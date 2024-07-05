@@ -22,10 +22,11 @@ body {
     font-display: swap;
 }
 
-/* @font-face {
+@font-face {
     font-family: "orb";
     src: url("../src/assets/Orbitron-Regular.ttf");
-} */
+    font-display: swap;
+}
 
 @font-face {
     font-family: "roboto";
@@ -48,3 +49,34 @@ body {
 .line {
     line-height: 1.1em;
 }
+
+.target .swiper-button-next, .target .swiper-button-prev {
+    background-color: var(--bg);
+    width: 50px;
+    padding: 1.9em;
+    height: 50px;
+    border-radius: 50%;
+    color: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.target .swiper-button-next:hover, .target .swiper-button-prev:hover {
+    background-color: #593f3ba2;
+    box-shadow: 0px 0px 4px var(--wh);
+}
+
+.hero2 .swiper-button-next, .hero2 .swiper-button-prev {
+    display: none;
+}
+
+.target .swiper-pagination-bullet {
+    background-color: var(--accent);
+}
+
+.hero2 .swiper-pagination-bullet {
+    background-color: var(--accent);
+}
+
