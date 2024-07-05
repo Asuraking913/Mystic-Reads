@@ -2,10 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
     --bg: #e3cec2;
+    --pdx: 3em;
+    --pdy: 1em;
+    --accent: #c16b63;
+    --accent1: #593f3b;
+    --wh: white;
 }
 
 body {
     background-color: var(--bg);
+}
+
+@font-face {
+    font-family: "audio";
+    src: url("../src//assets/Audiowide-Regular.ttf");
+    font-display: swap;
+}
+
+/* @font-face {
+    font-family: "orb";
+    src: url("../src/assets/Orbitron-Regular.ttf");
+} */
+
+@font-face {
+    font-family: "roboto";
+    src: url("../src/assets/Roboto-Regular.ttf");
+    font-display: swap;
+}
+
+.audio {
+    font-family: audio;
+}
+
+.orb {
+    font-family: "orb";
+  }
+
+.roboto {
+    font-family: "roboto";
+}
+
+.line {
+    line-height: 1.1em;
 }
