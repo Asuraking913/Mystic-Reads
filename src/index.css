@@ -30,8 +30,12 @@ body {
 
 @font-face {
     font-family: "roboto";
-    src: url("../src/assets/Roboto-Regular.ttf");
+    src: url("../src/assets/Poppins-Regular.ttf");
     font-display: swap;
+}
+
+body {
+    /* overflow: hidden; */
 }
 
 .audio {
@@ -50,22 +54,28 @@ body {
     line-height: 1.1em;
 }
 
+.text {
+    text-shadow: 0px 0px 0.01px black;
+}
+
 .target .swiper-button-next, .target .swiper-button-prev {
     background-color: var(--bg);
     width: 50px;
-    padding: 1.9em;
+    padding: 1em;
     height: 50px;
     border-radius: 50%;
     color: var(--accent);
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    transition-duration: 0.5s;
 }
 
 .target .swiper-button-next:hover, .target .swiper-button-prev:hover {
     background-color: #593f3ba2;
     box-shadow: 0px 0px 4px var(--wh);
+    color: white;
+    scale: 1.09;
 }
 
 .hero2 .swiper-button-next, .hero2 .swiper-button-prev {
@@ -73,10 +83,39 @@ body {
 }
 
 .target .swiper-pagination-bullet {
-    background-color: var(--accent);
+    background-color: white;
 }
 
 .hero2 .swiper-pagination-bullet {
     background-color: var(--accent);
+    display: none;
 }
 
+.topic .swiper-button-next, .topic .swiper-button-prev {
+    display: none;
+}
+
+.topic .swiper-pagination-bullet {
+    background-color: white;
+    /* display: none; */
+}
+
+@media (max-width: 640px) {
+    
+
+    .target .swiper-button-next, .target .swiper-button-prev {
+        display: none;
+    }
+}
+
+.navAnime {
+
+    animation-name: slide;
+        animation-duration: 0.5s;
+
+        @keyframes slide {
+          0% {
+            transform: translateY(-400px);
+          }
+        }
+}

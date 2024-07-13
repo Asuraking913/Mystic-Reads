@@ -2,10 +2,10 @@ import React from 'react'
 
 function Genre({img, title}) {
   return (
-    <div className='w-[300px] rounded-[2em] relative h-[250px] flex flex-col gap-[.5em]'>
-        <h2 className='text-xl text-[--accent1] font-[audio]'>{title}</h2>
-        <div className='h-full z-[20] w-full bg-[#593f3b9d]'>
-            <img src={img} className='w-[100%] h-[100%] object-cover' alt="genre-descripion" />
+    <div className='sm:w-[250px] h-[200px] relative sm:h-[250px] flex flex-col gap-[.5em]'>
+        <h2 className='sm:text-xl text-[1rem] text-[--accent1] font-[audio]'>{title}</h2>
+        <div className='h-full z-[20] w-full bg-[#]'>
+            <img src={img} className='sm:w-[100%] h-[100%] object-cover' alt="genre-descripion" />
         </div>
     </div>
   )
