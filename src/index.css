@@ -34,10 +34,6 @@ body {
     font-display: swap;
 }
 
-body {
-    /* overflow: hidden; */
-}
-
 .audio {
     font-family: audio;
 }

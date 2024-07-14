@@ -14,7 +14,7 @@ import {Navigation, Pagination, Autoplay} from "swiper/modules"
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 // People Image
 import person1 from "../assets/person1.jpeg"
@@ -27,13 +27,24 @@ import Weekly from './week'
 import News from './news'
 import Topic from './topic'
 import Foot from './footer'
-
+import phone from '../assets/phone.png'
+import phone1 from '../assets/phone.png'
 
 function Body() {
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo({top : 0, behavior : 'smooth'})
   }, [])
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search); 
+    for (const [key, value] of params.entries()) {
+      if(value) {
+        document.getElementById(value).scrollIntoView({behavior : 'smooth'})
+      }
+    }
+  }, [location])
 
   const genreImage = [
     {
@@ -195,24 +206,26 @@ function Body() {
         </div>
       </section>
       <section className='flex sm:flex-row flex-col sm:justify-between sm:gap-[2em] gap-[1em] sm:px-[--pdx] py-[--pdy] pt-0 px-[1em]'>
-      <div className='bg-[--accent] sm:text-left text-center w-full sm:p-[1em] sm:py-[1em] py-[1.5em]  sm:h-[300px] rounded-[1em] flex gap-[1em] items-center'>
+      <div className='bg-[--accent] overflow-hidden sm:text-left text-center w-full sm:p-[1em] sm:py-[1em] py-[1.5em]  sm:h-[300px] rounded-[1em] flex gap-[1em] items-center'>
           <div className='sm:w-[80%] sm:text-left px-[.2em] text-center items-center sm:items-start flex flex-col gap-[1em]'>
             <h2 className='text-2xl text-white roboto font-semibold'>Gain the best visual experience while reading stories on mystic reads</h2>
             <Link className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
               Read
             </Link>
           </div>
-          <div className='h-[200px] bg-white sm:block hidden w-[300px]'>
+          <div className='h-[200px] sm:block hidden w-[300px]'>
+            <img src={phone} alt="" />
           </div>
         </div>
-        <div className='bg-[--accent] sm:text-left text-center w-full sm:p-[1em] sm:py-[1em] py-[1.5em] p-[1em] sm:h-[300px] rounded-[1em] flex gap-[1em] items-center'>
+        <div className='bg-[--accent] overflow-hidden sm:text-left text-center w-full sm:p-[1em] sm:py-[1em] py-[1.5em] p-[1em] sm:h-[300px] rounded-[1em] flex gap-[1em] items-center'>
           <div className='sm:w-[80%] w-full flex flex-col gap-[1em] items-center sm:items-start'>
             <h2 className='text-2xl text-white roboto font-semibold'>Join us and publish your own stories to expand the paths to wondrous fantasies</h2>
             <Link className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
               Publish
             </Link>
           </div>
-          <div className='h-[200px] bg-white sm:block hidden w-[300px]'>
+          <div className='h-[200px] sm:block hidden w-[300px]'>
+            <img src={phone} alt="" />
           </div>
         </div>
       </section>

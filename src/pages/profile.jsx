@@ -1,18 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import Nav from '../components/nav'
 
-function Profile() {
-
-    // useEffect(() => {
-    //     console.log(window.location.href)
-    // })
-
+function profile() {
   return (
     <article>
-        <section className='w-full bg-[#00000097] h-[40vh]'>
-            <img src={input['file']} alt="" /><input type="file" name="file" id="file" />
-        </section>
+      <Nav />
+      <div className='bg-[--bg] h-[30vh]'>
+
+      </div>
     </article>
   )
 }
 
-export default Profile
+export default profile

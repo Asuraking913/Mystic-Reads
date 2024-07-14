@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +11,7 @@ function Nav() {
   const [nav, setNav] = useState(false)
   const [menu, setMenu] = useState(true)
   const [log, setLog] = useState(false)
+  const location = useLocation()
 
   const handleNav = () => {
     setNav(!nav)
@@ -34,17 +35,34 @@ function Nav() {
   }
 
   const handleTrend =() => {
+    if(location.pathname == '/profile') {
+      window.location.href = "/?scroll=trend"
+    }
+    if(location.pathname == "/"){
     document.getElementById('trend').scrollIntoView({behavior : 'smooth'})
+  }
   }
 
   const handleRecommend = () => {
     setNav(!Nav)
+    if(location.pathname == '/profile') {
+      window.location.href = "/?scroll=recommend"
+
+    }
+    if(location.pathname == "/"){
     document.getElementById('recommend').scrollIntoView({behavior : 'smooth'})
+  }
   }
 
   const handleContact = () => {
+    
     setNav(!Nav)
-    document.getElementById('foot').scrollIntoView({behavior : 'smooth'})
+    if(location.pathname == '/profile') {
+      window.location.href = "/?scroll=foot"
+    }
+    if(location.pathname == "/"){
+    document.getElementById('contact').scrollIntoView({behavior : 'smooth'})
+  }
   }
 
   const handleExit = (event) => {
@@ -52,6 +70,13 @@ function Nav() {
       setNav(!Nav)
     }
   }
+
+  // const location = useLocation(); 
+  // useEffect(() => {
+  //   const params = new URLSearchParams(location.search)
+  //   const keys = Array.from(params.keys());
+  //   console.log(keys)
+  // })
 
   return (
     <div className='text-[--accent] z-[100000000000] bg-[--accent1] sticky font-bold top-0 right-0 w-full px-[1em] sm:px-[--pdx] h-[60px] sm:mt-[1.5em] items-center flex justify-between'>
@@ -63,16 +88,17 @@ function Nav() {
           {
             menu ?
             <ul className='flex text-[1.1rem] gap-[2em]'>
-            <Link onClick={() => (window.scrollTo({top : 0, behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse'>
+            <Link to={"/"} onClick={() => (window.scrollTo({top : 0, behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse'>
               <li>Home</li>
             </Link>
-            <Link onClick={() => (document.getElementById('trend').scrollIntoView({behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse'>
+            {/* <Link to={"/?scroll=trend"} onClick={() => (document.getElementById('trend').scrollIntoView({behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse'> */}
+            <Link onClick={handleTrend} className='hover:underline decoration-white hover:animate-pulse'>
               <li>Trending</li>
             </Link>
-            <Link onClick={() => (document.getElementById('recommend').scrollIntoView({behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse'>
+            <Link onClick={handleRecommend} className='hover:underline decoration-white hover:animate-pulse'>
               <li>Recommended</li>
             </Link>
-            <Link onClick={() => (document.getElementById('foot').scrollIntoView({behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse duration[0.5s]'>
+            <Link onClick={handleContact} className='hover:underline decoration-white hover:animate-pulse duration[0.5s]'>
               <li>Contact</li>
             </Link>
           </ul>
