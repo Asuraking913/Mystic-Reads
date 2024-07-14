@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Nav from '../components/nav'
 import edit from '../assets/edit.svg'
 import { Link } from 'react-router-dom'
@@ -8,33 +8,44 @@ import book from "../assets/book.svg"
 import person from "../assets/person4.jpeg"
 import user from "../assets/user.svg"
 import update from "../assets/update.svg"
+import green from "../assets/green.png"
+import location from "../assets/location.png"
+import message from "../assets/message.png"
+import follow from "../assets/follow.png"
 
 function Profile() {
 
     const [file, setfile] = useState(false);
     const [file1, setFile1] = useState(false)
-    const [image, setImage] = useState(null);
+    const [cover, setCover] = useState(null);
     const [profile, setProfile] = useState(user)
     const [error, setError] = useState("")
+    const profileInput = useRef(null)
+    const coverInput = useRef(null)
 
-    const handleFile = () => {
-      setfile(!file)
+    const handleProfileBtn = () => {
+      if(profileInput.current) {
+        profileInput.current.click()
+      }
     }
 
-    const handlefile1 = () => {
-      setFile1(!file)
+    const handleCoverBtn = () => {
+      if(coverInput.current) {
+        coverInput.current.click()
+      }
     }
 
-    const handleImage = (event) => {
+    const handleCover = (event) => {
       const file = event.target.files[0]
       if(file && allowedExtensions(file.name)) {
+        console.log(file.name, file)
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result)
+        setCover(reader.result)
       }
 
       reader.readAsDataURL(file)
-      setfile(!file)
+      setCover(!file)
       return
       }
       setError("Invalid file")
@@ -42,7 +53,6 @@ function Profile() {
         setError("")
       }, [4000])
       event.target.value = ""
-      setfile(!file)
     }
 
     const handleProfile = (event) => {
@@ -76,25 +86,38 @@ function Profile() {
       {error && <p className='text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] p-[.5em] px-[1em] left-[45%] top-[4em]'>{error}</p>}
       <Nav />
       <div className='h-[50vh] relative w-full linear'>
-          <div className='h-[80vh] flex flex-col  z-[20] top-[40%] left-[--pdx] shadow-md shadow-[--accent1] absolute rounded-[10px] bg-[--accent1] gap-[1em] px-[1.5em] w-[380px]'>
-              <div className='h-[50%] flex items-center justify-center'>
-                <img src={profile} className='w-[200px] border-2 border-[--accent1] linear shadow-sm shadow-black object-cover rounded-[50%] h-[250px]' alt="" />
-                <Link onClick={handlefile1} className='absolute top-[35%] right-[6em] hover:scale-125 duration-[0.5s]'><img src={update} className='w-[30px] h-[30px] ' alt="" /></Link>
-              </div>
-              <div className=' text-center flex flex-col items-center gap-[.5em]'>
-              {file1 && <input className='text-[1rem] w-[50%]' type='file' name='file' onChange={handleProfile} id='file'/>}
-                <h2 className='text-center text-[--accent] roboto text-xl font-bold'>Alexandro Garnacho</h2>
-                <p className='italic text-[--wh]'>Active: now</p>
-                <div className='text-left flex flex-col gap-[1em] pr-[4em]'>
-                  <h2 className='text-xl text-[--accent] font-bold roboto'>About Me</h2>
-                  <p className='roboto text-[1.1rem] text-[--wh] line'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur, fuga. Lorem ipsum dolor sit amet.</p>
-                </div>
-              </div>
-              <div>
-                <p className='text-[1.1rem] text-[--wh]'>Location:  Rivers State</p>
-              </div>
+        <Link onClick={handleCoverBtn} className='absolute right-[1em] flex gap-[.2em] roboto font-bold text1 justify-center items-center hover:scale-110 duration-[0.5s] top-[90%]'>
+          <img src={update} alt="" />
+          Change Photo
+        </Link>
+        <input type="file" className='hidden' name="file" onChange={handleCover} id="cover" ref={coverInput} />
+      <img src={cover} className='h-full w-full object-cover' alt="" />
+
+
+          <div className='h-[80vh] py-[1em] flex flex-col items-center z-[20] top-[40%] left-[--pdx] shadow-md shadow-[--accent1] absolute rounded-[10px] bg-[--accent1] gap-[1em] px-[1.5em] w-[380px]'>
+             <div className='bg-[--accent] relative p-[.2em] rounded-[50%] h-[200px] w-[200px]'>
+                <img src={profile} className=' rounded-[50%] w-full h-full object-cover' alt="" />
+                <img src={update} onClick={handleProfileBtn} className='absolute cursor-pointer top-[80%] right-[1.5em] hover:scale-125 duration-[0.5s] ' alt="" />
+                <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
+             </div>
+             <h2 className='text-2xl font-bold roboto text-[--bg]'>Asura King913</h2>
+             <div>
+                <p className='line text-center text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
+             </div>
+             <div className='flex justify-between gap-[2em]'>
+                <Link className='px-[1em] hover:scale-110 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                  <img src={follow} className='w-[20px] mr-[.5em]' alt="" />
+                  <p>Follow</p>
+                </Link>
+                <Link className='px-[1em] hover:scale-110 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                  <img src={message} className='w-[20px] mr-[.5em]' alt="" />
+                  <p>Message</p>
+                </Link>
+             </div>
+             <div>
+                
+             </div>
           </div>
-          <img src={image} className='w-full h-full  object-cover' alt="" />
       </div>
       <div className='h-[60px] items-center justify-center px-[4em] flex relative bg-[--accent1]'>
       <ul className='flex ml-[8em] gap-[10em]'>
@@ -102,11 +125,6 @@ function Profile() {
           <Link className='hover:bg-[--accent] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={book}  title='Puslished' className='w-[40px] h-[50px]'alt="" /></Link>
           <Link className='hover:bg-[--accent] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={likes} title='Likes' className='w-[40px] h-[50px]' alt="" /></Link>
         </ul>
-        <Link onClick={handleFile} className=' duration-[0.5s] right-[1em] flex absolute top-[-2em] items-center roboto font-bold text-black'>
-          {!file && <p className='flex text1 items-center gap-[.3em] text-xl hover:scale-110 duration-[0.5s]' id='edit'><img src={edit} className='w-[30px] h-[30px]' alt="" /> Edit</p>}
-        </Link>
-        {file && <input className='absolute top-[-2em] right-0' type='file' name='file' onChange={handleImage} id='file'/>}
-        
       </div>
       <div className='min-h-[60vh]  w-full'>
 
