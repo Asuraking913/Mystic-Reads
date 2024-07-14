@@ -38,10 +38,11 @@ function Body() {
   }, [])
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search); 
+    let params = new URLSearchParams(location.search); 
     for (const [key, value] of params.entries()) {
       if(value) {
         document.getElementById(value).scrollIntoView({behavior : 'smooth'})
+        
       }
     }
   }, [location])

@@ -96,6 +96,10 @@ body {
     /* display: none; */
 }
 
+.linear {
+    background-image: linear-gradient(to right top , #c16b632d, white);
+}
+
 @media (max-width: 640px) {
     
 

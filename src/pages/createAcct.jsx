@@ -3,6 +3,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import google from "../assets/google.svg"
 
 function Create() {
   return (
@@ -20,7 +21,7 @@ function Create() {
         </div>
     </section>
     <section className='bg-[#ffffffea] flex-col sm:py-0 py-[2em] gap-[1em] rounded-[1em]  sm:rounded-l-[0em] sm:h-[90vh] w-full flex sm:px-0 px-[1em] sm:items-center justify-center'>
-        <h1 className='text-2xl audio text-[#c16b63af] mg-[1em]'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
+        <h1 className='text-3xl audio text-[#c16b63af] mg-[1em]'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
         <form action="" className='flex flex-col gap-[1em]'>
             <p>
                 <label className='text-[1.1rem] text-[--accent1]' htmlFor="username">Username</label>
@@ -36,8 +37,8 @@ function Create() {
             </p>
             <input  type="submit" value="Sign Up" className='p-[.5em] bg-[#c16b63af] roboto text-white text-xl font-bold cursor-pointer rounded-[5px] hover:bg-[#ffffff65] border-2 border-transparent hover:border-[--accent] duration-[0.5s] hover:text-[--accent]' />
         </form>
-        <Link className='flex gap-[1em] text-[0.9rem] roboto hover:underline items-center capitalize'>
-            <FontAwesomeIcon icon={faGoogle} className='text-xl' />
+        <Link className='flex gap-[1em] py-[1em] text-[0.9rem] roboto hover:underline items-center capitalize'>
+            <img src={google} className='w-[35px]  h-[35px]' alt="" />
             <span className='text-[--accent1]'>Sign In with google</span>
         </Link>
         <p className='roboto text-[1.1rem]'>

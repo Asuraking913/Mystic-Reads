@@ -3,6 +3,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import google from "../assets/google.svg"
 
 function Login() {
   return (
@@ -20,7 +21,7 @@ function Login() {
         </div>
     </section>
     <section className='bg-[#ffffffea] flex-col gap-[1em] rounded-[1em] sm:rounded-l-[0em] sm:h-[90vh] w-full flex items-center justify-center sm:px-0 px-[1em] sm:py-0 py-[2em]'>
-        <h1 className='text-2xl audio text-[#c16b63af] mg-[1em]'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
+        <h1 className='text-3xl audio text-[#c16b63af] mg-[1em]'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
         <form action="" className='flex flex-col gap-[1.2em]'>
             <p>
                 <label className='text-[1.1rem] text-[--accent1]' htmlFor="username/email">Username or email</label>
@@ -44,7 +45,7 @@ function Login() {
         <div className='w-full border-[--accent1] border-[1px] relative'> </div>
         </div>
         <Link className='flex gap-[1em] text-[0.9rem] roboto hover:underline items-center capitalize'>
-            <FontAwesomeIcon icon={faGoogle} className='text-xl' />
+            <img src={google} className='w-[35px] h-[35px]' alt="" />
             <span className='text-[--accent1]'>Log In with google</span>
         </Link>
         <p className='roboto text-[1.1rem]'>

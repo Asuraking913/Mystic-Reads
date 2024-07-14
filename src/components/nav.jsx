@@ -61,7 +61,7 @@ function Nav() {
       window.location.href = "/?scroll=foot"
     }
     if(location.pathname == "/"){
-    document.getElementById('contact').scrollIntoView({behavior : 'smooth'})
+    document.getElementById('foot').scrollIntoView({behavior : 'smooth'})
   }
   }
 
@@ -71,15 +71,8 @@ function Nav() {
     }
   }
 
-  // const location = useLocation(); 
-  // useEffect(() => {
-  //   const params = new URLSearchParams(location.search)
-  //   const keys = Array.from(params.keys());
-  //   console.log(keys)
-  // })
-
   return (
-    <div className='text-[--accent] z-[100000000000] bg-[--accent1] sticky font-bold top-0 right-0 w-full px-[1em] sm:px-[--pdx] h-[60px] sm:mt-[1.5em] items-center flex justify-between'>
+    <div className='text-[--accent] z-[100000000000] bg-[--accent1] sticky font-bold  right-0 w-full px-[1em] sm:px-[--pdx] h-[60px] sm:mt] items-center flex justify-between'>
         <a href="" className='text-2xl font-[audio]'>Mystic<span className='text-[--wh]'>Reads</span></a>
 
         <nav className='roboto sm:block hidden'>
