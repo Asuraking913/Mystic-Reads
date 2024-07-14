@@ -104,6 +104,17 @@ body {
     background-image: linear-gradient(to right top , #c16b632d, white);
 }
 
+/* styles.css */
+.hide-scrollbar {
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+  
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+  
+
 @media (max-width: 640px) {
     
 

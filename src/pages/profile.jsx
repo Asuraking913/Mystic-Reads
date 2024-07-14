@@ -19,6 +19,7 @@ function Profile() {
 
     const [file, setfile] = useState(false);
     const [file1, setFile1] = useState(false)
+    const [userName, setUserName] = useState('AsuraKing913')
     const [cover, setCover] = useState(null);
     const [profile, setProfile] = useState(user)
     const [error, setError] = useState("")
@@ -87,28 +88,39 @@ function Profile() {
       { 
         likes: 20, 
         comments: 15,
-        active: "now", 
-        postText: "After spending an hour at Mystic Reads!!, I still i have to pay with two more",
-        descrip: "Frontend developer"
+        active: "15mins ago", 
+        postText: "Just finished 'Doluo Dalu' and I'm completely hooked! The world-building is phenomenal, and Tang San's journey is so inspiring. Can't wait to see what happens next!",
       },
       { 
         likes: 45, 
         comments: 30,
         active: "2 hours ago", 
-        postText: "After spending an hour at Mystic Reads!!, I still i have to pay with two more",
-        descrip: "Full Stack Web developer"
+        postText: "I started reading 'Magic Chef of Ice and Fire' last night, and I'm already obsessed. The combination of cooking and magic is so unique and exciting. Nian Bing is such an intriguing character.",
       }, 
       { 
         likes: 100, 
         comments: 73,
         active: "15 hours ago", 
-        postText: "After spending an hour at Mystic Reads!!, I still i have to pay with two more",
-        descrip: "DevOps Engineer"
+        postText: "Forcardos High School has such a relatable storyline! The characters feel so real, and the high school dynamics are spot-on. Can't wait to see how the friendships and rivalries develop.",
+      }, 
+      { 
+        likes: 100, 
+        comments: 73,
+        active: "15 hours ago", 
+        postText: "Magic Chef of Ice and Fire is a must-read for anyone who loves fantasy and culinary arts. The way Nian Bing combines magic with cooking is brilliant. I'm constantly amazed by his creativity",
+      }, 
+      { 
+        likes: 100, 
+        comments: 73,
+        active: "15 hours ago", 
+        postText: "Doluo Dalu is a masterpiece! The martial arts and spirit abilities are described so vividly. Each character's journey to become stronger is so motivating. Highly recommend!",
       }
     ]
 
+    const post = postList.map((items, i) => (<Post key={i} profile={profile} post={items.postText} active={items.active} username={userName}/>))
+
   return (
-    <article className='min-h-[150vh]'>
+    <article className='h-auto'>
       {error && <p className='text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] p-[.5em] px-[1em] left-[45%] top-[4em]'>{error}</p>}
       <Nav />
       <div className='h-[50vh] relative w-full linear'>
@@ -126,7 +138,7 @@ function Profile() {
                 <img src={update} onClick={handleProfileBtn} className='absolute cursor-pointer top-[80%] right-[1.5em] hover:scale-125 duration-[0.5s] ' alt="" />
                 <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
              </div>
-             <h2 className='text-2xl font-bold roboto text-[--bg]'>Asura King913</h2>
+             <h2 className='text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
              <div>
                 <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
              </div>
@@ -155,7 +167,7 @@ function Profile() {
                   <span className='text-[--bg] roboto'>Member Since Dec 05, 2022</span>
                 </p>
              </div>
-             
+              
           </div>
       </div>
       <div className='h-[60px] items-center justify-center px-[4em] flex relative bg-[--accent1]'>
@@ -164,10 +176,25 @@ function Profile() {
           <Link className='hover:bg-[--accent] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={book}  title='Puslished' className='w-[40px] h-[50px]'alt="" /></Link>
           <Link className='hover:bg-[--accent] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={likes} title='Likes' className='w-[40px] h-[50px]' alt="" /></Link>
         </ul>
+        
       </div>
-      <section className='h-auto p-[4em] w-[100%] flex flex-col justify-end items-end'>
-        <Post profile={profile}/>
+      <section className=' p-[0em] h-screen w-[100%] px-[--pdx] flex justify-between items-end'>
+      <div className='bg-white min-h-[300px]'>
+        <h2 className='text-xl roboto font-bold'>Our Programs</h2>
+
+          <ul>
+            <li>About Us</li>
+            <li>Terms and Service</li>
+            <li>Privacy</li>
+            <li>How it Works</li>
+          </ul>
+      </div>
+        <div className='w-[60%] hide-scrollbar h-[100%] overflow-scroll  py-[2em] flex flex-col gap-[2em]'>
+          {post }
+        </div>
+        
       </section>
+      
     </article>
   )
 }
