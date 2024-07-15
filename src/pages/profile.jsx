@@ -142,7 +142,7 @@ function Profile() {
         <Nav />
 
       <article className='h-auto'>
-        {error && <p className='text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] p-[.5em] px-[1em] left-[45%] top-[4em]'>{error}</p>}
+        {error && <p className='sm:text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em] left-[38%] sm:left-[45%] top-[5em] sm:top-[4em]'>{error}</p>}
         <div className='sm:h-[50vh] h-[30vh] relative w-full linear'>
           {
             cover === null ? "" :
@@ -154,7 +154,7 @@ function Profile() {
             </span>
           </Link>
           }
-          <Link onClick={handleCoverBtn} className='absolute bg-[--accent] p-[.2em] rounded-[2px] text-white sm:active:scale-[0.95] right-[1em] flex gap-[.2em] roboto font-bold justify-center items-center hover:scale-110 duration-[0.5s] top-[85%]'>
+          <Link onClick={handleCoverBtn} className='absolute bg-[--accent] p-[.2em] rounded-[2px] text-white active:scale-[0.95] right-[1em] flex gap-[.2em] roboto font-bold justifsm:y-center items-center hover:scale-110 duration-[0.5s] top-[85%]'>
             <img src={edit} className='w-[20px]' alt="" />
             {/* <FontAwesomeIcon  icon={faPlusCircle}/> */}
             {/* Change Photo */}
@@ -172,7 +172,7 @@ function Profile() {
                   </Link>
                   }
                   <img src={profile} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
-                  <img src={update} onClick={handleProfileBtn} className='absolute sm:active:scale-[0.95] cursor-pointer top-[80%] right-[1.5em] hover:scale-125 duration-[0.5s] ' alt="" />
+                  <img src={update} onClick={handleProfileBtn} className='absolute active:scale-[0.95] cursor-pointer top-[80%] right-[1.5em] hover:scalsm:e-125 duration-[0.5s] ' alt="" />
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
@@ -184,11 +184,11 @@ function Profile() {
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
-                    <Link className='px-[1em] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <Link className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faUserPlus}/>
                       <p>Follow</p>
                     </Link>
-                    <Link className='px-[1em] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <Link className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faMessage}/>
                       <p>Message</p>
                     </Link>
@@ -228,7 +228,7 @@ function Profile() {
                   </Link>
                   }
                   <img src={profile} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
-                  <img src={update} onClick={handleProfileBtn} className='absolute sm:active:scale-[0.95] w-[20px] cursor-pointer top-[80%] right-[1em] hover:scale-125 duration-[0.5s] ' alt="" />
+                  <img src={update} onClick={handleProfileBtn} className='absolute active:scale-[0.95] w-[20px] cursor-pointer top-[80%] rightsm:-[1em] hover:scale-125 duration-[0.5s] ' alt="" />
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
@@ -240,11 +240,11 @@ function Profile() {
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
-                    <Link className='px-[1em] text-[.9rem] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <Link className='px-[1em] text-[.9rem] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center duration-[0.5s] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faUserPlus}/>
                       <p className='text-[.9rem]'>Follow</p>
                     </Link>
-                    <Link className='px-[1em] text-[.9rem] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <Link className='px-[1em] text-[.9rem] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center duration-[0.5s] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faMessage}/>
                       <p className='text-[.9rem]'>Message</p>
                     </Link>
@@ -273,9 +273,9 @@ function Profile() {
         </div>
         <div className='sm:h-[60px] h-[40px] items-center justify-center px-[4em] flex sticky top-[3.5em] z-[10] bg-[--accent1]'>
           <ul className='flex sm:ml-[8em] sm:justify-normal justify-between sm:gap-[10em] sm:w-auto w-full'>
-              <Link className='hover:bg-[--accent] sm:active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
-              <Link   className='hover:bg-[--accent] sm:active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /></Link>
-              <Link className='hover:bg-[--accent] sm:active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
+              <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
+              <Link   className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /></Link>
+              <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
             </ul>
       
         </div>

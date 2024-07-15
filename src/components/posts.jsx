@@ -25,7 +25,7 @@ function Post({profile, username, active, post, comments, likes}) {
           <Link className='text-[1rem] absolute hover:text-[--accent] right-[2em] bottom-[1em] text-[--bg] font-sans underline'>
             View Post
           </Link>
-          <Link className='text-[1rem] hover:text-[--accent] sm:active:scale-[1] absolute right-[2em] hover:scale-125 duration-[0.5s] top-[1em] text-[--bg] font-sans underline'>
+          <Link className='text-[1rem] hover:text-[--accent] active:scale-[1] absolute right-[2em] hover:scale-125 duration-[0.5s] top-[1em] text-[--bg] font-sans underline'>
             <FontAwesomeIcon icon={faTrash}/>
           </Link>
         </div>
