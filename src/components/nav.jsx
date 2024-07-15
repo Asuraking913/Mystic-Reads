@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import person1 from "../assets/person4.jpeg"
+import user from "../assets/user.svg"
 
 function Nav() {
 
@@ -127,8 +128,8 @@ function Nav() {
 
         <ul className='gap-[1em] duration-[0.5s] text-[1.1rem] items-center roboto sm:flex hidden'>
           <Link to={"/profile"}>
-            <div className='w-[50px] rounded-[50%] bg-white h-[50px]'>
-              <img src={person1} className='rounded-[50%]' alt="" />
+            <div className='w-[50px]  rounded-[50%] h-[50px]'>
+              <img src={user} className='rounded-[50%] bg-[--accent] shadow-sm shadow-[black]' alt="" />
             </div>
           </Link>
           <Link>

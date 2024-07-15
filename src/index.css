@@ -78,6 +78,13 @@ body {
     scale: 1.09;
 }
 
+.target .swiper-button-next:active, .target .swiper-button-prev:active {
+    background-color: #593f3ba2;
+    box-shadow: 0px 0px 4px var(--wh);
+    color: white;
+    scale: 0.9;
+}
+
 .hero2 .swiper-button-next, .hero2 .swiper-button-prev {
     display: none;
 }

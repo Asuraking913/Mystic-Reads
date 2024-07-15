@@ -77,7 +77,7 @@ function Topic() {
           <p className='flex items-center gap-[1em] text-[--accent1] orb'><FontAwesomeIcon icon={faHeart}/>{items.likes}</p>
         </div>
         <div className='flex items-center justify-center'>
-          <Link className='text-[.9rem] sm:text-[1.1rem] hover:scale-110 duration-[0.5s] active:text-white active:bg-[accent] hover:text-white hover:bg-[--accent] w-full text-center border-[2px] text-[--accent] border-[--accent] roboto rounded-[.5em]'>Start Reading</Link>
+          <Link className='text-[.9rem] sm:active:scale-[0.9] sm:text-[1.1rem] hover:scale-110 duration-[0.5s] active:text-white active:bg-[accent] hover:text-white hover:bg-[--accent] w-full text-center border-[2px] text-[--accent] border-[--accent] roboto rounded-[.5em]'>Start Reading</Link>
         </div>
       </SwiperSlide>))
 

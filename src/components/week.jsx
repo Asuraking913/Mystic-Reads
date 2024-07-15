@@ -59,7 +59,7 @@ function Weekly() {
           <p className='flex items-center gap-[1em] text-[--accent1] orb'><FontAwesomeIcon icon={faHeart}/>{items.likes}</p>
         </div>
         <div className='flex items-center justify-center'>
-          <Link className='sm:text-[1.1rem] px-[.2em] text-[.9rem] hover:scale-110 duration-[0.5s] active:text-white active:bg-[accent] hover:text-white hover:bg-[--accent] w-full text-center border-[2px] text-[--accent] border-[--accent] roboto rounded-[.5em]'>Start Reading</Link>
+          <Link className='sm:text-[1.1rem] px-[.2em] sm:active:scale-[0.95] text-[.9rem] hover:scale-110 duration-[0.5s] active:text-white active:bg-[accent] hover:text-white hover:bg-[--accent] w-full text-center border-[2px] text-[--accent] border-[--accent] roboto rounded-[.5em]'>Start Reading</Link>
         </div>
       </div>))
 
