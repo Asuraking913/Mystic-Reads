@@ -60,7 +60,7 @@ function News() {
                 <p className='flex items-center gap-[1em] text-[--accent1] orb'><FontAwesomeIcon icon={faHeart}/>{items.likes}</p>
             </div>
             <div className='flex'>
-                <Link className='text-[1.1rem] sm:active:scale-[0.9] hover:scale-110 duration-[0.5s] active:text-white active:bg-[accent] hover:text-white hover:bg-[--accent] px-[1em] text-center border-[2px] text-[--accent] border-[--accent] roboto rounded-[.5em]'>Read More</Link>
+                <Link className='text-[1.1rem] active:scale-[0.9] sm:hover:scale-110 duration-[0.5s] active:text-white active:bg-[accent] hover:text-white hover:bg-[--accent] px-[1em] text-center border-[2px] text-[--accent] border-[--accent] roboto rounded-[.5em]'>Read More</Link>
             </div>
         </div>
     </li>))

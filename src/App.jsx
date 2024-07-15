@@ -4,6 +4,7 @@ import Land from './pages/land'
 import Login from './pages/login'
 import Create from './pages/createAcct'
 import Profile from './pages/profile'
+import ReadPage from './pages/read'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             <Route path='/login' element={<Login />}/>
             <Route path='/signup' element={<Create />}/>
             <Route path='/profile' element={<Profile  />}/>
+            <Route path='/post' element={<ReadPage  />}/>
           </Routes>
         </Router>
     </div>

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import google from "../assets/google.svg"
+import svg from "../assets/svg1.svg"
 
 function Login() {
   return (
@@ -12,8 +13,8 @@ function Login() {
         <FontAwesomeIcon icon={faHome} className='absolute top-[1em] left-[1em] text-3xl text-[--accent] hover:scale-125 duration-[0.5s]'/>
       </Link>
     <section className='bg-[#c16b63af] hidden sm:flex flex-col items-center justify-center rounded-l-[1em] h-[90vh] w-full'>
-            <div className='h-[50%] w-[50%] bg-white mb-[1em]'>
-
+            <div className='mb-[1em] w-full flex justify-center items-center py-[0em]'>
+            <img src={svg} className='w-[350px] ml-[2em]' alt="" />
         </div>
         <div className='text-center px-[5em] flex flex-col gap-[.5em]'>
             <h2 className='audio text-2xl font-bold text-[white]'>Read More, Enjoy More</h2>

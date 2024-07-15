@@ -141,12 +141,12 @@ function Profile() {
     <>
         <Nav />
 
-      <article className='h-auto'>
+      <article className='h-auto sm:mt-0 mt-[3.7em]'>
         {error && <p className='sm:text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em] left-[38%] sm:left-[45%] top-[5em] sm:top-[4em]'>{error}</p>}
         <div className='sm:h-[50vh] h-[30vh] relative w-full linear'>
           {
             cover === null ? "" :
-            <Link onClick={handleCoverDel} className='text-[1rem] bg-[--accent] p-[.3em] active:bg-white text-[white] rounded-[2px] absolute right-[1em] sm:top-[5%] top-[4em] bottom hover:text-[--accent] sm:active:scale-[1]  hover:scale-110 duration-[0.5s]'>
+            <Link onClick={handleCoverDel} className='text-[1rem] bg-[--accent] p-[.3em] active:bg-white text-[white] rounded-[2px] absolute right-[1em] sm:top-[5%] top-[.5em] bottom hover:text-[--accent] sm:active:scale-[1]  hover:scale-110 duration-[0.5s]'>
             <span title='Delete Photo' className='flex gap-[.5em] roboto font-bold text items-center justify-center'>
               {/* <img src={edit} className='w-[20px]' alt="" /> */}
               <FontAwesomeIcon  icon={faTrash}/>
@@ -217,7 +217,7 @@ function Profile() {
             </div>
         </div>
         {/* profile mobile */}
-        <div className=' py-[1em] overflow-hidden  flex sm:hidden flex-col items-center justify-center z-[20]shadow-md shadow-[--accent1] bg-[--accent1] gap-[1em] px-[1.5em] w-[100%]'>
+        <div className=' py-[1em] overflow-hidden  flex sm:hidden flex-col items-center justify-center z-[20] shadow-md shadow-[--accent1] bg-[--accent1] gap-[1em] px-[1.5em] w-[100%]'>
                <div className='bg-[--accent] relative p-[.2em] rounded-[50%] h-[100px] w-[100px]'>
                   {
                     profile === user ? "" :
@@ -228,7 +228,7 @@ function Profile() {
                   </Link>
                   }
                   <img src={profile} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
-                  <img src={update} onClick={handleProfileBtn} className='absolute active:scale-[0.95] w-[20px] cursor-pointer top-[80%] rightsm:-[1em] hover:scale-125 duration-[0.5s] ' alt="" />
+                  <img src={update} onClick={handleProfileBtn} className='absolute active:scale-[0.95] w-[20px] cursor-pointer top-[80%] right-[1em] hover:scale-125 duration-[0.5s] ' alt="" />
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
@@ -279,7 +279,7 @@ function Profile() {
             </ul>
       
         </div>
-        <section className=' p-[0em] h-[90vh] relative w-[100%] sm:px-[--pdx] flex sm:flex-row flex-col-reverse justify-between items-start sm:items-end'>
+        <section className=' p-[0em] h-[100vh] sm:h-[90vh] relative w-[100%] sm:px-[--pdx] flex sm:flex-row flex-col-reverse justify-between items-start sm:items-end'>
         <div className='py-[2em] px-[.5em]'>
           <h2 className='text-2xl roboto font-bold text-[--accent1]'>Our Programs</h2>
             <ul className='flex text-[--accent1] flex-col gap-[1em] mt-[1em] '>
@@ -297,7 +297,6 @@ function Profile() {
           <FontAwesomeIcon icon={faDownLong} className='absolute top-[30%] text-[--accent1] h-[50px] right-[1.5em] animate-bounce sm:hidden'/>
           
         </section>
-      
       </article>
     </>
   )
