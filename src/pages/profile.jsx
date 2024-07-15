@@ -12,6 +12,7 @@ import update from "../assets/update.svg"
 import green from "../assets/green.png"
 import location from "../assets/location.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 
@@ -44,6 +45,14 @@ function Profile() {
       if(coverInput.current) {
         coverInput.current.click()
       }
+    }
+
+    const handleProfileDel = () => {
+      setProfile(user)
+    }
+
+    const handleCoverDel = () => {
+      setCover(null)
     }
 
     const handleCover = (event) => {
@@ -134,8 +143,17 @@ function Profile() {
       {error && <p className='text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] p-[.5em] px-[1em] left-[45%] top-[4em]'>{error}</p>}
       <Nav />
       <div className='h-[50vh] relative w-full linear'>
-        <Link onClick={handleCoverBtn} className='absolute sm:active:scale-[0.95] right-[1em] flex gap-[.2em] roboto font-bold text1 justify-center items-center hover:scale-110 duration-[0.5s] top-[90%]'>
-          <img src={update} alt="" />
+        {
+          cover === null ? "" :
+          <Link onClick={handleCoverDel} className='text-[1rem] bg-[--accent] p-[.5em] text-[white] rounded-[10px] absolute right-[1em] top-[5%] bottom hover:text-[--accent] sm:active:scale-[1]  hover:scale-110 duration-[0.5s]'>
+          <span title='Delete Photo' className='flex gap-[.5em] roboto font-bold text items-center justify-center'>
+            <FontAwesomeIcon  icon={faTrash}/>Delete photo
+          </span>
+        </Link>
+        }
+        <Link onClick={handleCoverBtn} className='absolute bg-[--accent] p-[.5em] rounded-[10px] text-white sm:active:scale-[0.95] right-[1em] flex gap-[.2em] roboto font-bold justify-center items-center hover:scale-110 duration-[0.5s] top-[85%]'>
+          {/* <img src={update} alt="" /> */}
+          <FontAwesomeIcon  icon={faPlusCircle}/>
           Change Photo
         </Link>
         <input type="file" className='hidden' name="file" onChange={handleCover} id="cover" ref={coverInput} />
@@ -144,6 +162,14 @@ function Profile() {
 
           <div className='min-h-[80vh] overflow-hidden py-[1em] flex flex-col items-center justify-center z-[20] top-[40%] left-[--pdx] shadow-md shadow-[--accent1] absolute rounded-[10px] bg-[--accent1] gap-[1em] px-[1.5em] w-[380px]'>
              <div className='bg-[--accent] relative p-[.2em] rounded-[50%] h-[200px] w-[200px]'>
+                {
+                  profile === user ? "" :
+                  <Link onClick={handleProfileDel} className='text-[1rem] absolute right-[-2em] bottom-[1em]  hover:text-[--accent] sm:active:scale-[1]  hover:scale-125 duration-[0.5s] text-[--bg] '>
+                  <span title='Delete Photo'>
+                    <FontAwesomeIcon  icon={faTrash}/>
+                  </span>
+                </Link>
+                }
                 <img src={profile} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
                 <img src={update} onClick={handleProfileBtn} className='absolute sm:active:scale-[0.95] cursor-pointer top-[80%] right-[1.5em] hover:scale-125 duration-[0.5s] ' alt="" />
                 <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
