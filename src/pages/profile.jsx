@@ -139,7 +139,7 @@ function Profile() {
 
   return (
     <>
-        <Nav />
+        <Nav profile={profile}/>
 
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
         {error && <p className='sm:text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em] left-[38%] sm:left-[45%] top-[5em] sm:top-[4em]'>{error}</p>}

@@ -88,7 +88,7 @@ function Topic() {
         modules={[Pagination, Navigation, Autoplay]}
         spaceBetween={20}
         slidesPerView={6}
-        loop = {true}
+        // loop = {true}
         autoplay = {{delay: 9900}}
         navigation
         pagination = {{clickable: true}}

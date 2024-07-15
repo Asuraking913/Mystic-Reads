@@ -3,10 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
-import person1 from "../assets/person4.jpeg"
 import user from "../assets/user.svg"
+import person1 from "../assets/person4.jpeg"
 
-function Nav() {
+function Nav({profile}) {
 
   const [search, setSearch] = useState(true);
   const [nav, setNav] = useState(false)
@@ -128,8 +128,8 @@ function Nav() {
 
         <ul className='gap-[1em] duration-[0.5s] text-[1.1rem] items-center roboto sm:flex hidden'>
           <Link to={"/profile"}>
-            <div className='w-[50px]  rounded-[50%] h-[50px]'>
-              <img src={user} className='rounded-[50%] bg-[--accent] shadow-sm shadow-[black]' alt="" />
+            <div className='w-[50px] bg-[--accent] shadow-sm shadow-[black]  rounded-[50%] h-[50px]'>
+              {profile ? <img src={profile} className='rounded-[50%] w-[50px] h-[50px] object-cover bg-[--accent] shadow-sm shadow-[black]' alt="" /> : <img src={user} className='rounded-[50%] h-[50px] w-[50px] object-cover'  alt="" />}
             </div>
           </Link>
           <Link>
@@ -192,8 +192,8 @@ function Nav() {
 
           <ul className=' flex gap-[3em] flex-col right-[1em] text-[1.1rem] items-center roboto'>
           <Link to={"/profile"}>
-            <div className='h-[50px] w-[50px] rounded-[50%]'>
-              <img src={person1} className='rounded-[50%]'  alt="" />
+            <div className=' rounded-[50%] bg-[--accent] shadow-sm shadow-[black]'>
+              <img src={profile} className='rounded-[50%] h-[50px] w-[50px] object-cover '  alt="" />
             </div>
           </Link>
             <Link >

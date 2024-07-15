@@ -20,7 +20,7 @@ function App() {
             <Route path='/login' element={<Login />}/>
             <Route path='/signup' element={<Create />}/>
             <Route path='/profile' element={<Profile  />}/>
-            <Route path='/post' element={<ReadPage  />}/>
+            <Route path='/read' element={<ReadPage  />}/>
           </Routes>
         </Router>
     </div>
