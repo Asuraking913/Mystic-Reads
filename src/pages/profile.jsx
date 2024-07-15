@@ -17,14 +17,23 @@ import Post from '../components/posts'
 
 function Profile() {
 
+
+    // State vars
     const [file1, setFile1] = useState(false)
     const [userName, setUserName] = useState('AsuraKing913')
     const [cover, setCover] = useState(null);
     const [profile, setProfile] = useState(user)
     const [error, setError] = useState("")
+    const [active, setActive] = useState(true)
+    const [followers, setFollowers] = useState(20)
+    const [following, setFollowing] = useState(10)
+
+    // image input ref
     const profileInput = useRef(null)
     const coverInput = useRef(null)
 
+
+    // event fxn
     const handleProfileBtn = () => {
       if(profileInput.current) {
         profileInput.current.click()
@@ -83,6 +92,8 @@ function Profile() {
       return listExtensions.includes(newExt)
     }
 
+
+    // list data
     const postList = [
       { 
         likes: 20, 
@@ -137,39 +148,48 @@ function Profile() {
                 <img src={update} onClick={handleProfileBtn} className='absolute sm:active:scale-[0.95] cursor-pointer top-[80%] right-[1.5em] hover:scale-125 duration-[0.5s] ' alt="" />
                 <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
              </div>
-             <h2 className='text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
+             <div className='text-center'>
+               <h2 className='text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
+               <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <img src={green} className='w-[15px] inline' alt="" /> : <p className='inline'>active 2hrs ago</p> }</p>
+             </div>
              <div>
                 <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
              </div>
-             <div className='flex justify-between gap-[2em]'>
-                <Link className='px-[1em] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
-                  <FontAwesomeIcon icon={faUserPlus}/>
-                  <p>Follow</p>
-                </Link>
-                <Link className='px-[1em] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
-                  <FontAwesomeIcon icon={faMessage}/>
-                  <p>Message</p>
-                </Link>
+             <div>
+               <div className='flex justify-between gap-[2em]'>
+                  <Link className='px-[1em] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <FontAwesomeIcon icon={faUserPlus}/>
+                    <p>Follow</p>
+                  </Link>
+                  <Link className='px-[1em] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <FontAwesomeIcon icon={faMessage}/>
+                    <p>Message</p>
+                  </Link>
+               </div>
+               <div className='flex justify-between mt-[.5em]'>
+                <p className='text-[--bg] font- roboto'>Followers: {followers}</p>
+                <p className='text-[--bg] font- roboto'>Following: {following}</p>
+               </div>
              </div>
              <div className='w-[120%] border-[1.5px] border-[--accent]'></div>
              <div className='w-full flex flex-col gap-[.5em]'>
                 <p className='flex justify-between items-center'>
-                  <span className='flex items-center text-[1rem] roboto text-[--bg] font-bold'><img src={location} className='w-[25px]' alt="" />Location:</span>
+                  <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><img src={location} className='w-[25px]' alt="" />Location:</span>
                     <span className='text-[--bg] roboto'>Nigeria</span>
                 </p>
                 <p className='flex justify-between items-center'>
-                  <span className='flex items-center text-[1rem] roboto text-[--bg] font-bold'><img src={likes} className='w-[25px]' alt="" />Likes:</span>
+                  <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><img src={likes} className='w-[25px]' alt="" />Likes:</span>
                   <span className='text-[--bg] roboto'>2 Likes</span>
                 </p>
                 <p className='flex justify-between items-center'>
-                  <span className='flex items-center text-[1rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[25px]' alt="" />Joined:</span>
+                  <span className='flex items-center gap-[.1em] text-[1rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[25px]' alt="" />Joined:</span>
                   <span className='text-[--bg] roboto'>Member Since Dec 05, 2022</span>
                 </p>
              </div>
               
           </div>
       </div>
-      <div className='h-[60px] items-center justify-center px-[4em] flex sticky top-[3em] z-[10] bg-[--accent1]'>
+      <div className='h-[60px] items-center justify-center px-[4em] flex sticky top-[3.5em] z-[10] bg-[--accent1]'>
       <ul className='flex ml-[8em] gap-[10em]'>
           <Link className='hover:bg-[--accent] sm:active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={posts} title='Posts' className='w-[40px] h-[50px]' alt="" /></Link>
           <Link className='hover:bg-[--accent] sm:active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={book}  title='Puslished' className='w-[40px] h-[50px]'alt="" /></Link>

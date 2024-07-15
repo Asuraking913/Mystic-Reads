@@ -115,7 +115,7 @@ function Nav() {
           <Link>
             {
               search ? 
-              <FontAwesomeIcon className='text-3xl hover:scale-125 duration-[0.5s]' onClick={handleSearch} icon={faSearch}/>
+              <FontAwesomeIcon className='text-3xl sm:active:scale-[0.95] hover:scale-125 duration-[0.5s]' onClick={handleSearch} icon={faSearch}/>
               :
               <form action="#" onSubmit={handleSubmit}>
                 <p><input type="text" className='py-[.5em] rounded-[2em] pl-[.5em] placeholder-[--accent] bg-[white]' name="search" id="navSearch" placeholder='Search...' /></p>
