@@ -176,7 +176,7 @@ function Profile() {
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
-                 <h2 className='text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
+                 <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <img src={green} className='w-[15px] inline' alt="" /> : <p className='inline'>active 2hrs ago</p> }</p>
                </div>
                <div>
@@ -201,7 +201,7 @@ function Profile() {
                <div className='w-[120%] border-[1.5px] border-[--accent]'></div>
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
-                    <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><img src={location} className='w-[25px]' alt="" />Location:</span>
+                    <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><img src={location} className='w-[25px]' alt="" />Location:</span>
                       <span className='text-[--bg] roboto'>Nigeria</span>
                   </p>
                   <p className='flex justify-between items-center'>
@@ -209,7 +209,7 @@ function Profile() {
                     <span className='text-[--bg] roboto'>2 Likes</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[1rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[25px]' alt="" />Joined:</span>
+                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[25px]' alt="" />Joined:</span>
                     <span className='text-[--bg] roboto'>Member Since Dec 05, 2022</span>
                   </p>
                </div>
@@ -232,7 +232,7 @@ function Profile() {
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
-                 <h2 className='text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
+                 <h2 className='text-xl font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <img src={green} className='w-[15px] inline' alt="" /> : <p className='inline'>active 2hrs ago</p> }</p>
                </div>
                <div>
@@ -240,28 +240,28 @@ function Profile() {
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
-                    <Link className='px-[1em] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <Link className='px-[1em] text-[.9rem] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faUserPlus}/>
-                      <p>Follow</p>
+                      <p className='text-[.9rem]'>Follow</p>
                     </Link>
-                    <Link className='px-[1em] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <Link className='px-[1em] text-[.9rem] sm:active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faMessage}/>
-                      <p>Message</p>
+                      <p className='text-[.9rem]'>Message</p>
                     </Link>
                  </div>
                  <div className='flex justify-between mt-[.5em]'>
-                  <p className='text-[--bg] font- roboto'>Followers: {followers}</p>
-                  <p className='text-[--bg] font- roboto'>Following: {following}</p>
+                  <p className='text-[--bg] text-[.9rem] font- roboto'>Followers: {followers}</p>
+                  <p className='text-[--bg] text-[.9rem] font- roboto'>Following: {following}</p>
                  </div>
                </div>
                <div className='border-[1.5px] ml-[-2em] w-[500px] border-[--accent]'></div>
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
-                    <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><img src={location} className='w-[25px]' alt="" />Location:</span>
+                    <span className='flex text-[.9rem]items-center text-[1rem] roboto text-[--bg] font-bold'><img src={location} className='w-[25px]' alt="" />Location:</span>
                       <span className='text-[--bg] roboto'>Nigeria</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><img src={likes} className='w-[25px]' alt="" />Likes:</span>
+                    <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><img src={likes} className='w-[25px]' alt="" />Likes:</span>
                     <span className='text-[--bg] roboto'>2 Likes</span>
                   </p>
                   <p className='flex justify-between items-center'>

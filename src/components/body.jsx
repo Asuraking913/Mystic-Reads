@@ -125,7 +125,7 @@ function Body() {
 
   return (
     <>
-      <section className='flex flex-col justify-center gap-[3em] sm:mt-[0em] sm:py-0 pt-[2em] sm:h-screen px-[1em] sm:px-[--pdx]'>
+      <section className='flex flex-col justify-center gap-[3em] mt-[3em] sm:mt-[0em] sm:py-0 pt-[2em] sm:h-screen px-[1em] sm:px-[--pdx]'>
         <div className='items-center sm:flex-row flex-col gap-[2em] flex w-[100%] hero1'>
           <div className='flex flex-col gap-[1em]'>
               <h1 className='sm:text-[3rem] text-[2rem] text-[--accent] uppercase font-[audio] font-bold line'><span className='text-[--accent1] block'>Read more,</span> enjoy more.</h1>

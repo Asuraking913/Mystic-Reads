@@ -16,10 +16,10 @@ function Post({profile, username, active, post, comments, likes}) {
           <p className='text-[--bg] sm:text-[1rem] text-[0.9rem] line roboto'>{post}</p>
           <div className='flex w-full gap-[2em] mt-[.2em]'>
               <p>
-                <span className='flex items-center justify-center roboto font-bold gap-[1em] text-[--accent] text'><img src={thumb} className='sm:w-[30px] w-[20px]' alt="" />{likes}</span>
+                <span className='flex items-center text-[.9rem] justify-center roboto font-bold gap-[1em] text-[--accent] text'><img src={thumb} className='sm:w-[30px] w-[20px]' alt="" />{likes}</span>
               </p>
               <p>
-                <span className='flex items-center justify-center roboto font-bold gap-[1em] text-[--accent] text'><img src={comment} className='sm:w-[28px] w-[18px]' alt="" />{comments}</span>
+                <span className='flex items-center text-[.9rem] justify-center roboto font-bold gap-[1em] text-[--accent] text'><img src={comment} className='sm:w-[28px] w-[18px]' alt="" />{comments}</span>
               </p>
           </div>
           <Link className='text-[1rem] absolute hover:text-[--accent] right-[2em] bottom-[1em] text-[--bg] font-sans underline'>

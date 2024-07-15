@@ -73,7 +73,7 @@ function Nav() {
   }
 
   return (
-    <div className='text-[--accent] z-[100000000000] bg-[--accent1] fixed sm:sticky top-0 font-bold  right-0 w-full px-[1em] sm:px-[--pdx] h-[60px] sm:mt] items-center flex justify-between'>
+    <div className='text-[--accent] z-[100000000000] bg-[--accent1] fixed  sm:sticky top-0 font-bold  right-0 w-full px-[1em] sm:px-[--pdx] h-[60px] sm:mt] items-center flex justify-between'>
         <a href="" className='text-2xl font-[audio]'>Mystic<span className='text-[--wh]'>Reads</span></a>
 
         <nav className='roboto sm:block hidden'>
@@ -152,7 +152,7 @@ function Nav() {
           <div className=' flex relative h-[full] py-[4em] p-[1em] justify-between bg-[#593f3b85] text-white '>
           <nav className='roboto left-[2em]'>
             <ul className='flex flex-col text-[1.1rem] gap-[3em]'>
-              <Link onClick={handleHome} className='hover:underline hover:animate-pulse'>
+              <Link to={"/"} className='hover:underline hover:animate-pulse'>
                 <li>Home</li>
               </Link>
               <Link onClick={handleTrend} className='hover:underline hover:animate-pulse'>
