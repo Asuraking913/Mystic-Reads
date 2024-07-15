@@ -117,7 +117,7 @@ function Profile() {
       }
     ]
 
-    const post = postList.map((items, i) => (<Post key={i} profile={profile} post={items.postText} active={items.active} username={userName}/>))
+    const post = postList.map((items, i) => (<Post key={i} comments={items.comments} likes={items.likes} profile={profile} post={items.postText} active={items.active} username={userName}/>))
 
   return (
     <article className='h-auto'>
@@ -170,7 +170,7 @@ function Profile() {
               
           </div>
       </div>
-      <div className='h-[60px] items-center justify-center px-[4em] flex relative bg-[--accent1]'>
+      <div className='h-[60px] items-center justify-center px-[4em] flex sticky top-[3em] z-[10] bg-[--accent1]'>
       <ul className='flex ml-[8em] gap-[10em]'>
           <Link className='hover:bg-[--accent] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={posts} title='Posts' className='w-[40px] h-[50px]' alt="" /></Link>
           <Link className='hover:bg-[--accent] hover:scale-110 rounded-[5px] duration-[0.5s] px-[.5em]'><img src={book}  title='Puslished' className='w-[40px] h-[50px]'alt="" /></Link>
@@ -178,18 +178,18 @@ function Profile() {
         </ul>
         
       </div>
-      <section className=' p-[0em] h-screen w-[100%] px-[--pdx] flex justify-between items-end'>
-      <div className='bg-white min-h-[300px]'>
-        <h2 className='text-xl roboto font-bold'>Our Programs</h2>
+      <section className=' p-[0em] h-[90vh] w-[100%] px-[--pdx] flex justify-between items-end'>
+      <div className='py-[2em]'>
+        <h2 className='text-2xl roboto font-bold text-[--accent1]'>Our Programs</h2>
 
-          <ul>
-            <li>About Us</li>
-            <li>Terms and Service</li>
-            <li>Privacy</li>
-            <li>How it Works</li>
+          <ul className='flex text-[--accent1] flex-col gap-[1em] mt-[1em] '>
+            <li className='font-sans font-bold'>About Us</li>
+            <li className='font-sans font-bold'>Terms and Service</li>
+            <li className='font-sans font-bold'>Privacy</li>
+            <li className='font-sans font-bold'>How it Works</li>
           </ul>
       </div>
-        <div className='w-[60%] hide-scrollbar h-[100%] overflow-scroll  py-[2em] flex flex-col gap-[2em]'>
+        <div className='w-[60%] hide-scrollbar h-[100%] overflow-scroll  py-[2em] flex flex-col gap-[1em]'>
           {post }
         </div>
         
