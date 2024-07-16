@@ -51,6 +51,10 @@ body {
     line-height: 1.1em;
 }
 
+.line1 {
+    line-height: 2em;
+}
+
 .text {
     text-shadow: 0px 0px 0.01px black;
 }
