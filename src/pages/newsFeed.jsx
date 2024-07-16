@@ -15,7 +15,7 @@ function Feeds() {
         {
             img: person1,
             username: 'AsuraKing913',
-            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
             descrip: "GamerXpert"
         }, 
         {
@@ -51,9 +51,8 @@ function Feeds() {
         <Nav />
         <Display />
         <FeedNav />
-        <section className='px-[.5em] sm:px-[--pdx] py-[1em] flex flex-col gap-[2em] w-[50%]'>
+        <section className='px-[.5em] sm:px-[--pdx] py-[1em] flex flex-col gap-[2em] w-[60%]'>
                 {listFeeds}
-       
         </section>
     </>
   )
