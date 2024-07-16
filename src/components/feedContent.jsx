@@ -38,11 +38,11 @@ function FeedsCont({img, post, username, descrip}) {
           </Link>
         </div>
         { postNav &&
-          <div  className='absolute top-0 w-full h-full bg-[#000000c5]'>
-            <FontAwesomeIcon onClick={handlePostNav} className='text-2xl right-[1.5em] text-white absolute top-[1.5em] text-[--accent1] sm:hover:scale-125 active:duration-[0.1s] sm:active:scale-[1] sm:duration-[0.5s] duration-[0.1s]' icon={faTimes}/>
+          <div  className='absolute top-0 left-0 w-full h-full rounded-[5px] bg-[#000000c5]'>
+            <FontAwesomeIcon onClick={handlePostNav} className='text-2xl right-[0.7em] text-white absolute top-[1.4em] text-[--accent1] sm:hover:scale-125 active:duration-[0.1s] sm:active:scale-[1] sm:duration-[0.5s] duration-[0.1s]' icon={faTimes}/>
 
               <ul className='flex flex-col items-center justify-between h-full '>
-                <Link className='flex items-center justify-center sm:hover:text-[--bg] sm:hover:bg-[--accent1] orb text-xl bg-[--bg] h-full w-[200px] border-2 border-[--accent1]'>
+                <Link className='flex items-center text- justify-center sm:hover:text-[--bg] sm:hover:bg-[--accent1] orb text-xl bg-[--bg] h-full w-[200px] border-2 border-[--accent1]'>
                   Delete Post
                 </Link>
                 <Link className='flex items-center justify-center sm:hover:text-[--bg] sm:hover:bg-[--accent1] orb text-xl bg-[--bg] h-full w-[200px] border-2 border-[--accent1]'>

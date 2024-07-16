@@ -42,6 +42,24 @@ function Feeds() {
             username: 'Ghost Of Sparta',
             p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
             descrip: "Data Analyst"
+        }, 
+        {
+            img: person5,
+            username: 'Ghost Of Sparta',
+            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+            descrip: "Data Analyst"
+        }, 
+        {
+            img: person5,
+            username: 'Ghost Of Sparta',
+            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+            descrip: "Data Analyst"
+        }, 
+        {
+            img: person5,
+            username: 'Ghost Of Sparta',
+            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+            descrip: "Data Analyst"
         }
     ]
 
@@ -53,10 +71,16 @@ function Feeds() {
         <Display />
         <FeedNav />
         <section className='px-[.5em] flex sm:px-[--pdx] py-[1.5em] gap-[1em]'>
-            <div className='flex flex-col gap-[2em] w-[100%]'>
+            <div className='flex flex-col gap-[2em] w-[100%] h-[200vh] overflow-scroll hide-scrollbar px-[.5em]'>
                     {listFeeds}
             </div>
-            <Notify />
+            {/* <div className='w-[70%] h-[200vh] rounded-[1em] flex justify-between flex-col'>
+                <Notify />
+                <div className='h-[48%] rounded-[1em] shadow-sm shadow-[--accent1]'></div>
+            </div> */}
+            <div className='w-[70%]'>
+
+            </div>
         </section>
     </>
   )
