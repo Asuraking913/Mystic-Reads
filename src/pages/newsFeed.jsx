@@ -9,6 +9,7 @@ import person4 from "../assets/person4.jpeg"
 import person5 from "../assets/person5.jpeg"
 import FeedNav from '../components/feedNav'
 import Notify from '../components/notify'
+import SmsBox from '../components/messageBox'
 
 function Feeds() {
 
@@ -74,12 +75,9 @@ function Feeds() {
             <div className='flex flex-col gap-[2em] w-[100%] h-[200vh] overflow-scroll hide-scrollbar px-[.5em]'>
                     {listFeeds}
             </div>
-            {/* <div className='w-[70%] h-[200vh] rounded-[1em] flex justify-between flex-col'>
+            <div className='w-[70%] h-[200vh] rounded-[1em] flex justify-between flex-col'>
                 <Notify />
-                <div className='h-[48%] rounded-[1em] shadow-sm shadow-[--accent1]'></div>
-            </div> */}
-            <div className='w-[70%]'>
-
+                <SmsBox />
             </div>
         </section>
     </>
