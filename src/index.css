@@ -17,6 +17,10 @@ body {
     /* overflow: hidden; */
 }
 
+body.no-scroll {
+    overflow: hidden;
+  }
+
 @font-face {
     font-family: "audio";
     src: url("../src//assets/Audiowide-Regular.ttf");

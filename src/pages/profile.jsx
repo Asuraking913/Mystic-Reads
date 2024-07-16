@@ -143,7 +143,7 @@ function Profile() {
 
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
         {error && <p className='sm:text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em] left-[38%] sm:left-[45%] top-[5em] sm:top-[4em]'>{error}</p>}
-        <div className='sm:h-[50vh] h-[30vh] relative w-full linear'>
+        <div className='sm:h-[50vh] h-[20vh] relative w-full linear'>
           {
             cover === null ? "" :
             <Link onClick={handleCoverDel} className='text-[1rem] bg-[--accent] p-[.3em] active:bg-white text-[white] rounded-[2px] absolute right-[1em] sm:top-[5%] top-[.5em] bottom hover:text-[--accent] sm:active:scale-[1]  hover:scale-110 duration-[0.5s]'>
@@ -154,7 +154,7 @@ function Profile() {
             </span>
           </Link>
           }
-          <Link onClick={handleCoverBtn} className='absolute bg-[--accent] p-[.2em] rounded-[2px] text-white active:scale-[0.95] right-[1em] flex gap-[.2em] roboto font-bold justifsm:y-center items-center hover:scale-110 duration-[0.5s] top-[85%]'>
+          <Link onClick={handleCoverBtn} className='absolute bg-[--accent] p-[.2em] rounded-[2px] text-white active:scale-[0.95] right-[1em] flex gap-[.2em] roboto font-bold justifsm:y-center items-center hover:scale-110 duration-[0.5s] top-[80%] sm:top-[90%]'>
             <img src={edit} className='w-[20px]' alt="" />
             {/* <FontAwesomeIcon  icon={faPlusCircle}/> */}
             {/* Change Photo */}
@@ -227,7 +227,7 @@ function Profile() {
                     </span>
                   </Link>
                   }
-                  <img src={profile} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
+                  <img src={profile} className='rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
                   <img src={update} onClick={handleProfileBtn} className='absolute active:scale-[0.95] w-[20px] cursor-pointer top-[80%] right-[1em] hover:scale-125 duration-[0.5s] ' alt="" />
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
@@ -273,9 +273,9 @@ function Profile() {
         </div>
         <div className='sm:h-[60px] h-[40px] items-center justify-center px-[4em] flex sticky top-[3.5em] z-[10] bg-[--accent1]'>
           <ul className='flex sm:ml-[8em] sm:justify-normal justify-between sm:gap-[10em] sm:w-auto w-full'>
-              <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
-              <Link   className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /></Link>
-              <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.5s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
+              <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
+              <Link   className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /></Link>
+              <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
             </ul>
       
         </div>
