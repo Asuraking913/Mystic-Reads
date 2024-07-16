@@ -1,108 +1,33 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import Nav from '../components/nav'
-import edit from '../assets/edit.svg'
 import { Link } from 'react-router-dom'
 import likes from "../assets/likes.svg"
 import posts from "../assets/post1.svg"
 import book from "../assets/book.svg"
-import person from "../assets/person4.jpeg"
 import user from "../assets/user.svg"
 import user1 from "../assets/user1.png"
-import update from "../assets/update.svg"
 import green from "../assets/green.png"
 import location from "../assets/location.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownLong, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faDownLong } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 
-function Profile() {
+function foreignView() {
 
 
     // State vars
     const [file1, setFile1] = useState(false)
+    const [userName, setUserName] = useState('AsuraKing913')
     const [cover, setCover] = useState(null);
     const [profile, setProfile] = useState(user)
     const [error, setError] = useState("")
     const [active, setActive] = useState(true)
-    const [userName, setUserName] = useState('AsuraKing913')
     const [followers, setFollowers] = useState(20)
     const [following, setFollowing] = useState(10)
     const [gender, setGender] = useState("Male")
     const [birth, setBirthday] = useState("May 1st")
     const [email, setEmail] = useState("israelshedrack913@gmail.com")
-
-    // image input ref
-    const profileInput = useRef(null)
-    const coverInput = useRef(null)
-
-
-    // event fxn
-    const handleProfileBtn = () => {
-      if(profileInput.current) {
-        profileInput.current.click()
-      }
-    }
-
-    const handleCoverBtn = () => {
-      if(coverInput.current) {
-        coverInput.current.click()
-      }
-    }
-
-    const handleProfileDel = () => {
-      setProfile(user)
-    }
-
-    const handleCoverDel = () => {
-      setCover(null)
-    }
-
-    const handleCover = (event) => {
-      const file = event.target.files[0]
-      if(file && allowedExtensions(file.name)) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCover(reader.result)
-      }
-
-      reader.readAsDataURL(file)
-      setCover(!file)
-      return
-      }
-      setError("Invalid file")
-      setInterval(() => {
-        setError("")
-      }, [4000])
-      event.target.value = ""
-    }
-
-    const handleProfile = (event) => {
-      const file = event.target.files[0]
-      if(file && allowedExtensions(file.name)) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfile(reader.result)
-      }
-
-      reader.readAsDataURL(file)
-      setFile1(!file1)
-      return
-      }
-      setError("Invalid file")
-      setInterval(() => {
-        setError("")
-      }, [4000])
-      event.target.value = ""
-      setFile1(!file)
-    }
-
-    const allowedExtensions = (filename) => {
-      const listExtensions = ['png', "jpeg", 'jpg']
-      const newExt = filename.split(".").pop()
-      return listExtensions.includes(newExt)
-    }
-
 
     // Postlist data
     const postList = [
@@ -145,38 +70,11 @@ function Profile() {
         <Nav profile={profile}/>
 
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
-        {error && <p className='sm:text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em] left-[38%] sm:left-[45%] top-[5em] sm:top-[4em]'>{error}</p>}
         <div className='sm:h-[50vh] h-[20vh] relative w-full linear'>
-          {
-            cover === null ? "" :
-            <Link onClick={handleCoverDel} className='text-[1rem] bg-[--accent] p-[.3em] active:bg-white text-[white] rounded-[2px] absolute right-[1em] sm:top-[5%] top-[.5em] bottom hover:text-[--accent] sm:active:scale-[1]  hover:scale-110 duration-[0.5s]'>
-            <span title='Delete Photo' className='flex gap-[.5em] roboto font-bold text items-center justify-center'>
-              {/* <img src={edit} className='w-[20px]' alt="" /> */}
-              <FontAwesomeIcon  icon={faTrash}/>
-              {/* Delete photo */}
-            </span>
-          </Link>
-          }
-          <Link onClick={handleCoverBtn} className='absolute bg-[--accent] p-[.2em] rounded-[2px] text-white active:scale-[0.95] right-[1em] flex gap-[.2em] roboto font-bold justifsm:y-center items-center hover:scale-110 duration-[0.5s] top-[80%] sm:top-[90%]'>
-            <img src={edit} className='w-[20px]' alt="" />
-            {/* <FontAwesomeIcon  icon={faPlusCircle}/> */}
-            {/* Change Photo */}
-          </Link>
-          <input type="file" className='hidden' name="file" onChange={handleCover} id="cover" ref={coverInput} />
-        {!cover ? "" : <img src={cover} className='h-full w-full object-cover' alt="" />}
+        <img src={cover} className='h-full w-full object-cover' alt="" />
             <div className='min-h-[80vh] overflow-hidden py-[1em] hidden sm:flex flex-col items-center justify-center z-[20] top-[40%] left-[--pdx] shadow-md shadow-[--accent1] absolute rounded-[10px] bg-[--accent1] gap-[1em] px-[1.5em] w-[380px]'>
                <div className='bg-[--accent] relative p-[.2em] rounded-[50%] h-[200px] w-[200px]'>
-                  {
-                    profile === user ? "" :
-                    <Link onClick={handleProfileDel} className='text-[1rem] absolute right-[-2em] bottom-[1em]  hover:text-[--accent] sm:active:scale-[1]  hover:scale-125 duration-[0.5s] text-[--bg] '>
-                    <span title='Delete Photo'>
-                      <FontAwesomeIcon  icon={faTrash}/>
-                    </span>
-                  </Link>
-                  }
                   <img src={profile} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
-                  <img src={update} onClick={handleProfileBtn} className='absolute active:scale-[0.95] cursor-pointer top-[80%] right-[1.5em] hover:scalsm:e-125 duration-[0.5s] ' alt="" />
-                  <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
                  <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
@@ -204,15 +102,15 @@ function Profile() {
                <div className='w-[120%] border-[1.5px] border-[--accent]'></div>
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
-                    <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><img src={location} className='w-[20px]' alt="" />Location:</span>
+                    <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><img src={location} className='w-[25px]' alt="" />Location:</span>
                       <span className='text-[--bg] roboto'>Nigeria</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><img src={likes} className='w-[20px]' alt="" />Likes:</span>
+                    <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><img src={likes} className='w-[25px]' alt="" />Likes:</span>
                     <span className='text-[--bg] roboto'>2 Likes</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Joined:</span>
+                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[25px]' alt="" />Joined:</span>
                     <span className='text-[--bg] roboto'>Member Since Dec 05, 2022</span>
                   </p>
                   <p className='flex justify-between items-center'>
@@ -220,13 +118,14 @@ function Profile() {
                     <span className='text-[--bg] roboto'>{gender}</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Email:</span>
-                    <span className='text-[--bg] roboto'>{email}</span>
-                  </p>
-                  <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Birthday:</span>
                     <span className='text-[--bg] roboto'>{birth}</span>
                   </p>
+                  <p className='flex justify-between items-center'>
+                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Email:</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{email}</span>
+                  </p>
+                  
                </div>
       
             </div>
@@ -234,17 +133,7 @@ function Profile() {
         {/* profile mobile */}
         <div className=' py-[1em] overflow-hidden  flex sm:hidden flex-col items-center justify-center z-[20] shadow-md shadow-[--accent1] bg-[--accent1] gap-[1em] px-[1.5em] w-[100%]'>
                <div className='bg-[--accent] relative p-[.2em] rounded-[50%] h-[100px] w-[100px]'>
-                  {
-                    profile === user ? "" :
-                    <Link onClick={handleProfileDel} className='text-[1rem] absolute right-[-2em] bottom-[-.2em]  hover:text-[--accent] sm:active:scale-[1]  hover:scale-125 duration-[0.5s] text-[--bg] '>
-                    <span title='Delete Photo'>
-                      <FontAwesomeIcon  icon={faTrash}/>
-                    </span>
-                  </Link>
-                  }
                   <img src={profile} className='rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
-                  <img src={update} onClick={handleProfileBtn} className='absolute active:scale-[0.95] w-[20px] cursor-pointer top-[80%] right-[1em] hover:scale-125 duration-[0.5s] ' alt="" />
-                  <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
                  <h2 className='text-xl font-bold roboto text-[--bg]'>{userName}</h2>
@@ -272,7 +161,7 @@ function Profile() {
                <div className='border-[1.5px] ml-[-2em] w-[500px] border-[--accent]'></div>
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
-                    <span className='flex text-[.9rem] items-center sm:text-[1rem] roboto text-[--bg] font-bold'><img src={location} className='w-[25px]' alt="" />Location:</span>
+                    <span className='flex text-[.9rem]items-center text-[1rem] roboto text-[--bg] font-bold'><img src={location} className='w-[25px]' alt="" />Location:</span>
                       <span className='text-[--bg] roboto'>Nigeria</span>
                   </p>
                   <p className='flex justify-between items-center'>
@@ -280,23 +169,11 @@ function Profile() {
                     <span className='text-[--bg] roboto'>2 Likes</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex items-center text-[.9rem] gap-[.1em] sm:text-[1rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[25px]' alt="" />Joined:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since Dec 05, 2022</span>
+                    <span className='flex items-center gap-[.1em] text-[1rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[25px]' alt="" />Joined:</span>
+                    <span className='text-[--bg] roboto'>Member Since Dec 05, 2022</span>
                   </p>
-                  <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Gender:</span>
-                    <span className='text-[--bg] roboto'>{gender}</span>
-                  </p>
-                  <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Birthday:</span>
-                    <span className='text-[--bg] roboto'>{birth}</span>
-                  </p>
-                  <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Email:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{email}</span>
-                  </p>
-                  
                </div>
+      
         </div>
         <div className='sm:h-[60px] h-[40px] items-center justify-center px-[4em] flex sticky top-[3.5em] z-[10] bg-[--accent1]'>
           <ul className='flex sm:ml-[8em] sm:justify-normal justify-between sm:gap-[10em] sm:w-auto w-full'>
@@ -329,4 +206,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default foreignView

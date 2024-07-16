@@ -5,6 +5,7 @@ import Login from './pages/login'
 import Create from './pages/createAcct'
 import Profile from './pages/profile'
 import ReadPage from './pages/read'
+import ForeignView from './pages/foreignProfile'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <Route path='/signup' element={<Create />}/>
             <Route path='/profile' element={<Profile  />}/>
             <Route path='/read' element={<ReadPage  />}/>
+            <Route path='/foreignView' element={<ForeignView  />}/>
           </Routes>
         </Router>
     </div>

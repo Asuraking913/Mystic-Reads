@@ -8,7 +8,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 function Post({profile, username, active, post, comments, likes}) {
   return (
-    <div className='sm:w-[100%] relative sm:rounded-[10px] rounded-[5px] flex gap-[1em] shadow-md shadow-[--accent1] bg-[--accent1] p-[1em] sm:p-[2em]'>
+    <div className='sm:w-[100%] relative sm:rounded-[10px] rounded-[5px] flex items-center justify-center gap-[1em] shadow-md shadow-[--accent1] bg-[--accent1] p-[.5em] sm:p-[2em]'>
         <div className='sm:block hidden'><img src={profile} className='w-[150px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover h-[120px]' alt="" /></div>
         <div className='w-[100%] flex gap-[.2em] flex-col'>
           <h2 className='sm:text-2xl text-xl roboto font-bold text-[--accent]'>{username}</h2>
