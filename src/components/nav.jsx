@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAlignLeft, faAlignRight, faBars, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import user from "../assets/user.svg"
 import person1 from "../assets/person4.jpeg"
 
@@ -15,6 +15,7 @@ function Nav({profile}) {
   const location = useLocation()
 
   const handleNav = () => {
+    document.body.classList.add('no-scroll')
     setNav(!nav)
   }
 
@@ -70,6 +71,7 @@ function Nav({profile}) {
     if (event.target.id == 'exit') {
       setNav(!Nav)
     }
+    document.body.classList.remove('no-scroll')
   }
 
   return (
@@ -215,7 +217,7 @@ function Nav({profile}) {
 
         :
 
-        <FontAwesomeIcon onClick={handleNav} className='sm:hidden block text-4xl' icon={faBars}/> }
+        <FontAwesomeIcon onClick={handleNav} className='sm:hidden block text-4xl' icon={faAlignRight}/> }
     </div>
   )
 }
