@@ -8,6 +8,7 @@ import person3 from "../assets/person3.jpeg"
 import person4 from "../assets/person4.jpeg"
 import person5 from "../assets/person5.jpeg"
 import FeedNav from '../components/feedNav'
+import Notify from '../components/notify'
 
 function Feeds() {
 
@@ -51,8 +52,11 @@ function Feeds() {
         <Nav />
         <Display />
         <FeedNav />
-        <section className='px-[.5em] sm:px-[--pdx] py-[1em] flex flex-col gap-[2em] w-[60%]'>
-                {listFeeds}
+        <section className='px-[.5em] flex sm:px-[--pdx] py-[1.5em] gap-[1em]'>
+            <div className='flex flex-col gap-[2em] w-[100%]'>
+                    {listFeeds}
+            </div>
+            <Notify />
         </section>
     </>
   )
