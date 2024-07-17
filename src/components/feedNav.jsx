@@ -3,19 +3,29 @@ import { Link } from 'react-router-dom'
 
 function FeedNav() {
     const handleSms = () => {
+        window.scrollTo({top : 400, behavior : 'smooth'})
         document.body.classList.add('no-scroll')
         document.getElementById('box').style.display = 'flex'
         document.getElementById('notify').style.zIndex = 0
         document.getElementById('box').classList.remove('notify')
         document.getElementById('box').classList.add('sms')
+        document.getElementById('smsIcon').classList.add('sm:animate-bounce')
+        setInterval(() => {
+        document.getElementById('smsIcon').classList.remove('sm:animate-bounce')
+        }, 4000)
     }
 
     const handleNotify = () => {
+        window.scrollTo({top : 400, behavior : 'smooth'})
         document.body.classList.add('no-scroll')
         document.getElementById('message').style.zIndex = 0
         document.getElementById('box').style.display = 'flex'
         document.getElementById('box').classList.remove('sms')
         document.getElementById('box').classList.add('notify')
+        document.getElementById('bell').classList.add('sm:animate-bounce')
+        setInterval(() => {
+        document.getElementById('bell').classList.remove('sm:animate-bounce')
+        }, 4000)
     }
 
     const handleFeeds = () => {

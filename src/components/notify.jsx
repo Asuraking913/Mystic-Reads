@@ -57,7 +57,7 @@ function Notify() {
     <div id='notify' className='w-[100%] shadow-sm shadow-[--accent1] z-[10000000] bg-[#e3cec2d0] sm:bg-transparent sm:z-0 fixed sm:top-0 top-[3.7em] left-0 sm:relative sm:rounded-[1em] h-screen overflow-scroll hide-scrollbar'>
         <div className=' p-[1em] border-b-[2px] z-[10] sticky sm:block flex justify-between top-0 w-full bg-[--accent1] border-b-[--accent1]'>
             <Link>
-                <FontAwesomeIcon className='sm:text-2xl text-xl text-[--bg] sm:hover:scale-125 sm:duration-[0.5s] sm:active:scale-[1]' icon={faBell}/>
+                <FontAwesomeIcon id='bell' className='sm:text-2xl text-xl text-[--bg] sm:hover:scale-125 sm:duration-[0.5s] sm:active:scale-[1]' icon={faBell}/>
             </Link>
             <Link onClick={() => {
                 document.getElementById('box').style.display = 'none';

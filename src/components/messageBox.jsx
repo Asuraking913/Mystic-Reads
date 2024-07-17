@@ -65,7 +65,7 @@ function SmsBox() {
   return (
     <div id='message' className='sm:h-[48%] h-full left-0 bg-[#e3cec2d0] sm:z-0 z-[1000] sm:rounded-[1em] fixed sm:top-0 top-[3.7em] sm:relative  shadow-sm shadow-[--accent1] overflow-scroll hide-scrollbar'>
         <div className='sm:rounded-t-[1em] p-[1em] flex justify-between border-b-[2px] z-[3] sticky top-0 w-full bg-[--accent1] border-b-[--accent1]'>
-            <Link className='cursor-pointer'>
+            <Link id='smsIcon' className='cursor-pointer'>
                 <FontAwesomeIcon className='text-2xl text-[--bg]  sm:hover:scale-125 sm:duration-[0.5s] sm:active:scale-[1]' icon={faMessage}/>
             </Link>
             <Link onClick={() => {
