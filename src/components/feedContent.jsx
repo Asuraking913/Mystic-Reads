@@ -29,11 +29,11 @@ function FeedsCont({img, post, username, descrip}) {
         <p className=''>{post}</p>
         <div className='flex items-center justify-center gap-[2em] border-[--accent1]'>
           <Link className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
-            <FontAwesomeIcon icon={faThumbsUp} className='text-xl'/>
+            <FontAwesomeIcon id='thumb' icon={faThumbsUp} className='text-xl'/>
             <p className='inline'>{likes}</p>
           </Link>
           <Link className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
-            <FontAwesomeIcon icon={faComment} className='text-xl'/>
+            <FontAwesomeIcon id='comment-icon' icon={faComment} className='text-xl'/>
             <p className='inline'>{likes}</p>
           </Link>
         </div>

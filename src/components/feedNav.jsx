@@ -29,7 +29,15 @@ function FeedNav() {
     }
 
     const handleFeeds = () => {
-        document.getElementById('post').scrollIntoView({behavior : 'smooth', })
+        window.scrollTo({top : '400', behavior : 'smooth'})
+        document.getElementById('thumb').classList.add('sm:animate-bounce')
+        setInterval(() => {
+        document.getElementById('thumb').classList.remove('sm:animate-bounce')
+        }, 2000)
+        document.getElementById('comment-icon').classList.add('sm:animate-bounce')
+        setInterval(() => {
+        document.getElementById('comment-icon').classList.remove('sm:animate-bounce')
+        }, 2000)
     }
 
   return (
