@@ -17,9 +17,6 @@ body {
     /* overflow: hidden; */
 }
 
-body.no-scroll {
-    overflow: hidden;
-  }
 
 @font-face {
     font-family: "audio";
@@ -145,6 +142,15 @@ body.no-scroll {
     .target .swiper-button-next, .target .swiper-button-prev {
         display: none;
     }
+
+    body.no-scroll {
+        overflow: hidden;
+      }
+
+      .hidenotify {
+        z-index: 0;
+      }
+    
 }
 
 .navAnime {

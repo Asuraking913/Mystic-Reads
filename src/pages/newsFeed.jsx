@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Nav from '../components/nav'
 import Display from '../components/display'
 import FeedsCont from '../components/feedContent'
@@ -12,6 +12,7 @@ import Notify from '../components/notify'
 import SmsBox from '../components/messageBox'
 
 function Feeds() {
+
 
     const feeds = [
         {
@@ -71,11 +72,11 @@ function Feeds() {
         <Nav />
         <Display />
         <FeedNav />
-        <section className='px-[.5em] flex sm:px-[--pdx] py-[1.5em] gap-[1em]'>
-            <div className='flex flex-col gap-[2em] w-[100%] h-[200vh] overflow-scroll hide-scrollbar px-[.5em]'>
+        <section  className='px-[.5em] flex sm:px-[--pdx] py-[1.5em] gap-[1em]'>
+            <div id='post' className='flex flex-col gap-[2em] w-[100%] h-[200vh] overflow-scroll hide-scrollbar px-[.5em]'>
                     {listFeeds}
             </div>
-            <div id='box' className='w-[70%] h-[200vh] rounded-[1em] flex justify-between notify '>
+            <div id='box' className='w-[70%] h-[200vh] rounded-[1em] hidden sm:flex sm:justify-between notify '>
                 <Notify />
                 <SmsBox />
             </div>
