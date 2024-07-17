@@ -65,17 +65,19 @@ function SmsBox() {
   return (
     <div className='h-[48%] rounded-[1em] shadow-sm shadow-[--accent1] overflow-scroll hide-scrollbar'>
         <div className='rounded-t-[1em] p-[1em] border-b-[2px] z-[3] sticky top-0 w-full bg-[--accent1] border-b-[--accent1]'>
-            <Link>
-                <FontAwesomeIcon className='text-2xl text-[--bg] sm:hover:scale-125 sm:duration-[0.5s] sm:active:scale-[1]' icon={faMessage}/>
+            <Link className='cursor-pointer'>
+                <FontAwesomeIcon className='text-2xl text-[--bg]  sm:hover:scale-125 sm:duration-[0.5s] sm:active:scale-[1]' icon={faMessage}/>
             </Link>
         </div>
         <div className='h-full pt-[0em]'>
             
             {msgList.map((items, i )=> (
-                <div key={i} className='flex items-center gap-[2em] relative justify-between px-[1em] shadow-sm shadow-[--accent1] py-[1em]'>
-                    <FontAwesomeIcon icon={faTrash} className='absolute right-[5px] top-[5px] text-[0.9rem] text-[--accent1] sm:hover:scale-125 sm:active:scale-[1] sm:duration-[0.5s]'/>
+                <div key={i} className='flex items-center cursor-pointer hover:bg-[#f3ddd0] active:bg-[#e3cec2] gap-[2em] relative justify-between px-[1em] shadow-sm shadow-[--accent1] py-[1em]'>
+                    <FontAwesomeIcon icon={faTrash} className='absolute cursor-pointer right-[5px] top-[5px] text-[0.9rem] text-[--accent1] sm:hover:scale-125 sm:active:scale-[1] sm:duration-[0.5s]'/>
                     <img src={items.img} className='w-[80px] h-[80px] rounded-[50%] object-cover' alt="" />
-                    <p className='text-[--accent1] font-bold roboto'>{handleLength(items.msg)}</p>
+                    {/* <p className='text-[--accent1] font-bold roboto'>{(items.msg.length > 34) ? items.msg + items.msg[34 : items.msg }</p> */}
+                    {/* {'sd'.} */}
+                    <p className=''>{items.msg}</p>
                     <p className='text-[0.9rem]'>{items.time}</p>
                 </div>
             ))}

@@ -54,7 +54,7 @@ function Notify() {
     ]
 
   return (
-    <div className='w-[100%] shadow-sm shadow-[--accent1] relative rounded-[1em] h-screen overflow-scroll hide-scrollbar'>
+    <div className='w-[100%] shadow-sm shadow-[--accent1] z-0 relative rounded-[1em] h-screen overflow-scroll hide-scrollbar'>
         <div className=' p-[1em] border-b-[2px] z-[10] sticky top-0 w-full bg-[--accent1] border-b-[--accent1]'>
             <Link>
                 <FontAwesomeIcon className='text-2xl text-[--bg] sm:hover:scale-125 sm:duration-[0.5s] sm:active:scale-[1]' icon={faBell}/>
@@ -63,8 +63,8 @@ function Notify() {
         <div className='h-full pt-[0em]'>
             
             {notifyList.map((items, i )=> (
-                <div key={i} className='flex items-center relative justify-between px-[1em] shadow-sm shadow-[--accent1] py-[1em]'>
-                    <FontAwesomeIcon icon={faTrash} className='absolute right-[5px] top-[5px] text-[0.9rem] text-[--accent1] sm:hover:scale-125 sm:active:scale-[1] sm:duration-[0.5s]'/>
+                <div key={i} className='flex items-center cursor-pointer hover:bg-[#f3ddd0] active:bg-[#e3cec2] relative justify-between px-[1em] shadow-sm shadow-[--accent1] py-[1em]'>
+                    <FontAwesomeIcon icon={faTrash} className='absolute cursor-pointer right-[5px] top-[5px] text-[0.9rem] text-[--accent1] sm:hover:scale-125 sm:active:scale-[1] sm:duration-[0.5s]'/>
                     <img src={items.img} className='w-[80px] h-[80px] rounded-[50%] object-cover' alt="" />
                     <p className='text-[--accent1] font-bold roboto'>{items.p}</p>
                     <p className='text-[0.9rem]'>{items.time}</p>

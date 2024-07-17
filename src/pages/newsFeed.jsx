@@ -75,7 +75,7 @@ function Feeds() {
             <div className='flex flex-col gap-[2em] w-[100%] h-[200vh] overflow-scroll hide-scrollbar px-[.5em]'>
                     {listFeeds}
             </div>
-            <div className='w-[70%] h-[200vh] rounded-[1em] flex justify-between flex-col'>
+            <div id='box' className='w-[70%] h-[200vh] rounded-[1em] flex justify-between notify '>
                 <Notify />
                 <SmsBox />
             </div>

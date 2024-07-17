@@ -129,6 +129,14 @@ body.no-scroll {
 .hide-scrollbar::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
 }
+
+.sms {
+    flex-flow: column-reverse;
+}
+
+.notify {
+    flex-flow: column;
+}
   
 
 @media (max-width: 640px) {
