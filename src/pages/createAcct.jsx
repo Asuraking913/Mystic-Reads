@@ -39,10 +39,10 @@ function Create() {
             <input  type="submit" value="Sign Up" className='p-[.5em] bg-[#c16b63af] roboto text-white text-xl font-bold cursor-pointer rounded-[5px] hover:bg-[#ffffff65] border-2 border-transparent hover:border-[--accent] duration-[0.5s] hover:text-[--accent]' />
         </form>
         <Link className='flex gap-[1em] py-[1em] text-[0.9rem] roboto hover:underline items-center capitalize'>
-            <img src={google} className='w-[35px]  h-[35px]' alt="" />
+            <img src={google} className='w-[25px]  h-[25px]' alt="" />
             <span className='text-[--accent1]'>Sign In with google</span>
         </Link>
-        <p className='roboto text-[1.1rem]'>
+        <p className='roboto text-[1rem]'>
             Already have an account? <Link to={"/login"} className='underline text-[--accent1] ml-[.5em] animate-pulse duration-[0.5s]'><span>Log in</span></Link>
         </p>
     </section>

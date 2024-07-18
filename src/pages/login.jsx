@@ -46,10 +46,10 @@ function Login() {
         <div className='w-full border-[--accent1] border-[1px] relative'> </div>
         </div>
         <Link className='flex gap-[1em] text-[0.9rem] roboto hover:underline items-center capitalize'>
-            <img src={google} className='w-[35px] h-[35px]' alt="" />
+            <img src={google} className='w-[25px] h-[25px]' alt="" />
             <span className='text-[--accent1]'>Log In with google</span>
         </Link>
-        <p className='roboto text-[1.1rem]'>
+        <p className='roboto text-[1rem]'>
             Are you new? <Link to={"/signup"} className='underline text-[--accent1] ml-[.5em] animate-pulse duration-[0.5s]'><span>Create an account</span></Link>
         </p>
     </section>

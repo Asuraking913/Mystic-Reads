@@ -64,6 +64,10 @@ body {
     text-shadow: 0px 0px 4px white;
 }
 
+.text2 {
+    background-color: #31A24C;
+}
+
 .target .swiper-button-next, .target .swiper-button-prev {
     background-color: var(--bg);
     width: 50px;

@@ -12,7 +12,7 @@ import update from "../assets/update.svg"
 import green from "../assets/green.png"
 import location from "../assets/location.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownLong, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faDownLong, faEnvelope, faGift, faLocation, faLocationDot, faPeopleArrows, faPeopleGroup, faPersonHalfDress, faPlusCircle, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 
@@ -180,7 +180,7 @@ function Profile() {
                </div>
                <div className='text-center'>
                  <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
-                 <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <img src={green} className='w-[15px] inline' alt="" /> : <p className='inline'>active 2hrs ago</p> }</p>
+                 <p className='text-[0.9rem] text-[--bg] flex items-center justify-center gap-[.5em]'><span className='text-[--] flex'>Active:</span> {active ? <div className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></div> : <p className='inline'>active 2hrs ago</p> }</p>
                </div>
                <div>
                   <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
@@ -204,27 +204,27 @@ function Profile() {
                <div className='w-[120%] border-[1.5px] border-[--accent]'></div>
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
-                    <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><img src={location} className='w-[20px]' alt="" />Location:</span>
+                    <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='text-xl mr-[.1em] text-[--bg]'/>Location:</span>
                       <span className='text-[--bg] roboto'>Nigeria</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><img src={likes} className='w-[20px]' alt="" />Likes:</span>
+                    <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text-xl mr-[.1em] text-[--bg]'/>Likes:</span>
                     <span className='text-[--bg] roboto'>2 Likes</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Joined:</span>
+                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
                     <span className='text-[--bg] roboto'>Member Since Dec 05, 2022</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Gender:</span>
+                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
                     <span className='text-[--bg] roboto'>{gender}</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Email:</span>
+                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='text-xl mr-[.1em] text-[--bg]'/>Email:</span>
                     <span className='text-[--bg] roboto'>{email}</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><img src={user1} className='w-[20px]' alt="" />Birthday:</span>
+                    <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='text-xl mr-[.1em] text-[--bg]'/>Birthday:</span>
                     <span className='text-[--bg] roboto'>{birth}</span>
                   </p>
                </div>
