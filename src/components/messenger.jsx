@@ -14,7 +14,7 @@ function Messenger() {
     <article>
         {/* <Nav profile={user}/> */}
         <main className='h-[100vh] flex flex-col overflow-hidden py-[1em]'>
-            <div className='p-[1em] w-full flex justify-between items-center  px-[--pdx] text-[--accent1] shadow-md shadow-[--accent1]'>
+            <div className='p-[0em] w-full flex justify-between items-center  px-[--pdx] text-[--accent1] shadow-md shadow-[--accent1]'>
                 <Link to={"/"} className=''>
                     <FontAwesomeIcon className='text-4xl text-[--accent1]' icon={faHome}/>
                 </Link>
@@ -36,7 +36,7 @@ function Messenger() {
                     </div>
                 </section>
                 <section className='w-[60%] shadow-sm shadow-black'>
-                    <InputMessage />
+                    <InputMessage userImage={user} username={'Ditan'}/>
                 </section>
                 <section className='w-[30%] shadow-sm shadow-black'>
                     sect3
