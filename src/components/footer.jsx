@@ -9,7 +9,7 @@ function Foot() {
             <div className='flex sm:flex-row flex-col justify-center items-center w-[100%]'>
                 <ul className='flex flex-col gap-[.5em] sm:gap-[1em] py-[0.5em]'>
                     <h2 className='sm:text-3xl text-2xl audio text-[--bg]'>MysticReads</h2>
-                    <p className='sm:w-[80%] w-[100%] sm:text-xl text-[1.1rem] text-[--bg] italic'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio repellendus facere vel inventore voluptatum officia ex unde odio iusto quia, dolores harum maiores voluptatibus possimus ratione, sapiente temporibus qui vero.</p>
+                    <p className='sm:w-[80%] w-[100%] text-[1.1rem] text-[--bg] italic'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio repellendus facere vel inventore voluptatum officia ex unde odio iusto quia, dolores harum maiores voluptatibus possimus ratione, sapiente temporibus qui vero.</p>
                 </ul>
                 <ul className='flex flex-col items-center justify-center w-[100%]'>
                     <form action="" className='flex flex-col w-[100%] gap-[1em]'>

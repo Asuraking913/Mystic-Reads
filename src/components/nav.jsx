@@ -11,7 +11,7 @@ function Nav({profile}) {
   const [search, setSearch] = useState(true);
   const [nav, setNav] = useState(false)
   const [menu, setMenu] = useState(true)
-  const [log, setLog] = useState(false)
+  const [log, setLog] = useState(true)
   const location = useLocation()
 
   const handleNav = () => {

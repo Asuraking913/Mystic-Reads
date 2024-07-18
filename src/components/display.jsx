@@ -111,8 +111,8 @@ function Display() {
                   <Link className='p-[.5em] active:scale-[0.9] active:bg-[--accent] active:text-[white] sm:hover:bg-[--accent] sm:duration-[0.5s] sm:hover:text-white sm:hover:scale-110 duration-[0.05s] flex items-center justify-center px-[1.5em] border-2 border-[--accent] rounded-[1.5em] roboto text-[--accent] text-[1.2rem] font-bold'>
                     Contents
                   </Link>
-                  <Link className='p-[.5em] active:scale-[0.9] active:bg-[--accent1] sm:hover:bg-[--accent1] sm:hover:scale-110 duration-[0.05s] sm:duration-[0.5s] flex items-center justify-center px-[1.5em] bg-[--accent] text-[--wh] rounded-[1.5em] roboto  text-[1.2rem] font-bold'>
-                    Buy Plan
+                  <Link className='p-[.5em] px-[2em] active:scale-[0.9] active:bg-[--accent1] sm:hover:bg-[--accent1] sm:hover:scale-110 duration-[0.05s] sm:duration-[0.5s] flex items-center justify-center bg-[--accent] text-[--wh] rounded-[1.5em] roboto  text-[1.2rem] font-bold'>
+                    Feeds
                   </Link>
               </div>
           </div>
