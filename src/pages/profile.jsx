@@ -9,10 +9,9 @@ import person from "../assets/person4.jpeg"
 import user from "../assets/user.svg"
 import user1 from "../assets/user1.png"
 import update from "../assets/update.svg"
-import green from "../assets/green.png"
 import location from "../assets/location.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faDownLong, faEnvelope, faGift, faLocation, faLocationDot, faPeopleArrows, faPeopleGroup, faPersonHalfDress, faPlusCircle, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faDownLong, faEnvelope, faGift, faLocation, faLocationDot, faPeopleArrows, faPeopleGroup, faPersonHalfDress, faPlusCircle, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 

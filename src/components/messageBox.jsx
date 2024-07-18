@@ -53,13 +53,6 @@ function SmsBox() {
         
     ]
 
-    const handleLength = (data) => {
-        if (data.length > 34) {
-            data + "<Link>Read more</Link>"
-            return data
-        }
-        return data
-    }
 
 
   return (

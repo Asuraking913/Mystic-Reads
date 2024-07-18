@@ -6,7 +6,6 @@ import posts from "../assets/post1.svg"
 import book from "../assets/book.svg"
 import user from "../assets/user.svg"
 import user1 from "../assets/user1.png"
-import green from "../assets/green.png"
 import location from "../assets/location.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownLong } from '@fortawesome/free-solid-svg-icons'
@@ -78,7 +77,7 @@ function foreignView() {
                </div>
                <div className='text-center'>
                  <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
-                 <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <img src={green} className='w-[15px] inline' alt="" /> : <p className='inline'>active 2hrs ago</p> }</p>
+                 <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <div className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></div>: <p className='inline'>active 2hrs ago</p> }</p>
                </div>
                <div>
                   <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>

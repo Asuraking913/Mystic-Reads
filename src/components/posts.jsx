@@ -1,8 +1,5 @@
 import React from 'react'
-import thumb from "../assets/likes.svg"
-import comment from "../assets/comment.png"
 import { Link } from 'react-router-dom'
-import trash from "../assets/trash.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons'
 
