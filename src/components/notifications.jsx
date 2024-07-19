@@ -7,7 +7,7 @@ import person3 from "../assets/person3.jpeg"
 import person4 from "../assets/person4.jpeg"
 import { Link } from 'react-router-dom'
 
-function Notify() {
+function MainNotify() {
 
     const notifyList = [
         {
@@ -84,32 +84,18 @@ function Notify() {
     ]
 
   return (
-    <div id='notify' className='w-[100%] shadow-sm shadow-[--accent1] z-[100000000000] bg-[#DDBDB2] sm:bg-transparent sm:z-0 fixed sm:top-0 top-[3.7em] left-0 sm:relative sm:rounded-[1em] h-screen overflow-scroll hide-scrollbar'>
-        <div className=' p-[1em] border-b-[2px] z-[10] sticky sm:block flex justify-between top-0 w-full bg-[--accent1] border-b-[--accent1]'>
-            <Link>
-                <FontAwesomeIcon id='bell' className='sm:text-2xl text-xl text-[--bg] sm:hover:scale-125 sm:duration-[0.5s] sm:active:scale-[1]' icon={faBell}/>
-            </Link>
-            <Link onClick={() => {
-                document.getElementById('box').style.display = 'none';
-                document.body.classList.remove('no-scroll')
-                document.getElementById('message').style.zIndex = 1000
-                document.getElementById('swiper1').style.display = 'block'
-
-                
-                }}>
-                <FontAwesomeIcon className='sm:hidden text-xl text-[--bg] sm:hover:scale-125 sm:duration-[0.5s] sm:active:scale-[1]' icon={faTimes}/>
-            </Link>
-        </div>
-        <div className='h-full pt-[0em]'>
+    <div id='notify' className='w-[100%] px-[1em] pt-[1em] absolute shadow-sm shadow-[--accent1] left-0 h-[vh] bg-[#DDBDB2]  overflow-scroll hide-scrollbar'>
+        
+        <div className='h-full flex flex-col gap-[.5em]'>
             
             {notifyList.map((items, i )=> (
-                <div key={i} className='flex items-center h-[80px] gap-[1em] cursor-pointer sm:hover:bg-[#f3ddd0] active:bg-[#e3cec2] relative justify-between px-[1em] shadow-sm shadow-[--accent1] py-[1em]'>
+                <div key={i} className='flex rounded-[10px] items-center h-[80px] cursor-pointer sm:hover:bg-[#f3ddd0] active:bg-[#e3cec2] relative justify-between px-[1em] shadow-sm shadow-[--accent1] py-[1em]'>
                     <FontAwesomeIcon icon={faTrash} className='absolute cursor-pointer right-[5px] top-[5px] text-[0.9rem] text-[--accent1] sm:hover:scale-125 sm:active:scale-[1] sm:duration-[0.5s]'/>
-                    {/* <div className='flex gap-[.5em]'> */}
-                        <img src={items.img} className='sm:w-[50px] w-[70px] h-[50px] sm:h-[50px] rounded-[50%] object-cover' alt="" />
+                    <div className='flex gap-[.5em] items-center'>
+                    <div className='w-[55px] h-[50px]'><img src={items.img} className='w-[50px] h-[50px] object-cover rounded-[50%] border-[1.5px] shadow-sm shadow-[--accent1]' alt="" /></div>
                         <p className='text-[0.9rem] break-words w-[89%]'>{(items.p.length > 42) ? items.p.substring(0, 42 - 4) : items.p}</p>
-                    {/* </div> */}
-                    <p className='text-[0.9rem]'>{items.time}</p>
+                    </div>
+                    <p className='text-[0.8rem]'>{items.time}</p>
                 </div>
             ))}
         </div>
@@ -117,4 +103,4 @@ function Notify() {
   )
 }
 
-export default Notify
+export default MainNotify

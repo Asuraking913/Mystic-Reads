@@ -117,7 +117,7 @@ function Display() {
               </div>
           </div>
           <div className='cursor-pointer sm:z-[0]  w-[100%] sm:w-[60%] target'>
-              <Swiper
+              <Swiper id='swiper1'
               modules={[Pagination, Navigation, Autoplay]}
               spaceBetween={10}
               slidesPerView={3}

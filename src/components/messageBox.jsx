@@ -56,7 +56,7 @@ function SmsBox() {
 
 
   return (
-    <div id='message' className='sm:h-[48%] h-full left-0 bg-[#e3cec2d0] sm:z-0 z-[1000] sm:rounded-[1em] fixed sm:top-0 top-[3.7em] sm:relative  shadow-sm shadow-[--accent1] overflow-scroll hide-scrollbar'>
+    <div id='message' className='sm:h-[48%] h-full left-0  sm:z-0 z-[1000] sm:rounded-[1em] fixed sm:top-0 top-[3.7em] sm:relative  shadow-sm shadow-[--accent1] overflow-scroll hide-scrollbar'>
         <div className='sm:rounded-t-[1em] p-[1em] flex justify-between border-b-[2px] z-[3] sticky top-0 w-full bg-[--accent1] border-b-[--accent1]'>
             <Link id='smsIcon' className='cursor-pointer'>
                 <FontAwesomeIcon className='text-2xl text-[--bg]  sm:hover:scale-125 sm:duration-[0.5s] sm:active:scale-[1]' icon={faMessage}/>
@@ -76,10 +76,10 @@ function SmsBox() {
             {msgList.map((items, i )=> (
                 <div key={i} className='flex items-center cursor-pointer sm:hover:bg-[#f3ddd0] active:bg-[#e3cec2] gap-[2em] relative justify-between px-[1em] shadow-sm shadow-[--accent1] py-[1em]'>
                     <FontAwesomeIcon icon={faTrash} className='absolute cursor-pointer right-[5px] top-[5px] text-[0.9rem] text-[--accent1] sm:hover:scale-125 sm:active:scale-[1] sm:duration-[0.5s]'/>
-                    <img src={items.img} className='sm:w-[80px] sm:h-[80px] w-[50px] h-[50px] rounded-[50%] object-cover' alt="" />
+                    <img src={items.img} className='sm:w-[50px] sm:h-[50px] w-[50px] h-[50px] rounded-[50%] object-cover' alt="" />
                     {/* <p className='text-[--accent1] font-bold roboto'>{(items.msg.length > 34) ? items.msg + items.msg[34 : items.msg }</p> */}
                     {/* {'sd'.} */}
-                    <p className=''>{items.msg}</p>
+                    <p className=''>{(items.msg.length > 27) ? items.msg.substring(0, 25).trim() + "..." : items.msg}</p>
                     <p className='text-[0.9rem]'>{items.time}</p>
                 </div>
             ))}

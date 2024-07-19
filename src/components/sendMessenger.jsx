@@ -82,7 +82,7 @@ function SendMessage({onUsername, onImage, onSearch}) {
             onImage(items.img)
             onUsername(items.username)
             console.log(onSearch)
-        }} className='shadow-sm gap-[0em] duration-[0.3s] hover:cursor-pointer hover:bg-[#f3ddd0] justify-between shadow-[--accent1] rounded-[.5em] h-[80px] w-full flex items-center p-[.5em]'>
+        }} className='shadow-sm gap-[0em] duration-[0.3s] hover:cursor-pointer hover:bg-[#f3ddd0] justify-between shadow-[--accent1] rounded-[.5em] h-[75px] w-full flex items-center p-[.5em]'>
             <div className='text-start flex items-center gap-[.5em]'>
                 <div className=''><img src={items.img} className='w-[50px] h-[50px] object-cover rounded-[50%] border-[1.5px] shadow-sm shadow-[--accent1]' alt="" /></div>
                 <div className=''>

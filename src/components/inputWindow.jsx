@@ -19,7 +19,7 @@ function InputMessage() {
     const chatField = document.getElementById('smsBox');
     const newElement =document.createElement('p')
     newElement.style.backgroundColor = ''
-    newElement.classList.add('text-[1rem]',  'bg-[--accent1]', "mt-[1em]", 'px-[.8em]',  'p-[.2em]', 'text-white', 'rounded-l-[1em]', 'rounded-tr-[.5em]', 'max-w-[400px]')
+    newElement.classList.add('text-[1rem]',  'bg-[--accent1]', "mt-[.1em]", 'px-[.8em]',  'p-[.2em]', 'text-white', 'rounded-l-[1em]', 'rounded-tr-[.5em]', 'max-w-[400px]')
     newElement.innerHTML = newUserSms
     chatField.appendChild(newElement)
     chatField.scrollTo({top : chatField.scrollHeight, behavior : 'smooth'})
@@ -34,7 +34,7 @@ function InputMessage() {
     const chatField = document.getElementById('smsBox');
     const newElement =document.createElement('p')
     newElement.style.backgroundColor = ''
-    newElement.classList.add('text-[1rem]',  'bg-[--accent]', "mt-[1em]", 'self-start', 'px-[.8em]',  'p-[.2em]', 'text-white', 'rounded-r-[1em]', 'rounded-l-[1em]', 'max-w-[400px]')
+    newElement.classList.add('text-[1rem]',  'bg-[--accent]', "mt-[.1em]", 'self-start', 'px-[.8em]',  'p-[.2em]', 'text-white', 'rounded-r-[1em]', 'rounded-l-[1em]', 'max-w-[400px]')
     newElement.innerHTML = newUserSms
     chatField.appendChild(newElement)
     chatField.scrollTo({top : chatField.scrollHeight, behavior : 'smooth'})
