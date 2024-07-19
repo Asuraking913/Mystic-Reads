@@ -12,7 +12,6 @@ function Messenger() {
     const [currentUser, setCurrentUser] = useState('Asura')
     const [active, setActive] = useState('active 3 hrs ago')
 
-
   return (
     <>
             <div className='fixed bg-[#DDBDB2] z-[1000] top-0 p-[1em] w-full flex justify-between items-center  px-[1em] text-[--accent1]'>
@@ -66,10 +65,8 @@ function Messenger() {
                 <InputMessage />
             </section>
             <section className='w-[40%] bg-[#ddbdb269] overflow-scroll hide-scrollbar'>
-                <div className='relative mt-[4em]'>
-                    <div className='blur-sm bg-[#00000081] absolute w-full h-full'>
-                    </div>
-                    <p className='z-[10]'>sdf</p>
+                <div className='relative mt-[9em]'>
+                 
                 </div>
 
             </section>

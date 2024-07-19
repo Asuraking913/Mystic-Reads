@@ -66,7 +66,7 @@ function SendMessage() {
         }, 
         {
             img: person4, 
-            username: 'Charlie Wade',
+            username: 'Charlie 123Wade',
             msg: "Hey there, How's the day going", 
             time: "2:14pm"
         }, 
