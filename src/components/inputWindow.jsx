@@ -52,7 +52,7 @@ function InputMessage() {
             <form action="" className='absolute w-full' >
               <p className='relative'>
                 <FontAwesomeIcon onClick={sendMessage} icon={faPaperPlane} className='text-[1rem] absolute right-[.3em] hover:scale-110 duration-[0.2s] cursor-pointer bg-[--accent1] text-white p-[1em] rounded-[50%] top-[.2em]'/>
-                <textarea name="sms" onChange={(event) => (setNewSms(event.target.value))} id="sms" cols="30" className='p-[.8em] py-[1em] h-auto hide-scrollbar shadow-md shadow-[--accent1] rounded-[4em] w-full pl-[1em] line2 outline-none pr-[3.5em] pb-[1em]' rows="1"></textarea>
+                <textarea name="sms" onChange={(event) => (setNewSms(event.target.value))} id="sms" cols="30" className='p-[.8em] resize-none py-[1em] h-auto hide-scrollbar shadow-md shadow-[--accent1] rounded-[4em] w-full pl-[1em] line2 outline-none pr-[3.5em] pb-[1em]' rows="1"></textarea>
               </p>
             </form>
           </div>

@@ -11,6 +11,8 @@ function Messenger() {
 
     const [currentUser, setCurrentUser] = useState('Asura')
     const [active, setActive] = useState('active 3 hrs ago')
+    const [foreignImage, setForeignImage] = useState(userDefault)
+    const [search, setSearch] = useState('invalid')
 
   return (
     <>
@@ -27,14 +29,16 @@ function Messenger() {
                      <form action="">
                          <p className='relative'>
                          <FontAwesomeIcon icon={faSearch} className='text-2xl absolute top-[8px] left-[8px] text-[--accent1]'/>
-                             <input className='shadow-sm shadow-[--accent1] w-[95%] p-[.5em] rounded-[2em] pl-[2.5em] outline-none text-[--accent1]' placeholder='Search' type="text" name="search" id="search" />
+                             <input className='shadow-sm shadow-[--accent1] w-[95%] p-[.5em] rounded-[2em] pl-[2.5em] outline-none text-[--accent1]' placeholder='Search' type="text" name="search" onChange={(e) => {
+                                setSearch(e.target.value)
+                             }} id="search" />
                              </p>
                      </form>
                 </div>
                 <div className='w-[60%] flex items-center justify-between px-[1em] '>
                     <div className='flex gap-[.5em] items-center'>
                         <div className='w-[50px] bg-[--accent] shadow-sm shadow-[black]  rounded-[50%] h-[50px]'>
-                                <img src={userDefault} className='rounded-[50%] h-[50px] w-[50px] object-cover'  alt="" />
+                                <img src={foreignImage} className='rounded-[50%] h-[50px] w-[50px] object-cover'  alt="" />
                         </div>
                         <div>
                             <h3 className='roboto font-bold text-[--accent1]'>{currentUser}</h3>
@@ -53,9 +57,9 @@ function Messenger() {
         <div className='flex h-full '>
             <section className='w-[40%] overflow-scroll hide-scrollbar px-[1em]'>
                 <div className='pt-[em]'>
-                    <SendMessage />
-                    <SendMessage />
-                    <SendMessage />
+                    <SendMessage onImage={setForeignImage} onUsername={setCurrentUser} onSearch={search}/>
+                    <SendMessage onImage={setForeignImage} onUsername={setCurrentUser} onSearch={search}/>
+                    <SendMessage onImage={setForeignImage} onUsername={setCurrentUser} onSearch={search}/>
                 </div>
             </section>
             <section className='w-[60%] relative shadow-sm shadow-[--accent1] ' >
