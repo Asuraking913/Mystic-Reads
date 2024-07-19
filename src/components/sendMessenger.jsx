@@ -75,7 +75,7 @@ function SendMessage() {
 
 
   return (
-    <div className='flex flex-col px-[.1em] h-full gap-[.5em]'>
+    <div className='flex flex-col px-[.1em] gap-[.5em]'>
         {msgList.map((items, i) => (
         <div key={i} className='shadow-sm gap-[0em] duration-[0.3s] hover:cursor-pointer hover:bg-[#f3ddd0] justify-between shadow-[--accent1] rounded-[.5em] h-[80px] w-full flex items-center p-[.5em]'>
             <div className='text-start flex items-center gap-[.5em]'>

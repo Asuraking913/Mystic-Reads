@@ -11,39 +11,54 @@ function Messenger() {
 
 
   return (
-    <article>
-        {/* <Nav profile={user}/> */}
-        <main className='h-[100vh] flex flex-col overflow-hidden py-[1em]'>
-            <div className='p-[0em] w-full flex justify-between items-center  px-[--pdx] text-[--accent1] shadow-md shadow-[--accent1]'>
+    <>
+            <div className='fixed bg-[#DDBDB2] z-[1000] top-0 p-[1em] w-full flex justify-between items-center  px-[1em] text-[--accent1]'>
                 <Link to={"/"} className=''>
                     <FontAwesomeIcon className='text-4xl text-[--accent1]' icon={faHome}/>
                 </Link>
                 <h1 className='text-3xl roboto font-bold'>Inbox</h1>
             </div>
-            <div className='flex h-full'>
-                <section className='w-[30%] px-[1em] shadow-sm shadow-black'>
-                    <div className='py-[.5em] flex flex-col gap-[.5em]'>
-                        <h2 className='text-2xl font-extrabold text-[--accent1] roboto'>Chats</h2>
-                        <form action="">
-                            <p className='relative'>
-                            <FontAwesomeIcon icon={faSearch} className='text-2xl absolute top-[8px] left-[8px] text-[--accent1]'/>
-                                <input className='w-full shadow-sm shadow-[--accent1] p-[.5em] rounded-[2em] pl-[2.5em] outline-none text-[--accent1]' placeholder='Search' type="text" name="search" id="search" />
-                                </p>
-                        </form>
+    <article className='w-full h-screen pt-[4em] t-[5%] relative flex flex-col'>
+        <nav className='w-full flex fixed px-[1em]'>
+            <div className='py-[.5em] w-[40%] left-0 flex flex-col gap-[.5em] bg-[#DDBDB2]'>
+                     <h2 className='text-2xl font-extrabold text-[--accent1] roboto'>Chats</h2>
+                     <form action="">
+                         <p className='relative'>
+                         <FontAwesomeIcon icon={faSearch} className='text-2xl absolute top-[8px] left-[8px] text-[--accent1]'/>
+                             <input className='shadow-sm shadow-[--accent1] w-full p-[.5em] rounded-[2em] pl-[2.5em] outline-none text-[--accent1]' placeholder='Search' type="text" name="search" id="search" />
+                             </p>
+                     </form>
+                </div>
+                <div className='w-[60%] bg-white'>
+
+                </div>
+                <div className='w-[40%]'>
+
+                </div>
+        </nav>
+        
+        <div className='flex h-full '>
+            <section className='w-[40%] overflow-scroll hide-scrollbar px-[1em]'>
+                <div className=''>
+                    <SendMessage />
+                    <SendMessage />
+                    <SendMessage />
+                </div>
+            </section>
+            <section className='w-[60%] shadow-sm shadow-[--accent1] ' >
+
+            </section>
+            <section className='w-[40%] bg-[#ddbdb269]'>
+                <div className='relative mt-[4em]'>
+                    <div className='blur-sm bg-[#00000081] absolute w-full h-full'>
                     </div>
-                    <div className='h-[76%] overflow-scroll hide-scrollbar py-[.5em]'>
-                        <SendMessage />
-                    </div>
-                </section>
-                <section className='w-[60%] shadow-sm shadow-black'>
-                    <InputMessage userImage={user} username={'Ditan'}/>
-                </section>
-                <section className='w-[30%] shadow-sm shadow-black'>
-                    sect3
-                </section>
-            </div>
-        </main>
+                    <p className='z-[10]'>sdf</p>
+                </div>
+
+            </section>
+        </div>
     </article>
+    </>
   )
 }
 
