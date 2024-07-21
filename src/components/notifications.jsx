@@ -84,7 +84,7 @@ function MainNotify() {
     ]
 
   return (
-    <div id='notify' className='w-[100%] px-[1em] pt-[1em] absolute shadow-sm shadow-[--accent1] left-0 h-[vh] bg-[#DDBDB2]  overflow-scroll hide-scrollbar'>
+    <div id='notifications' className='w-[100%] px-[1em] pt-[1em] absolute shadow-sm shadow-[--accent1] left-0 h-[vh] bg-[#DDBDB2]  overflow-scroll hide-scrollbar'>
         
         <div className='h-full flex flex-col gap-[.5em]'>
             

@@ -38,13 +38,13 @@ function InputMessage() {
     newElement.innerHTML = newUserSms
     chatField.appendChild(newElement)
     chatField.scrollTo({top : chatField.scrollHeight, behavior : 'smooth'})
-    console.log(newElement)
+    // console.log(newElement)
   }
   }
 
   return (
     <div className='flex flex-col z-[300] justify-center px-[1.5em] absolute bottom-[4em] w-full'>
-      <div className='h-[65vh] break-words flex flex-col gap-[.3em] items-end overflow-scroll hide-scrollbar p-[.3em]' id='smsBox'>
+      <div className='sm:h-[65vh] h-[80vh] break-words flex flex-col gap-[.3em] items-end overflow-scroll hide-scrollbar p-[.3em]' id='smsBox'>
 
       {/* <p className='justify-self-start '>sdfsdfsfd</p> */}
       </div>
@@ -56,7 +56,6 @@ function InputMessage() {
               </p>
             </form>
           </div>
-          {/* Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis fuga repellat dolores consequuntur at possimus aperiam accusamus, quas explicabo reprehenderit sed pariatur enim asperiores placeat quaerat libero sint tempore rerum. */}
     </div>
   )
 }
