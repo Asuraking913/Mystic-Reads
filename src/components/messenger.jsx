@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import userDefault from "../assets/user.svg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faEllipsis, faHome, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faBell, faEllipsis, faHome, faSearch } from '@fortawesome/free-solid-svg-icons'
 import SendMessage from './sendMessenger.jsx'
 import { Link } from 'react-router-dom'
 import InputMessage from './inputWindow.jsx'
@@ -18,6 +18,23 @@ function Messenger() {
   return (
     <>
             <div className='fixed bg-[#DDBDB2] z-[1000] top-0 p-[1em] w-full flex justify-between items-center  sm:px-[4em] text-[--accent1]'>
+                <Link id='back' onClick={() => {
+                    const message = document.getElementById('small-sms')
+                    const header = document.getElementById('head')
+                    const sectBox = document.getElementById('sect-box')
+                    const search = document.getElementById('search-sect')
+                    search.classList.add('flex')
+                    search.classList.remove('hidden')
+                    sectBox.classList.remove('hidden')
+                    sectBox.classList.add('block')
+                    header.classList.remove('flex')
+                    header.classList.remove('py-[2em]')
+                    header.classList.add('hidden')
+                    message.classList.remove('block')
+                    message.classList.add('hidden')
+                }}  className=''>
+                    <FontAwesomeIcon className='sm:text-4xl text-3xl hover:scale-110 active:scale-[1] active:duration-[0.1s] duration-[0.5s] text-[--accent1]' icon={faArrowLeft} title='Home page '/>
+                </Link>
                 <Link to={"/"} className=''>
                     <FontAwesomeIcon className='sm:text-4xl text-2xl hover:scale-110 active:scale-[1] active:duration-[0.1s] duration-[0.5s] text-[--accent1]' icon={faHome} title='Home page '/>
                 </Link>
@@ -25,7 +42,7 @@ function Messenger() {
                     {/* <FontAwesomeIcon className='text-4xl text-[--accent1]' icon={faHome}/> */}
                     <img src={menu} className='sm:w-[50px] w-[30px] sm:h-[50px] h-[30px]' alt="" title='Feeds' />
                 </Link>
-                <h1 className='sm:text-3xl text-2xl roboto font-bold'>Inbox</h1>
+                <h1 className='sm:text-3xl text-2xl roboto font-bold opacity-70'>Inbox</h1>
             </div>
     <article className='w-full h-screen pt-[4em] t-[5%] relative flex flex-col'>
         <nav className='w-full flex fixed z-[1000000]'>
@@ -40,7 +57,7 @@ function Messenger() {
                              </p>
                      </form>
                 </div>
-                <div className='w-[60%] hidden sm:flex items-center justify-between px-[1em] '>
+                <div id='head' className='sm:w-[60%] w-full hidden sm:flex items-center justify-between px-[1em] '>
                     <div className='flex gap-[.5em] items-center'>
                         <div className='w-[50px] bg-[#DDBDB2] shadow-sm shadow-[black]  rounded-[50%] h-[50px]'>
                                 <img src={foreignImage} className='rounded-[50%] h-[50px] w-[50px] object-cover'  alt="" />
@@ -50,7 +67,7 @@ function Messenger() {
                             <p className='text-[0.9rem] roboto text-[#534947]'>{active}</p>
                         </div>
                     </div>
-                        <Link className='hover:bg-[--accent1] p-[.3em] px-[.4em] rounded-[50%] hover:text-[white] text-[--accent1] flex items-center justify-center duration-[0.2s] shadow-sm shadow-[--accent1] animate-spin hover:animate-none'>
+                        <Link className='sm:hover:bg-[--accent1] active:bg-[--accent1] active:duration-[0.1s] active:animate-bounce p-[.3em] px-[.4em] rounded-[50%] active:text-white sm:hover:text-[white] text-[--accent1] flex items-center justify-center duration-[0.2s] shadow-sm shadow-[--accent1] animate-spin sm:hover:animate-none'>
                             <FontAwesomeIcon className='text-2xl roboto' icon={faEllipsis}/>
                         </Link>
                 </div>
