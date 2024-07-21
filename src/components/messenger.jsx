@@ -19,6 +19,9 @@ function Messenger() {
     <>
             <div className='fixed bg-[#DDBDB2] z-[1000] top-0 p-[1em] w-full flex justify-between items-center  sm:px-[4em] text-[--accent1]'>
                 <Link id='back' onClick={() => {
+                    const back = document.getElementById('back')
+                    back.classList.add('hidden')
+                    back.classList.remove('block')
                     const message = document.getElementById('small-sms')
                     const header = document.getElementById('head')
                     const sectBox = document.getElementById('sect-box')
@@ -32,7 +35,7 @@ function Messenger() {
                     header.classList.add('hidden')
                     message.classList.remove('block')
                     message.classList.add('hidden')
-                }}  className=''>
+                }}  className='sm:hidden hidden'>
                     <FontAwesomeIcon className='sm:text-4xl text-3xl hover:scale-110 active:scale-[1] active:duration-[0.1s] duration-[0.5s] text-[--accent1]' icon={faArrowLeft} title='Home page '/>
                 </Link>
                 <Link to={"/"} className=''>

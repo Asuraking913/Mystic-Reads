@@ -81,6 +81,9 @@ function SendMessage({onUsername, onImage, onSearch}) {
         <div key={i} onClick={(e) => {
             onImage(items.img)
             onUsername(items.username)
+            const back = document.getElementById('back')
+            back.classList.remove('hidden')
+            back.classList.add('block')
             const Notification = document.getElementById('small-sms')
             const sectBox = document.getElementById('sect-box')
             const search = document.getElementById('search-sect')
@@ -115,7 +118,22 @@ function SendMessage({onUsername, onImage, onSearch}) {
             <div key={i} onClick={(e) => {
                 onImage(items.img)
                 onUsername(items.username)
-                console.log(onSearch)
+                const back = document.getElementById('back')
+                back.classList.remove('hidden')
+                back.classList.add('block')
+                const Notification = document.getElementById('small-sms')
+                const sectBox = document.getElementById('sect-box')
+                const search = document.getElementById('search-sect')
+                const header = document.getElementById('head')
+                header.classList.remove('hidden')
+                header.classList.add('flex')
+                header.classList.add('py-[2em]')
+                search.classList.remove('flex')
+                search.classList.add('hidden')
+                sectBox.classList.remove('block')
+                sectBox.classList.add('hidden')
+                Notification.classList.remove('hidden')
+                Notification.classList.add('block')
             }} className='shadow-sm gap-[0em] duration-[0.3s] hover:cursor-pointer hover:bg-[#f3ddd0] justify-between shadow-[--accent1] rounded-[.5em] h-[80px] w-full flex items-center p-[.5em]'>
                 <div className='text-start flex items-center gap-[.5em]'>
                     <div className=''><img src={items.img} className='w-[50px] h-[50px] object-cover rounded-[50%] border-[1.5px] shadow-sm shadow-[--accent1]' alt="" /></div>

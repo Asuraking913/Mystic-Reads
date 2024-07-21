@@ -44,7 +44,7 @@ function InputMessage() {
 
   return (
     <div className='flex flex-col z-[300] justify-center px-[1.5em] absolute bottom-[4em] w-full'>
-      <div className='sm:h-[65vh] h-[80vh] break-words flex flex-col gap-[.3em] items-end overflow-scroll hide-scrollbar p-[.3em]' id='smsBox'>
+      <div className='sm:h-[65vh] h-[75vh] break-words flex flex-col gap-[.3em] items-end overflow-scroll hide-scrollbar p-[.3em]' id='smsBox'>
 
       {/* <p className='justify-self-start '>sdfsdfsfd</p> */}
       </div>
