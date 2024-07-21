@@ -157,9 +157,9 @@ function Nav({profile}) {
               <Link to={"/"} className='hover:underline hover:animate-pulse'>
                 <li>Home</li>
               </Link>
-              <Link onClick={handleTrend} className='hover:underline hover:animate-pulse'>
+              {/* <Link onClick={handleTrend} className='hover:underline hover:animate-pulse'>
                 <li>Trending</li>
-              </Link>
+              </Link> */}
               <Link onClick={handleRecommend} className='hover:underline hover:animate-pulse'>
                 <li>Recommended</li>
               </Link>

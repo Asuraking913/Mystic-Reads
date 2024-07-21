@@ -59,7 +59,7 @@ function Feeds() {
         }, 
         {
             img: person5,
-            username: 'Ghost Of Sparta',
+            username: 'Ghost123 Of Sparta',
             p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
             descrip: "Data Analyst"
         }

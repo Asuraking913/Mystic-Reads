@@ -21,28 +21,42 @@ function Create() {
             <p className='roboto text-[--accent1] text italic text-[1rem]'>Sign Up and Browse through our vast library of addictive novels to pass away time</p>
         </div>
     </section>
-    <section className='bg-[#ffffffea] flex-col sm:py-0 py-[2em] gap-[1em] rounded-[1em]  sm:rounded-l-[0em] sm:h-[90vh] w-full flex sm:px-0 px-[1em] sm:items-center justify-center'>
-        <h1 className='text-3xl audio text-[#c16b63af] mg-[1em]'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
-        <form action="" className='flex flex-col gap-[1em]'>
+    <section className='bg-[#ffffffea] flex-col sm:py-0 py-[2em] gap-[0em] sm:gap-[1em] rounded-[1em]  sm:rounded-l-[0em] sm:h-[90vh] sm:w-[80%] flex sm:px-0 px-[1em] sm:items-center justify-center'>
+        <h1 className='text-3xl audio text-[#c16b63af] mb-[.5em] text-center'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
+        <form action="" className='flex flex-col gap-[.5em] justfiy-center'>
             <p>
-                <label className='text-[1.1rem] text-[--accent1]' htmlFor="username">Username</label>
-                <input className='w-full p-[.5em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="text" name="username" id="user" />
+                <label className='text-[1rem] text-[--accent1]' htmlFor="username">Username</label>
+                <input className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="text" name="username" id="user" />
             </p>
             <p>
-                <label className='text-[1.1rem] text-[--accent1]' htmlFor="email">Email</label>
-                <input className='w-full p-[.5em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="text" name="email" id="email" />
+                <label className='text-[1rem] text-[--accent1]' htmlFor="email">Email</label>
+                <input className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="text" name="email" id="email" />
             </p>
             <p>
-                <label className='text-[1.1rem] text-[--accent1]' htmlFor="password">Password</label>
-                <input className='w-full p-[.5em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="password" name="password" id="password" />
+                <label className='text-[1rem] text-[--accent1]' htmlFor="password">Password</label>
+                <input className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="password" name="password" id="password" />
             </p>
-            <input  type="submit" value="Sign Up" className='p-[.5em] bg-[#c16b63af] roboto text-white text-xl font-bold cursor-pointer rounded-[5px] hover:bg-[#ffffff65] border-2 border-transparent hover:border-[--accent] duration-[0.5s] hover:text-[--accent]' />
+            <p>
+                <label className='text-[1rem] text-[--accent1]' htmlFor="password">Confirm Password</label>
+                <input className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="password" name="password" id="confirm" />
+            </p>
+            <div className='flex justify-between'>
+                <p className='flex-items-center justify-center '>
+                    <input type="checkbox" name="male" id="male" />
+                    <label htmlFor="male" className='pl-[1em]'>Male</label>
+                </p>
+                <p className='flex-items-center justify-center '>
+                    <input type="checkbox" name="female" id="female" />
+                    <label htmlFor="female" className='pl-[1em]'>Female</label>
+                </p>
+            </div>
+            <input  type="submit" value="Sign Up" className='p-[.2em] bg-[#c16b63af] roboto text-white text-xl font-bold cursor-pointer rounded-[5px] hover:bg-[#ffffff65] border-2 border-transparent hover:border-[--accent] duration-[0.5s] hover:text-[--accent]' />
         </form>
-        <Link className='flex gap-[1em] py-[1em] text-[0.9rem] roboto hover:underline items-center capitalize'>
-            <img src={google} className='w-[25px]  h-[25px]' alt="" />
+        <Link className='flex gap-[1em] text-center justify-center py-[1em] text-[0.9rem] roboto active:underline active:duration-[0.1s] sm:hover:underline items-center capitalize'>
+            <img src={google} className='sm:w-[25px] w-[20px] h-[20px]  sm:h-[25px]' alt="" />
             <span className='text-[--accent1]'>Sign In with google</span>
         </Link>
-        <p className='roboto text-[1rem]'>
+        <p className='roboto sm:text-[1rem] text-[0.9rem] text-center'>
             Already have an account? <Link to={"/login"} className='underline text-[--accent1] ml-[.5em] animate-pulse duration-[0.5s]'><span>Log in</span></Link>
         </p>
     </section>
