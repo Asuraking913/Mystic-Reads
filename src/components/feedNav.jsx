@@ -38,9 +38,8 @@ function FeedNav() {
     }
 
     const handleFeeds = () => {
-        window.scrollTo({top : 600, behavior : 'smooth'})
-        // document.getElementById('post').scrollTo({top : 0, behavior : 'post'})
-        document.getElementById('thumb').scrollIntoView({top : 0,behavior : 'smooth'})
+        window.scrollTo({top : 300, behavior : 'smooth'})   
+        document.getElementById('post').scroll({top : 0, behavior : 'smooth'})
         document.getElementById('thumb').classList.add('sm:animate-bounce')
         setInterval(() => {
         document.getElementById('thumb').classList.remove('sm:animate-bounce')
@@ -52,7 +51,7 @@ function FeedNav() {
     }
 
   return (
-    <div className='bg-[--accent1] z-[5] h-[60px] w-full sticky top-[3.74em] my-[1em] px-[--pdx]'>
+    <div id='feednav' className='bg-[--accent1] z-[5] h-[60px] w-full sticky top-[3.74em] my-[1em] px-[--pdx]'>
         <div className='h-full w-full sm:px-[8em] duration-[0.5s]'>
             <ul className='flex items-center  h-full w-full justify-between'>
                 <Link onClick={handleFeeds} className='sm:text-xl active:bg-[--accent] active:text-[--accent1] text-[1.1rem] relative sm:duration-[0.5s] sm:hover:text-[--accent1] sm:hover:bg-[--accent] py-1 px-[.5em] rounded-[5px] font-bold text-white roboto'>

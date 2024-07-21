@@ -73,7 +73,9 @@ function Feeds() {
         <Display />
         <FeedNav />
         <section  className='px-[.5em] flex sm:px-[--pdx] py-[1.5em] gap-[1em]'>
-            <div id='post' className='flex flex-col gap-[2em] w-[100%] h-[200vh] overflow-scroll hide-scrollbar px-[.5em]'>
+            <div id='post' className='flex flex-col gap-[2em] w-[100%] h-[200vh] overflow-scroll hide-scrollbar sm:py-[.3em] px-[.5em]'>
+                    {listFeeds}
+                    {listFeeds}
                     {listFeeds}
             </div>
             <div id='box' className='w-[60%] h-[200vh] rounded-[1em] hidden sm:flex sm:justify-between notify '>

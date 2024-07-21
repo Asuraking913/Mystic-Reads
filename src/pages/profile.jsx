@@ -30,6 +30,7 @@ function Profile() {
     const [gender, setGender] = useState("Male")
     const [birth, setBirthday] = useState("May 1st")
     const [email, setEmail] = useState("israelshedrack913@gmail.com")
+    const [bio, setBio] = useState("")
 
     // image input ref
     const profileInput = useRef(null)
@@ -142,7 +143,26 @@ function Profile() {
   return (
     <>
         <Nav profile={profile}/>
-
+        <div className='h-screen flex items-center justify-center bg-[#000000ea] fixed w-full z-[200000000000]'>
+          <div className='px-[1em] shadow-md shadow-[black] bg-[#593f3b8a] rounded-[.5em] w-[80%] sm:w-[40%] py-[1em]'>
+            <h2 className='roboto text-white font-bold text-xl text-center'>Edit Your Profile</h2>
+              <form action="" className='flex flex-col gap-[.5em]'>
+                <p>
+                  <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="location">Location</label>
+                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" />
+                </p>
+                <p>
+                  <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="bio">Bio</label>
+                  <textarea name="bio" className='w-full p-[.5em] resize-none outline-none text-white bg-transparent border-[white] border-[.5px] rounded-[5px]' id="bio" cols="30" rows="4" onChange={(e) => {
+                    setBio(e.target.value)
+                  }}></textarea>
+                </p>
+                <div className='flex justify-center items-center'>
+                  <input type="submit" value="Submit" className='text-[white] p-[.5em] px-[1em] bg-[--accent] rounded-[5px] cursor-pointer roboto sm:hover:scale-105 duration-[0.5s] sm:hover:bg-white sm:hover:text-[--accent]' />
+                </div>
+              </form>
+          </div>
+        </div>
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
         {error && <p className='sm:text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em] left-[38%] sm:left-[45%] top-[5em] sm:top-[4em]'>{error}</p>}
         <div className='sm:h-[50vh] h-[20vh] relative w-full linear'>
@@ -179,10 +199,11 @@ function Profile() {
                </div>
                <div className='text-center'>
                  <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
-                 <p className='text-[0.9rem] text-[--bg] flex items-center justify-center gap-[.5em]'><span className='text-[--] flex'>Active:</span> {active ? <p className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></p> : <p className='inline'>active 2hrs ago</p> }</p>
+                 <p className='text-[0.9rem] text-[--bg] flex items-center justify-center gap-[.5em]'><span className='text-[--] flex'>Active:</span> {active ? <i className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></i> : <i className='inline'>active 2hrs ago</i> }</p>
                </div>
-               <div>
-                  <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
+               <div className='w-[80%]'>
+                  {/* <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p> */}
+                  <p className='line text-center break-words font-sans italic text-[0.9rem] text-white'>{bio}</p>
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
@@ -302,6 +323,7 @@ function Profile() {
               <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
               <Link   className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /></Link>
               <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
+              <Link className='active:bg-[--accent] text-white sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'>Edit</Link>
             </ul>
       
         </div>

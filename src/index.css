@@ -121,9 +121,9 @@ body {
 .linear {
     background-image: linear-gradient(to right top , #c16b632d, white);
 }
-/* .linear1 {
-    background-image: linear-gradient(to right top , #c16b632d, rgba(0, 0, 0, 0.158));
-} */
+.linear1 {
+    background-image: linear-gradient(to right top , #c16b632d, #c16b632d, rgba(0, 0, 0, 0.158));
+}
 
 /* styles.css */
 .hide-scrollbar {
