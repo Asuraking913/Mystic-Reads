@@ -103,7 +103,7 @@ function SendMessage({onUsername, onImage, onSearch, bool}) {
                 // cont.removeChild(box)
             const new_child = document.createElement('div')
             new_child.id = 'smsBox'
-            new_child.classList.add('sm:h-[65vh]', 'height', 'h-[75vh]', 'break-words', 'flex', 'flex-col', 'gap-[.3em]', 'items-end', 'overflow-scroll', 'hide-scrollbar', 'p-[.3em]')
+            new_child.classList.add('sm:h-[65vh]', 'height', 'h-[66vh]', 'h-[66vh]', 'max-h-[350px]:h-[65vh]', 'break-words', 'flex', 'flex-col', 'gap-[.3em]', 'items-end', 'overflow-scroll', 'hide-scrollbar', 'p-[.3em]')
             cont.firstChild.replaceWith(new_child)
             }
             
