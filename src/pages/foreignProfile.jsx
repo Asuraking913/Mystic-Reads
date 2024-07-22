@@ -136,10 +136,10 @@ function foreignView() {
                </div>
                <div className='text-center'>
                  <h2 className='text-xl font-bold roboto text-[--bg]'>{userName}</h2>
-                 <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <FontAwesomeIcon icon={faCircle} className='text text-green-500 mt-[.5em] w-[15px] h-[15px]'/> : <p className='inline'>active 2hrs ago</p> }</p>
+                 <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <FontAwesomeIcon icon={faCircle} className='text text-green-500 mt-[.5em] w-[15px] h-[15px]'/> : <i className='inline'>active 2hrs ago</i> }</p>
                </div>
                <div>
-                  <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
+                  <p className='line text-center roboto italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
@@ -159,17 +159,29 @@ function foreignView() {
                </div>
                <div className='border-[1.5px] ml-[-2em] w-[500px] border-[--accent]'></div>
                <div className='w-full flex flex-col gap-[.5em]'>
-                  <p className='flex justify-between items-center'>
-                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='text-xl mr-[.1em] text-[--bg]'/>Location:</span>
-                    <span className='text-[--bg] roboto'>Nigeria</span>
+               <p className='flex justify-between items-center'>
+                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='mr-[.1em] text-[--bg]'/>Location:</span>
+                      <span className='text-[--bg] roboto'>Nigeria</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                  <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text-xl mr-[.1em] text-[--bg]'/>Likes:</span>
+                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text mr-[.1em] text-[--bg]'/>Likes:</span>
                     <span className='text-[--bg] roboto'>2 Likes</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                  <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since Dec 05, 2022</span>
+                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Location:</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since Dec 05, 2022</span>
+                  </p>
+                  <p className='flex justify-between items-center'>
+                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>
+                    <span className='text-[--bg] roboto'>{gender}</span>
+                  </p>
+                  <p className='flex justify-between items-center'>
+                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='mr-[.1em] text-[--bg]'/>Birthday:</span>
+                    <span className='text-[--bg] roboto'>{birth}</span>
+                  </p>
+                  <p className='flex justify-between items-center'>
+                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='mr-[.1em] text-[--bg]'/>Email:</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{email}</span>
                   </p>
                </div>
       

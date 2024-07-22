@@ -7,7 +7,7 @@ import person2 from "../assets/person2.jpeg"
 import person3 from "../assets/person3.jpeg"
 import person4 from "../assets/person4.jpeg"
 
-function SendMessage({onUsername, onImage, onSearch}) {
+function SendMessage({onUsername, onImage, onSearch, bool}) {
 
 
     const msgList = [
@@ -97,6 +97,17 @@ function SendMessage({onUsername, onImage, onSearch}) {
             sectBox.classList.add('hidden')
             Notification.classList.remove('hidden')
             Notification.classList.add('block')
+            const box = document.getElementById('smsBox')
+            const cont = document.getElementById('smscont')
+            if (cont) {
+                // cont.removeChild(box)
+            const new_child = document.createElement('div')
+            new_child.id = 'smsBox'
+            new_child.classList.add('sm:h-[65vh]', 'height', 'h-[75vh]', 'break-words', 'flex', 'flex-col', 'gap-[.3em]', 'items-end', 'overflow-scroll', 'hide-scrollbar', 'p-[.3em]')
+            cont.firstChild.replaceWith(new_child)
+            }
+            
+           
         }} className='shadow-sm gap-[0em] duration-[0.3s] hover:cursor-pointer active:bg-[#f3ddd0] active:duration[0.1s] sm:hover:bg-[#f3ddd0] justify-between shadow-[--accent1] rounded-[.5em] h-[75px] w-full flex items-center p-[.5em]'>
             <div className='text-start flex items-center gap-[.5em]'>
                 <div className=''><img src={items.img} className='w-[50px] h-[50px] object-cover rounded-[50%] border-[1.5px] shadow-sm shadow-[--accent1]' alt="" /></div>

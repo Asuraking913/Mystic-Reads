@@ -10,6 +10,8 @@ import person5 from "../assets/person5.jpeg"
 import FeedNav from '../components/feedNav'
 import Notify from '../components/notify'
 import SmsBox from '../components/messageBox'
+import PostForm from '../components/postForm'
+import { Link } from 'react-router-dom'
 
 function Feeds() {
 
@@ -65,15 +67,17 @@ function Feeds() {
         }
     ]
 
-    const listFeeds = feeds.map((items, i) => (<FeedsCont key={i} descrip={items.descrip} post={items.p} username={items.username} img={items.img}/>))
+    const listFeeds = feeds.map((items, i) => (<FeedsCont  key={i} descrip={items.descrip} post={items.p.length > 380 ? items.p.substring(0, 370) + "<Readmore className = 'underline'/>" : items.p} username={items.username} img={items.img}/>))
 
   return (
     <>
         <Nav />
         <Display />
         <FeedNav />
+        <PostForm />
         <section  className='px-[.5em] flex sm:px-[--pdx] py-[1.5em] gap-[1em]'>
-            <div id='post' className='flex flex-col gap-[2em] w-[100%] h-[200vh] overflow-scroll hide-scrollbar sm:py-[.3em] px-[.5em]'>
+            <div id='post' className='flex flex-col gap-[2em] w-[100%] relative h-[200vh] overflow-scroll hide-scrollbar sm:py-[.3em] px-[.5em]'>
+                <div id='newbox' className='absolute top-0'></div>
                     {listFeeds}
                     {listFeeds}
                     {listFeeds}

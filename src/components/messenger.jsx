@@ -10,9 +10,11 @@ import menu from "../assets/menu.png"
 
 function Messenger() {
 
+    
+
     const [currentUser, setCurrentUser] = useState('Asura')
     const [active, setActive] = useState('active 3 hrs ago')
-    const [foreignImage, setForeignImage] = useState(userDefault)
+    const [foreignImage, setForeignImage] = useState(false)
     const [search, setSearch] = useState('invalid')
 
   return (
@@ -61,7 +63,7 @@ function Messenger() {
                      </form>
                 </div>
                 <div id='head' className='sm:w-[60%] w-full hidden sm:flex items-center justify-between px-[1em] '>
-                    <div className='flex gap-[.5em] items-center'>
+                    {foreignImage ? <div className='flex gap-[.5em] items-center'>
                         <div className='w-[50px] bg-[#DDBDB2] shadow-sm shadow-[black]  rounded-[50%] h-[50px]'>
                                 <img src={foreignImage} className='rounded-[50%] h-[50px] w-[50px] object-cover'  alt="" />
                         </div>
@@ -69,10 +71,10 @@ function Messenger() {
                             <h3 className='roboto font-bold text-[--accent1]'>{currentUser}</h3>
                             <p className='text-[0.9rem] roboto text-[#534947]'>{active}</p>
                         </div>
-                    </div>
-                        <Link className='sm:hover:bg-[--accent1] active:bg-[--accent1] active:duration-[0.1s] active:animate-bounce p-[.3em] px-[.4em] rounded-[50%] active:text-white sm:hover:text-[white] text-[--accent1] flex items-center justify-center duration-[0.2s] shadow-sm shadow-[--accent1] animate-spin sm:hover:animate-none'>
+                    </div> : ""}
+                        {foreignImage ?<Link className='sm:hover:bg-[--accent1] active:bg-[--accent1] active:duration-[0.1s] active:animate-bounce p-[.3em] px-[.4em] rounded-[50%] active:text-white sm:hover:text-[white] text-[--accent1] flex items-center justify-center duration-[0.2s] shadow-sm shadow-[--accent1] animate-spin sm:hover:animate-none'>
                             <FontAwesomeIcon className='text-2xl roboto' icon={faEllipsis}/>
-                        </Link>
+                        </Link> : ""}
                 </div>
                 <div className='w-[40%] rounded-l-[5px] bg-[--accent1] hidden sm:flex items-center justify-between px-[1em]'>
                     <p className='flex items-center text-2xl roboto text-[#DDBDB2] font-bold'>Notifications</p>
@@ -85,16 +87,21 @@ function Messenger() {
         <div className='flex sm:flex-row flex-col h-full '>
             <section id='sect-box' className='sm:w-[40%] block sm:block w-full overflow-scroll hide-scrollbar px-[1em]'>
                 <div className='pt-[6.5em]'>
-                    <SendMessage onImage={setForeignImage} onUsername={setCurrentUser} onSearch={search}/>
-                    <SendMessage onImage={setForeignImage} onUsername={setCurrentUser} onSearch={search}/>
-                    <SendMessage onImage={setForeignImage} onUsername={setCurrentUser} onSearch={search}/>
+                    <SendMessage onImage={setForeignImage} bool={foreignImage} onUsername={setCurrentUser} onSearch={search}/>
+                    <SendMessage onImage={setForeignImage} bool={foreignImage} onUsername={setCurrentUser} onSearch={search}/>
+                    <SendMessage onImage={setForeignImage} bool={foreignImage} onUsername={setCurrentUser} onSearch={search}/>
                 </div>
             </section>
             <section id='small-sms' className='sm:w-[60%] w-full h-full sm:block hidden relative shadow-sm shadow-[--accent1] ' >
                 <div className='h-[15vh] '>
 
                 </div>
-                <InputMessage />
+                {foreignImage ? <InputMessage /> : <div className='flex flex-col gap-[8em]'>
+                    <p className='text-center roboto text-2xl px-[4em] text-[--accent1] font-bold opacity-[0.8]'>Your chat history will be stored in our database</p>
+                    <p className='text-center roboto text-2xl px-[4em] text-[--accent1] font-bold opacity-[0.8]'>
+                        Your Privacy Matters
+                    </p>
+                </div>}
             </section>
             <section id='not' className='sm:w-[40%] w-full bg-white  sm:block hidden shadow-sm shadow-[--accent1] bg-[#ddbdb269] overflow-scroll hide-scrollbar'>
                 <div className=' p-[1em] mt-[4.5em] relative'>

@@ -1,12 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import sms from "../assets/sms.png"
 import bell from "../assets/bell.png"
 import feeds from "../assets/menu.png"
 
 function FeedNav() {
+    const new_location = useLocation()
     const handleSms = () => {
-        window.scrollTo({top : 400, behavior : 'smooth'})
+        if (new_location.pathname === "/feeds") {
+            window.scrollTo({top : 400, behavior : 'smooth'})
         document.body.classList.add('no-scroll')
         document.getElementById('box').style.display = 'flex'
         document.getElementById('message').style.display = 'block'
@@ -20,10 +22,13 @@ function FeedNav() {
         setInterval(() => {
         document.getElementById('smsIcon').classList.remove('sm:animate-bounce')
         }, 4000)
+        }
+        
     }
 
     const handleNotify = () => {
-        window.scrollTo({top : 400, behavior : 'smooth'})
+        if (new_location.pathname === "/feeds") {
+            window.scrollTo({top : 400, behavior : 'smooth'})
         document.body.classList.add('no-scroll')
         document.getElementById('message').style.zIndex = 0
         // document.getElementById('swiper1').style.display = 'none'
@@ -35,19 +40,25 @@ function FeedNav() {
         setInterval(() => {
         document.getElementById('bell').classList.remove('sm:animate-bounce')
         }, 4000)
+        }
+        
     }
 
     const handleFeeds = () => {
-        window.scrollTo({top : 300, behavior : 'smooth'})   
-        document.getElementById('post').scroll({top : 0, behavior : 'smooth'})
-        document.getElementById('thumb').classList.add('sm:animate-bounce')
-        setInterval(() => {
-        document.getElementById('thumb').classList.remove('sm:animate-bounce')
-        }, 2000)
-        document.getElementById('comment-icon').classList.add('sm:animate-bounce')
-        setInterval(() => {
-        document.getElementById('comment-icon').classList.remove('sm:animate-bounce')
-        }, 2000)
+        if (new_location.pathname == "/feeds") {
+            window.scrollTo({top : 1000, behavior : 'smooth'})   
+            const scrollPost  = document.getElementById('newbox')
+            scrollPost.scrollIntoView({top : 0, behavior : 'smooth'})
+            document.getElementById('thumb').classList.add('sm:animate-bounce')
+            setInterval(() => {
+            document.getElementById('thumb').classList.remove('sm:animate-bounce')
+            }, 2000)
+            document.getElementById('comment-icon').classList.add('sm:animate-bounce')
+            setInterval(() => {
+            document.getElementById('comment-icon').classList.remove('sm:animate-bounce')
+            }, 2000)
+        }
+        
     }
 
   return (

@@ -5,13 +5,10 @@ import { Link } from 'react-router-dom'
 import likes from "../assets/likes.svg"
 import posts from "../assets/post1.svg"
 import book from "../assets/book.svg"
-import person from "../assets/person4.jpeg"
 import user from "../assets/user.svg"
-import user1 from "../assets/user1.png"
 import update from "../assets/update.svg"
-import location from "../assets/location.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faDownLong, faEnvelope, faGift, faLocation, faLocationDot, faPeopleArrows, faPeopleGroup, faPersonHalfDress, faPlusCircle, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup, faPersonHalfDress, faPlusCircle, faThumbsUp, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 
@@ -30,7 +27,7 @@ function Profile() {
     const [gender, setGender] = useState("Male")
     const [birth, setBirthday] = useState("May 1st")
     const [email, setEmail] = useState("israelshedrack913@gmail.com")
-    const [bio, setBio] = useState("")
+    const [editProfile, setEditProfile] = useState(false)
 
     // image input ref
     const profileInput = useRef(null)
@@ -142,14 +139,18 @@ function Profile() {
 
   return (
     <>
+       { !!editProfile ?
         <Nav profile={profile}/>
-        <div className='h-screen flex items-center justify-center bg-[#000000ea] fixed w-full z-[200000000000]'>
-          <div className='px-[1em] shadow-md shadow-[black] bg-[#593f3b8a] rounded-[.5em] w-[80%] sm:w-[40%] py-[1em]'>
+        :
+        <div className='h-screen top-0 flex items-center justify-center bg-[#000000ea] fixed w-full z-[200000000000]'>
+          
+          <div className='px-[1em] relative shadow-md shadow-[black] bg-[#593f3b8a] rounded-[.5em] w-[80%] sm:w-[40%] py-[1em]'>
+          <FontAwesomeIcon icon={faTimes} onClick={() => (setEditProfile(!editProfile))} className='text-3xl text-white absolute right-[.5em] top-[.5em]'/>
             <h2 className='roboto text-white font-bold text-xl text-center'>Edit Your Profile</h2>
               <form action="" className='flex flex-col gap-[.5em]'>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="location">Location</label>
-                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" />
+                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" maxLength={15} onChange={(e) => (setLocation(e.target.value))}/>
                 </p>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="bio">Bio</label>
@@ -162,7 +163,7 @@ function Profile() {
                 </div>
               </form>
           </div>
-        </div>
+        </div>}
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
         {error && <p className='sm:text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em] left-[38%] sm:left-[45%] top-[5em] sm:top-[4em]'>{error}</p>}
         <div className='sm:h-[50vh] h-[20vh] relative w-full linear'>
@@ -201,24 +202,24 @@ function Profile() {
                  <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg] flex items-center justify-center gap-[.5em]'><span className='text-[--] flex'>Active:</span> {active ? <i className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></i> : <i className='inline'>active 2hrs ago</i> }</p>
                </div>
-               <div className='w-[80%]'>
-                  {/* <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p> */}
-                  <p className='line text-center break-words font-sans italic text-[0.9rem] text-white'>{bio}</p>
+               <div className='w-[95%]'>
+                  <p className='line text-center roboto font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
+                  {/* <p className='line text-center break-words font-sans italic text-[0.9rem] text-white'>{bio}</p> */}
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
-                    <Link className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    {/* <Link className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faUserPlus}/>
                       <p>Follow</p>
                     </Link>
-                    <Link className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <Link to={"/sendSms"} className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faMessage}/>
-                      <p>Message</p>
-                    </Link>
+                    Message
+                    </Link> */}
                  </div>
-                 <div className='flex justify-between mt-[.5em]'>
-                  <p className='text-[--bg] font- roboto'>Followers: {followers}</p>
-                  <p className='text-[--bg] font- roboto'>Following: {following}</p>
+                 <div className='flex justify-between gap-[2em] mt-[.5em]'>
+                  <p className='text-[--bg] font-semibold roboto'>Followers: {followers}</p>
+                  <p className='text-[--bg] font-semibold roboto'>Following: {following}</p>
                  </div>
                </div>
                <div className='w-[120%] border-[1.5px] border-[--accent]'></div>
@@ -323,7 +324,7 @@ function Profile() {
               <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
               <Link   className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /></Link>
               <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
-              <Link className='active:bg-[--accent] text-white sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'>Edit</Link>
+              <Link onClick={() => setEditProfile(!editProfile)} className='active:bg-[--accent] flex items-center text-xl sm:text-2xl text-white sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'>Edit</Link>
             </ul>
       
         </div>

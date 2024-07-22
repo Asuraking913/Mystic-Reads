@@ -1,6 +1,6 @@
 import { faArrowLeft, faEllipsis, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import user1 from "../assets/user.svg"
 
@@ -23,8 +23,11 @@ function InputMessage() {
     newElement.innerHTML = newUserSms
     chatField.appendChild(newElement)
     chatField.scrollTo({top : chatField.scrollHeight, behavior : 'smooth'})
+    const inbox = document.getElementById('sms')
+    inbox.value = ""
+    setNewSms(inbox.value)
+
   }
-    
   }
 
   const handleSubmit = (event) => {
@@ -43,7 +46,7 @@ function InputMessage() {
   }
 
   return (
-    <div className='flex flex-col z-[300] justify-center px-[1.5em] absolute bottom-[4em] w-full'>
+    <div id='smscont' className='flex flex-col z-[300] justify-center px-[1.5em] absolute bottom-[4em] w-full'>
       <div className='sm:h-[65vh] height h-[75vh] break-words flex flex-col gap-[.3em] items-end overflow-scroll hide-scrollbar p-[.3em]' id='smsBox'>
 
       {/* <p className='justify-self-start '>sdfsdfsfd</p> */}
