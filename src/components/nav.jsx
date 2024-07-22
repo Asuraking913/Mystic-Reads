@@ -139,7 +139,7 @@ function Nav({profile}) {
           </Link>
           <Link to={"/profile"}>
             <div className='w-[40px] bg-[--accent] shadow-sm shadow-[black]  rounded-[50%] h-[40px]'>
-              {profile ? <img src={profile} className='rounded-[50%] w-[40px] h-[40px] object-cover bg-[--accent] shadow-sm shadow-[black]' alt="" /> : <img src={user} className='rounded-[50%] h-[50px] w-[50px] object-cover'  alt="" />}
+              {profile ? <img src={profile} className='rounded-[50%] w-[40px] h-[40px] object-cover bg-[--accent] shadow-sm shadow-[black]' alt="" /> : <img src={user} className='rounded-[50%] h-[40px] w-[40px] object-cover'  alt="" />}
             </div>
           </Link>
           <Link>

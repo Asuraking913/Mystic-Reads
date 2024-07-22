@@ -108,10 +108,10 @@ function Display() {
               <h1 className='sm:text-[3rem] text-[2rem] text-[--accent] uppercase font-[audio] font-bold line'><span className='text-[--accent1] block'>Read more,</span> enjoy more.</h1>
               <p className='roboto  text-[1.1rem] text-[--accent1] font-bold'>Get Lost in MysticReads fantasies and never find your way to reality </p>
               <div className='flex gap-[2em] py-[1em]'>
-                  <Link className='p-[.5em] active:scale-[0.9] active:bg-[--accent] active:text-[white] sm:hover:bg-[--accent] sm:duration-[0.5s] sm:hover:text-white sm:hover:scale-110 duration-[0.05s] flex items-center justify-center px-[1.5em] border-2 border-[--accent] rounded-[1.5em] roboto text-[--accent] text-[1.2rem] font-bold'>
-                    Contents
+                  <Link to={"/"} className='p-[.5em] active:scale-[0.9] active:bg-[--accent] active:text-[white] sm:hover:bg-[--accent] sm:duration-[0.5s] sm:hover:text-white sm:hover:scale-110 duration-[0.05s] flex items-center justify-center px-[1.5em] border-2 border-[--accent] rounded-[1.5em] roboto text-[--accent] text-[1.2rem] font-bold'>
+                    Collections
                   </Link>
-                  <Link className='p-[.5em] px-[2em] active:scale-[0.9] active:bg-[--accent1] sm:hover:bg-[--accent1] sm:hover:scale-110 duration-[0.05s] sm:duration-[0.5s] flex items-center justify-center bg-[--accent] text-[--wh] rounded-[1.5em] roboto  text-[1.2rem] font-bold'>
+                  <Link to={"/feeds"} className='p-[.5em] px-[2em] active:scale-[0.9] active:bg-[--accent1] sm:hover:bg-[--accent1] sm:hover:scale-110 duration-[0.05s] sm:duration-[0.5s] flex items-center justify-center bg-[--accent] text-[--wh] rounded-[1.5em] roboto  text-[1.2rem] font-bold'>
                     Feeds
                   </Link>
               </div>

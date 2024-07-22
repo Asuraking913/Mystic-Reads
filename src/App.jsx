@@ -8,6 +8,7 @@ import ReadPage from './pages/read'
 import ForeignView from './pages/foreignProfile'
 import Feeds from './pages/newsFeed'
 import Messenger from './components/messenger'
+import Publish from './pages/publish'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
             <Route path='/foreignView' element={<ForeignView  />}/>
             <Route path='/feeds' element={<Feeds  />}/>
             <Route path='/sendSms' element={<Messenger  />}/>
+            <Route path='/publish' element={<Publish />}/>
           </Routes>
         </Router>
     </div>

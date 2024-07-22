@@ -21,8 +21,8 @@ function FeedsCont({img, post, username, descrip}) {
               <img src={img} className='w-[60px] h-[60px] object-cover rounded-[50%] shadow-sm shadow-[--accent1]' alt="" />
             </Link>
             <div className='text-center'>
-              <h2 className='sm:text-2xl text-[--accent1] text-xl roboto font-semibold '>{username}</h2>
-              <p className='orb'>{descrip}</p>
+              <h2 className='sm:text-xl text-[--accent1] text-[1rem] roboto font-semibold '>{username}</h2>
+              <p className='orb text-[0.9rem]'>{descrip}</p>
             </div>
             <FontAwesomeIcon onClick={handlePostNav} className='text-xl cursor-pointer text-[--accent1] sm:hover:scale-125 active:duration-[0.1s] sm:active:scale-[1] sm:duration-[0.5s] duration-[0.1s]' icon={faArrowsToDot}/>
         </div>
