@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Nav from '../components/nav'
 import Display from '../components/display'
 import Foot from '../components/footer'
 
 function Publish() {
+
+  const [chapter, setChapter] = useState('Prologue')
+
   return (
     <>
         <Nav />
@@ -17,17 +20,17 @@ function Publish() {
           <form action="" className='py-[--pdy] mt-[1em] w-full flex flex-col gap-[2em]'>
             <p className=''>
               <label className='text-xl roboto text-[--accent1]' htmlFor="#">Author's Identity</label>
-              <input className='text-2xl rounded-[5px] bg-[#ffffff2c] shadow-sm shadow-[--accent1] w-full p-[.2em] outline-none' type="text" name="identity" id="identity" />
+              <input className='sm:text-2xl text-[--accent1] text-xl rounded-[5px] bg-[#ffffff2c] shadow-sm shadow-[--accent1] w-full p-[.1em] sm:p-[.2em] outline-none' type="text" name="identity" id="identity" />
             </p>
             <p className=''>
               <label className='text-xl roboto text-[--accent1]' htmlFor="#">Chapter</label>
-              <input className='text-2xl rounded-[5px] bg-[#ffffff2c] shadow-sm shadow-[--accent1] w-full p-[.2em] outline-none' type="text" name="identity" value={'Chapter 1'} id="identity" />
+              <input className='sm:text-2xl text-[--accent1] text-xl rounded-[5px] bg-[#ffffff2c] shadow-sm shadow-[--accent1] w-full p-[.1em] sm:p-[.2em] outline-none' type="text" defaultValue={chapter} name="chapter"  id="chapter" />
             </p>
             <p>
               <label className='text-xl roboto text-[--accent1]' htmlFor="content">Content</label>
               <textarea className='w-full bg-[#ffffff2c] shadow-sm shadow-[--accent1] outline-none rounded-[5px]' name="content" id="content" cols="30" rows="10"></textarea>
             </p>
-            <input type="submit" value="Publish" className='text-xl p-[.4em] w-full text-center bg-[--accent1] text-white duration-[0.5s] hover:bg-[#ffffff2c] hover:text-[--accent1] cursor-pointer shadow-md rounded-[5px] shadow-[--accent1]' />
+            <input type="submit" value="Publish" className='text-xl p-[.2em] sm:p-[.4em] w-full text-center bg-[--accent1] text-white duration-[0.5s] hover:bg-[#ffffff2c] hover:text-[--accent1] cursor-pointer shadow-md rounded-[5px] shadow-[--accent1]' />
             
           </form>
         </section>
