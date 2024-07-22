@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAlignLeft, faAlignRight, faBars, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAlignLeft, faAlignRight, faBars, faBell, faMessage, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import user from "../assets/user.svg"
 import person1 from "../assets/person4.jpeg"
 
@@ -11,7 +11,7 @@ function Nav({profile}) {
   const [search, setSearch] = useState(true);
   const [nav, setNav] = useState(false)
   const [menu, setMenu] = useState(true)
-  const [log, setLog] = useState(true)
+  const [log, setLog] = useState(false)
   const location = useLocation()
 
   const handleNav = () => {
@@ -129,9 +129,17 @@ function Nav({profile}) {
         :
 
         <ul className='gap-[1em] duration-[0.5s] text-[1.1rem] items-center roboto sm:flex hidden'>
+          <Link to = {"/feeds"}  className='relative'>
+            <div className='h-[13px] w-[13px] bg-red-500 absolute right-0 text-white text-[0.7rem] rounded-[50%] flex items-center justify-center'>1</div>
+            <FontAwesomeIcon icon={faBell} className='text-4xl'/>
+          </Link>
+          <Link to = {"/sendSms"}  className='relative'>
+            <div className='h-[13px] w-[13px] bg-red-500 absolute right-0 text-white text-[0.7rem] rounded-[50%] flex items-center justify-center'>1</div>
+            <FontAwesomeIcon icon={faMessage} className='text-4xl'/>
+          </Link>
           <Link to={"/profile"}>
-            <div className='w-[50px] bg-[--accent] shadow-sm shadow-[black]  rounded-[50%] h-[50px]'>
-              {profile ? <img src={profile} className='rounded-[50%] w-[50px] h-[50px] object-cover bg-[--accent] shadow-sm shadow-[black]' alt="" /> : <img src={user} className='rounded-[50%] h-[50px] w-[50px] object-cover'  alt="" />}
+            <div className='w-[40px] bg-[--accent] shadow-sm shadow-[black]  rounded-[50%] h-[40px]'>
+              {profile ? <img src={profile} className='rounded-[50%] w-[40px] h-[40px] object-cover bg-[--accent] shadow-sm shadow-[black]' alt="" /> : <img src={user} className='rounded-[50%] h-[50px] w-[50px] object-cover'  alt="" />}
             </div>
           </Link>
           <Link>
@@ -193,9 +201,17 @@ function Nav({profile}) {
           :
 
           <ul className=' flex gap-[3em] flex-col right-[1em] text-[1.1rem] items-center roboto'>
+            <Link to = {"/feeds"}  className='relative text-[--accent]'>
+            <div className='h-[13px] w-[13px] bg-red-500 absolute right-0 text-white text-[0.7rem] rounded-[50%] flex items-center justify-center'>1</div>
+            <FontAwesomeIcon icon={faBell} className='text-4xl'/>
+          </Link>
+          <Link to = {"/sendSms"}  className='relative text-[--accent]'>
+            <div className='h-[13px] w-[13px] bg-red-500 absolute right-0 text-white text-[0.7rem] rounded-[50%] flex items-center justify-center'>1</div>
+            <FontAwesomeIcon icon={faMessage} className='text-4xl'/>
+          </Link>
           <Link to={"/profile"}>
             <div className=' rounded-[50%] bg-[--accent] shadow-sm shadow-[black]'>
-              <img src={profile} className='rounded-[50%] h-[50px] w-[50px] object-cover '  alt="" />
+              <img src={profile} className='rounded-[50%] h-[40px] w-[40px] object-cover '  alt="" />
             </div>
           </Link>
             <Link >

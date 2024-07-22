@@ -199,9 +199,32 @@ function Body() {
       <section className='min-h-[50vh] sm:py-[--pdy] px-[1em] sm:px-[--pdx]' id='recommend'>
         <div className='sm:z-0'>
           <ul className='flex justify-between sm:justify-normal sm:gap-[2em] border-b-2 border-[--accent1]'>
-            <Link className='roboto text-[1.1rem] sm:text-xl underline underline-offset-[7px] decoration-[--accent] text-[--accent1] font-bold'>Recommended</Link>
-            <Link className='roboto text-[1.1rem] sm:text-xl underline underline-offset-[7px] hover:decoration-[--accent] text-[--accent1] hover:font-bold'>Popular</Link>
-            <Link className='roboto text-[1.1rem] sm:text-xl underline underline-offset-[7px] hover:decoration-[--accent] text-[--accent1] hover:font-bold'>What's New?</Link>
+            <Link onClick={() => {
+              const popular = document.getElementById("popular")
+              const newTopic = document.getElementById('new-topic')
+              const recommend =  document.getElementById('recommend1')
+              popular.classList.remove('decoration-[--accent]', 'font-bold')
+              newTopic.classList.remove('decoration-[--accent]', 'font-bold')
+              recommend.classList.add('decoration-[--accent]', 'font-bold')
+            }} id='recommend1' className='roboto text-[1.1rem] sm:text-xl underline underline-offset-[7px] text-[--accent1]'>Recommended</Link>
+            <Link onClick={() => {
+              const popular = document.getElementById("popular")
+              const newTopic = document.getElementById('new-topic')
+              const recommend =  document.getElementById('recommend1')
+              popular.classList.add('decoration-[--accent]', 'font-bold')
+              newTopic.classList.remove('decoration-[--accent]', 'font-bold')
+            recommend.classList.remove('decoration-[--accent]', 'font-bold')
+              
+            }} id='popular' className='roboto text-[1.1rem] sm:text-xl underline underline-offset-[7px] text-[--accent1] '>Popular</Link>
+            <Link onClick={() => {
+              const popular = document.getElementById("popular")
+              const newTopic = document.getElementById('new-topic')
+              const recommend =  document.getElementById('recommend1')
+              popular.classList.remove('decoration-[--accent]', 'font-bold')
+              newTopic.classList.add('decoration-[--accent]', 'font-bold')
+              recommend.classList.remove('decoration-[--accent]', 'font-bold')
+              
+            }} id='new-topic' className='roboto text-[1.1rem] sm:text-xl underline underline-offset-[7px] text-[--accent1]'>What's New?</Link>
           </ul>
           <Topic />
         </div>

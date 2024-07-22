@@ -88,7 +88,6 @@ function Topic() {
         modules={[Pagination, Navigation, Autoplay]}
         spaceBetween={20}
         slidesPerView={6}
-        // loop = {true}
         autoplay = {{delay: 9900}}
         navigation
         pagination = {{clickable: true}}
@@ -96,10 +95,9 @@ function Topic() {
             {topic}
         </Swiper>
         <Swiper
-        modules={[Pagination, Navigation, Autoplay]}
+        modules={[Pagination, Navigation]}
         spaceBetween={3}
         slidesPerView={3}
-        loop = {true}
         navigation
         pagination = {{clickable: true}}
          className='sm:hidden flex p-[1em] px-0 gap-[0em] topic'>

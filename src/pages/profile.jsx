@@ -139,9 +139,7 @@ function Profile() {
 
   return (
     <>
-       { !!editProfile ?
-        <Nav profile={profile}/>
-        :
+       { editProfile ?
         <div className='h-screen top-0 flex items-center justify-center bg-[#000000ea] fixed w-full z-[200000000000]'>
           
           <div className='px-[1em] relative shadow-md shadow-[black] bg-[#593f3b8a] rounded-[.5em] w-[80%] sm:w-[40%] py-[1em]'>
@@ -163,7 +161,12 @@ function Profile() {
                 </div>
               </form>
           </div>
-        </div>}
+        </div>
+        : 
+
+        <Nav profile={profile}/>
+
+      }
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
         {error && <p className='sm:text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em] left-[38%] sm:left-[45%] top-[5em] sm:top-[4em]'>{error}</p>}
         <div className='sm:h-[50vh] h-[20vh] relative w-full linear'>
