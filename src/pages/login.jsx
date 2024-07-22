@@ -1,11 +1,24 @@
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"
 
 function Login() {
+
+    const [userData, setUserData] = useState("")
+    const [userPass, setUserpass] = useState("")
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const data = {
+            userName : userData, 
+            userPass : userPass
+        }
+    }
+
   return (
    <article className='sm:h-full h-screen flex items-center p-[2em] px-[1em] sm:px-[10em]'>
      <Link to={"/"}>
@@ -25,11 +38,15 @@ function Login() {
         <form action="" className='flex flex-col gap-[.7em]'>
             <p className=''>
                 <label className='text-[1rem] text-[--accent1]' htmlFor="username/email">Username or email</label>
-                <input className='w-full p-[.19em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="text" name="username/email" id="user" />
+                <input onChange={(e) => {
+                    setUserData(e.target.value)
+                }} className='w-full p-[.19em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="text" name="username/email" id="user" />
             </p>
             <p className=''>
                 <label className='text-[1rem] text-[--accent1]' htmlFor="password">Password</label>
-                <input className='w-full p-[.19em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="password" name="password" id="password" />
+                <input onChange={(e) => {
+                    setUserpass(e.target.value)
+                }} className='w-full p-[.19em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="password" name="password" id="password" />
             </p>
             <Link className='text-right animate-pulse underline'>
                 <p className='sm:text-[1rem] text-[0.9rem] text-[--accent1] capitalize'>

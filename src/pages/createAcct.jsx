@@ -1,12 +1,75 @@
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg2.svg"
+import axios from 'axios'
 
 function Create() {
+
+    const [userName, setUserName] = useState("")
+    const [userEmail, setUserEmail] = useState("")
+    const [pass, setPass] = useState("")
+    const [confirmPass, setConfirmPass] = useState("")
+    const [gender, setGender] = useState("male")
+    const [error1, setError] = useState(false)
+
+    const handleSumbit = async (event) => {
+        event.preventDefault()
+        const data = {
+            userName: userName,
+            userEmail: userEmail, 
+            gender: gender, 
+            userPass: pass, 
+            confirmPass: confirmPass
+        }
+        
+        if (data['userName'].length <= 5) {
+            setError("Username must be more than 5 characters")
+            setInterval(() => {
+                setError("")
+            }, 4000)
+            return
+        }
+
+        if (data['userPass'].length <= 5) {
+            setError("Password must be more than 5 characters")
+            setInterval(() => {
+                setError("")
+            }, 4000)
+            return
+        }
+
+        if (data['userPass'] !== data['confirmPass']) {
+            setError("Password fields are not identical")
+            setInterval(() => {
+                setError("")
+            }, 4000)
+            return
+        }
+
+        try {
+        const response = await axios.post("api/auth/register", data).then(response => {
+            console.log(response.data)
+            if (response.status == 201) {
+                window.location.href = "/login"
+            }
+        }) 
+        }
+
+    catch(error) {
+        if (error.response.status == 400) {
+            setError(error.response.data['message'])
+            setInterval(() => {
+                setError("")
+            }, 4000)
+        }
+    }
+
+    }
+
   return (
     <article className='sm:h-full h-screen flex items-center p-[2em] sm:px-[10em] px-[1em]'>
       <Link to={"/"}>
@@ -22,35 +85,38 @@ function Create() {
         </div>
     </section>
     <section className='bg-[#ffffffea] flex-col sm:py-0 py-[2em] gap-[0em] sm:gap-[1em] rounded-[1em]  sm:rounded-l-[0em] sm:h-[90vh] sm:w-[80%] flex sm:px-0 px-[1em] sm:items-center justify-center'>
+      {/* <p className='absolute top-[10%] sm:left-[45%]'>'sdfsdf'</p> */}
+
         <h1 className='text-3xl audio text-[#c16b63af] mb-[.5em] text-center'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
-        <form action="" className='flex flex-col gap-[.5em] justfiy-center'>
+        {error1 && <p className='text-center text-[0.9rem] text-[--accent1] animate-bounce'>{error1}</p>}
+        <form onSubmit={handleSumbit} className='flex flex-col gap-[.5em] justfiy-center'>
             <p>
                 <label className='text-[1rem] text-[--accent1]' htmlFor="username">Username</label>
-                <input className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="text" name="username" id="user" />
+                <input onChange={(e) => setUserName(e.target.value)} className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' required type="text" name="username" id="user" />
             </p>
             <p>
                 <label className='text-[1rem] text-[--accent1]' htmlFor="email">Email</label>
-                <input className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="text" name="email" id="email" />
+                <input required onChange={(e) => setUserEmail(e.target.value)} className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="email" name="email" id="email" />
             </p>
             <p>
                 <label className='text-[1rem] text-[--accent1]' htmlFor="password">Password</label>
-                <input className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="password" name="password" id="password" />
+                <input required onChange={(e) => setPass(e.target.value)} className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="password" name="password" id="password" />
             </p>
             <p>
                 <label className='text-[1rem] text-[--accent1]' htmlFor="password">Confirm Password</label>
-                <input className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="password" name="password" id="confirm" />
+                <input required onChange={(e) => setConfirmPass(e.target.value)} className='w-full p-[.2em] border-[1.5px] border-[#c16b63af] rounded-[5px]' type="password" name="password" id="confirm" />
             </p>
             <div className='flex justify-between'>
                 <p className='flex-items-center justify-center '>
-                    <input type="checkbox" name="male" id="male" />
+                    <input type="checkbox" name="gender" id="male" />
                     <label htmlFor="male" className='pl-[1em]'>Male</label>
                 </p>
                 <p className='flex-items-center justify-center '>
-                    <input type="checkbox" name="female" id="female" />
+                    <input type="checkbox" name="gender" id="female" />
                     <label htmlFor="female" className='pl-[1em]'>Female</label>
                 </p>
             </div>
-            <input  type="submit" value="Sign Up" className='p-[.2em] bg-[#c16b63af] roboto text-white text-xl font-bold cursor-pointer rounded-[5px] hover:bg-[#ffffff65] border-2 border-transparent hover:border-[--accent] duration-[0.5s] hover:text-[--accent]' />
+            <input  type="submit" value="Sign Up" className='p-[.2em] bg-[#c16b63af] roboto text-white text-xl font-bold cursor-pointer rounded-[5px] active:duration-[0.1s] active:bg-[#ffffff65] sm:hover:bg-[#ffffff65] border-2 border-transparent active:border-[--accent] sm:hover:border-[--accent] duration-[0.5s] active:text-[--accent] sm:hover:text-[--accent]' />
         </form>
         <Link className='flex gap-[1em] text-center justify-center py-[1em] text-[0.9rem] roboto active:underline active:duration-[0.1s] sm:hover:underline items-center capitalize'>
             <img src={google} className='sm:w-[25px] w-[20px] h-[20px]  sm:h-[25px]' alt="" />
