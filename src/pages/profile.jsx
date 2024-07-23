@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup, faPersonHalfDress, faPlusCircle, faThumbsUp, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
+import axios from 'axios'
+import Axios from '../components/axios'
 
 function Profile() {
 
@@ -28,6 +30,16 @@ function Profile() {
     const [birth, setBirthday] = useState("May 1st")
     const [email, setEmail] = useState("israelshedrack913@gmail.com")
     const [editProfile, setEditProfile] = useState(false)
+    const [bio, setBio] = useState("")
+    const [location, setLocation] = useState("")
+    const [member, setMember] = useState("")
+
+    useEffect(() => {
+      console.log(localStorage)
+      setUserName(localStorage.getItem('userName'))
+      setMember(localStorage.getItem('member'))
+      setGender(localStorage.getItem('gender'))
+    }, [])
 
     // image input ref
     const profileInput = useRef(null)
@@ -53,6 +65,24 @@ function Profile() {
 
     const handleCoverDel = () => {
       setCover(null)
+    }
+
+    const handleEditform = async (event) => {
+      event.preventDefault()
+      const data = {
+        "bio" : bio, 
+        'location' : location, 
+        "birthday" : birth
+      }
+      const userId = localStorage.getItem('userId')
+      try{
+      // const response = await axios.post(`/api/profiles_info/${userId}`, data, {baseURL : "http://127.0.0.1:5000",}).then(response => console.log(response.data))
+      const response = await Axios.post(`/api/profiles_info/${userId}`, data).then(response => console.log(response.data))
+    }
+
+    catch (error) {
+      console.log(error.response.data)
+    }
     }
 
     const handleCover = (event) => {
@@ -143,16 +173,25 @@ function Profile() {
         <div className='h-screen top-0 flex items-center justify-center bg-[#000000ea] fixed w-full z-[200000000000]'>
           
           <div className='px-[1em] relative shadow-md shadow-[black] bg-[#593f3b8a] rounded-[.5em] w-[80%] sm:w-[40%] py-[1em]'>
-          <FontAwesomeIcon icon={faTimes} onClick={() => (setEditProfile(!editProfile))} className='text-3xl text-white absolute right-[.5em] top-[.5em]'/>
+          <FontAwesomeIcon icon={faTimes} onClick={() => {
+            setEditProfile(!editProfile)
+            setLocation("")
+            setBio("")
+            setBirthday("")
+          }} className='text-3xl cursor-pointer hover:scale-125 duration-[.5s] text-white absolute right-[.5em] top-[.5em]'/>
             <h2 className='roboto text-white font-bold text-xl text-center'>Edit Your Profile</h2>
-              <form action="" className='flex flex-col gap-[.5em]'>
+              <form action="" onSubmit={handleEditform} className='flex flex-col gap-[.5em]'>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="location">Location</label>
                   <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" maxLength={15} onChange={(e) => (setLocation(e.target.value))}/>
                 </p>
                 <p>
+                  <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="Birthday">Birthday</label>
+                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" maxLength={15} onChange={(e) => (setBirthday(e.target.value))}/>
+                </p>
+                <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="bio">Bio</label>
-                  <textarea name="bio" className='w-full p-[.5em] resize-none outline-none text-white bg-transparent border-[white] border-[.5px] rounded-[5px]' id="bio" cols="30" rows="4" onChange={(e) => {
+                  <textarea maxLength={150} name="bio" className='w-full p-[.5em] resize-none outline-none text-white bg-transparent border-[white] border-[.5px] rounded-[5px]' id="bio" cols="30" rows="4" onChange={(e) => {
                     setBio(e.target.value)
                   }}></textarea>
                 </p>
@@ -229,7 +268,7 @@ function Profile() {
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
                     <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='text-xl mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>Nigeria</span>
+                      <span className='text-[--bg] roboto'>location</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text-xl mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -237,7 +276,7 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since Dec 05, 2022</span>
+                    <span className='text-[--bg] roboto'>Member Since {member}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
@@ -297,7 +336,7 @@ function Profile() {
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>Nigeria</span>
+                      <span className='text-[--bg] roboto'>location</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -305,7 +344,7 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since Dec 05, 2022</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since {member}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>

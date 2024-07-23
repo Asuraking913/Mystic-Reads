@@ -131,8 +131,8 @@ function Body() {
               <h1 className='sm:text-[3rem] text-[2rem] text-[--accent] uppercase font-[audio] font-bold line'><span className='text-[--accent1] block'>Read more,</span> enjoy more.</h1>
               <p className='roboto  text-[1.1rem] text-[--accent1] font-bold'>Get Lost in MysticReads fantasies and never find your way to reality </p>
               <div className='flex gap-[2em] py-[1em]'>
-                  <Link to={"/"} className='p-[.5em] sm:active:scale-[1] hover:bg-[--accent] hover:text-white hover:scale-110 duration-[0.5s] flex items-center justify-center px-[1.5em] border-2 border-[--accent] rounded-[1.5em] roboto text-[--accent] text-[1.2rem] font-bold'>
-                    Collections
+                  <Link to={"/publish"} className='p-[.5em] sm:active:scale-[1] hover:bg-[--accent] hover:text-white hover:scale-110 duration-[0.5s] flex items-center justify-center px-[1.5em] border-2 border-[--accent] rounded-[1.5em] roboto text-[--accent] text-[1.2rem] font-bold'>
+                    Publish
                   </Link>
                   <Link to={"/feeds"} className='p-[.5em] sm:active:scale-[1] hover:bg-[--accent1] hover:scale-110 duration-[0.5s] flex items-center justify-center px-[2em] bg-[--accent] text-[--wh] rounded-[1.5em] roboto  text-[1.2rem] font-bold'>
                     Feeds
@@ -190,7 +190,7 @@ function Body() {
           <Weekly />
         </div>
         <div className='w-full sm:block hidden'>
-        <div className='border-b-2 border-b-[--accent1] mb-[--pdy] ' id='trend'>
+        <div className='border-b-2 border-b-[--accent1] mb-[--pdy]' id='trend'>
             <h2 className='sm:text-xl text-[1.1rem] mb-[.3em] roboto font-semibold text-[--accent] '>News & Trending</h2>
           </div>
           <News />
@@ -198,33 +198,33 @@ function Body() {
       </section>
       <section className='min-h-[50vh] sm:py-[--pdy] px-[1em] sm:px-[--pdx]' id='recommend'>
         <div className='sm:z-0'>
-          <ul className='flex justify-between sm:justify-normal sm:gap-[2em] border-b-2 border-[--accent1]'>
+          <ul className='flex justify-between sm:justify-normal sm:gap-[2em]'>
             <Link onClick={() => {
               const popular = document.getElementById("popular")
               const newTopic = document.getElementById('new-topic')
               const recommend =  document.getElementById('recommend1')
-              popular.classList.remove('decoration-[--accent]', 'font-bold')
-              newTopic.classList.remove('decoration-[--accent]', 'font-bold')
-              recommend.classList.add('decoration-[--accent]', 'font-bold')
-            }} id='recommend1' className='roboto text-[1.1rem] sm:text-xl underline underline-offset-[7px] text-[--accent1]'>Recommended</Link>
+              popular.classList.remove('decoration-[--accent]','text-[--accent]')
+              newTopic.classList.remove('decoration-[--accent]','text-[--accent]')
+              recommend.classList.add('decoration-[--accent]','text-[--accent]')
+            }} id='recommend1' className='roboto decoration-[--accent] decoration-[2px] font-semibold text1s duration-[1s] text-[1.1rem] sm:text-xl underline underline-offset-[7px] text-[--accent1]'>Recommended</Link>
             <Link onClick={() => {
               const popular = document.getElementById("popular")
               const newTopic = document.getElementById('new-topic')
               const recommend =  document.getElementById('recommend1')
-              popular.classList.add('decoration-[--accent]', 'font-bold')
-              newTopic.classList.remove('decoration-[--accent]', 'font-bold')
-            recommend.classList.remove('decoration-[--accent]', 'font-bold')
+              popular.classList.add('decoration-[--accent]','text-[--accent]')
+              newTopic.classList.remove('decoration-[--accent]','text-[--accent]')
+            recommend.classList.remove('decoration-[--accent]','text-[--accent]')
               
-            }} id='popular' className='roboto text-[1.1rem] sm:text-xl underline underline-offset-[7px] text-[--accent1] '>Popular</Link>
+            }} id='popular' className='roboto text-[1.1rem] decoration-[2px] font-semibold text1s duration-[1s] sm:text-xl underline underline-offset-[7px] text-[--accent1] '>Popular</Link>
             <Link onClick={() => {
               const popular = document.getElementById("popular")
               const newTopic = document.getElementById('new-topic')
               const recommend =  document.getElementById('recommend1')
-              popular.classList.remove('decoration-[--accent]', 'font-bold')
-              newTopic.classList.add('decoration-[--accent]', 'font-bold')
-              recommend.classList.remove('decoration-[--accent]', 'font-bold')
+              popular.classList.remove('decoration-[--accent]','text-[--accent]')
+              newTopic.classList.add('decoration-[--accent]','text-[--accent]')
+              recommend.classList.remove('decoration-[--accent]','text-[--accent]')
               
-            }} id='new-topic' className='roboto text-[1.1rem] sm:text-xl underline underline-offset-[7px] text-[--accent1]'>What's New?</Link>
+            }} id='new-topic' className='roboto decoration-[2px] font-semibold text1s duration-[1s] text-[1.1rem] sm:text-xl underline underline-offset-[7px] text-[--accent1]'>What's New?</Link>
           </ul>
           <Topic />
         </div>
@@ -233,7 +233,7 @@ function Body() {
       <div className='bg-[--accent] overflow-hidden sm:text-left text-center w-full sm:p-[1em] sm:py-[1em] py-[1.5em]  sm:h-[300px] rounded-[1em] flex gap-[1em] items-center'>
           <div className='sm:w-[80%] sm:text-left px-[.2em] text-center items-center sm:items-start flex flex-col gap-[1em]'>
             <h2 className='text-2xl text-white roboto font-semibold'>Gain the best visual experience while reading stories on mystic reads</h2>
-            <Link className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
+            <Link to={"/read"} className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
               Read
             </Link>
           </div>
@@ -244,7 +244,7 @@ function Body() {
         <div className='bg-[--accent] overflow-hidden sm:text-left text-center w-full sm:p-[1em] sm:py-[1em] py-[1.5em] p-[1em] sm:h-[300px] rounded-[1em] flex gap-[1em] items-center'>
           <div className='sm:w-[80%] w-full flex flex-col gap-[1em] items-center sm:items-start'>
             <h2 className='text-2xl text-white roboto font-semibold'>Join us and publish your own stories to expand the paths to wondrous fantasies</h2>
-            <Link className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
+            <Link to={"/publish"} className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
               Publish
             </Link>
           </div>

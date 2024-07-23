@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import userDefault from "../assets/user.svg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faBell, faEllipsis, faHome, faSearch } from '@fortawesome/free-solid-svg-icons'
-import SendMessage from './sendMessenger.jsx'
+import SendMessage from '../components/sendMessenger.jsx'
 import { Link } from 'react-router-dom'
-import InputMessage from './inputWindow.jsx'
-import MainNotify from './notifications.jsx'
+import InputMessage from '../components/inputWindow.jsx'
+import MainNotify from '../components/notifications.jsx'
 import menu from "../assets/menu.png"
 
 function Messenger() {

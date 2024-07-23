@@ -66,7 +66,7 @@ function News() {
     </li>))
 
   return (
-    <ul className='flex flex-col '>
+    <ul className='flex gap-[.4em] flex-col '>
         {news}
     </ul>
   )

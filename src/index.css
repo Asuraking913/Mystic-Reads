@@ -22,19 +22,24 @@ body {
 @font-face {
     font-family: "audio";
     src: url("../src//assets/Audiowide-Regular.ttf");
-    font-display: swap;
+    /* font-display: swap; */
+    font-display: block;
 }
 
 @font-face {
     font-family: "orb";
     src: url("../src/assets/Orbitron-Regular.ttf");
-    font-display: swap;
+    /* font-display: swap; */
+    font-display: block;
+    
 }
 
 @font-face {
     font-family: "roboto";
     src: url("../src/assets/Poppins-Regular.ttf");
-    font-display: swap;
+    /* font-display: swap; */
+    font-display: block;
+
 }
 
 .audio {

@@ -4,20 +4,57 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"
+import axios from 'axios'
 
 function Login() {
 
     const [userData, setUserData] = useState("")
     const [userPass, setUserpass] = useState("")
+    const [error, setError] = useState("")
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         const data = {
             userName : userData, 
             userPass : userPass
         }
+
+        if (data['userName'].length <= 5) {
+            setError("Username must be more than 5 characters")
+            setInterval(() => (
+                setError("")
+            ), [4000])
+            return
+        }
+
+        if (data['userPass'].length <= 5) {
+            setError("Password must be more than 5 characters")
+            setInterval(() => (
+                setError("")
+            ), [4000])
+            return
+        }
+
+        try {
+        const response = await axios.post("/api/auth/login", data).then(response => {
+            if (response.status == 200) {
+                console.log(response.data['data'])
+                localStorage.setItem('userName', response.data['data']['userName'] )
+                localStorage.setItem('userEmail', response.data['data']['userEmail'], )
+                localStorage.setItem( 'member', response.data['data']['joined'])
+                localStorage.setItem('userId', response.data['data']['userId'])
+                localStorage.setItem('gender', response.data['data']['gender'])
+                window.location.href = "/"
+            }
+        })
     }
+
+    catch(error) {
+        if (error.response.status == 400)
+        setError(error.response.data['message'])
+    }
+}
 
   return (
    <article className='sm:h-full h-screen flex items-center p-[2em] px-[1em] sm:px-[10em]'>
@@ -34,8 +71,10 @@ function Login() {
         </div>
     </section>
     <section className='bg-[#ffffffea] flex-col gap-[.5em] rounded-[1em] sm:rounded-l-[0em] sm:h-[90vh] w-full sm:w-[80%] flex items-center justify-center sm:px-0 px-[1em] sm:py-0 py-[2em]'>
-        <h1 className='text-3xl audio text-[#c16b63af] mb-[1em]'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
-        <form action="" className='flex flex-col gap-[.7em]'>
+        <h1 className='text-3xl audio text-[#c16b63af] mb-[.5em]'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
+        {error && <p className='text-center text-[0.9rem] text-[--accent1] animate-bounce'>{error}</p>}
+
+        <form onSubmit={handleSubmit} className='flex flex-col gap-[.7em]'>
             <p className=''>
                 <label className='text-[1rem] text-[--accent1]' htmlFor="username/email">Username or email</label>
                 <input onChange={(e) => {
@@ -53,7 +92,7 @@ function Login() {
                         forgot password
                 </p>
             </Link>
-            <input  type="submit" value="Log In" className='p-[.19em] bg-[#c16b63af] roboto text-white text-xl font-bold cursor-pointer rounded-[5px] hover:bg-[#ffffff65] border-2 border-transparent hover:border-[--accent] duration-[0.5s] hover:text-[--accent]' />
+            <input  type="submit" value="Log In" className='p-[.19em] bg-[#c16b63af] roboto text-white text-xl font-bold cursor-pointer rounded-[5px] active:duration-[0.1s] active:bg-[#ffffff65] sm:hover:bg-[#ffffff65] active:border-[--accent] border-2 sm:hover:border-[--accent] duration-[0.5s] active:text-[--accent] sm:hover:text-[--accent]' />
         </form>
 
         <div className='w-full px-[2em] sm:px-[8em] py-[1em] flex items-center justify-center'>

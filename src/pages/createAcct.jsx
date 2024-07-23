@@ -51,12 +51,12 @@ function Create() {
         }
 
         try {
-        const response = await axios.post("api/auth/register", data).then(response => {
-            console.log(response.data)
-            if (response.status == 201) {
-                window.location.href = "/login"
-            }
-        }) 
+            const response = await axios.post("api/auth/register", data).then(response => {
+                console.log(response.data)
+                if (response.status == 201) {
+                    window.location.href = "/login"
+                }
+            }) 
         }
 
     catch(error) {
@@ -85,7 +85,6 @@ function Create() {
         </div>
     </section>
     <section className='bg-[#ffffffea] flex-col sm:py-0 py-[2em] gap-[0em] sm:gap-[1em] rounded-[1em]  sm:rounded-l-[0em] sm:h-[90vh] sm:w-[80%] flex sm:px-0 px-[1em] sm:items-center justify-center'>
-      {/* <p className='absolute top-[10%] sm:left-[45%]'>'sdfsdf'</p> */}
 
         <h1 className='text-3xl audio text-[#c16b63af] mb-[.5em] text-center'>Mystic<span className='text-[--accent1]'>Reads</span></h1>
         {error1 && <p className='text-center text-[0.9rem] text-[--accent1] animate-bounce'>{error1}</p>}
