@@ -1,16 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 
+const token = localStorage.getItem('token')
+
 const Axios = axios.create(
     {
-        // withCredentials : true,
-        // headers : 'access_token', 
-        // xsrfHeaderName: 'access_token',
-        // xsrfCookieName : 'access_token'
-        // withCredentials : true,
         'headers' : {
-            Accept : 'access_token',
-            Authorization : 'Bearer <JWT>'
+            Authorization : `Bearer ${token}`
         }
     }
 )

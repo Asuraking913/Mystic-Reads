@@ -45,7 +45,13 @@ function Login() {
                 localStorage.setItem( 'member', response.data['data']['joined'])
                 localStorage.setItem('userId', response.data['data']['userId'])
                 localStorage.setItem('gender', response.data['data']['gender'])
+                localStorage.setItem('token', response.data['data']['access_token'])
+                localStorage.setItem('bio', response.data['data']['bio'])
+                localStorage.setItem('location', response.data['data']['location'])
+                localStorage.setItem('birthday', response.data['data']['birthday'])
+                console.log(localStorage)
                 window.location.href = "/"
+                console.log(response.data)
             }
         })
     }

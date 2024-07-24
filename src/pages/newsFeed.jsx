@@ -12,8 +12,21 @@ import Notify from '../components/notify'
 import SmsBox from '../components/messageBox'
 import PostForm from '../components/postForm'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function Feeds() {
+
+  const [log, setLog] = useState(false)
+
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+          setLog(true)
+          return
+        }
+    
+        setLog(false)
+      }, [])
 
 
     const feeds = [
@@ -71,7 +84,7 @@ function Feeds() {
 
   return (
     <>
-        <Nav />
+        <Nav log={log}/>
         <Display />
         <FeedNav />
         <PostForm />

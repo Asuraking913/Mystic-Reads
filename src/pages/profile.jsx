@@ -16,7 +16,6 @@ import Axios from '../components/axios'
 
 function Profile() {
 
-
     // State vars
     const [file1, setFile1] = useState(false)
     const [cover, setCover] = useState(null);
@@ -28,17 +27,31 @@ function Profile() {
     const [following, setFollowing] = useState(10)
     const [gender, setGender] = useState("Male")
     const [birth, setBirthday] = useState("May 1st")
-    const [email, setEmail] = useState("israelshedrack913@gmail.com")
+    const [email, setEmail] = useState("")
     const [editProfile, setEditProfile] = useState(false)
     const [bio, setBio] = useState("")
     const [location, setLocation] = useState("")
     const [member, setMember] = useState("")
+    const [log, setLog] = useState(false)
+
 
     useEffect(() => {
+      // console.log(localStorage)
+      if (localStorage.getItem('token')) {
+        setLog(true)
+        return
+      }
+  
+      setLog(false)
+      window.location.href = "/"
       console.log(localStorage)
       setUserName(localStorage.getItem('userName'))
       setMember(localStorage.getItem('member'))
       setGender(localStorage.getItem('gender'))
+      setEmail(localStorage.getItem('userEmail'))
+      setLocation(localStorage.getItem('location'))
+      setBirthday(localStorage.getItem('birthday  '))
+      setBio(localStorage.getItem('bio'))
     }, [])
 
     // image input ref
@@ -76,13 +89,30 @@ function Profile() {
       }
       const userId = localStorage.getItem('userId')
       try{
-      // const response = await axios.post(`/api/profiles_info/${userId}`, data, {baseURL : "http://127.0.0.1:5000",}).then(response => console.log(response.data))
-      const response = await Axios.post(`/api/profiles_info/${userId}`, data).then(response => console.log(response.data))
-    }
-
-    catch (error) {
-      console.log(error.response.data)
-    }
+          if(bio.length < 20 || location.length < 4 ) {
+            return
+        }
+        const response = await Axios.post(`/api/profiles_info/${userId}`, data).then(response => {
+                  
+                  if (response.status = 201) {
+                  console.log(response.data)
+                  localStorage.clear()
+                  localStorage.setItem('userName', response.data['data']['userName'] )
+                  localStorage.setItem('userEmail', response.data['data']['userEmail'], )
+                  localStorage.setItem( 'member', response.data['data']['joined'])
+                  localStorage.setItem('userId', response.data['data']['userId'])
+                  localStorage.setItem('gender', response.data['data']['gender'])
+                  localStorage.setItem('bio', response.data['data']['bio'])
+                  localStorage.setItem('joined', response.data['data']['member'])
+                  localStorage.setItem('birthday', response.data['data']['birthday'])
+                  localStorage.setItem('location', response.data['data']['location'])
+                  console.log(localStorage)
+                }
+        })
+      }
+      catch (error) {
+        console.log(error)
+      }
     }
 
     const handleCover = (event) => {
@@ -203,7 +233,7 @@ function Profile() {
         </div>
         : 
 
-        <Nav profile={profile}/>
+        <Nav profile={profile} log={log}/>
 
       }
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
@@ -241,7 +271,7 @@ function Profile() {
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
-                 <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
+                 <h2 className='sm:text-2xl capitalize font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg] flex items-center justify-center gap-[.5em]'><span className='text-[--] flex'>Active:</span> {active ? <i className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></i> : <i className='inline'>active 2hrs ago</i> }</p>
                </div>
                <div className='w-[95%]'>
@@ -266,9 +296,9 @@ function Profile() {
                </div>
                <div className='w-[120%] border-[1.5px] border-[--accent]'></div>
                <div className='w-full flex flex-col gap-[.5em]'>
-                  <p className='flex justify-between items-center'>
+                    <p className='flex justify-between items-center'>
                     <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='text-xl mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>location</span>
+                      <span className='text-[--bg] roboto'>{localStorage.getItem('location') ? localStorage.getItem('location') : ""}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text-xl mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -276,20 +306,23 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since {member}</span>
+                    <span className='text-[--bg] roboto'>Member Since {localStorage.getItem('joined')}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
-                    <span className='text-[--bg] roboto'>{gender}</span>
+                    <span className='text-[--bg] roboto'>{localStorage.getItem('gender')}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='text-xl mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] roboto'>{email}</span>
+                    <span className='text-[--bg] roboto'>{localStorage.getItem('userEmail')}</span>
                   </p>
-                  <p className='flex justify-between items-center'>
+                 { localStorage.getItem('birthday') ?
+                 <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='text-xl mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] roboto'>{birth}</span>
+                    <span className='text-[--bg] roboto'>{localStorage.getItem('birthday') ? localStorage.getItem('birthday') : ""}</span>
                   </p>
+                  : ""
+                  }
                </div>
       
             </div>
@@ -310,7 +343,7 @@ function Profile() {
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
-                 <h2 className='text-xl font-bold roboto text-[--bg]'>{userName}</h2>
+                 <h2 className='text-xl capitalize font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <FontAwesomeIcon icon={faCircle} className='text text-green-400 w-[15px] h-[15px]'/>  : <p className='inline'>active 2hrs ago</p> }</p>
                </div>
                <div>
@@ -336,27 +369,27 @@ function Profile() {
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>location</span>
+                      <span className='text-[--bg] roboto'>{localStorage.getItem('location') }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text mr-[.1em] text-[--bg]'/>Likes:</span>
                     <span className='text-[--bg] roboto'>2 Likes</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since {member}</span>
+                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Joined:</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since {localStorage.getItem('joined')}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>
-                    <span className='text-[--bg] roboto'>{gender}</span>
+                    <span className='text-[--bg] roboto'>{localStorage.getItem('gender')}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] roboto'>{birth}</span>
+                    <span className='text-[--bg] roboto'>{localStorage.getItem('birthday')}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{email}</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{localStorage.getItem('userEmail')}</span>
                   </p>
                   
                </div>
@@ -370,7 +403,7 @@ function Profile() {
             </ul>
       
         </div>
-        <section className=' p-[0em] h-[100vh] sm:h-[100vh] relative w-[100%] sm:px-[--pdx] flex sm:flex-row flex-col-reverse justify-between items-start sm:items-end'>
+        <section className=' p-[0em] h-[120vh] sm:h-[100vh] relative w-[100%] sm:px-[--pdx] flex sm:flex-row flex-col-reverse justify-between items-start sm:items-end'>
         <div className='py-[2em] px-[.5em]'>
           <h2 className='text-2xl roboto font-bold text-[--accent1]'>Our Programs</h2>
             <ul className='flex text-[--accent1] flex-col gap-[1em] mt-[1em] '>
