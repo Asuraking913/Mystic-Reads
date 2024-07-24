@@ -38,7 +38,7 @@ function Login() {
         }
 
         try {
-        const response = await axios.post("/api/auth/login", data).then(response => {
+        const response = await Axios.post("/api/auth/login", data).then(response => {
             if (response.status == 200) {
                 console.log(response.data['data'])
                 localStorage.setItem('userName', response.data['data']['userName'] )
@@ -61,6 +61,8 @@ function Login() {
         if (error.response.status == 400)
         setError(error.response.data['message'])
     }
+
+    
 }
 
   return (

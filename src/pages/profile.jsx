@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Nav from '../components/nav'
 import edit from '../assets/edit.svg'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import likes from "../assets/likes.svg"
 import posts from "../assets/post1.svg"
 import book from "../assets/book.svg"
@@ -13,8 +13,15 @@ import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 import axios from 'axios'
 import Axios from '../components/axios'
+import edit1 from "../assets/edit2.png"
 
 function Profile() {
+
+    // image input ref
+    const profileInput = useRef(null)
+    const coverInput = useRef(null)
+    const navigate = useLocation()
+
 
     // State vars
     const [file1, setFile1] = useState(false)
@@ -22,17 +29,20 @@ function Profile() {
     const [profile, setProfile] = useState(user)
     const [error, setError] = useState("")
     const [active, setActive] = useState(true)
-    const [userName, setUserName] = useState('AsuraKing913')
+    const [userName, setUserName] = useState(localStorage.getItem('userName'))
     const [followers, setFollowers] = useState(20)
     const [following, setFollowing] = useState(10)
-    const [gender, setGender] = useState("Male")
-    const [birth, setBirthday] = useState("May 1st")
-    const [email, setEmail] = useState("")
+    const [gender, setGender] = useState(localStorage.getItem('gender'))
+    const [birth, setBirthday] = useState(localStorage.getItem(localStorage.getItem('birthday')))
+    const [email, setEmail] = useState(localStorage.getItem('userEmail'))
     const [editProfile, setEditProfile] = useState(false)
-    const [bio, setBio] = useState("")
-    const [location, setLocation] = useState("")
-    const [member, setMember] = useState("")
+    const [bio, setBio] = useState(localStorage.getItem('bio'))
+    const [location, setLocation] = useState(localStorage.getItem('location'))
+    const [member, setMember] = useState(localStorage.getItem('member'))
     const [log, setLog] = useState(false)
+    const [bio1, setBio1] = useState("")
+    const [location1, setLocation1] = useState("")
+    const [birth1, setBirthday1] = useState("")
 
 
     useEffect(() => {
@@ -43,20 +53,10 @@ function Profile() {
       }
   
       setLog(false)
-      window.location.href = "/"
-      console.log(localStorage)
-      setUserName(localStorage.getItem('userName'))
-      setMember(localStorage.getItem('member'))
-      setGender(localStorage.getItem('gender'))
-      setEmail(localStorage.getItem('userEmail'))
-      setLocation(localStorage.getItem('location'))
-      setBirthday(localStorage.getItem('birthday  '))
-      setBio(localStorage.getItem('bio'))
+      navigate("/")
     }, [])
 
-    // image input ref
-    const profileInput = useRef(null)
-    const coverInput = useRef(null)
+    
 
 
     // event fxn
@@ -81,17 +81,25 @@ function Profile() {
     }
 
     const handleEditform = async (event) => {
+      console.log(localStorage)
       event.preventDefault()
       const data = {
-        "bio" : bio, 
-        'location' : location, 
-        "birthday" : birth
+        "bio" : bio1, 
+        'location' : location1, 
+        "birthday" : birth1
       }
+
+      // console.log(data)
+      
+      // return
       const userId = localStorage.getItem('userId')
+        if(bio1.length < 20 || location1.length < 4 ) {
+          console.log('event')
+          return
+      }
       try{
-          if(bio.length < 20 || location.length < 4 ) {
-            return
-        }
+          
+        console.log(data)
         const response = await Axios.post(`/api/profiles_info/${userId}`, data).then(response => {
                   
                   if (response.status = 201) {
@@ -106,7 +114,7 @@ function Profile() {
                   localStorage.setItem('joined', response.data['data']['member'])
                   localStorage.setItem('birthday', response.data['data']['birthday'])
                   localStorage.setItem('location', response.data['data']['location'])
-                  console.log(localStorage)
+                  setEditProfile(!editProfile)
                 }
         })
       }
@@ -205,24 +213,24 @@ function Profile() {
           <div className='px-[1em] relative shadow-md shadow-[black] bg-[#593f3b8a] rounded-[.5em] w-[80%] sm:w-[40%] py-[1em]'>
           <FontAwesomeIcon icon={faTimes} onClick={() => {
             setEditProfile(!editProfile)
-            setLocation("")
-            setBio("")
-            setBirthday("")
+            // setLocation("")
+            // setBio("")
+            // setBirthday("")
           }} className='text-3xl cursor-pointer hover:scale-125 duration-[.5s] text-white absolute right-[.5em] top-[.5em]'/>
             <h2 className='roboto text-white font-bold text-xl text-center'>Edit Your Profile</h2>
               <form action="" onSubmit={handleEditform} className='flex flex-col gap-[.5em]'>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="location">Location</label>
-                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" maxLength={15} onChange={(e) => (setLocation(e.target.value))}/>
+                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" maxLength={15} onChange={(e) => (setLocation1(e.target.value))}/>
                 </p>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="Birthday">Birthday</label>
-                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" maxLength={15} onChange={(e) => (setBirthday(e.target.value))}/>
+                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" maxLength={15} onChange={(e) => (setBirthday1(e.target.value))}/>
                 </p>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="bio">Bio</label>
                   <textarea maxLength={150} name="bio" className='w-full p-[.5em] resize-none outline-none text-white bg-transparent border-[white] border-[.5px] rounded-[5px]' id="bio" cols="30" rows="4" onChange={(e) => {
-                    setBio(e.target.value)
+                    setBio1(e.target.value)
                   }}></textarea>
                 </p>
                 <div className='flex justify-center items-center'>
@@ -275,7 +283,7 @@ function Profile() {
                  <p className='text-[0.9rem] text-[--bg] flex items-center justify-center gap-[.5em]'><span className='text-[--] flex'>Active:</span> {active ? <i className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></i> : <i className='inline'>active 2hrs ago</i> }</p>
                </div>
                <div className='w-[95%]'>
-                  <p className='line text-center roboto font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
+                  <p className='line text-center roboto font-sans italic text-[0.9rem] text-white'>{(bio == "null") ? <i className='opacity-40'>none</i> : bio }</p>
                   {/* <p className='line text-center break-words font-sans italic text-[0.9rem] text-white'>{bio}</p> */}
                </div>
                <div>
@@ -298,7 +306,7 @@ function Profile() {
                <div className='w-full flex flex-col gap-[.5em]'>
                     <p className='flex justify-between items-center'>
                     <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='text-xl mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>{localStorage.getItem('location') ? localStorage.getItem('location') : ""}</span>
+                      <span className='text-[--bg] roboto'>{(location == "null") ? <i className='opacity-40'>none</i> : location }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text-xl mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -306,7 +314,7 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since {localStorage.getItem('joined')}</span>
+                    <span className='text-[--bg] roboto'>Member Since {localStorage.getItem('member')}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
@@ -316,13 +324,10 @@ function Profile() {
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='text-xl mr-[.1em] text-[--bg]'/>Email:</span>
                     <span className='text-[--bg] roboto'>{localStorage.getItem('userEmail')}</span>
                   </p>
-                 { localStorage.getItem('birthday') ?
                  <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='text-xl mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] roboto'>{localStorage.getItem('birthday') ? localStorage.getItem('birthday') : ""}</span>
+                    <span className='text-[--bg] roboto'>{(localStorage.getItem('birthday') == "null") ? <i className='opacity-40'>none</i> : localStorage.getItem('birthday') }</span>
                   </p>
-                  : ""
-                  }
                </div>
       
             </div>
@@ -346,21 +351,11 @@ function Profile() {
                  <h2 className='text-xl capitalize font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <FontAwesomeIcon icon={faCircle} className='text text-green-400 w-[15px] h-[15px]'/>  : <p className='inline'>active 2hrs ago</p> }</p>
                </div>
-               <div>
-                  <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
+               <div className='w-[90%] break-words px-[--pdx]' >
+                  <p className='line text-center font-sans italic text-[0.8rem] text-white'>{(bio == "null") ? <i className='opacity-40'>none</i> : bio }</p>
                </div>
                <div>
-                 <div className='flex justify-between gap-[2em]'>
-                    <Link className='px-[1em] text-[.9rem] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center duration-[0.5s] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
-                      <FontAwesomeIcon icon={faUserPlus}/>
-                      <p className='text-[.9rem]'>Follow</p>
-                    </Link>
-                    <Link className='px-[1em] text-[.9rem] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center duration-[0.5s] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
-                      <FontAwesomeIcon icon={faMessage}/>
-                      <p className='text-[.9rem]'>Message</p>
-                    </Link>
-                 </div>
-                 <div className='flex justify-between mt-[.5em]'>
+                 <div className='flex justify-between gap-[4em] mt-[.5em]'>
                   <p className='text-[--bg] text-[.9rem] font- roboto'>Followers: {followers}</p>
                   <p className='text-[--bg] text-[.9rem] font- roboto'>Following: {following}</p>
                  </div>
@@ -369,7 +364,7 @@ function Profile() {
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>{localStorage.getItem('location') }</span>
+                      <span className='text-[--bg] roboto'>{(location == "null") ? <i className='opacity-40'>none</i> : location }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -377,29 +372,29 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since {localStorage.getItem('joined')}</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{(member == "null") ? <i className='opacity-40'>none</i> : member }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>
-                    <span className='text-[--bg] roboto'>{localStorage.getItem('gender')}</span>
+                    <span className='text-[--bg] roboto'>{(gender == "null") ? <i className='opacity-40'>none</i> : gender }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] roboto'>{localStorage.getItem('birthday')}</span>
+                    <span className='text-[--bg] roboto'>{(localStorage.getItem('birthday') == "null") ? <i className='opacity-40'>none</i> : localStorage.getItem('birthday') }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{localStorage.getItem('userEmail')}</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{(email == "null") ? <i className='opacity-40'>none</i> : email }</span>
                   </p>
                   
                </div>
         </div>
-        <div className='sm:h-[60px] h-[40px] items-center justify-center px-[4em] flex sticky top-[3.5em] z-[10] bg-[--accent1]'>
-          <ul className='flex sm:ml-[8em] sm:justify-normal justify-between sm:gap-[10em] sm:w-auto w-full'>
-              <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
-              <Link   className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /></Link>
-              <Link className='active:bg-[--accent] sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /></Link>
-              <Link onClick={() => setEditProfile(!editProfile)} className='active:bg-[--accent] flex items-center text-xl sm:text-2xl text-white sm:hover:bg-[--accent] sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'>Edit</Link>
+        <div className='sm:h-[80px] h-[60px] items-center justify-end px-[4em] flex sticky top-[3.5em] z-[10] bg-[--accent1]'>
+          <ul className='flex sm:pr-[4em] items-center sm:justify-normal justify-between  sm:gap-[8em] sm:w-auto w-full'>
+              <Link className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Post</p></Link>
+              <Link   className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /><p className='text-[0.7rem] text-[--bg]'>Published</p></Link>
+              <Link className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Likes</p></Link>
+              <Link onClick={() => setEditProfile(!editProfile)} className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={edit1} title='Edit' className='sm:w-[40px] w-[25px] sm:h-[45px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Edit Profile</p></Link>
             </ul>
       
         </div>

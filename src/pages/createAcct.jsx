@@ -2,10 +2,10 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg2.svg"
-import axios from 'axios'
+import Axios from '../components/axios'
 
 function Create() {
 
@@ -15,6 +15,7 @@ function Create() {
     const [confirmPass, setConfirmPass] = useState("")
     const [gender, setGender] = useState("male")
     const [error1, setError] = useState(false)
+    const navigate = useNavigate()
 
     const handleSumbit = async (event) => {
         event.preventDefault()
@@ -51,10 +52,10 @@ function Create() {
         }
 
         try {
-            const response = await axios.post("api/auth/register", data).then(response => {
+            const response = await Axios.post("api/auth/register", data).then(response => {
                 console.log(response.data)
                 if (response.status == 201) {
-                    window.location.href = "/login"
+                    navigate("/login") 
                 }
             }) 
         }

@@ -12,7 +12,6 @@ function Nav({profile, log}) {
   const [nav, setNav] = useState(false)
   const [menu, setMenu] = useState(true)
   // const [log, setLog] = useState(false)
-  const location = useLocation()
   const navigate = useNavigate()
 
   const handleNav = () => {
@@ -133,7 +132,7 @@ function Nav({profile, log}) {
           <Link  className='relative text-[--accent]'>
             <FontAwesomeIcon onClick={() => {
               localStorage.clear()
-              window.location.href = "/"
+              navigate("/")
               }} icon={faPowerOff} className='text-4xl'/>
           </Link>
           <Link to = {"/feeds"}  className='relative'>
