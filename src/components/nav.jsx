@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faAlignRight, faBars, faBell, faMessage, faPowerOff, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,7 @@ function Nav({profile, log}) {
   const [menu, setMenu] = useState(true)
   // const [log, setLog] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   const handleNav = () => {
     document.body.classList.add('no-scroll')

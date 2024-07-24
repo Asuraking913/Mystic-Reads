@@ -1,7 +1,7 @@
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"
 import axios from 'axios'
@@ -11,6 +11,7 @@ function Login() {
     const [userData, setUserData] = useState("")
     const [userPass, setUserpass] = useState("")
     const [error, setError] = useState("")
+    const navigate = useNavigate()
 
 
     const handleSubmit = async (event) => {
@@ -50,8 +51,8 @@ function Login() {
                 localStorage.setItem('location', response.data['data']['location'])
                 localStorage.setItem('birthday', response.data['data']['birthday'])
                 console.log(localStorage)
-                window.location.href = "/"
                 console.log(response.data)
+                navigate("/")
             }
         })
     }

@@ -10,6 +10,7 @@ import Feeds from './pages/newsFeed'
 import Messenger from './pages/messenger'
 import Publish from './pages/publish'
 import Library from './pages/library'
+import PrivateRoutes from './components/privateRoute'
 
 function App() {
 
@@ -24,13 +25,15 @@ function App() {
             <Route path='/' element={<Land />}/>
             <Route path='/login' element={<Login />}/>
             <Route path='/signup' element={<Create />}/>
-            <Route path='/profile' element={<Profile  />}/>
-            <Route path='/read' element={<ReadPage  />}/>
-            <Route path='/foreignView' element={<ForeignView  />}/>
-            <Route path='/feeds' element={<Feeds  />}/>
-            <Route path='/sendSms' element={<Messenger  />}/>
-            <Route path='/publish' element={<Publish />}/>
-            <Route path='/library' element={<Library />}/>
+            <Route element={<PrivateRoutes />}>
+              <Route path='/profile' element={<Profile  />}/>
+              <Route path='/read' element={<ReadPage  />}/>
+              <Route path='/foreignView' element={<ForeignView  />}/>
+              <Route path='/feeds' element={<Feeds  />}/>
+              <Route path='/sendSms' element={<Messenger  />}/>
+              <Route path='/publish' element={<Publish />}/>
+              <Route path='/library' element={<Library />}/>
+            </Route>
           </Routes>
         </Router>
     </div>
