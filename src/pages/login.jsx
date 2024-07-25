@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"
 import axios from 'axios'
+import Axios from '../components/axios'
 
 function Login() {
 
@@ -23,7 +24,7 @@ function Login() {
 
         if (data['userName'].length <= 5) {
             setError("Username must be more than 5 characters")
-            setInterval(() => (
+            setTimeout(() => (
                 setError("")
             ), [4000])
             return
@@ -31,15 +32,15 @@ function Login() {
 
         if (data['userPass'].length <= 5) {
             setError("Password must be more than 5 characters")
-            setInterval(() => (
+            setTimeout(() => (
                 setError("")
             ), [4000])
             return
         }
 
         try {
-        const response = await Axios.post("/api/auth/login", data).then(response => {
-            if (response.status == 200) {
+            const response = await axios.post("/api/auth/login", data) 
+            if (response.status === 200) {
                 console.log(response.data['data'])
                 localStorage.setItem('userName', response.data['data']['userName'] )
                 localStorage.setItem('userEmail', response.data['data']['userEmail'], )
@@ -54,15 +55,19 @@ function Login() {
                 console.log(response.data)
                 navigate("/")
             }
-        })
-    }
+        }
 
-    catch(error) {
-        if (error.response.status == 400)
-        setError(error.response.data['message'])
-    }
-
-    
+        catch(error) {
+            if (error.response && error.response.status === 400) {
+                setError(error.response.data['message'])
+                setTimeout(() => {
+                    setError("")
+                }, 4000)
+            }
+            else {
+                console.log(error)
+            }
+        }
 }
 
   return (

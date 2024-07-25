@@ -67,6 +67,10 @@ function Create() {
                 setError("")
             }, 4000)
         }
+
+        else {
+            console.log(error)
+        }
     }
 
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Nav from '../components/nav'
 import edit from '../assets/edit.svg'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import likes from "../assets/likes.svg"
 import posts from "../assets/post1.svg"
 import book from "../assets/book.svg"
@@ -20,7 +20,7 @@ function Profile() {
     // image input ref
     const profileInput = useRef(null)
     const coverInput = useRef(null)
-    const navigate = useLocation()
+    const navigate = useNavigate()
 
 
     // State vars
@@ -89,37 +89,41 @@ function Profile() {
         "birthday" : birth1
       }
 
-      // console.log(data)
+      console.log(data)
       
       // return
       const userId = localStorage.getItem('userId')
         if(bio1.length < 20 || location1.length < 4 ) {
-          console.log('event')
           return
       }
       try{
-          
-        console.log(data)
-        const response = await Axios.post(`/api/profiles_info/${userId}`, data).then(response => {
+        const response = await axios.post(`/api/profiles_info/${userId}`, data, {
+          headers : {
+            Authorization : `Bearer ${localStorage.getItem('token')}`
+          }
+        }).then(response => {
                   
-                  if (response.status = 201) {
-                  console.log(response.data)
-                  localStorage.clear()
-                  localStorage.setItem('userName', response.data['data']['userName'] )
-                  localStorage.setItem('userEmail', response.data['data']['userEmail'], )
-                  localStorage.setItem( 'member', response.data['data']['joined'])
-                  localStorage.setItem('userId', response.data['data']['userId'])
-                  localStorage.setItem('gender', response.data['data']['gender'])
-                  localStorage.setItem('bio', response.data['data']['bio'])
-                  localStorage.setItem('joined', response.data['data']['member'])
-                  localStorage.setItem('birthday', response.data['data']['birthday'])
-                  localStorage.setItem('location', response.data['data']['location'])
-                  setEditProfile(!editProfile)
-                }
+        if (response.status = 201) {
+        console.log(response.data)
+        const items = ['userName', 'userEmail', 'member', 'userId', 'gender', 'bio', 'joined', 'birthday', 'location']
+        items.forEach(item => localStorage.removeItem(item))
+        localStorage.setItem('userName', response.data['data']['userName'] )
+        localStorage.setItem('userEmail', response.data['data']['userEmail'], )
+        localStorage.setItem( 'member', response.data['data']['joined'])
+        localStorage.setItem('userId', response.data['data']['userId'])
+        localStorage.setItem('gender', response.data['data']['gender'])
+        localStorage.setItem('bio', response.data['data']['bio'])
+        localStorage.setItem('joined', response.data['data']['member'])
+        localStorage.setItem('birthday', response.data['data']['birthday'])
+        localStorage.setItem('location', response.data['data']['location'])
+        setLocation(localStorage.getItem('location'))
+        setBio(localStorage.getItem('bio'))
+        setEditProfile(!editProfile)
+        }
         })
       }
       catch (error) {
-        console.log(error)
+        console.log(error.response.data)
       }
     }
 
