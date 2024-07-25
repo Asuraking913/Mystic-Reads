@@ -12,7 +12,6 @@ import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup,
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 import axios from 'axios'
-import Axios from '../components/axios'
 import edit1 from "../assets/edit2.png"
 
 function Profile() {

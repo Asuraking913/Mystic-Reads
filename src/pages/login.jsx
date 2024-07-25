@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"
 import axios from 'axios'
-import Axios from '../components/axios'
 
 function Login() {
 
