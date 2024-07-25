@@ -6,6 +6,7 @@ import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"
 import axios from 'axios'
 import Axios from '../components/Axios'
+import { useEffect } from 'react'
 
 function Login() {
 
@@ -13,6 +14,12 @@ function Login() {
     const [userPass, setUserpass] = useState("")
     const [error, setError] = useState("")
     const navigate = useNavigate()
+
+    useEffect(() => {
+        setInterval(() => {
+            setError("")
+        }, 4000)
+    }, [])
 
 
     const handleSubmit = async (event) => {
@@ -24,17 +31,11 @@ function Login() {
 
         if (data['userName'].length <= 5) {
             setError("Username must be more than 5 characters")
-            setTimeout(() => (
-                setError("")
-            ), [4000])
             return
         }
 
         if (data['userPass'].length <= 5) {
             setError("Password must be more than 5 characters")
-            setTimeout(() => (
-                setError("")
-            ), [4000])
             return
         }
 

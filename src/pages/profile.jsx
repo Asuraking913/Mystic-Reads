@@ -56,8 +56,6 @@ function Profile() {
       navigate("/")
     })
 
-    
-
 
     // event fxn
     const handleProfileBtn = () => {
@@ -91,6 +89,7 @@ function Profile() {
       // return
       const userId = localStorage.getItem('userId')
         if(bio1.length < 20 || location1.length < 4 ) {
+          // setError("")
           return
       }
       try{

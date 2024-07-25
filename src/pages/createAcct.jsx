@@ -13,9 +13,16 @@ function Create() {
     const [userEmail, setUserEmail] = useState("")
     const [pass, setPass] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
-    const [gender, setGender] = useState("male")
+    const [gender, setGender] = useState("")
     const [error1, setError] = useState(false)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        setInterval(() => {
+            setError("")
+        }, 4000)
+    }, [])
+   
 
     const handleSumbit = async (event) => {
         event.preventDefault()
@@ -27,27 +34,25 @@ function Create() {
             confirmPass: confirmPass
         }
         
+        
         if (data['userName'].length <= 5) {
             setError("Username must be more than 5 characters")
-            setInterval(() => {
-                setError("")
-            }, 4000)
+            return
+        }
+
+        if (!data['gender']) {
+            setError("Please select an option for gender")
             return
         }
 
         if (data['userPass'].length <= 5) {
             setError("Password must be more than 5 characters")
-            setInterval(() => {
-                setError("")
-            }, 4000)
             return
         }
+        
 
         if (data['userPass'] !== data['confirmPass']) {
             setError("Password fields are not identical")
-            setInterval(() => {
-                setError("")
-            }, 4000)
             return
         }
 
@@ -63,9 +68,6 @@ function Create() {
     catch(error) {
         if (error.response.status == 400) {
             setError(error.response.data['message'])
-            setInterval(() => {
-                setError("")
-            }, 4000)
         }
 
         else {
@@ -112,11 +114,11 @@ function Create() {
             </p>
             <div className='flex justify-between'>
                 <p className='flex-items-center justify-center '>
-                    <input type="checkbox" name="gender" id="male" />
+                    <input type="radio" onChange={(e) => {setGender(e.target.value); }} value={"male"} checked ={gender === 'male'} name="gender" id="male" />
                     <label htmlFor="male" className='pl-[1em]'>Male</label>
                 </p>
                 <p className='flex-items-center justify-center '>
-                    <input type="checkbox" name="gender" id="female" />
+                    <input type="radio" onChange={(e) => {setGender(e.target.value); }} value={"female"} checked ={gender === 'female'} name="gender" id="female" />
                     <label htmlFor="female" className='pl-[1em]'>Female</label>
                 </p>
             </div>
