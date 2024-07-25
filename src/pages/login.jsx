@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"
 import axios from 'axios'
+import Axios from '../components/Axios'
 
 function Login() {
 
@@ -38,14 +39,15 @@ function Login() {
         }
 
         try {
-            const response = await axios.post("/api/auth/login", data) 
+            const response = await Axios.post("/api/auth/login", data) 
             if (response.status === 200) {
                 localStorage.setItem('userName', response.data['data']['userName'] )
                 localStorage.setItem('userEmail', response.data['data']['userEmail'], )
                 localStorage.setItem( 'member', response.data['data']['joined'])
                 localStorage.setItem('userId', response.data['data']['userId'])
                 localStorage.setItem('gender', response.data['data']['gender'])
-                localStorage.setItem('token', response.data['data']['access_token'])
+                localStorage.setItem('access_token', response.data['data']['access_token'])
+                localStorage.setItem('refresh_token', response.data['data']['refresh_token'])
                 localStorage.setItem('bio', response.data['data']['bio'])
                 localStorage.setItem('location', response.data['data']['location'])
                 localStorage.setItem('birthday', response.data['data']['birthday'])

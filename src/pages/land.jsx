@@ -10,7 +10,7 @@ function Land() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('access_token')) {
       setLog(true)
       return
     }

@@ -13,6 +13,7 @@ import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 import axios from 'axios'
 import edit1 from "../assets/edit2.png"
+import Axios from '../components/Axios'
 
 function Profile() {
 
@@ -46,7 +47,7 @@ function Profile() {
 
     useEffect(() => {
       // console.log(localStorage)
-      if (localStorage.getItem('token')) {
+      if (localStorage.getItem('access_token')) {
         setLog(true)
         return
       }
@@ -93,11 +94,7 @@ function Profile() {
           return
       }
       try{
-        const response = await axios.post(`/api/profiles_info`, data, {
-          headers : {
-            Authorization : `Bearer ${localStorage.getItem('token')}`
-          }
-        }).then(response => {
+        const response = await Axios.post(`/api/profiles_info`, data).then(response => {
                   
         if (response.status = 201) {
         const items = ['userName', 'userEmail', 'member', 'userId', 'gender', 'bio', 'joined', 'birthday', 'location']
