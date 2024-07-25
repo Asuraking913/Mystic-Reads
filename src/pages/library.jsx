@@ -1,13 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Nav from '../components/nav'
 import LibComp from '../components/libraryComp'
 import Display from '../components/display'
 import Foot from '../components/footer'
+import { useEffect } from 'react'
 
 function Library() {
+
+    const [log, setLog] = useState(false)
+
+    useEffect(() => {
+        // console.log(localStorage)
+        if (localStorage.getItem('access_token')) {
+          setLog(true)
+          return
+        }
+    
+        setLog(false)
+        navigate("/")
+      })
+
   return (
     <>
-        <Nav />
+        <Nav log={log}/>
         <Display />
         <section className='h-auto px-[--pdx] '>
             <div className='w-full py-[2em]'>

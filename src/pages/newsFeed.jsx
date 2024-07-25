@@ -14,13 +14,14 @@ import PostForm from '../components/postForm'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 
+
 function Feeds() {
 
   const [log, setLog] = useState(false)
 
 
     useEffect(() => {
-        if (localStorage.getItem('token')) {
+        if (localStorage.getItem('access_token')) {
           setLog(true)
           return
         }

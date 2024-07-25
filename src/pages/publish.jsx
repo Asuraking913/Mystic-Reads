@@ -2,14 +2,27 @@ import React, { useState } from 'react'
 import Nav from '../components/nav'
 import Display from '../components/display'
 import Foot from '../components/footer'
+import { useEffect } from 'react'
 
 function Publish() {
 
   const [chapter, setChapter] = useState('Prologue')
+  const [log, setLog] = useState(false)
+
+    useEffect(() => {
+        // console.log(localStorage)
+        if (localStorage.getItem('access_token')) {
+          setLog(true)
+          return
+        }
+    
+        setLog(false)
+        navigate("/")
+      })
 
   return (
     <>
-        <Nav />
+        <Nav log={log}/>
         <Display />
         <section className='min-h-screen sm:py-[--pdy] py-[.5em] px-[1em] sm:px-[--pdx] flex flex-col items-center'>
             <div className='w-full px-[.2em] flex flex-col gap-[1em]'>

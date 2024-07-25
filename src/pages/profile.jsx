@@ -112,7 +112,7 @@ function Profile() {
         items.forEach(item => localStorage.removeItem(item))
         localStorage.setItem('userName', response.data['data']['userName'] )
         localStorage.setItem('userEmail', response.data['data']['userEmail'], )
-        localStorage.setItem( 'member', response.data['data']['joined'])
+        // localStorage.setItem( 'member', response.data['data']['joined'])
         localStorage.setItem('userId', response.data['data']['userId'])
         localStorage.setItem('gender', response.data['data']['gender'])
         localStorage.setItem('bio', response.data['data']['bio'])
@@ -324,7 +324,7 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since {(member == "null") ? <i className='opacity-40'>none</i> : member }</span>
+                    <span className='text-[--bg] roboto'>Member Since {(localStorage.getItem('joined') == "null") ? <i className='opacity-40'>none</i> : localStorage.getItem('joined') }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
@@ -382,7 +382,7 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since {(member == "null") ? <i className='opacity-40'>none</i> : member }</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since {(localStorage.getItem('joined') == "null") ? <i className='opacity-40'>none</i> : localStorage.getItem('joined') }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>
