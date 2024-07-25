@@ -53,7 +53,7 @@ function Profile() {
   
       setLog(false)
       navigate("/")
-    }, [])
+    })
 
     
 
@@ -80,15 +80,12 @@ function Profile() {
     }
 
     const handleEditform = async (event) => {
-      console.log(localStorage)
       event.preventDefault()
       const data = {
         "bio" : bio1, 
         'location' : location1, 
         "birthday" : birth1
       }
-
-      console.log(data)
       
       // return
       const userId = localStorage.getItem('userId')
@@ -96,14 +93,13 @@ function Profile() {
           return
       }
       try{
-        const response = await axios.post(`/api/profiles_info/${userId}`, data, {
+        const response = await axios.post(`/api/profiles_info`, data, {
           headers : {
             Authorization : `Bearer ${localStorage.getItem('token')}`
           }
         }).then(response => {
                   
         if (response.status = 201) {
-        console.log(response.data)
         const items = ['userName', 'userEmail', 'member', 'userId', 'gender', 'bio', 'joined', 'birthday', 'location']
         items.forEach(item => localStorage.removeItem(item))
         localStorage.setItem('userName', response.data['data']['userName'] )
@@ -122,7 +118,8 @@ function Profile() {
         })
       }
       catch (error) {
-        console.log(error.response.data)
+        setError(error.response.data)
+        setTimeout(() => setError(""), 4000)
       }
     }
 

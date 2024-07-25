@@ -84,19 +84,27 @@ function Nav({profile, log}) {
           {
             menu ?
             <ul className='flex text-[1.1rem] gap-[2em]'>
-            <Link to={"/"} onClick={() => (window.scrollTo({top : 0, behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse'>
-              <li>Home</li>
-            </Link>
+            <li>
+              <Link to={"/"} onClick={() => (window.scrollTo({top : 0, behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse'>
+                <p>Home</p>
+              </Link>
+            </li>
             {/* <Link to={"/?scroll=trend"} onClick={() => (document.getElementById('trend').scrollIntoView({behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse'> */}
-            <Link onClick={handleTrend} className='hover:underline decoration-white hover:animate-pulse'>
-              <li>Trending</li>
-            </Link>
-            <Link onClick={handleRecommend} className='hover:underline decoration-white hover:animate-pulse'>
-              <li>Recommended</li>
-            </Link>
-            <Link onClick={handleContact} className='hover:underline decoration-white hover:animate-pulse duration[0.5s]'>
-              <li>Contact</li>
-            </Link>
+            <li>
+              <Link onClick={handleTrend} className='hover:underline decoration-white hover:animate-pulse'>
+                <p>Trending</p>
+              </Link>
+            </li>
+            <li>
+              <Link onClick={handleRecommend} className='hover:underline decoration-white hover:animate-pulse'>
+               <p>Recommended</p>
+              </Link>
+            </li>
+            <li>
+              <Link onClick={handleContact} className='hover:underline decoration-white hover:animate-pulse duration[0.5s]'>
+                <p>Contact</p>
+              </Link>
+            </li>
           </ul>
           :
 
@@ -129,11 +137,12 @@ function Nav({profile, log}) {
         :
 
         <ul className='gap-[1em] duration-[0.5s] text-[1.1rem] items-center roboto sm:flex hidden'>
-          <Link  className='relative text-[--accent]'>
-            <FontAwesomeIcon onClick={() => {
+          <Link onClick={() => {
               localStorage.clear()
               navigate("/")
-              }} icon={faPowerOff} className='text-4xl'/>
+              window.location.href = "/"
+              }}   className='relative text-[--accent]'>
+            <FontAwesomeIcon icon={faPowerOff} className='text-4xl'/>
           </Link>
           <Link to = {"/feeds"}  className='relative'>
             <div className='h-[13px] w-[13px] bg-red-500 absolute right-0 text-white text-[0.7rem] rounded-[50%] flex items-center justify-center'>1</div>

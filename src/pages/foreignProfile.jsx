@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from '../components/nav'
 import { Link } from 'react-router-dom'
 import likes from "../assets/likes.svg"
@@ -11,22 +11,51 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup, faPersonHalfDress, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
+import Axios from '../components/Axios'
 
-function foreignView() {
+function ForeignView() {
+
+  const [log, setLog] = useState(false)
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setLog(true)
+      return
+    }
+
+    setLog(false)
+  })
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    const response = Axios.get(`/api/profiles_info/${userId}`).then(response => {
+      setBio(response.data['data']['bio'])
+      setLocation1(response.data['data']['location'])
+      setBirthday(response.data['data']['birthday'])
+      setGender(response.data['data']['gender'])
+      setUserName(response.data['data']["userName"])
+      setJoined(response.data['data']['member'])
+      setEmail(response.data['data']['userEmail'])
+      // console.log(response.data)
+    })
+   },  [])
 
 
     // State vars
     const [file1, setFile1] = useState(false)
-    const [userName, setUserName] = useState('AsuraKing913')
+    const [userName, setUserName] = useState('')
     const [cover, setCover] = useState(null);
     const [profile, setProfile] = useState(user)
     const [error, setError] = useState("")
     const [active, setActive] = useState(true)
     const [followers, setFollowers] = useState(20)
     const [following, setFollowing] = useState(10)
-    const [gender, setGender] = useState("Male")
-    const [birth, setBirthday] = useState("May 1st")
-    const [email, setEmail] = useState("israelshedrack913@gmail.com")
+    const [gender, setGender] = useState("")
+    const [birth, setBirthday] = useState("")
+    const [email, setEmail] = useState("")
+    const [location1, setLocation1] = useState("")
+    const [bio, setBio] = useState("")
+    const [joined, setJoined] = useState("")
 
     // Postlist data
     const postList = [
@@ -66,7 +95,7 @@ function foreignView() {
 
   return (
     <>
-        <Nav profile={profile}/>
+        <Nav profile={profile} log={log}/>
 
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
         <div className='sm:h-[50vh] h-[20vh] relative w-full linear'>
@@ -79,8 +108,8 @@ function foreignView() {
                  <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg] flex justify-center items-center gap-[.5em]'><span className='text-[--]'>Active:</span> {active ? <i className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></i>: <i className='inline'>active 2hrs ago</i> }</p>
                </div>
-               <div>
-                  <p className='line text-center font-sans italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
+               <div className='w-[90%] break-words px-[--pdx]'>
+                  <p className='line text-center font-sans italic sm:text-[0.9rem] text-white'>{(bio == "null") ? <i className='opacity-40'>none</i> : bio }</p>
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
@@ -102,7 +131,7 @@ function foreignView() {
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='text-xl mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>Nigeria</span>
+                      <span className='text-[--bg] roboto'>{(location1 == "null") ? <i className='opacity-40'>none</i> : location1 }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text-xl mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -110,7 +139,7 @@ function foreignView() {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since Dec 05, 2022</span>
+                    <span className='text-[--bg] roboto'>Member Since {joined}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
@@ -118,11 +147,11 @@ function foreignView() {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='text-xl mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] roboto'>{email}</span>
+                    <span className='text-[--bg] roboto'>{(email == "null") ? <i className='opacity-40'>none</i> : email }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='text-xl mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{birth}</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{(birth == "null") ? <i className='opacity-40'>none</i> : birth }</span>
                   </p>
                   
                </div>
@@ -138,8 +167,8 @@ function foreignView() {
                  <h2 className='text-xl font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <FontAwesomeIcon icon={faCircle} className='text text-green-500 mt-[.5em] w-[15px] h-[15px]'/> : <i className='inline'>active 2hrs ago</i> }</p>
                </div>
-               <div>
-                  <p className='line text-center roboto italic text-[0.9rem] text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perferendis minima velit aut, eveniet perspiciatis? Lorem ipsum dolor sit amet.</p>
+               <div className='w-[85%] break-words px-[--pdx] '>
+                  <p className='line text-center font-sans italic text-[0.8rem] text-white'>{(bio == "null") ? <i className='opacity-40'>none</i> : bio }</p>
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
@@ -161,7 +190,7 @@ function foreignView() {
                <div className='w-full flex flex-col gap-[.5em]'>
                <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>Nigeria</span>
+                      <span className='text-[--bg] roboto'>{(location1 == "null") ? <i className='opacity-40'>none</i> : location1 }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -169,19 +198,19 @@ function foreignView() {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since Dec 05, 2022</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>Member {(birth == "null") ? <i className='opacity-40'>none</i> : birth }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>
-                    <span className='text-[--bg] roboto'>{gender}</span>
+                    <span className='text-[--bg] roboto'>{(gender == "null") ? <i className='opacity-40'>none</i> : gender }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] roboto'>{birth}</span>
+                    <span className='text-[--bg] roboto'>{(birth == "null") ? <i className='opacity-40'>none</i> : birth }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{email}</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{(email == "null") ? <i className='opacity-40'>none</i> : email }</span>
                   </p>
                </div>
       
@@ -217,4 +246,4 @@ function foreignView() {
   )
 }
 
-export default foreignView
+export default ForeignView
