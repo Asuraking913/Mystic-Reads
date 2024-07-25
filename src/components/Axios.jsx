@@ -20,6 +20,8 @@ const refresh_token = async () => {
         localStorage.setItem('access_token', access_token)
         localStorage.setItem('refresh_token', refresh_token)
 
+        return access_token
+
     }
 
     catch(error) {

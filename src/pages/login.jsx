@@ -44,7 +44,7 @@ function Login() {
             if (response.status === 200) {
                 localStorage.setItem('userName', response.data['data']['userName'] )
                 localStorage.setItem('userEmail', response.data['data']['userEmail'], )
-                localStorage.setItem( 'member', response.data['data']['joined'])
+                localStorage.setItem('joined', response.data['data']['joined'])
                 localStorage.setItem('userId', response.data['data']['userId'])
                 localStorage.setItem('gender', response.data['data']['gender'])
                 localStorage.setItem('access_token', response.data['data']['access_token'])

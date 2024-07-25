@@ -33,12 +33,12 @@ function Profile() {
     const [followers, setFollowers] = useState(20)
     const [following, setFollowing] = useState(10)
     const [gender, setGender] = useState(localStorage.getItem('gender'))
-    const [birth, setBirthday] = useState(localStorage.getItem(localStorage.getItem('birthday')))
+    const [birth, setBirthday] = useState(localStorage.getItem('birthday'))
     const [email, setEmail] = useState(localStorage.getItem('userEmail'))
     const [editProfile, setEditProfile] = useState(false)
     const [bio, setBio] = useState(localStorage.getItem('bio'))
     const [location, setLocation] = useState(localStorage.getItem('location'))
-    const [member, setMember] = useState(localStorage.getItem('member'))
+    const [member, setMember] = useState(localStorage.getItem('joined'))
     const [log, setLog] = useState(false)
     const [bio1, setBio1] = useState("")
     const [location1, setLocation1] = useState("")
@@ -78,12 +78,24 @@ function Profile() {
       setCover(null)
     }
 
+    const handleDate = (date) => {
+      const month = ['january', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
+      const split = date.split('-')
+      const userMonth = month[split[1] -1]
+      const userDay = split[2]
+      const userYear = split[0]
+      const newBirth = `${userMonth} ${userDay}`
+
+      return newBirth
+    }
+
     const handleEditform = async (event) => {
       event.preventDefault()
+      const newBirth = handleDate(birth1)
       const data = {
         "bio" : bio1, 
         'location' : location1, 
-        "birthday" : birth1
+        "birthday" : newBirth
       }
       
       // return
@@ -104,11 +116,12 @@ function Profile() {
         localStorage.setItem('userId', response.data['data']['userId'])
         localStorage.setItem('gender', response.data['data']['gender'])
         localStorage.setItem('bio', response.data['data']['bio'])
-        localStorage.setItem('joined', response.data['data']['member'])
+        localStorage.setItem('joined', response.data['data']['joined'])
         localStorage.setItem('birthday', response.data['data']['birthday'])
         localStorage.setItem('location', response.data['data']['location'])
         setLocation(localStorage.getItem('location'))
         setBio(localStorage.getItem('bio'))
+        document.body.classList.remove('no-scroll')
         setEditProfile(!editProfile)
         }
         })
@@ -209,6 +222,7 @@ function Profile() {
           <div className='px-[1em] relative shadow-md shadow-[black] bg-[#593f3b8a] rounded-[.5em] w-[80%] sm:w-[40%] py-[1em]'>
           <FontAwesomeIcon icon={faTimes} onClick={() => {
             setEditProfile(!editProfile)
+            document.body.classList.remove('no-scroll')
             // setLocation("")
             // setBio("")
             // setBirthday("")
@@ -221,7 +235,7 @@ function Profile() {
                 </p>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="Birthday">Birthday</label>
-                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="text" maxLength={15} onChange={(e) => (setBirthday1(e.target.value))}/>
+                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="date" maxLength={15} onChange={(e) => (setBirthday1(e.target.value))}/>
                 </p>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="bio">Bio</label>
@@ -310,7 +324,7 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since {localStorage.getItem('member')}</span>
+                    <span className='text-[--bg] roboto'>Member Since {(member == "null") ? <i className='opacity-40'>none</i> : member }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
@@ -368,7 +382,7 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{(member == "null") ? <i className='opacity-40'>none</i> : member }</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since {(member == "null") ? <i className='opacity-40'>none</i> : member }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>
@@ -390,7 +404,10 @@ function Profile() {
               <Link className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Post</p></Link>
               <Link   className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /><p className='text-[0.7rem] text-[--bg]'>Published</p></Link>
               <Link className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Likes</p></Link>
-              <Link onClick={() => setEditProfile(!editProfile)} className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={edit1} title='Edit' className='sm:w-[40px] w-[25px] sm:h-[45px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Edit Profile</p></Link>
+              <Link onClick={() => {
+                setEditProfile(!editProfile);
+                document.body.classList.add('no-scroll')
+              }} className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={edit1} title='Edit' className='sm:w-[40px] w-[25px] sm:h-[45px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Edit Profile</p></Link>
             </ul>
       
         </div>
