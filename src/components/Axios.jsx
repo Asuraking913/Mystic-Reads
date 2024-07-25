@@ -51,8 +51,10 @@ Axios.interceptors.response.use(response => {
         originalRequest._retry = true; 
         try {
             const newAccesstoken = await refresh_token();
-            console.log(newAccesstoken)
+
             originalRequest.headers.Authorization = `Bearer ${newAccesstoken}`
+
+
             return Axios(originalRequest)
         }
 

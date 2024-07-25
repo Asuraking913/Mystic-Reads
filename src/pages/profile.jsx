@@ -279,8 +279,8 @@ function Profile() {
                  <h2 className='sm:text-2xl capitalize font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg] flex items-center justify-center gap-[.5em]'><span className='text-[--] flex'>Active:</span> {active ? <i className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></i> : <i className='inline'>active 2hrs ago</i> }</p>
                </div>
-               <div className='w-[95%]'>
-                  <p className='line text-center roboto font-sans italic text-[0.9rem] text-white'>{(bio == "null") ? <i className='opacity-40'>none</i> : bio }</p>
+               <div className='w-[90%] break-words px-[1.5em]'>
+                  <p className='line w- text-center roboto font-sans italic text-[0.9rem] text-white'>{(bio == "null") ? <i className='opacity-40'>none</i> : bio }</p>
                   {/* <p className='line text-center break-words font-sans italic text-[0.9rem] text-white'>{bio}</p> */}
                </div>
                <div>

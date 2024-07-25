@@ -140,7 +140,6 @@ function Nav({profile, log}) {
           <Link onClick={() => {
               localStorage.clear()
               navigate("/")
-              window.location.href = "/"
               }}   className='relative text-[--accent]'>
             <FontAwesomeIcon icon={faPowerOff} className='text-4xl'/>
           </Link>
@@ -219,7 +218,7 @@ function Nav({profile, log}) {
              <Link  className='relative text-[--accent]'>
             <FontAwesomeIcon onClick={() => {
               localStorage.clear()
-              window.location.href = "/"
+              navigate("/")
               }} icon={faPowerOff} className='text-4xl'/>
           </Link>
             <Link to = {"/feeds"}  className='relative text-[--accent]'>
