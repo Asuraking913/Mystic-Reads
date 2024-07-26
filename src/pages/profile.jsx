@@ -127,9 +127,19 @@ function Profile() {
         })
       }
       catch (error) {
-        setError(error.response.data)
-        setTimeout(() => setError(""), 4000)
+        localStorage.clear()
+        if (error.response.data) {
+          setError(error.response.data)
+          setTimeout(() => setError(""), 4000)
+        }
+
+        if (error.response.status === 401) {
+          navigate("/")
+        }
+        
+        setEditProfile(!editProfile)
       }
+      
     }
 
     const handleCover = (event) => {

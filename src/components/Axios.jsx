@@ -1,4 +1,5 @@
 import axios from "axios";
+import {  useNavigate } from "react-router-dom";
 
 const Axios = axios.create({
     headers : {
@@ -8,6 +9,7 @@ const Axios = axios.create({
 })
 
 const refresh_token = async () => {
+    
     try {
         const response = await axios.get("/api/refresh_token", {
             headers : {
@@ -25,7 +27,7 @@ const refresh_token = async () => {
     }
 
     catch(error) {
-        console.log("Unable to get refresh tokken", error)
+        console.log("Unable to get refresh tokken")
         return
     }
 }
@@ -49,13 +51,13 @@ Axios.interceptors.response.use(response => {
 },  async error => {
     const originalRequest = error.config;
 
+
     if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true; 
         try {
             const newAccesstoken = await refresh_token();
 
             originalRequest.headers.Authorization = `Bearer ${newAccesstoken}`
-
 
             return Axios(originalRequest)
         }
@@ -64,6 +66,7 @@ Axios.interceptors.response.use(response => {
             return Promise.reject(error)
         }
     }
+
     return Promise.reject(error)
 
 }

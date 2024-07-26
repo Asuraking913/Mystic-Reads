@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../components/nav'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import likes from "../assets/likes.svg"
 import posts from "../assets/post1.svg"
 import book from "../assets/book.svg"
@@ -16,6 +16,7 @@ import Axios from '../components/Axios'
 function ForeignView() {
 
   const [log, setLog] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
@@ -37,6 +38,11 @@ function ForeignView() {
       setJoined(response.data['data']['member'])
       setEmail(response.data['data']['userEmail'])
       // console.log(response.data)
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        localStorage.clear()
+        navigate("/")
+      }
     })
    },  [])
 
