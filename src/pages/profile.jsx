@@ -43,6 +43,7 @@ function Profile() {
     const [bio1, setBio1] = useState("")
     const [location1, setLocation1] = useState("")
     const [birth1, setBirthday1] = useState("")
+    const [error1, setError1] = useState("")
 
 
     useEffect(() => {
@@ -98,12 +99,23 @@ function Profile() {
         "birthday" : newBirth
       }
       
-      // return
-      const userId = localStorage.getItem('userId')
-        if(bio1.length < 20 || location1.length < 4 ) {
-          // setError("")
-          return
+      if(location1.length < 4 ) {
+        setError1("length charactermust be greater than 4")
+        setTimeout(() => {
+          setError1("")
+        }, 4000)
+        return
       }
+
+      if(bio1.length < 20) {
+        setError1("Bio length must me greater than 20")
+        setTimeout(() => {
+          setError1("")
+        }, 4000)
+        return
+    }
+
+
       try{
         const response = await Axios.post(`/api/profiles_info`, data).then(response => {
                   
@@ -228,14 +240,14 @@ function Profile() {
     <>
        { editProfile ?
         <div className='h-screen top-0 flex items-center justify-center bg-[#000000ea] fixed w-full z-[200000000000]'>
+
           
           <div className='px-[1em] relative shadow-md shadow-[black] bg-[#593f3b8a] rounded-[.5em] w-[80%] sm:w-[40%] py-[1em]'>
+        {error1 && <p className='sm:text-xl text-[0.8rem] sm:left-[4em] right-[2em]  top-[-3em] rounded-[5px] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em]'>{error1}</p>}
+
           <FontAwesomeIcon icon={faTimes} onClick={() => {
             setEditProfile(!editProfile)
             document.body.classList.remove('no-scroll')
-            // setLocation("")
-            // setBio("")
-            // setBirthday("")
           }} className='text-3xl cursor-pointer hover:scale-125 duration-[.5s] text-white absolute right-[.5em] top-[.5em]'/>
             <h2 className='roboto text-white font-bold text-xl text-center'>Edit Your Profile</h2>
               <form action="" onSubmit={handleEditform} className='flex flex-col gap-[.5em]'>
@@ -271,7 +283,6 @@ function Profile() {
             cover === null ? "" :
             <Link onClick={handleCoverDel} className='text-[1rem] bg-[--accent] p-[.3em] active:bg-white text-[white] rounded-[2px] absolute right-[1em] sm:top-[5%] top-[.5em] bottom hover:text-[--accent] sm:active:scale-[1]  hover:scale-110 duration-[0.5s]'>
             <span title='Delete Photo' className='flex gap-[.5em] roboto font-bold text items-center justify-center'>
-              {/* <img src={edit} className='w-[20px]' alt="" /> */}
               <FontAwesomeIcon  icon={faTrash}/>
               {/* Delete photo */}
             </span>
@@ -279,8 +290,6 @@ function Profile() {
           }
           <Link onClick={handleCoverBtn} className='absolute bg-[--accent] p-[.2em] rounded-[2px] text-white active:scale-[0.95] right-[1em] flex gap-[.2em] roboto font-bold justifsm:y-center items-center hover:scale-110 duration-[0.5s] top-[80%] sm:top-[90%]'>
             <img src={edit} className='w-[20px]' alt="" />
-            {/* <FontAwesomeIcon  icon={faPlusCircle}/> */}
-            {/* Change Photo */}
           </Link>
           <input type="file" className='hidden' name="file" onChange={handleCover} id="cover" ref={coverInput} />
         {!cover ? "" : <img src={cover} className='h-full w-full object-cover' alt="" />}
@@ -308,14 +317,6 @@ function Profile() {
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
-                    {/* <Link className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
-                      <FontAwesomeIcon icon={faUserPlus}/>
-                      <p>Follow</p>
-                    </Link>
-                    <Link to={"/sendSms"} className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
-                      <FontAwesomeIcon icon={faMessage}/>
-                    Message
-                    </Link> */}
                  </div>
                  <div className='flex justify-between gap-[2em] mt-[.5em]'>
                   <p className='text-[--bg] font-semibold roboto'>Followers: {followers}</p>

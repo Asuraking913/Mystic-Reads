@@ -108,6 +108,12 @@ function Body() {
       username: "Khal Drogo", 
       comment: "After spending an hour at Mystic Reads!!, I still i have to pay with two more",
       descrip: "Cyber Security Expert"
+    }, 
+    {
+      img: person3, 
+      username: "Tyrion Lannister", 
+      comment: "After spending an hour at Mystic Reads!!, I still i have to pay with two more",
+      descrip: "DevOps Engineer"
     }
   ]
 

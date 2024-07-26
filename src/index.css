@@ -75,12 +75,12 @@ body {
 }
 
 .target .swiper-button-next, .target .swiper-button-prev {
-    background-color: var(--bg);
+    background-color: #593f3bc9;
     width: 50px;
     padding: 1em;
     height: 50px;
     border-radius: 50%;
-    color: var(--accent);
+    color: var(--bg);
     display: flex;
     justify-content: center;
     align-items: center;

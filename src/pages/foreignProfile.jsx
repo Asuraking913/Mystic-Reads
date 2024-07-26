@@ -43,6 +43,10 @@ function ForeignView() {
         localStorage.clear()
         navigate("/")
       }
+      if (error.response.status === 500) {
+        localStorage.clear()
+        navigate("/")
+      }
     })
    },  [])
 
