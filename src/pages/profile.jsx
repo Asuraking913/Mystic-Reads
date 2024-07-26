@@ -14,6 +14,7 @@ import Post from '../components/posts'
 import axios from 'axios'
 import edit1 from "../assets/edit2.png"
 import Axios from '../components/Axios'
+import Axios1 from '../components/Axios1'
 
 function Profile() {
 
@@ -173,13 +174,35 @@ function Profile() {
       event.target.value = ""
     }
 
-    const handleProfile = (event) => {
+    const handleProfile = async (event) => {
       const file = event.target.files[0]
       if(file && allowedExtensions(file.name)) {
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         setProfile(reader.result)
       }
+
+      // send to database
+      const fileData = new FormData();
+      fileData.append('profile', file)
+      const token = localStorage.getItem('access_token')
+
+      const response = await Axios1.post("/api/upload_picture", fileData).then(
+        response => {
+            console.log(response.data)
+            if (response.status === 401) {
+              localStorage.clear()
+              navigate("/")
+            }
+
+            if (response.status == 201)
+            setError("File Uploaded")
+            setInterval(() => {
+              setError("")
+            }, [4000])
+          }).catch((error) => {
+            console.log(error)
+          })
 
       reader.readAsDataURL(file)
       setFile1(!file1)

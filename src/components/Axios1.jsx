@@ -1,11 +1,7 @@
 import axios from "axios";
 import {  useNavigate } from "react-router-dom";
 
-const Axios = axios.create({
-    headers : {
-        "Content-Type" : "application/json", 
-        'Content-Encoding' : 'utf-8'
-    },  
+const Axios1 = axios.create({
 })
 
 const refresh_token = async () => {
@@ -33,7 +29,7 @@ const refresh_token = async () => {
     }
 }
 
-Axios.interceptors.request.use(config => {
+Axios1.interceptors.request.use(config => {
     const token = localStorage.getItem('access_token'); 
     if (token) {
         config.headers.Authorization = `Bearer ${token}` 
@@ -47,12 +43,12 @@ Axios.interceptors.request.use(config => {
 
 )
 
-Axios.interceptors.response.use(response => {
+Axios1.interceptors.response.use(response => {
         return response; 
 },  async error => {
     const originalRequest = error.config;
 
-
+    console.log(error)
     if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true; 
         try {
@@ -60,7 +56,7 @@ Axios.interceptors.response.use(response => {
 
             originalRequest.headers.Authorization = `Bearer ${newAccesstoken}`
 
-            return Axios(originalRequest)
+            return Axios1(originalRequest)
         }
 
         catch (error) {
@@ -74,4 +70,4 @@ Axios.interceptors.response.use(response => {
 
 )
 
-export default Axios
+export default Axios1
