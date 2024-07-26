@@ -155,7 +155,7 @@ function Profile() {
       
     }
 
-    const handleCover = (event) => {
+    const handleCover = async (event) => {
       const file = event.target.files[0]
       if(file && allowedExtensions(file.name)) {
       const reader = new FileReader();
@@ -163,6 +163,27 @@ function Profile() {
         setCover(reader.result)
       }
 
+      // Send file to database
+      const fileData = new FormData(); 
+      fileData.append('cover', file)
+      const response = await Axios1.post("/api/upload_picture", fileData).then(
+        response => {
+            console.log(response.data)
+            if (response.status === 401) {
+              localStorage.clear()
+              navigate("/")
+            }
+
+            if (response.status == 201)
+            setError("File Uploaded")
+            setInterval(() => {
+              setError("")
+            }, [4000])
+          }).catch((error) => {
+            console.log(error)
+          })
+
+      
       reader.readAsDataURL(file)
       setCover(!file)
       return
@@ -182,7 +203,7 @@ function Profile() {
         setProfile(reader.result)
       }
 
-      // send to database
+      // send file to database
       const fileData = new FormData();
       fileData.append('profile', file)
       const token = localStorage.getItem('access_token')
@@ -203,7 +224,8 @@ function Profile() {
           }).catch((error) => {
             console.log(error)
           })
-
+        
+      // Upload file to client side
       reader.readAsDataURL(file)
       setFile1(!file1)
       return
