@@ -45,6 +45,7 @@ function Profile() {
     const [location1, setLocation1] = useState("")
     const [birth1, setBirthday1] = useState("")
     const [error1, setError1] = useState("")
+    const [images, setImages] = useState({cover_image: "", profile_image : ""})
 
 
     useEffect(() => {
@@ -57,6 +58,36 @@ function Profile() {
       setLog(false)
       navigate("/")
     })
+
+    const handleImages = async () => {
+        const userId = localStorage.getItem('userId')
+        const response = await Axios1.get(`/api/fetch_picture`).then(response => {
+          const {cover, profile} = response.data;
+
+          if(response.status == 200 && cover) {
+            setImages(prevImages => ({
+              ...prevImages, cover_image: `data:${cover.mime};base64,${cover.data}`
+            })
+              )
+          }
+
+          if(response.status === 200 && profile) {
+            setImages(prevImages => ({
+              ...prevImages, profile_image: `data:${profile.mime};base64,${profile.data}`
+            }))
+          }
+        }).catch((error) => setImages({cover_image : '', profile_image : user}))
+      }
+
+    useEffect(() => {
+      handleImages()
+      
+    }, [])
+
+    useEffect(() => {
+      setCover(images['cover_image'])
+      setProfile(images['profile_image'])
+    }, [images])
 
 
     // event fxn
@@ -72,11 +103,18 @@ function Profile() {
       }
     }
 
-    const handleProfileDel = () => {
+    const handleProfileDel = async () => {
+
+      const response = await Axios1.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
+
       setProfile(user)
     }
 
-    const handleCoverDel = () => {
+    const handleCoverDel = async () => {
+
+      const response = await Axios1.post("/api/remove_image", {"photo" : 'cover'}).then(response => console.log(response.data))
+
+
       setCover(null)
     }
 
@@ -168,7 +206,6 @@ function Profile() {
       fileData.append('cover', file)
       const response = await Axios1.post("/api/upload_picture", fileData).then(
         response => {
-            console.log(response.data)
             if (response.status === 401) {
               localStorage.clear()
               navigate("/")
@@ -206,11 +243,9 @@ function Profile() {
       // send file to database
       const fileData = new FormData();
       fileData.append('profile', file)
-      const token = localStorage.getItem('access_token')
 
       const response = await Axios1.post("/api/upload_picture", fileData).then(
         response => {
-            console.log(response.data)
             if (response.status === 401) {
               localStorage.clear()
               navigate("/")
