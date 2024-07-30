@@ -56,7 +56,7 @@ function FeedsCont({img, post, username, descrip}) {
             </div>
             <FontAwesomeIcon onClick={handlePostNav} className='text-xl cursor-pointer text-[--accent1] sm:hover:scale-125 active:duration-[0.1s] sm:active:scale-[1] sm:duration-[0.5s] duration-[0.1s]' icon={faArrowsToDot}/>
         </div>
-        {post}
+        {post.length > 300 ? post.substring(0, 250) : post}
         { btn ? <div className='flex items-center justify-center gap-[2em] border-[--accent1]'>
           <Link onClick={handleLike} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
             <FontAwesomeIcon id='thumb' icon={faThumbsUp} className='text-xl'/>

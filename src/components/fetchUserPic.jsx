@@ -4,4 +4,6 @@ import { useEffect } from "react"
 import user from "../assets/user.svg"
 
 
-export const userPicContext = createContext("sdf")
+export const userPicContext = createContext()
+
+export const  access_token = createContext()

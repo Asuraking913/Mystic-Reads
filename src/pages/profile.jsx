@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Nav from '../components/nav'
 import edit from '../assets/edit.svg'
 import { Link, useNavigate } from 'react-router-dom'
@@ -15,7 +15,7 @@ import axios from 'axios'
 import edit1 from "../assets/edit2.png"
 import Axios from '../components/Axios'
 import Axios1 from '../components/Axios1'
-import { userPicContext } from '../components/fetchUserPic'
+import { access_token, userPicContext } from '../components/fetchUserPic'
 
 function Profile() {
 
@@ -26,6 +26,7 @@ function Profile() {
 
 
     // State vars
+    const token = useContext(access_token)
     const [file1, setFile1] = useState(false)
     const [cover, setCover] = useState(null);
     const [profile, setProfile] = useState(user)
@@ -101,7 +102,6 @@ function Profile() {
           if (postDetails[0]) {
             const sect = document.getElementById('sect1')
             sect.classList.add('h-[120vh]')
-            console.log('sdf')
           }
           {postDetails ? postDetails.map(posts => 
             setPostList(t => (

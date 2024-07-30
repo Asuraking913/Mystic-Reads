@@ -57,6 +57,7 @@ function App() {
       }, [])
 
   return (
+    // <access_token.Provider >
     <userPicContext.Provider value={images['profile_image']}>
       <div>
           <Router>
@@ -66,18 +67,19 @@ function App() {
               <Route path='/signup' element={<Create />}/>
               <Route path='/library' element={<Library />}/>
 
-              <Route element={<PrivateRoutes />}>
-                <Route path='/profile' element={<Profile  />}/>
-                <Route path='/read' element={<ReadPage  />}/>
-                <Route path='/foreignView' element={<ForeignView  />}/>
-                <Route path='/feeds' element={<Feeds  />}/>
-                <Route path='/sendSms' element={<Messenger  />}/>
-                <Route path='/publish' element={<Publish />}/>
-              </Route>
-            </Routes>
+                <Route element={<PrivateRoutes />}>
+                  <Route path='/profile' element={<Profile  />}/>
+                  <Route path='/read' element={<ReadPage  />}/>
+                  <Route path='/foreignView' element={<ForeignView  />}/>
+                  <Route path='/feeds' element={<Feeds  />}/>
+                  <Route path='/sendSms' element={<Messenger  />}/>
+                  <Route path='/publish' element={<Publish />}/>
+                </Route>
+             </Routes>
           </Router>
       </div>
     </userPicContext.Provider>
+//  </access_token.Provider>
   )
 }
 

@@ -3,7 +3,7 @@ import Nav from '../components/nav'
 import user from "../assets/user.svg"
 import Body from '../components/body'
 import { useNavigate } from 'react-router-dom'
-import { userPicContext } from '../components/fetchUserPic'
+import { access_token, userPicContext } from '../components/fetchUserPic'
 import Axios1 from '../components/Axios1'
 
 
@@ -15,7 +15,6 @@ function Land() {
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
       setLog(true)
-      console.log('sdf')
       return
     }
 

@@ -1,12 +1,13 @@
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { createContext, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"
 import axios from 'axios'
 import Axios from '../components/Axios'
 import { useEffect } from 'react'
+import { access_token } from '../components/fetchUserPic'
 
 
 function Login() {
@@ -14,6 +15,7 @@ function Login() {
     const [userPass, setUserpass] = useState("")
     const [error, setError] = useState("")
     const navigate = useNavigate()
+
 
 
     useEffect(() => {
@@ -55,7 +57,10 @@ function Login() {
                 localStorage.setItem('birthday', response.data['data']['birthday'])
                 navigate("/")
             }
+
         }
+
+
 
         catch(error) {
             if (error.response && error.response.status === 400) {
