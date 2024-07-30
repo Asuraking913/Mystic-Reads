@@ -3,22 +3,25 @@ import Nav from '../components/nav'
 import Display from '../components/display'
 import Foot from '../components/footer'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Publish() {
 
   const [chapter, setChapter] = useState('Prologue')
   const [log, setLog] = useState(false)
+  const navigate = useNavigate()
 
-    useEffect(() => {
-        // console.log(localStorage)
-        if (localStorage.getItem('access_token')) {
-          setLog(true)
-          return
-        }
-    
-        setLog(false)
-        navigate("/")
-      })
+    // Logged
+  useEffect(() => {
+    // console.log(localStorage)
+    if (localStorage.getItem('access_token')) {
+      setLog(true)
+      return
+    }
+
+    setLog(false)
+    navigate("/")
+  })
 
   return (
     <>

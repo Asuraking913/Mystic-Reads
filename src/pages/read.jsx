@@ -1,13 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Nav from '../components/nav'
 import { Link } from 'react-router-dom'
 import next from "../assets/next.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookOpen, faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons'
 import ChapLink from '../components/chapLinks'
+import { useNavigate } from 'react-router-dom'
 
 function ReadPage() {
   const [chap, setChap] = useState(false);
+
+  const [log, setLog] = useState(false)
+  const navigate = useNavigate()
+
+  // Logged
+  useEffect(() => {
+    // console.log(localStorage)
+    if (localStorage.getItem('access_token')) {
+      setLog(true)
+      return
+    }
+
+    setLog(false)
+    navigate("/")
+  })
 
   const handlechap = () => {
     setChap(!chap)
@@ -32,7 +48,7 @@ function ReadPage() {
 
   return (
     <>
-        <Nav />
+        <Nav log={log}/>
         <Link onClick={scrollDown}>
           <FontAwesomeIcon icon={faCircleArrowDown} className='text-[--accent1] animate-pulse sm:hidden right-[10px] fixed top-[30%] text-3xl'/>
         </Link>

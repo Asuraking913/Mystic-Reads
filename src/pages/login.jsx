@@ -1,6 +1,6 @@
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import React, { createContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"
@@ -8,12 +8,13 @@ import axios from 'axios'
 import Axios from '../components/Axios'
 import { useEffect } from 'react'
 
-function Login() {
 
+function Login() {
     const [userData, setUserData] = useState("")
     const [userPass, setUserpass] = useState("")
     const [error, setError] = useState("")
     const navigate = useNavigate()
+
 
     useEffect(() => {
         setInterval(() => {

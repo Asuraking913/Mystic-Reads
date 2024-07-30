@@ -1,26 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState} from 'react'
 import Nav from '../components/nav'
 import user from "../assets/user.svg"
 import Body from '../components/body'
 import { useNavigate } from 'react-router-dom'
+import { userPicContext } from '../components/fetchUserPic'
+import Axios1 from '../components/Axios1'
+
 
 function Land() {
 
   const [log, setLog] = useState(false)
-  const navigate = useNavigate()
+  const user = useContext(userPicContext);
 
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
       setLog(true)
+      console.log('sdf')
       return
     }
 
     setLog(false)
   })
+    
+
   return (
     <div className=''>
-      <Nav profile={user} log={log}/>
-      <Body />
+          <Nav log={log}/>
+          <Body />
     </div>
   )
 }

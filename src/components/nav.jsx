@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faAlignRight, faBars, faBell, faMessage, faPowerOff, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import user from "../assets/user.svg"
-import person1 from "../assets/person4.jpeg"
+import { userPicContext } from './fetchUserPic';
 
-function Nav({profile, log}) {
+function Nav({log}) {
 
   const [search, setSearch] = useState(true);
   const [nav, setNav] = useState(false)
   const [menu, setMenu] = useState(true)
+  const profile = useContext(userPicContext)
   // const [log, setLog] = useState(false)
   const navigate = useNavigate()
 
@@ -218,6 +219,7 @@ function Nav({profile, log}) {
              <Link  className='relative text-[--accent]'>
             <FontAwesomeIcon onClick={() => {
               localStorage.clear()
+              console.log('wer')
               navigate("/")
               }} icon={faPowerOff} className='text-4xl'/>
           </Link>
@@ -240,7 +242,7 @@ function Nav({profile, log}) {
                 <FontAwesomeIcon className='text-4xl hover:scale-125 duration-[0.5s]' onClick={() => (setSearch(!search))} icon={faSearch}/>
                 :
                 <form action="#" onSubmit={handleSubmit}>
-                  <p><input type="text" className='py-[.5em] rounded-[2em] w-[300px] text-black absolute top-[85%] right-[5%] pl-[.5em] placeholder-[--accent] bg-[white]' name="search" id="navSearch" placeholder='Search...' /></p>
+                  <p><input type="text" className='py-[.5em] rounded-[2em] w-[350px] text-black absolute top-[85%] right-[2%] pl-[.5em] placeholder-[--accent] bg-[white] outline-none' name="search" id="navSearch" placeholder='Search...' /></p>
                 </form>
               }
                   <FontAwesomeIcon icon={faTimes} onClick={() => (setNav(!Nav))} className='text-4xl absolute top-[120%] z-[20] left-[50%]'/>

@@ -4,21 +4,23 @@ import LibComp from '../components/libraryComp'
 import Display from '../components/display'
 import Foot from '../components/footer'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Library() {
 
     const [log, setLog] = useState(false)
+    const navigate = useNavigate()
 
-    useEffect(() => {
-        // console.log(localStorage)
-        if (localStorage.getItem('access_token')) {
-          setLog(true)
-          return
-        }
+    // useEffect(() => {
+    //     // console.log(localStorage)
+    //     if (localStorage.getItem('access_token')) {
+    //       setLog(true)
+    //       return
+    //     }
     
-        setLog(false)
-        navigate("/")
-      })
+    //     setLog(false)
+    //     navigate("/")
+    //   })
 
   return (
     <>

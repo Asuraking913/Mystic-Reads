@@ -12,21 +12,27 @@ import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup,
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 import Axios from '../components/Axios'
+import Axios1 from '../components/Axios1'
 
 function ForeignView() {
 
   const [log, setLog] = useState(false)
   const navigate = useNavigate()
 
+  // Logged
   useEffect(() => {
+    // console.log(localStorage)
     if (localStorage.getItem('access_token')) {
       setLog(true)
       return
     }
 
     setLog(false)
+    navigate("/")
   })
 
+
+  // Fetch user details
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     const response = Axios.get(`/api/profiles_info/${userId}`).then(response => {
@@ -50,8 +56,47 @@ function ForeignView() {
     })
    },  [])
 
+  //  fetch images
+    const handleImages = async () => {
+      const userId = localStorage.getItem('userId')
+      const response = await Axios1.get(`/api/fetch_picture`).then(response => {
+        const {cover, profile} = response.data;
+
+        if(response.status == 200 && cover) {
+          setImages(prevImages => ({
+            ...prevImages, cover_image: `data:${cover.mime};base64,${cover.data}`
+          })
+            )
+        }
+
+        if(response.status === 200 && profile) {
+          setImages(prevImages => ({
+            ...prevImages, profile_image: `data:${profile.mime};base64,${profile.data}`
+          }))
+        }
+      }).catch((error) => {
+        setImages({cover_image : '', profile_image : user})
+        if (error.response.status === 401) {
+          localStorage.clear()
+          navigate("/")
+        }
+
+        if (error.response.status === 500) {
+          localStorage.clear()
+          navigate("/")
+        }
+      })
+    }
+
+useEffect(() => {
+  handleImages()
+  
+}, [])
+
+
 
     // State vars
+    const [image, setImages] = useState({profile_image : '', cover_image : ""})
     const [file1, setFile1] = useState(false)
     const [userName, setUserName] = useState('')
     const [cover, setCover] = useState(null);
@@ -101,18 +146,18 @@ function ForeignView() {
       }
     ]
 
-    const post = postList.map((items, i) => (<Post key={i} comments={items.comments} likes={items.likes} profile={profile} post={items.postText} active={items.active} username={userName}/>))
+    const post = postList.map((items, i) => (<Post key={i} comments={items.comments} likes={items.likes} profile={image['profile_image']} post={items.postText} active={items.active} username={userName}/>))
 
   return (
     <>
-        <Nav profile={profile} log={log}/>
+        <Nav log={log}/>
 
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
         <div className='sm:h-[50vh] h-[20vh] relative w-full linear'>
-        <img src={cover} className='h-full w-full object-cover' alt="" />
+        <img src={image['cover_image']} className='h-full w-full object-cover' alt="" />
             <div className='min-h-[80vh] overflow-hidden py-[1em] hidden sm:flex flex-col items-center justify-center z-[20] top-[40%] left-[--pdx] shadow-md shadow-[--accent1] absolute rounded-[10px] bg-[--accent1] gap-[1em] px-[1.5em] w-[380px]'>
                <div className='bg-[--accent] relative p-[.2em] rounded-[50%] h-[200px] w-[200px]'>
-                  <img src={profile} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
+                  <img src={image['profile_image']} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
                </div>
                <div className='text-center'>
                  <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
@@ -171,7 +216,7 @@ function ForeignView() {
         {/* profile mobile */}
         <div className=' py-[1em] overflow-hidden  flex sm:hidden flex-col items-center justify-center z-[20] shadow-md shadow-[--accent1] bg-[--accent1] gap-[1em] px-[1.5em] w-[100%]'>
                <div className='bg-[--accent] relative p-[.2em] rounded-[50%] h-[100px] w-[100px]'>
-                  <img src={profile} className='rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
+                  <img src={image['profile']} className='rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
                </div>
                <div className='text-center'>
                  <h2 className='text-xl font-bold roboto text-[--bg]'>{userName}</h2>

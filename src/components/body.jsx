@@ -238,9 +238,9 @@ function Body() {
       <section className='flex sm:flex-row flex-col sm:justify-between sm:gap-[2em] gap-[1em] sm:px-[--pdx] py-[--pdy] pt-0 px-[1em]'>
       <div className='bg-[--accent] overflow-hidden sm:text-left text-center w-full sm:p-[1em] sm:py-[1em] py-[1.5em]  sm:h-[300px] rounded-[1em] flex gap-[1em] items-center'>
           <div className='sm:w-[80%] sm:text-left px-[.2em] text-center items-center sm:items-start flex flex-col gap-[1em]'>
-            <h2 className='text-2xl text-white roboto font-semibold'>Gain the best visual experience while reading stories on mystic reads</h2>
-            <Link to={"/read"} className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
-              Read
+            <h2 className='text-2xl text-white roboto font-semibold'>Gain the best visual experience while reading stories on from out Library</h2>
+            <Link to={"/library"} className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
+              Library
             </Link>
           </div>
           <div className='h-[200px] sm:block hidden w-[300px]'>

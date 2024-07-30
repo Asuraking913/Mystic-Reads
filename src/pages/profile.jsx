@@ -15,6 +15,7 @@ import axios from 'axios'
 import edit1 from "../assets/edit2.png"
 import Axios from '../components/Axios'
 import Axios1 from '../components/Axios1'
+import { userPicContext } from '../components/fetchUserPic'
 
 function Profile() {
 
@@ -45,7 +46,7 @@ function Profile() {
     const [location1, setLocation1] = useState("")
     const [birth1, setBirthday1] = useState("")
     const [error1, setError1] = useState("")
-    const [images, setImages] = useState({cover_image: "", profile_image : ""})
+    const [images, setImages] = useState({cover_image: "", profile_image : user})
 
 
     useEffect(() => {
@@ -76,12 +77,63 @@ function Profile() {
               ...prevImages, profile_image: `data:${profile.mime};base64,${profile.data}`
             }))
           }
-        }).catch((error) => setImages({cover_image : '', profile_image : user}))
+        }).catch((error) => {
+          setImages({cover_image : '', profile_image : user})
+          if (error.response.status === 401) {
+            localStorage.clear()
+            navigate("/")
+          }
+
+          if (error.response.status === 500) {
+            localStorage.clear()
+            navigate("/")
+          }
+        })
+      }
+
+      // fetch posts data
+      const handlePostFetch = () => {
+
+        const response = Axios.get("/api/user_posts").then(response => {
+          console.log(response.data)
+          const postDetails = response.data['data']['post']
+          console.log(postDetails)
+          if (postDetails[0]) {
+            const sect = document.getElementById('sect1')
+            sect.classList.add('h-[120vh]')
+            console.log('sdf')
+          }
+          {postDetails ? postDetails.map(posts => 
+            setPostList(t => (
+              [
+                {
+                  postText : posts.content,
+                }, 
+                ...t
+              ]
+          ))
+          )
+              :
+              setPostList(t => (
+                [
+                  {
+                    postText : posts.content,
+                  }, 
+                  ...t
+                ]
+            ))
+
+        }
+          
+      }).catch((error) => {
+          console.log(error)
+      })
+
       }
 
     useEffect(() => {
       handleImages()
-      
+      handlePostFetch()
     }, [])
 
     useEffect(() => {
@@ -108,6 +160,9 @@ function Profile() {
       const response = await Axios1.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
 
       setProfile(user)
+      // setImages((prev) => ({
+      //   ...prev, profile_image : user
+      // }))
     }
 
     const handleCoverDel = async () => {
@@ -216,6 +271,7 @@ function Profile() {
             setInterval(() => {
               setError("")
             }, [4000])
+            fileData.delete('cover')
           }).catch((error) => {
             console.log(error)
           })
@@ -238,6 +294,9 @@ function Profile() {
       const reader = new FileReader();
       reader.onloadend = async () => {
         setProfile(reader.result)
+        setImages((prev) => ({
+          ...prev, profile_image : reader.result
+        }))
       }
 
       // send file to database
@@ -256,6 +315,7 @@ function Profile() {
             setInterval(() => {
               setError("")
             }, [4000])
+            fileData.delete('profile')
           }).catch((error) => {
             console.log(error)
           })
@@ -281,38 +341,38 @@ function Profile() {
 
 
     // Postlist data
-    const postList = [
-      { 
-        likes: 20, 
-        comments: 15,
-        active: "15mins ago", 
-        postText: "Just finished 'Doluo Dalu' and I'm completely hooked! The world-building is phenomenal, and Tang San's journey is so inspiring. Can't wait to see what happens next!",
-      },
-      { 
-        likes: 45, 
-        comments: 30,
-        active: "2 hours ago", 
-        postText: "I started reading 'Magic Chef of Ice and Fire' last night, and I'm already obsessed. The combination of cooking and magic is so unique and exciting. Nian Bing is such an intriguing character.",
-      }, 
-      { 
-        likes: 100, 
-        comments: 73,
-        active: "15 hours ago", 
-        postText: "Forcardos High School has such a relatable storyline! The characters feel so real, and the high school dynamics are spot-on. Can't wait to see how the friendships and rivalries develop.",
-      }, 
-      { 
-        likes: 100, 
-        comments: 73,
-        active: "15 hours ago", 
-        postText: "Magic Chef of Ice and Fire is a must-read for anyone who loves fantasy and culinary arts. The way Nian Bing combines magic with cooking is brilliant. I'm constantly amazed by his creativity",
-      }, 
-      { 
-        likes: 100, 
-        comments: 73,
-        active: "15 hours ago", 
-        postText: "Doluo Dalu is a masterpiece! The martial arts and spirit abilities are described so vividly. Each character's journey to become stronger is so motivating. Highly recommend!",
-      }
-    ]
+    const [postList, setPostList] = useState([
+        // { 
+        //   likes: 20, 
+        //   comments: 15,
+        //   active: "15mins ago", 
+        //   postText: "Just finished 'Doluo Dalu' and I'm completely hooked! The world-building is phenomenal, and Tang San's journey is so inspiring. Can't wait to see what happens next!",
+        // },
+        // { 
+        //   likes: 45, 
+        //   comments: 30,
+        //   active: "2 hours ago", 
+        //   postText: "I started reading 'Magic Chef of Ice and Fire' last night, and I'm already obsessed. The combination of cooking and magic is so unique and exciting. Nian Bing is such an intriguing character.",
+        // }, 
+        // { 
+        //   likes: 100, 
+        //   comments: 73,
+        //   active: "15 hours ago", 
+        //   postText: "Forcardos High School has such a relatable storyline! The characters feel so real, and the high school dynamics are spot-on. Can't wait to see how the friendships and rivalries develop.",
+        // }, 
+        // { 
+        //   likes: 100, 
+        //   comments: 73,
+        //   active: "15 hours ago", 
+        //   postText: "Magic Chef of Ice and Fire is a must-read for anyone who loves fantasy and culinary arts. The way Nian Bing combines magic with cooking is brilliant. I'm constantly amazed by his creativity",
+        // }, 
+        // { 
+        //   likes: 100, 
+        //   comments: 73,
+        //   active: "15 hours ago", 
+        //   postText: "Doluo Dalu is a masterpiece! The martial arts and spirit abilities are described so vividly. Each character's journey to become stronger is so motivating. Highly recommend!",
+        // }
+    ])
 
     const post = postList.map((items, i) => (<Post key={i} comments={items.comments} likes={items.likes} profile={profile} post={items.postText} active={items.active} username={userName}/>))
 
@@ -337,7 +397,7 @@ function Profile() {
                 </p>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="Birthday">Birthday</label>
-                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="date" maxLength={15} onChange={(e) => (setBirthday1(e.target.value))}/>
+                  <input className='w-full outline-none text-white bg-transparent border-[.5px] p-[.1em] border-[white] rounded-[5px]' type="date" required maxLength={15} onChange={(e) => (setBirthday1(e.target.value))}/>
                 </p>
                 <p>
                   <label className='text-[1.1rem] roboto text-[--accent] ' htmlFor="bio">Bio</label>
@@ -352,9 +412,10 @@ function Profile() {
           </div>
         </div>
         : 
-
-        <Nav profile={profile} log={log}/>
-
+        
+        <userPicContext.Provider value={images['profile_image']}>
+           <Nav profile log={log}/>
+        </userPicContext.Provider>
       }
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
         {error && <p className='sm:text-2xl rounded-[1em] animate-bounce text-white roboto absolute z-[1000] bg-[--accent1] sm:p-[.5em] p-[.2em] px-[1em] left-[38%] sm:left-[45%] top-[5em] sm:top-[4em]'>{error}</p>}
@@ -399,8 +460,8 @@ function Profile() {
                  <div className='flex justify-between gap-[2em]'>
                  </div>
                  <div className='flex justify-between gap-[2em] mt-[.5em]'>
-                  <p className='text-[--bg] font-semibold roboto'>Followers: {followers}</p>
-                  <p className='text-[--bg] font-semibold roboto'>Following: {following}</p>
+                  <p className='text-[--bg] font-bold roboto'>Followers: {followers}</p>
+                  <p className='text-[--bg] font-bold roboto'>Following: {following}</p>
                  </div>
                </div>
                <div className='w-[120%] border-[1.5px] border-[--accent]'></div>
@@ -457,8 +518,8 @@ function Profile() {
                </div>
                <div>
                  <div className='flex justify-between gap-[4em] mt-[.5em]'>
-                  <p className='text-[--bg] text-[.9rem] font- roboto'>Followers: {followers}</p>
-                  <p className='text-[--bg] text-[.9rem] font- roboto'>Following: {following}</p>
+                  <p className='text-[--bg] text-[.9rem] font-bold roboto'>Followers: {followers}</p>
+                  <p className='text-[--bg] text-[.9rem] font-bold roboto'>Following: {following}</p>
                  </div>
                </div>
                <div className='border-[1.5px] ml-[-2em] w-[500px] border-[--accent]'></div>
@@ -500,9 +561,8 @@ function Profile() {
                 document.body.classList.add('no-scroll')
               }} className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={edit1} title='Edit' className='sm:w-[40px] w-[25px] sm:h-[45px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Edit Profile</p></Link>
             </ul>
-      
         </div>
-        <section className=' p-[0em] h-[120vh] sm:h-[100vh] relative w-[100%] sm:px-[--pdx] flex sm:flex-row flex-col-reverse justify-between items-start sm:items-end'>
+        <section id='sect1' className=' p-[0em]  sm:h-[100vh] relative w-[100%] sm:px-[--pdx] flex sm:flex-row flex-col-reverse justify-between items-start sm:items-end'>
         <div className='py-[2em] px-[.5em]'>
           <h2 className='text-2xl roboto font-bold text-[--accent1]'>Our Programs</h2>
             <ul className='flex text-[--accent1] flex-col gap-[1em] mt-[1em] '>
@@ -513,9 +573,17 @@ function Profile() {
             </ul>
         </div>
           <div className=' w-[85%] sm:w-[60%] px-[.5em] py-[1em] hide-scrollbar h-[100%] overflow-scroll flex sm:flex-col gap-[1em]'>
+              {postList[0] ?
             <div className='flex flex-col gap-[1em] relative'>
-              {post }
+
+               {post }
             </div>
+
+               : 
+               <div className='sm:h-[400px] flex items-center justify-center'>
+                  <h2 className='sm:text-4xl text-xl roboto font-bold text-[--accent1] opacity-80'>Your post collection is empty</h2>
+                </div>
+              }
           </div>
           <FontAwesomeIcon icon={faDownLong} className='absolute top-[30%] text-[--accent1] h-[50px] right-[1.5em] animate-bounce sm:hidden'/>
           
