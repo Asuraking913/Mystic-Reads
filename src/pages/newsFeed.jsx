@@ -14,7 +14,6 @@ import PostForm from '../components/postForm'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import Axios913 from '../components/Axios913'
-import { AuthContext } from '../components/fetchUserPic'
 
 
 function Feeds() {
@@ -121,14 +120,14 @@ function Feeds() {
 
   return (
     <>
-        <Nav log={log}/>
+        <Nav />
         <Display />
         <FeedNav />
         {
         write ? <div className='flex justify-between px-[1em] sm:px-[--pdx] py-[1em]'>
                     <Link onClick={() => {
                         setWrite(!write)
-                    }} className='p-[.5em] sm:px-[1em] bg-[--accent1] sm:hover:bg-[#ffffff2c] text-white roboto rounded-[5px] hover:duration-[0.5s] hover:scale-105 hover:shadow-md hover:shadow-[--accent1] hover:text-[--accent1] cursor-pointer active:bg-[#ffffff2c] active:scale-100 active:duration-[0.1s]'>Create Post</Link>
+                    }} className='sm:p-[.5em] p-[.3em] sm:text-[1rem] text-[0.9rem] px-[.4em] flex items-center sm:px-[1em] bg-[--accent1] sm:hover:bg-[#ffffff2c] text-white roboto rounded-[5px] hover:duration-[0.5s] hover:scale-105 hover:shadow-md hover:shadow-[--accent1] hover:text-[--accent1] cursor-pointer active:bg-[#ffffff2c] active:scale-100 active:duration-[0.1s]'>Create Post</Link>
                      <button onClick={() => {
                         navigate("/profile")
                     }} className='sm:p-[.5em]  text-[--accent1] underline hover:no-underline roboto sm:text-[1.2rem] rounded-[5px] hover:duration-[0.5s] hover:scale-105 hover:shadow-sm hover:shadow-[--accent1] hover:text-[--accent1] cursor-pointer active:bg-[#ffffff2c] active:scale-100 active:duration-[0.1s]'>View posts You've made?</button>

@@ -5,8 +5,6 @@ import likes from "../assets/likes.svg"
 import posts from "../assets/post1.svg"
 import book from "../assets/book.svg"
 import user from "../assets/user.svg"
-import user1 from "../assets/user1.png"
-import location from "../assets/location.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup, faPersonHalfDress, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
@@ -95,11 +93,8 @@ useEffect(() => {
 
     // State vars
     const [image, setImages] = useState({profile_image : '', cover_image : ""})
-    const [file1, setFile1] = useState(false)
     const [userName, setUserName] = useState('')
     const [cover, setCover] = useState(null);
-    const [profile, setProfile] = useState(user)
-    const [error, setError] = useState("")
     const [active, setActive] = useState(true)
     const [followers, setFollowers] = useState(20)
     const [following, setFollowing] = useState(10)

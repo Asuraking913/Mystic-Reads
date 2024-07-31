@@ -54,15 +54,6 @@ function Login() {
         try {
             const response = await Axios913.post("/api/auth/login", data) 
             if (response.status === 200) {
-                localStorage.setItem('userName', response.data['data']['userName'] )
-                localStorage.setItem('userEmail', response.data['data']['userEmail'], )
-                localStorage.setItem('joined', response.data['data']['joined'])
-                localStorage.setItem('userId', response.data['data']['userId'])
-                localStorage.setItem('gender', response.data['data']['gender'])
-                localStorage.setItem('auth', true)
-                localStorage.setItem('bio', response.data['data']['bio'])
-                localStorage.setItem('location', response.data['data']['location'])
-                localStorage.setItem('birthday', response.data['data']['birthday'])
                 setAuth(true)
                 setBio(response.data['data']['bio'])
                 setBirthday(response.data['data']['birthday'])
@@ -88,7 +79,7 @@ function Login() {
         }
 }
 
-  console.log(auth)
+console.log(auth)
 
 
   return (

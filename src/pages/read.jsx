@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import Nav from '../components/nav'
 import { Link } from 'react-router-dom'
 import next from "../assets/next.png"
@@ -48,7 +48,6 @@ function ReadPage() {
             <div className='bg-[--bg] w-[60%] sm:w-[30%] h-full overflow-scroll hide-scrollbar'>
               <ChapLink />
             </div>
-            {/* <FontAwesomeIcon icon={faTimes} onClick={exitChap} className='text-white absolute text-4xl top-[1em] right-[1em]'/> */}
           </div>
         }
         

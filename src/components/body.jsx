@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import fantasy from "../assets/story4.jpeg"
 import action from "../assets/action.jpeg"
 import romance from "../assets/romance.jpeg"
@@ -14,7 +14,7 @@ import {Navigation, Pagination, Autoplay} from "swiper/modules"
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
-import { Link, useLocation } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
 // People Image
 import person1 from "../assets/person1.jpeg"
@@ -28,11 +28,9 @@ import News from './news'
 import Topic from './topic'
 import Foot from './footer'
 import phone from '../assets/phone.png'
-import phone1 from '../assets/phone.png'
-import { AuthContext } from './fetchUserPic'
+
 
 function Body() {
-  const locationref = useLocation();
 
 
   useEffect(() => {
@@ -115,7 +113,6 @@ function Body() {
     }
   ]
 
-// const imageList = () 
 
   const genreList = genreImage.map((genre, i) => (<SwiperSlide className='flex text-center justify-center items-center' key={i}>
         <Genre title={genre.title} img={genre.img}/>

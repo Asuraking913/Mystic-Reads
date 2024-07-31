@@ -41,9 +41,6 @@ function App() {
             }))
         }
         }).catch((err) => {
-          // if (err.response.data.message === 'Images Unavailable' ) {
-          //   return  
-          // }
 
           if(err.response.status === 400) {
             return

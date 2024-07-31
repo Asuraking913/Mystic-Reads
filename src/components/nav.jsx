@@ -12,10 +12,8 @@ function Nav() {
   const [nav, setNav] = useState(false)
   const [menu, setMenu] = useState(true)
   const profile = useContext(userPicContext)
-  // const [log, setLog] = useState(false)
   const navigate = useNavigate()
   const {auth, setAuth} = useContext(AuthContext)
-  console.log(auth)
 
   const handleNav = () => {
     document.body.classList.add('no-scroll')
@@ -92,7 +90,6 @@ function Nav() {
                 <p>Home</p>
               </Link>
             </li>
-            {/* <Link to={"/?scroll=trend"} onClick={() => (document.getElementById('trend').scrollIntoView({behavior : 'smooth'}))} className='hover:underline decoration-white hover:animate-pulse'> */}
             <li>
               <Link onClick={handleTrend} className='hover:underline decoration-white hover:animate-pulse'>
                 <p>Trending</p>
@@ -183,9 +180,6 @@ function Nav() {
               <Link to={"/"} className='hover:underline hover:animate-pulse'>
                 <li>Home</li>
               </Link>
-              {/* <Link onClick={handleTrend} className='hover:underline hover:animate-pulse'>
-                <li>Trending</li>
-              </Link> */}
               <Link onClick={handleRecommend} className='hover:underline hover:animate-pulse'>
                 <li>Recommended</li>
               </Link>
