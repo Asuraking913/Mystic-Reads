@@ -1,14 +1,12 @@
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { createContext, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
-import svg from "../assets/svg1.svg"
-import axios from 'axios'
-import Axios from '../components/Axios'
+import svg from "../assets/svg1.svg"    
 import { useEffect } from 'react'
-import { access_token } from '../components/fetchUserPic'
 import Axios913 from '../components/Axios913'
+import { AuthContext } from '../components/fetchUserPic'
 
 
 function Login() {
@@ -16,7 +14,17 @@ function Login() {
     const [userPass, setUserpass] = useState("")
     const [error, setError] = useState("")
     const navigate = useNavigate()
-
+    const {
+            auth, setAuth,
+            userId, setUserId,
+            userName, setUserName,
+            location, setLocation,
+            birthday, setBirthday,
+            joined, setJoined,
+            bio, setBio,
+            gender, setGender,
+            email, setEmail
+         } = useContext(AuthContext)
 
 
     useEffect(() => {
@@ -55,6 +63,14 @@ function Login() {
                 localStorage.setItem('bio', response.data['data']['bio'])
                 localStorage.setItem('location', response.data['data']['location'])
                 localStorage.setItem('birthday', response.data['data']['birthday'])
+                setAuth(true)
+                setBio(response.data['data']['bio'])
+                setBirthday(response.data['data']['birthday'])
+                setEmail(response.data['data']['userEmail'])
+                setGender(response.data['data']['gender'])
+                setUserId(response.data['data']['userId'])
+                setLocation(response.data['data']['location'])
+                setUserName(response.data['data']['userName'])
                 navigate("/")
             }
 

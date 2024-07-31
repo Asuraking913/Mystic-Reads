@@ -11,11 +11,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup, faPersonHalfDress, faPlusCircle, faThumbsUp, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
-import axios from 'axios'
 import edit1 from "../assets/edit2.png"
-import Axios from '../components/Axios'
 import Axios913 from '../components/Axios913'
-import { access_token, userPicContext } from '../components/fetchUserPic'
+import { userPicContext } from '../components/fetchUserPic'
+import { AuthContext } from '../components/fetchUserPic'
 
 function Profile() {
 
@@ -24,24 +23,35 @@ function Profile() {
     const coverInput = useRef(null)
     const navigate = useNavigate()
 
+    const {
+      auth, setAuth,
+      userId : id,
+      userName : name,
+      location : loca,
+      birthday : birthday,
+      joined : joined,
+      bio : about,
+      gender : sex,
+      email : userEmail,
+    } = useContext(AuthContext)
+
 
     // State vars
-    const token = useContext(access_token)
     const [file1, setFile1] = useState(false)
     const [cover, setCover] = useState(null);
     const [profile, setProfile] = useState(user)
     const [error, setError] = useState("")
     const [active, setActive] = useState(true)
-    const [userName, setUserName] = useState(localStorage.getItem('userName'))
+    const [userName, setUserName] = useState(name)
     const [followers, setFollowers] = useState(20)
     const [following, setFollowing] = useState(10)
-    const [gender, setGender] = useState(localStorage.getItem('gender'))
-    const [birth, setBirthday] = useState(localStorage.getItem('birthday'))
-    const [email, setEmail] = useState(localStorage.getItem('userEmail'))
+    const [gender, setGender] = useState(sex)
+    const [birth, setBirthday] = useState(birthday)
+    const [email, setEmail] = useState(userEmail)
     const [editProfile, setEditProfile] = useState(false)
-    const [bio, setBio] = useState(localStorage.getItem('bio'))
-    const [location, setLocation] = useState(localStorage.getItem('location'))
-    const [member, setMember] = useState(localStorage.getItem('joined'))
+    const [bio, setBio] = useState(about)
+    const [location, setLocation] = useState(loca)
+    const [member, setMember] = useState(joined)
     const [log, setLog] = useState(false)
     const [bio1, setBio1] = useState("")
     const [location1, setLocation1] = useState("")
@@ -342,36 +352,36 @@ function Profile() {
 
     // Postlist data
     const [postList, setPostList] = useState([
-        // { 
-        //   likes: 20, 
-        //   comments: 15,
-        //   active: "15mins ago", 
-        //   postText: "Just finished 'Doluo Dalu' and I'm completely hooked! The world-building is phenomenal, and Tang San's journey is so inspiring. Can't wait to see what happens next!",
-        // },
-        // { 
-        //   likes: 45, 
-        //   comments: 30,
-        //   active: "2 hours ago", 
-        //   postText: "I started reading 'Magic Chef of Ice and Fire' last night, and I'm already obsessed. The combination of cooking and magic is so unique and exciting. Nian Bing is such an intriguing character.",
-        // }, 
-        // { 
-        //   likes: 100, 
-        //   comments: 73,
-        //   active: "15 hours ago", 
-        //   postText: "Forcardos High School has such a relatable storyline! The characters feel so real, and the high school dynamics are spot-on. Can't wait to see how the friendships and rivalries develop.",
-        // }, 
-        // { 
-        //   likes: 100, 
-        //   comments: 73,
-        //   active: "15 hours ago", 
-        //   postText: "Magic Chef of Ice and Fire is a must-read for anyone who loves fantasy and culinary arts. The way Nian Bing combines magic with cooking is brilliant. I'm constantly amazed by his creativity",
-        // }, 
-        // { 
-        //   likes: 100, 
-        //   comments: 73,
-        //   active: "15 hours ago", 
-        //   postText: "Doluo Dalu is a masterpiece! The martial arts and spirit abilities are described so vividly. Each character's journey to become stronger is so motivating. Highly recommend!",
-        // }
+        { 
+          likes: 20, 
+          comments: 15,
+          active: "15mins ago", 
+          postText: "Just finished 'Doluo Dalu' and I'm completely hooked! The world-building is phenomenal, and Tang San's journey is so inspiring. Can't wait to see what happens next!",
+        },
+        { 
+          likes: 45, 
+          comments: 30,
+          active: "2 hours ago", 
+          postText: "I started reading 'Magic Chef of Ice and Fire' last night, and I'm already obsessed. The combination of cooking and magic is so unique and exciting. Nian Bing is such an intriguing character.",
+        }, 
+        { 
+          likes: 100, 
+          comments: 73,
+          active: "15 hours ago", 
+          postText: "Forcardos High School has such a relatable storyline! The characters feel so real, and the high school dynamics are spot-on. Can't wait to see how the friendships and rivalries develop.",
+        }, 
+        { 
+          likes: 100, 
+          comments: 73,
+          active: "15 hours ago", 
+          postText: "Magic Chef of Ice and Fire is a must-read for anyone who loves fantasy and culinary arts. The way Nian Bing combines magic with cooking is brilliant. I'm constantly amazed by his creativity",
+        }, 
+        { 
+          likes: 100, 
+          comments: 73,
+          active: "15 hours ago", 
+          postText: "Doluo Dalu is a masterpiece! The martial arts and spirit abilities are described so vividly. Each character's journey to become stronger is so motivating. Highly recommend!",
+        }
     ])
 
     const post = postList.map((items, i) => (<Post key={i} comments={items.comments} likes={items.likes} profile={profile} post={items.postText} active={items.active} username={userName}/>))
@@ -449,7 +459,7 @@ function Profile() {
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
-                 <h2 className='sm:text-2xl capitalize font-bold roboto text-[--bg]'>{userName}</h2>
+                 <h2 className='sm:text-2xl capitalize font-bold roboto text-[--bg]'>{name}</h2>
                  <p className='text-[0.9rem] text-[--bg] flex items-center justify-center gap-[.5em]'><span className='text-[--] flex'>Active:</span> {active ? <i className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></i> : <i className='inline'>active 2hrs ago</i> }</p>
                </div>
                <div className='w-[90%] break-words px-[1.5em]'>
@@ -468,7 +478,7 @@ function Profile() {
                <div className='w-full flex flex-col gap-[.5em]'>
                     <p className='flex justify-between items-center'>
                     <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='text-xl mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>{(location == "null") ? <i className='opacity-40'>none</i> : location }</span>
+                      <span className='text-[--bg] roboto'>{(loca == null) ? <i className='opacity-40'>none</i> : loca }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text-xl mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -476,19 +486,19 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since {(localStorage.getItem('joined') == "null") ? <i className='opacity-40'>none</i> : localStorage.getItem('joined') }</span>
+                    <span className='text-[--bg] roboto'>Member Since {(joined == null) ? <i className='opacity-40'>none</i> : joined }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
-                    <span className='text-[--bg] roboto'>{localStorage.getItem('gender')}</span>
+                    <span className='text-[--bg] roboto'>{sex}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='text-xl mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] roboto'>{localStorage.getItem('userEmail')}</span>
+                    <span className='text-[--bg] roboto'>{userEmail}</span>
                   </p>
                  <p className='flex justify-between items-center'>
                     <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='text-xl mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] roboto'>{(localStorage.getItem('birthday') == "null") ? <i className='opacity-40'>none</i> : localStorage.getItem('birthday') }</span>
+                    <span className='text-[--bg] roboto'>{(birthday == null) ? <i className='opacity-40'>none</i> : birthday }</span>
                   </p>
                </div>
       
@@ -510,11 +520,11 @@ function Profile() {
                   <input type="file" className='hidden' onChange={handleProfile} ref={profileInput} name="file" id="profile" />
                </div>
                <div className='text-center'>
-                 <h2 className='text-xl capitalize font-bold roboto text-[--bg]'>{userName}</h2>
+                 <h2 className='text-xl capitalize font-bold roboto text-[--bg]'>{name}</h2>
                  <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <FontAwesomeIcon icon={faCircle} className='text text-green-400 w-[15px] h-[15px]'/>  : <p className='inline'>active 2hrs ago</p> }</p>
                </div>
                <div className='w-[90%] break-words px-[--pdx]' >
-                  <p className='line text-center font-sans italic text-[0.8rem] text-white'>{(bio == "null") ? <i className='opacity-40'>none</i> : bio }</p>
+                  <p className='line text-center font-sans italic text-[0.8rem] text-white'>{(about == null) ? <i className='opacity-40'>none</i> : about }</p>
                </div>
                <div>
                  <div className='flex justify-between gap-[4em] mt-[.5em]'>
@@ -526,7 +536,7 @@ function Profile() {
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>{(location == "null") ? <i className='opacity-40'>none</i> : location }</span>
+                      <span className='text-[--bg] roboto'>{loca == null  ? <i className='opacity-40'>none</i> : loca }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -534,19 +544,19 @@ function Profile() {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since {(localStorage.getItem('joined') == "null") ? <i className='opacity-40'>none</i> : localStorage.getItem('joined') }</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>Member Since {(joined == null) ? <i className='opacity-40'>none</i> : joined }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>
-                    <span className='text-[--bg] roboto'>{(gender == "null") ? <i className='opacity-40'>none</i> : gender }</span>
+                    <span className='text-[--bg] roboto'>{(sex == "null") ? <i className='opacity-40'>none</i> : sex }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] roboto'>{(localStorage.getItem('birthday') == "null") ? <i className='opacity-40'>none</i> : localStorage.getItem('birthday') }</span>
+                    <span className='text-[--bg] roboto'>{(birthday == null) ? <i className='opacity-40'>none</i> : birthday }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{(email == "null") ? <i className='opacity-40'>none</i> : email }</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{(userEmail == null) ? <i className='opacity-40'>none</i> : userEmail }</span>
                   </p>
                   
                </div>

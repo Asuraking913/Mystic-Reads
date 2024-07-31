@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Land from './pages/land'
 import Login from './pages/login'
@@ -12,13 +12,13 @@ import Publish from './pages/publish'
 import Library from './pages/library'
 import PrivateRoutes from './components/privateRoute'
 import { useState } from 'react'
-import Axios1 from './components/Axios1'
 import user from "../src/assets/user.svg"
-import { userPicContext } from './components/fetchUserPic'
-import Nav from './components/nav'
+import {  AuthContext, userPicContext } from './components/fetchUserPic'
 import Axios913 from './components/Axios913'
 
 function App() {
+  
+  const {auth, setAuth} = useContext(AuthContext)
 
   useEffect(() => {
     document.title = "Mystic Reads"
@@ -27,8 +27,7 @@ function App() {
   const [images, setImage] = useState({cover_image: "", profile_image: user})
 
     const handleImages = async () => {
-        const userId = localStorage.getItem('userId')
-        const response = await Axios913.get(`/api/fetch_picture`).then(response => {
+        const response = await Axios913.get('/api/fetch_picture').then(response => {
         const {cover, profile} = response.data
 
         if (response.status === 200 && cover) {
@@ -53,12 +52,13 @@ function App() {
       }
 
       useEffect(() => {
+        if(auth) {
         handleImages()
+      }
         
-      }, [])
+      }, [auth])
 
   return (
-    // <access_token.Provider >
     <userPicContext.Provider value={images['profile_image']}>
       <div>
           <Router>
@@ -80,7 +80,6 @@ function App() {
           </Router>
       </div>
     </userPicContext.Provider>
-//  </access_token.Provider>
   )
 }
 

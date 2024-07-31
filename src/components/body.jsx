@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import fantasy from "../assets/story4.jpeg"
 import action from "../assets/action.jpeg"
 import romance from "../assets/romance.jpeg"
@@ -29,13 +29,11 @@ import Topic from './topic'
 import Foot from './footer'
 import phone from '../assets/phone.png'
 import phone1 from '../assets/phone.png'
+import { AuthContext } from './fetchUserPic'
 
 function Body() {
-  const location = useLocation();
+  const locationref = useLocation();
 
-  // useEffect(() => {
-  //   window.scrollTo({top : 0, behavior : 'smooth'})
-  // }, [])
 
   useEffect(() => {
     let params = new URLSearchParams(location.search); 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Axios from './Axios'
+import Axios913 from './Axios913'
 
 function PostForm({onNew, New, onWrite, Write}) {
 
@@ -20,7 +20,7 @@ function PostForm({onNew, New, onWrite, Write}) {
       content : content
     }
 
-    const response = await Axios.post("/api/user_posts", data).then(response => console.log(response.data))
+    const response = await Axios913.post("/api/user_posts", data).then(response => console.log(response.data))
     handleNew()
   }
 

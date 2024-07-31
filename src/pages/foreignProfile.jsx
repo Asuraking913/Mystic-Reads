@@ -11,8 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup, faPersonHalfDress, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
-import Axios from '../components/Axios'
-import Axios1 from '../components/Axios1'
+import Axios913 from '../components/Axios913'
 
 function ForeignView() {
 
@@ -35,7 +34,7 @@ function ForeignView() {
   // Fetch user details
   useEffect(() => {
     const userId = localStorage.getItem('userId');
-    const response = Axios.get(`/api/profiles_info/${userId}`).then(response => {
+    const response = Axios913.get(`/api/profiles_info/${userId}`).then(response => {
       setBio(response.data['data']['bio'])
       setLocation1(response.data['data']['location'])
       setBirthday(response.data['data']['birthday'])
