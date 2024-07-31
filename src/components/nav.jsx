@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faAlignRight, faBars, faBell, faMessage, faPowerOff, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import user from "../assets/user.svg"
-import { userPicContext } from './fetchUserPic';
+import { AuthContext, userPicContext } from './fetchUserPic';
 
-function Nav({log}) {
+function Nav() {
 
   const [search, setSearch] = useState(true);
   const [nav, setNav] = useState(false)
@@ -14,6 +14,8 @@ function Nav({log}) {
   const profile = useContext(userPicContext)
   // const [log, setLog] = useState(false)
   const navigate = useNavigate()
+  const {auth, setAuth} = useContext(AuthContext)
+  console.log(auth)
 
   const handleNav = () => {
     document.body.classList.add('no-scroll')
@@ -114,7 +116,7 @@ function Nav({log}) {
         }
         </nav>
         {
-          !log ?
+          !auth ?
 
         <ul className='gap-[1em] text-[1.1rem] items-center roboto sm:flex hidden'>
           <Link to={"/signup"} className='hover:scale-110 border-2 border-[--accent] px-[1.5em] py-[0.5em] rounded-[2em] hover:text-white hover:bg-[--accent] duration-[0.5s]'>
@@ -140,6 +142,7 @@ function Nav({log}) {
         <ul className='gap-[1em] duration-[0.5s] text-[1.1rem] items-center roboto sm:flex hidden'>
           <Link onClick={() => {
               localStorage.clear()
+              setAuth(false)
               navigate("/")
               }}   className='relative text-[--accent]'>
             <FontAwesomeIcon icon={faPowerOff} className='text-4xl'/>
@@ -192,7 +195,7 @@ function Nav({log}) {
             </ul>
           </nav>
             {
-              !log ?
+              !auth ?
           <ul className=' flex gap-[3em] flex-col right-[1em] text-[1.1rem] items-center roboto'>
             <Link to={"/signup"} className='hover:scale-110 border-2 border-[--accent] px-[1.5em] py-[0.5em] rounded-[2em] hover:text-white hover:bg-[--accent] duration-[0.5s]'>
               <li className=''>Sign Up</li>
@@ -219,7 +222,7 @@ function Nav({log}) {
              <Link  className='relative text-[--accent]'>
             <FontAwesomeIcon onClick={() => {
               localStorage.clear()
-              console.log('wer')
+              setAuth(false)
               navigate("/")
               }} icon={faPowerOff} className='text-4xl'/>
           </Link>

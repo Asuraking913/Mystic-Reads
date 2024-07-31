@@ -8,25 +8,11 @@ import { AuthContext, userPicContext } from '../components/fetchUserPic'
 
 function Land() {
 
-  const [log, setLog] = useState(false)
   const user = useContext(userPicContext);
-  const {auth, setAuth} = useContext(AuthContext)
-
-  useEffect(() => {
-    if (localStorage.getItem('auth')) {
-      setLog(true)
-      return
-    }
-
-    setLog(false)
-  })
-
-  // console.log(auth)
-    
 
   return (
     <div className=''>
-          <Nav log={log}/>
+          <Nav />
           <Body />
     </div>
   )

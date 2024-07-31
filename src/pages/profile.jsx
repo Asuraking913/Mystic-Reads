@@ -52,24 +52,11 @@ function Profile() {
     const [bio, setBio] = useState(about)
     const [location, setLocation] = useState(loca)
     const [member, setMember] = useState(joined)
-    const [log, setLog] = useState(false)
     const [bio1, setBio1] = useState("")
     const [location1, setLocation1] = useState("")
     const [birth1, setBirthday1] = useState("")
     const [error1, setError1] = useState("")
     const [images, setImages] = useState({cover_image: "", profile_image : user})
-
-
-    useEffect(() => {
-      // console.log(localStorage)
-      if (localStorage.getItem('auth')) {
-        setLog(true)
-        return
-      }
-  
-      setLog(false)
-      navigate("/")
-    })
 
     const handleImages = async () => {
         const userId = localStorage.getItem('userId')
@@ -91,12 +78,12 @@ function Profile() {
         }).catch((error) => {
           setImages({cover_image : '', profile_image : user})
           if (error.response.status === 401) {
-            localStorage.clear()
+            setAuth(false)
             navigate("/")
           }
 
           if (error.response.status === 500) {
-            localStorage.clear()
+            setAuth(false)
             navigate("/")
           }
         })
@@ -243,7 +230,7 @@ function Profile() {
         })
       }
       catch (error) {
-        localStorage.clear()
+        setAuth(false)
         if (error.response.data) {
           setError(error.response.data)
           setTimeout(() => setError(""), 4000)
@@ -272,7 +259,7 @@ function Profile() {
       const response = await Axios913.post("/api/upload_picture", fileData).then(
         response => {
             if (response.status === 401) {
-              localStorage.clear()
+              setAuth(false)
               navigate("/")
             }
 
@@ -316,7 +303,7 @@ function Profile() {
       const response = await Axios913.post("/api/upload_picture", fileData).then(
         response => {
             if (response.status === 401) {
-              localStorage.clear()
+              setAuth(false)
               navigate("/")
             }
 
@@ -424,7 +411,7 @@ function Profile() {
         : 
         
         <userPicContext.Provider value={images['profile_image']}>
-           <Nav profile log={log}/>
+           <Nav />
         </userPicContext.Provider>
       }
       <article className='h-auto sm:mt-0 mt-[3.7em]'>

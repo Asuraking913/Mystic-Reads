@@ -12,24 +12,24 @@ import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup,
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 import Axios913 from '../components/Axios913'
+import { AuthContext } from '../components/fetchUserPic'
+import { useContext } from 'react'
 
 function ForeignView() {
 
-  const [log, setLog] = useState(false)
   const navigate = useNavigate()
 
-  // Logged
-  useEffect(() => {
-    // console.log(localStorage)
-    if (localStorage.getItem('access_token')) {
-      setLog(true)
-      return
-    }
-
-    setLog(false)
-    navigate("/")
-  })
-
+  const {
+    auth, setAuth,
+    userId : id,
+    userName : name,
+    location : loca,
+    birthday : birthday,
+    joined : member,
+    bio : about,
+    gender : sex,
+    email : userEmail,
+  } = useContext(AuthContext)
 
   // Fetch user details
   useEffect(() => {
@@ -42,14 +42,13 @@ function ForeignView() {
       setUserName(response.data['data']["userName"])
       setJoined(response.data['data']['member'])
       setEmail(response.data['data']['userEmail'])
-      // console.log(response.data)
     }).catch((error) => {
       if (error.response.status === 401) {
-        localStorage.clear()
+        setAuth(false)
         navigate("/")
       }
       if (error.response.status === 500) {
-        localStorage.clear()
+        setAuth(false)
         navigate("/")
       }
     })
@@ -58,7 +57,7 @@ function ForeignView() {
   //  fetch images
     const handleImages = async () => {
       const userId = localStorage.getItem('userId')
-      const response = await Axios1.get(`/api/fetch_picture`).then(response => {
+      const response = await Axios913.get(`/api/fetch_picture`).then(response => {
         const {cover, profile} = response.data;
 
         if(response.status == 200 && cover) {
@@ -159,11 +158,11 @@ useEffect(() => {
                   <img src={image['profile_image']} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
                </div>
                <div className='text-center'>
-                 <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
+                 <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{name}</h2>
                  <p className='text-[0.9rem] text-[--bg] flex justify-center items-center gap-[.5em]'><span className='text-[--]'>Active:</span> {active ? <i className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></i>: <i className='inline'>active 2hrs ago</i> }</p>
                </div>
                <div className='w-[90%] break-words px-[1.5em]'>
-                  <p className='line text-center font-sans italic sm:text-[0.9rem] text-white'>{(bio == "null") ? <i className='opacity-40'>none</i> : bio }</p>
+                  <p className='line text-center font-sans italic sm:text-[0.9rem] text-white'>{(about == null) ? <i className='opacity-40'>none</i> : about }</p>
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
@@ -185,7 +184,7 @@ useEffect(() => {
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='text-xl mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>{(location1 == "null") ? <i className='opacity-40'>none</i> : location1 }</span>
+                      <span className='text-[--bg] roboto'>{(loca == null) ? <i className='opacity-40'>none</i> : loca }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text-xl mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -193,19 +192,19 @@ useEffect(() => {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since {joined}</span>
+                    <span className='text-[--bg] roboto'>Member Since {member}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
-                    <span className='text-[--bg] roboto'>{gender}</span>
+                    <span className='text-[--bg] roboto'>{sex}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='text-xl mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] roboto'>{(email == "null") ? <i className='opacity-40'>none</i> : email }</span>
+                    <span className='text-[--bg] roboto'>{(userEmail == null) ? <i className='opacity-40'>none</i> : userEmail }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='text-xl mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{(birth == "null") ? <i className='opacity-40'>none</i> : birth }</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{(birthday == null) ? <i className='opacity-40'>none</i> : birthday }</span>
                   </p>
                   
                </div>
@@ -215,7 +214,7 @@ useEffect(() => {
         {/* profile mobile */}
         <div className=' py-[1em] overflow-hidden  flex sm:hidden flex-col items-center justify-center z-[20] shadow-md shadow-[--accent1] bg-[--accent1] gap-[1em] px-[1.5em] w-[100%]'>
                <div className='bg-[--accent] relative p-[.2em] rounded-[50%] h-[100px] w-[100px]'>
-                  <img src={image['profile']} className='rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
+                  <img src={image['profile_image']} className='rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
                </div>
                <div className='text-center'>
                  <h2 className='text-xl font-bold roboto text-[--bg]'>{userName}</h2>
@@ -244,27 +243,27 @@ useEffect(() => {
                <div className='w-full flex flex-col gap-[.5em]'>
                <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>{(location1 == "null") ? <i className='opacity-40'>none</i> : location1 }</span>
+                      <span className='text-[--bg] roboto'>{(loca == null) ? <i className='opacity-40'>none</i> : loca }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text mr-[.1em] text-[--bg]'/>Likes:</span>
                     <span className='text-[--bg] roboto'>2 Likes</span>
                   </p>
                   <p className='flex justify-between items-center'>
-                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>Member {(birth == "null") ? <i className='opacity-40'>none</i> : birth }</span>
+                  <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='mr-[.1em] text-[--bg]'/>Member:</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>Member {(member == null) ? <i className='opacity-40'>none</i> : member }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>
-                    <span className='text-[--bg] roboto'>{(gender == "null") ? <i className='opacity-40'>none</i> : gender }</span>
+                    <span className='text-[--bg] roboto'>{(sex == "null") ? <i className='opacity-40'>none</i> : sex }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] roboto'>{(birth == "null") ? <i className='opacity-40'>none</i> : birth }</span>
+                    <span className='text-[--bg] roboto'>{(birthday == "null") ? <i className='opacity-40'>none</i> : birthday }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{(email == "null") ? <i className='opacity-40'>none</i> : email }</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{(userEmail == "null") ? <i className='opacity-40'>none</i> : userEmail }</span>
                   </p>
                </div>
       

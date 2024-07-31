@@ -45,8 +45,7 @@ const AuthProvider = ({children}) => {
            const handleFetch = async () => {
                const response = await Axios913.get('/api/profiles_info').then(response => {
                 if (response.status == 200) {
-                if(!auth) {
-                setAuth(true)
+                if(auth == false) {
                 setBio(response.data.data.bio)
                 setBirthday(response.data.data.birthday)
                 setGender(response.data.data.gender)

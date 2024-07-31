@@ -8,20 +8,7 @@ import { useNavigate } from 'react-router-dom'
 function Publish() {
 
   const [chapter, setChapter] = useState('Prologue')
-  const [log, setLog] = useState(false)
   const navigate = useNavigate()
-
-    // Logged
-  useEffect(() => {
-    // console.log(localStorage)
-    if (localStorage.getItem('auth')) {
-      setLog(true)
-      return
-    }
-
-    setLog(false)
-    navigate("/")
-  })
 
   return (
     <>

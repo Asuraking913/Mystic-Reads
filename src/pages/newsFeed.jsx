@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Nav from '../components/nav'
 import Display from '../components/display'
 import FeedsCont from '../components/feedContent'
@@ -14,15 +14,14 @@ import PostForm from '../components/postForm'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import Axios913 from '../components/Axios913'
+import { AuthContext } from '../components/fetchUserPic'
 
 
 function Feeds() {
 
-  const [log, setLog] = useState(false)
   const navigate = useNavigate()
   const [newPost, setNewPost] = useState("")
   const [write, setWrite] = useState(true)
-
 
 //   fetch post
     const handleFetch = async () => {
@@ -66,19 +65,6 @@ function Feeds() {
     useEffect (() => {
     {newPost ? handleFetch() : ""}
     })
-
-
-  useEffect(() => {
-    // console.log(localStorage)
-    if (localStorage.getItem('auth')) {
-      setLog(true)
-      return
-    }
-
-    setLog(false)
-    navigate("/")
-  })
-
 
     const [feeds, setFeeds] = useState([
         {

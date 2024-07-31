@@ -75,9 +75,6 @@ function Login() {
             }
 
         }
-
-
-
         catch(error) {
             if (error.response && error.response.status === 400) {
                 setError(error.response.data['message'])
@@ -90,6 +87,9 @@ function Login() {
             }
         }
 }
+
+  console.log(auth)
+
 
   return (
    <article className='sm:h-full h-screen flex items-center p-[2em] px-[1em] sm:px-[10em]'>

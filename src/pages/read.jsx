@@ -10,20 +10,7 @@ import { useNavigate } from 'react-router-dom'
 function ReadPage() {
   const [chap, setChap] = useState(false);
 
-  const [log, setLog] = useState(false)
   const navigate = useNavigate()
-
-  // Logged
-  useEffect(() => {
-    // console.log(localStorage)
-    if (localStorage.getItem('auth')) {
-      setLog(true)
-      return
-    }
-
-    setLog(false)
-    navigate("/")
-  })
 
   const handlechap = () => {
     setChap(!chap)
@@ -48,7 +35,7 @@ function ReadPage() {
 
   return (
     <>
-        <Nav log={log}/>
+        <Nav />
         <Link onClick={scrollDown}>
           <FontAwesomeIcon icon={faCircleArrowDown} className='text-[--accent1] animate-pulse sm:hidden right-[10px] fixed top-[30%] text-3xl'/>
         </Link>

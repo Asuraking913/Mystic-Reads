@@ -8,23 +8,11 @@ import { useNavigate } from 'react-router-dom'
 
 function Library() {
 
-    const [log, setLog] = useState(false)
     const navigate = useNavigate()
-
-    // useEffect(() => {
-    //     // console.log(localStorage)
-    //     if (localStorage.getItem('access_token')) {
-    //       setLog(true)
-    //       return
-    //     }
-    
-    //     setLog(false)
-    //     navigate("/")
-    //   })
 
   return (
     <>
-        <Nav log={log}/>
+        <Nav />
         <Display />
         <section className='h-auto px-[--pdx] '>
             <div className='w-full py-[2em]'>
