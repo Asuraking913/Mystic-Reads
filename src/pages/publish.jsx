@@ -14,7 +14,7 @@ function Publish() {
     // Logged
   useEffect(() => {
     // console.log(localStorage)
-    if (localStorage.getItem('access_token')) {
+    if (localStorage.getItem('auth')) {
       setLog(true)
       return
     }

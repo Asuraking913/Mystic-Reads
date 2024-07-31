@@ -16,6 +16,7 @@ import Axios1 from './components/Axios1'
 import user from "../src/assets/user.svg"
 import { userPicContext } from './components/fetchUserPic'
 import Nav from './components/nav'
+import Axios913 from './components/Axios913'
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
 
     const handleImages = async () => {
         const userId = localStorage.getItem('userId')
-        const response = await Axios1.get(`/api/fetch_picture`).then(response => {
+        const response = await Axios913.get(`/api/fetch_picture`).then(response => {
         const {cover, profile} = response.data
 
         if (response.status === 200 && cover) {
@@ -41,9 +42,9 @@ function App() {
             }))
         }
         }).catch((err) => {
-          if (err.response.data.message === 'Images Unavailable' ) {
-            return  
-          }
+          // if (err.response.data.message === 'Images Unavailable' ) {
+          //   return  
+          // }
 
           if(err.response.status === 400) {
             return

@@ -14,7 +14,7 @@ import Post from '../components/posts'
 import axios from 'axios'
 import edit1 from "../assets/edit2.png"
 import Axios from '../components/Axios'
-import Axios1 from '../components/Axios1'
+import Axios913 from '../components/Axios913'
 import { access_token, userPicContext } from '../components/fetchUserPic'
 
 function Profile() {
@@ -52,7 +52,7 @@ function Profile() {
 
     useEffect(() => {
       // console.log(localStorage)
-      if (localStorage.getItem('access_token')) {
+      if (localStorage.getItem('auth')) {
         setLog(true)
         return
       }
@@ -63,7 +63,7 @@ function Profile() {
 
     const handleImages = async () => {
         const userId = localStorage.getItem('userId')
-        const response = await Axios1.get(`/api/fetch_picture`).then(response => {
+        const response = await Axios913.get(`/api/fetch_picture`).then(response => {
           const {cover, profile} = response.data;
 
           if(response.status == 200 && cover) {
@@ -95,7 +95,7 @@ function Profile() {
       // fetch posts data
       const handlePostFetch = () => {
 
-        const response = Axios.get("/api/user_posts").then(response => {
+        const response = Axios913.get("/api/user_posts").then(response => {
           console.log(response.data)
           const postDetails = response.data['data']['post']
           console.log(postDetails)
@@ -157,7 +157,7 @@ function Profile() {
 
     const handleProfileDel = async () => {
 
-      const response = await Axios1.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
+      const response = await Axios913.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
 
       setProfile(user)
       // setImages((prev) => ({
@@ -167,7 +167,7 @@ function Profile() {
 
     const handleCoverDel = async () => {
 
-      const response = await Axios1.post("/api/remove_image", {"photo" : 'cover'}).then(response => console.log(response.data))
+      const response = await Axios913.post("/api/remove_image", {"photo" : 'cover'}).then(response => console.log(response.data))
 
 
       setCover(null)
@@ -259,7 +259,7 @@ function Profile() {
       // Send file to database
       const fileData = new FormData(); 
       fileData.append('cover', file)
-      const response = await Axios1.post("/api/upload_picture", fileData).then(
+      const response = await Axios913.post("/api/upload_picture", fileData).then(
         response => {
             if (response.status === 401) {
               localStorage.clear()
@@ -303,7 +303,7 @@ function Profile() {
       const fileData = new FormData();
       fileData.append('profile', file)
 
-      const response = await Axios1.post("/api/upload_picture", fileData).then(
+      const response = await Axios913.post("/api/upload_picture", fileData).then(
         response => {
             if (response.status === 401) {
               localStorage.clear()

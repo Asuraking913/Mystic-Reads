@@ -8,6 +8,7 @@ import axios from 'axios'
 import Axios from '../components/Axios'
 import { useEffect } from 'react'
 import { access_token } from '../components/fetchUserPic'
+import Axios913 from '../components/Axios913'
 
 
 function Login() {
@@ -43,15 +44,14 @@ function Login() {
         }
 
         try {
-            const response = await Axios.post("/api/auth/login", data) 
+            const response = await Axios913.post("/api/auth/login", data) 
             if (response.status === 200) {
                 localStorage.setItem('userName', response.data['data']['userName'] )
                 localStorage.setItem('userEmail', response.data['data']['userEmail'], )
                 localStorage.setItem('joined', response.data['data']['joined'])
                 localStorage.setItem('userId', response.data['data']['userId'])
                 localStorage.setItem('gender', response.data['data']['gender'])
-                localStorage.setItem('access_token', response.data['data']['access_token'])
-                localStorage.setItem('refresh_token', response.data['data']['refresh_token'])
+                localStorage.setItem('auth', true)
                 localStorage.setItem('bio', response.data['data']['bio'])
                 localStorage.setItem('location', response.data['data']['location'])
                 localStorage.setItem('birthday', response.data['data']['birthday'])

@@ -13,7 +13,7 @@ function Land() {
   const user = useContext(userPicContext);
 
   useEffect(() => {
-    if (localStorage.getItem('access_token')) {
+    if (localStorage.getItem('auth')) {
       setLog(true)
       return
     }
