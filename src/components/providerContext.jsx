@@ -15,10 +15,13 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(false)
 
     const handleFetch = async () => {
+
+        try {
         const response = await Axios913.get('/api/profiles_info')
 
         if (response.status == 200) {
             setAuth(true)
+            setLoading(true)
             setBio(response.data.data.bio)
             setBirthday(response.data.data.birthday)
             setGender(response.data.data.gender)
@@ -28,10 +31,17 @@ const AuthProvider = ({children}) => {
             setUserId(response.data.data.userId)
             setUserName(response.data.data.userName)
             }
+        }
+
+        catch (err) {
+            console.log("Error", err)
+        }
     }
 
-    useEffect(() => {   
+    useEffect(() => {  
+        
            handleFetch()
+
     },  [])
 
     return (

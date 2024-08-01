@@ -138,12 +138,12 @@ function Nav() {
         :
 
         <ul className='gap-[1em] duration-[0.5s] text-[1.1rem] items-center roboto sm:flex hidden'>
-          <Link onClick={() => {
+          <button onClick={() => {
               setAuth(null)
               navigate("/")
               }}   className='relative text-[--accent]'>
             <FontAwesomeIcon icon={faPowerOff} className='text-4xl'/>
-          </Link>
+          </button>
           <Link to = {"/feeds"}  className='relative'>
             <div className='h-[13px] w-[13px] bg-red-500 absolute right-0 text-white text-[0.7rem] rounded-[50%] flex items-center justify-center'>1</div>
             <FontAwesomeIcon icon={faBell} className='text-4xl'/>
@@ -213,13 +213,12 @@ function Nav() {
           :
 
           <ul className=' flex gap-[1.5em] flex-col right-[1em] text-[1.1rem] items-center roboto'>
-             <Link  className='relative text-[--accent]'>
+             <button  className='relative text-[--accent]'>
             <FontAwesomeIcon onClick={() => {
-              localStorage.clear()
-              setAuth(false)
+              setAuth(null)
               navigate("/")
               }} icon={faPowerOff} className='text-4xl'/>
-          </Link>
+          </button>
             <Link to = {"/feeds"}  className='relative text-[--accent]'>
             <div className='h-[13px] w-[13px] bg-red-500 absolute right-0 text-white text-[0.7rem] rounded-[50%] flex items-center justify-center'>1</div>
             <FontAwesomeIcon icon={faBell} className='text-4xl'/>
