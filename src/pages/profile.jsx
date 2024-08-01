@@ -15,6 +15,7 @@ import edit1 from "../assets/edit2.png"
 import Axios913 from '../components/Axios913'
 import { userPicContext } from '../components/fetchUserPic'
 import AuthContext from '../components/fetchUserPic'
+import Axios from '../components/Axios'
 
 function Profile() {
 
@@ -150,7 +151,7 @@ function Profile() {
 
     const handleProfileDel = async () => {
 
-      const response = await Axios913.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
+      const response = await Axios.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
 
       setProfile(user)
       // setImages((prev) => ({
@@ -298,8 +299,10 @@ function Profile() {
 
       const response = await Axios913.post("/api/upload_picture", fileData).then(
         response => {
+        console.log('response', response)
+
             if (response.status === 401) {
-              setAuth(false)
+              // setAuth(false)
               navigate("/")
             }
 

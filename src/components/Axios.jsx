@@ -1,16 +1,15 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
-const Axios913 = axios.create({
-    withCredentials : true,
-
+const Axios = axios.create({
 })
 
 const refresh_token = async () => {
     try {
-        const response = await axios.get("/api/refresh_token", {
+        const response = axios.get("/api/refresh_token", {
             withCredentials : true
         })
-        console.log('Retrieved new tokens')
+        // console.log('Retrieved new tokens')
     }
 
     catch(err) {
@@ -18,12 +17,12 @@ const refresh_token = async () => {
     }
 }
 
-Axios913.interceptors.request.use(config => {
+Axios.interceptors.request.use(config => {
     config.withCredentials=true
     return config
 })
 
-Axios913.interceptors.response.use(response => {
+Axios.interceptors.response.use(response => {
     response.config.withCredentials=true
     return response
 },
@@ -33,11 +32,10 @@ Axios913.interceptors.response.use(response => {
         originalRequest._retry = true
     try {
         await refresh_token()
-        return Axios913(originalRequest)
+        return Axios(originalRequest)
     }
     catch (err) {
-        // console.log('Unable To get New Access Tokens')
-        console.log(err)
+        console.log('Unable To get New Access Tokens')
         return Promise.reject(err)
     }
     }
@@ -46,4 +44,4 @@ Axios913.interceptors.response.use(response => {
 }
 )
 
-export default Axios913
+export default Axios
