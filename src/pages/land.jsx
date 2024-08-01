@@ -3,7 +3,7 @@ import Nav from '../components/nav'
 import user from "../assets/user.svg"
 import Body from '../components/body'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext, userPicContext } from '../components/fetchUserPic'
+import { userPicContext } from '../components/fetchUserPic'
 
 
 function Land() {

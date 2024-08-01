@@ -14,7 +14,7 @@ import Post from '../components/posts'
 import edit1 from "../assets/edit2.png"
 import Axios913 from '../components/Axios913'
 import { userPicContext } from '../components/fetchUserPic'
-import { AuthContext } from '../components/fetchUserPic'
+import AuthContext from '../components/fetchUserPic'
 
 function Profile() {
 

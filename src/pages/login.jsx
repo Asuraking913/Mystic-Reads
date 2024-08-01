@@ -6,7 +6,7 @@ import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"    
 import { useEffect } from 'react'
 import Axios913 from '../components/Axios913'
-import { AuthContext } from '../components/fetchUserPic'
+import AuthContext from '../components/fetchUserPic'
 
 
 function Login() {
@@ -32,7 +32,6 @@ function Login() {
             setError("")
         }, 4000)
     }, [])
-
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -78,8 +77,6 @@ function Login() {
             }
         }
 }
-
-console.log(auth)
 
 
   return (

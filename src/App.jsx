@@ -13,7 +13,8 @@ import Library from './pages/library'
 import PrivateRoutes from './components/privateRoute'
 import { useState } from 'react'
 import user from "../src/assets/user.svg"
-import {  AuthContext, userPicContext } from './components/fetchUserPic'
+import AuthContext from './components/fetchUserPic'
+import { userPicContext } from './components/fetchUserPic'
 import Axios913 from './components/Axios913'
 
 function App() {

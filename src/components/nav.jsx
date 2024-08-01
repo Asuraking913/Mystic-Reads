@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faAlignRight, faBars, faBell, faMessage, faPowerOff, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import user from "../assets/user.svg"
-import { AuthContext, userPicContext } from './fetchUserPic';
+import AuthContext from './fetchUserPic';
+import { userPicContext } from './fetchUserPic';
 
 function Nav() {
 
@@ -13,7 +14,7 @@ function Nav() {
   const [menu, setMenu] = useState(true)
   const profile = useContext(userPicContext)
   const navigate = useNavigate()
-  const {auth, setAuth} = useContext(AuthContext)
+  const {auth, setAuth, setLoading} = useContext(AuthContext)
 
   const handleNav = () => {
     document.body.classList.add('no-scroll')
@@ -138,8 +139,7 @@ function Nav() {
 
         <ul className='gap-[1em] duration-[0.5s] text-[1.1rem] items-center roboto sm:flex hidden'>
           <Link onClick={() => {
-              localStorage.clear()
-              setAuth(false)
+              setAuth(null)
               navigate("/")
               }}   className='relative text-[--accent]'>
             <FontAwesomeIcon icon={faPowerOff} className='text-4xl'/>

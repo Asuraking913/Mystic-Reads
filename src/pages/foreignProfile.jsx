@@ -10,7 +10,7 @@ import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup,
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 import Axios913 from '../components/Axios913'
-import { AuthContext } from '../components/fetchUserPic'
+import AuthContext from '../components/fetchUserPic'
 import { useContext } from 'react'
 
 function ForeignView() {

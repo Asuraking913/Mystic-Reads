@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Nav from '../components/nav'
 import Display from '../components/display'
 import FeedsCont from '../components/feedContent'
