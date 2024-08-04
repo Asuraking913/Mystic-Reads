@@ -6,6 +6,8 @@ import { faAlignLeft, faAlignRight, faBars, faBell, faMessage, faPowerOff, faSea
 import user from "../assets/user.svg"
 import AuthContext from './fetchUserPic';
 import { userPicContext } from './fetchUserPic';
+import Cookies from 'js-cookie';
+import Axios913 from './Axios913';
 
 function Nav() {
 
@@ -138,8 +140,9 @@ function Nav() {
         :
 
         <ul className='gap-[1em] duration-[0.5s] text-[1.1rem] items-center roboto sm:flex hidden'>
-          <button onClick={() => {
+          <button onClick={async () => {
               setAuth(null)
+              const response = await Axios913.get("/api/logout").then(response => alert(response.data.message))
               navigate("/")
               }}   className='relative text-[--accent]'>
             <FontAwesomeIcon icon={faPowerOff} className='text-4xl'/>

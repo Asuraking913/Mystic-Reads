@@ -31,7 +31,7 @@ function ForeignView() {
 
   // Fetch user details
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = id;
     const response = Axios913.get(`/api/profiles_info/${userId}`).then(response => {
       setBio(response.data['data']['bio'])
       setLocation1(response.data['data']['location'])
@@ -54,7 +54,7 @@ function ForeignView() {
 
   //  fetch images
     const handleImages = async () => {
-      const userId = localStorage.getItem('userId')
+      const userId = id
       const response = await Axios913.get(`/api/fetch_picture`).then(response => {
         const {cover, profile} = response.data;
 
@@ -143,7 +143,7 @@ useEffect(() => {
 
   return (
     <>
-        <Nav log={log}/>
+        <Nav />
 
       <article className='h-auto sm:mt-0 mt-[3.7em]'>
         <div className='sm:h-[50vh] h-[20vh] relative w-full linear'>
