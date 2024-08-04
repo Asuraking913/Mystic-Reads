@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Truncate from './truncate'
 
 function FeedsCont({img, post, username, descrip}) {
 
   const [postNav, setPostNav] = useState(false)
   const [form, setForm] = useState(false)
   const [btn, setBtn] = useState(true)
+
 
   const handlePostNav = () => {
     setPostNav(!postNav)
@@ -44,6 +46,8 @@ function FeedsCont({img, post, username, descrip}) {
     preView.style.display = "none"
   }
 
+  
+
   return (
     <div className='flex gap-[1em] shadow-sm shadow-[--accent1] w-full flex-col relative p-[1em] rounded-[10px]'>
         <div className='flex items-center w-[100%] justify-between'>
@@ -56,7 +60,7 @@ function FeedsCont({img, post, username, descrip}) {
             </div>
             <FontAwesomeIcon onClick={handlePostNav} className='text-xl cursor-pointer text-[--accent1] sm:hover:scale-125 active:duration-[0.1s] sm:active:scale-[1] sm:duration-[0.5s] duration-[0.1s]' icon={faArrowsToDot}/>
         </div>
-        {post.length > 300 ? post.substring(0, 250) : post}
+        <Truncate text={post}/>
         { btn ? <div className='flex items-center justify-center gap-[2em] border-[--accent1]'>
           <Link onClick={handleLike} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
             <FontAwesomeIcon id='thumb' icon={faThumbsUp} className='text-xl'/>

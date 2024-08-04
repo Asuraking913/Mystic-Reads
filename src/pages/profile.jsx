@@ -90,9 +90,7 @@ function Profile() {
       const handlePostFetch = () => {
 
         const response = Axios913.get("/api/user_posts").then(response => {
-          console.log(response.data)
           const postDetails = response.data['data']['post']
-          console.log(postDetails)
           if (postDetails[0]) {
             const sect = document.getElementById('sect1')
             sect.classList.add('h-[120vh]')
@@ -154,9 +152,6 @@ function Profile() {
       const response = await Axios.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
 
       setProfile(user)
-      // setImages((prev) => ({
-      //   ...prev, profile_image : user
-      // }))
     }
 
     const handleCoverDel = async () => {

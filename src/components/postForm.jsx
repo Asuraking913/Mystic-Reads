@@ -20,7 +20,7 @@ function PostForm({onNew, New, onWrite, Write}) {
       content : content
     }
 
-    const response = await Axios913.post("/api/user_posts", data).then(response => console.log(response.data))
+    const response = await Axios913.post("/api/user_posts", data).then(response => console.log(response.data)).catch((err) => console.log("An error Occurred", err))
     handleNew()
   }
 

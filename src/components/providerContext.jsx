@@ -20,6 +20,7 @@ const AuthProvider = ({children}) => {
         const response = await Axios913.get('/api/profiles_info')
 
         if (response.status == 200) {
+            console.log(response.data)
             setAuth(true)
             setLoading(true)
             setBio(response.data.data.bio)
@@ -35,6 +36,13 @@ const AuthProvider = ({children}) => {
 
         catch (err) {
             console.log("Error", err)
+
+            if (err.response.status === 401) {
+                console.log('Error Occured here')
+                setLoading(false)
+                setAuth(true)
+                return
+            } 
         }
     }
 
