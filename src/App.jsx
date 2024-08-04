@@ -10,12 +10,12 @@ import Feeds from './pages/newsFeed'
 import Messenger from './pages/messenger'
 import Publish from './pages/publish'
 import Library from './pages/library'
-import PrivateRoutes from './components/privateRoute'
+import PrivateRoutes from './utils/privateRoute'
 import { useState } from 'react'
 import user from "../src/assets/user.svg"
-import AuthContext from './components/fetchUserPic'
-import { userPicContext } from './components/fetchUserPic'
-import Axios913 from './components/Axios913'
+import AuthContext from './utils/fetchUserPic'
+import { userPicContext } from './utils/fetchUserPic'
+import Axios913 from './utils/Axios913'
 
 function App() {
   

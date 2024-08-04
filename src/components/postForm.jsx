@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Axios913 from './Axios913'
+import Axios913 from '../utils/Axios913'
 
 function PostForm({onNew, New, onWrite, Write}) {
 

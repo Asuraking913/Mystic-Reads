@@ -9,8 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup, faPersonHalfDress, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
-import Axios913 from '../components/Axios913'
-import AuthContext from '../components/fetchUserPic'
+import Axios913 from '../utils/Axios913'
+import AuthContext from '../utils/fetchUserPic'
 import { useContext } from 'react'
 
 function ForeignView() {

@@ -12,10 +12,10 @@ import { faCircle, faDownLong, faEnvelope, faGift, faLocationDot, faPeopleGroup,
 import { faMessage, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Post from '../components/posts'
 import edit1 from "../assets/edit2.png"
-import Axios913 from '../components/Axios913'
-import { userPicContext } from '../components/fetchUserPic'
-import AuthContext from '../components/fetchUserPic'
-import Axios from '../components/Axios'
+import Axios913 from '../utils/Axios913'
+import { userPicContext } from '../utils/fetchUserPic'
+import AuthContext from '../utils/fetchUserPic'
+import Axios from '../utils/Axios'
 
 function Profile() {
 

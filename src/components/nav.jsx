@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faAlignRight, faBars, faBell, faMessage, faPowerOff, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import user from "../assets/user.svg"
-import AuthContext from './fetchUserPic';
-import { userPicContext } from './fetchUserPic';
+import AuthContext from '../utils/fetchUserPic';
+import { userPicContext } from '../utils/fetchUserPic';
 import Cookies from 'js-cookie';
-import Axios913 from './Axios913';
+import Axios913 from '../utils/Axios913';
 
 function Nav() {
 
@@ -217,8 +217,9 @@ function Nav() {
 
           <ul className=' flex gap-[1.5em] flex-col right-[1em] text-[1.1rem] items-center roboto'>
              <button  className='relative text-[--accent]'>
-            <FontAwesomeIcon onClick={() => {
+            <FontAwesomeIcon onClick={async () => {
               setAuth(null)
+              const response = await Axios913.get("/api/logout").then(response => alert(response.data.message))
               navigate("/")
               }} icon={faPowerOff} className='text-4xl'/>
           </button>

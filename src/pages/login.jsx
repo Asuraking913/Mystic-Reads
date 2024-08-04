@@ -5,8 +5,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg1.svg"    
 import { useEffect } from 'react'
-import Axios913 from '../components/Axios913'
-import AuthContext from '../components/fetchUserPic'
+import Axios913 from '../utils/Axios913'
+import AuthContext from '../utils/fetchUserPic'
 
 
 function Login() {

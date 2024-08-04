@@ -1,6 +1,6 @@
-import AuthContext from "./fetchUserPic";
+import AuthContext from "../utils/fetchUserPic";
 import { useState, useEffect } from "react";
-import Axios913 from "./Axios913";
+import Axios913 from "../utils/Axios913";
 
 const AuthProvider = ({children}) => {
     const [auth, setAuth] = useState(null); 
