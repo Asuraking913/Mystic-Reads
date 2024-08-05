@@ -7,8 +7,8 @@ const Axios913 = axios.create({
 
 const refresh_token = async () => {
     try {
-        const response = await Axios913.get("/api/refresh_token", {
-            withCredentials : true,
+        const response = await axios.get("/api/refresh_token", {
+            withCredentials : true
         })
         console.log('Retrieved new tokens')
     }
