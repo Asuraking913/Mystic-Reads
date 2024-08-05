@@ -8,8 +8,7 @@ const Axios913 = axios.create({
 const refresh_token = async () => {
     try {
         const response = await Axios913.get("/api/refresh_token", {
-            withCredentials : true, 
-            baseURL : "https://mystic-reads-api.vercel.app"
+            withCredentials : true,
         })
         console.log('Retrieved new tokens')
     }
@@ -21,13 +20,11 @@ const refresh_token = async () => {
 
 Axios913.interceptors.request.use(config => {
     config.withCredentials=true
-    config.baseURL="https://mystic-reads-api.vercel.app"
     return config
 })
 
 Axios913.interceptors.response.use(response => {
     response.config.withCredentials=true
-    response.config.baseURL="https://mystic-reads-api.vercel.app"
     return response
 },
     async (error) => {
