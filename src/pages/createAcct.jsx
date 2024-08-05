@@ -57,7 +57,7 @@ function Create() {
         }
 
         try {
-            const response = await axios.post("api/auth/register", data).then(response => {
+            const response = await axios.post("/api/auth/register", data).then(response => {
                 console.log(response.data)
                 if (response.status == 201) {
                     navigate("/login") 
