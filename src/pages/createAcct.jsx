@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg2.svg"
 import axios from 'axios'
+import Axios913 from '../utils/Axios913'
 
 function Create() {
 
@@ -57,7 +58,7 @@ function Create() {
         }
 
         try {
-            const response = await axios.post("/api/auth/register", data).then(response => {
+            const response = await Axios913.post("/api/auth/register", data).then(response => {
                 console.log(response.data)
                 if (response.status == 201) {
                     navigate("/login") 
