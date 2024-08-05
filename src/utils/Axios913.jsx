@@ -2,6 +2,7 @@ import axios from "axios";
 
 const Axios913 = axios.create({
     withCredentials : true,
+    baseURL : "https://mystic-reads-api.vercel.app"
 
 })
 
