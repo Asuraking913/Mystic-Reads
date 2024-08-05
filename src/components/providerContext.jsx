@@ -35,7 +35,6 @@ const AuthProvider = ({children}) => {
         }
 
         catch (err) {
-            console.log("Error", err)
 
             if (err.response.status === 401) {
                 console.log('Error Occured here')
@@ -43,6 +42,11 @@ const AuthProvider = ({children}) => {
                 setAuth(true)
                 return
             } 
+
+            if (err.response.status === 500) {
+                setAuth(!auth)
+                setLoading(!loading)
+            }
         }
     }
 

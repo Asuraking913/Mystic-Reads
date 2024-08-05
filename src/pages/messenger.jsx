@@ -7,8 +7,16 @@ import { Link } from 'react-router-dom'
 import InputMessage from '../components/inputWindow.jsx'
 import MainNotify from '../components/notifications.jsx'
 import menu from "../assets/menu.png"
+import socket from '../utils/socket.jsx'
 
 function Messenger() {
+    
+
+    useEffect(() => {
+        socket.on('connect')
+        socket.connect()
+        socket.on('connect')
+    }, [])
 
     
 
@@ -51,7 +59,7 @@ function Messenger() {
             </div>
     <article className='w-full h-screen pt-[4em] t-[5%] relative flex flex-col'>
         <nav className='w-full flex fixed h-[15vh] z-[1000000]'>
-            <div id='search-sect' className='py-[.5em] px-[1em] sm:w-[40.7%] w-full left-0 flex sm:flex flex-col gap-[.5em] bg-[--accent1] rounded-r-[5px]'>
+            <div id='search-sect' className='py-[.5em] justify-center  px-[1em] sm:w-[40.7%] w-full left-0 flex sm:flex flex-col gap-[.5em] bg-[--accent1] rounded-r-[5px]'>
                      <h2 className='text-2xl font-extrabold text-[#DDBDB2] roboto'>Chats</h2>
                      <form action="">
                          <p className='relative'>
