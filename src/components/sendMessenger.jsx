@@ -9,6 +9,10 @@ import person4 from "../assets/person4.jpeg"
 
 function SendMessage({onUsername, onImage, onSearch, bool}) {
 
+    // const handleFriends = () => {
+        
+    // }
+
 
     const msgList = [
         {
