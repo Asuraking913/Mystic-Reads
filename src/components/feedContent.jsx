@@ -4,12 +4,22 @@ import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Truncate from '../utils/truncate'
+import Axios913 from '../utils/Axios913'
+import { useContext } from 'react'
+import AuthContext from '../utils/fetchUserPic'
 
-function FeedsCont({img, post, username, descrip, like, comments}) {
+function FeedsCont({img, post, username, descrip, like, comments, postId, userId, likeStatus}) {
 
   const [postNav, setPostNav] = useState(false)
   const [form, setForm] = useState(false)
   const [btn, setBtn] = useState(true)
+  const [remark, setRemark] = useState("")
+  const [likeStatus1, setLikeStatus] = useState(likeStatus)
+
+  const {
+    userName, 
+    userId : id
+  } = useContext(AuthContext)
 
 
   const handlePostNav = () => {
@@ -32,11 +42,19 @@ function FeedsCont({img, post, username, descrip, like, comments}) {
 
     setBtn(!btn)
     setForm(!form)
-    handleComment()
+    // handleComment()
   }
 
-  const handleLike = () => {
-    setLikes(t => (t +=1))
+  const handleLike = async () => {
+    const response = await Axios913.post(`/api/${postId}/likes`, {}).then(response => {
+      console.log(response.data)
+      if (response.status == 201) {
+        setLikes(t => (t +=1))
+        setLikeStatus(!likeStatus)
+      }
+      
+    })
+    // setLikes(t => (t +=1))
   }
 
   const handleView = () => {
@@ -62,10 +80,22 @@ function FeedsCont({img, post, username, descrip, like, comments}) {
         </div>
         <Truncate text={post}/>
         { btn ? <div className='flex items-center justify-center gap-[2em] border-[--accent1]'>
-          <Link onClick={handleLike} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
+          {
+            likeStatus1 ? 
+
+            <Link onClick={handleLike} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--accent] shadow-sm shadow-[--accent1]'>
             <FontAwesomeIcon id='thumb' icon={faThumbsUp} className='text-xl'/>
             <p className='inline'>{likes}</p>
           </Link>
+
+            :
+
+            <Link onClick={handleLike} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
+            <FontAwesomeIcon id='thumb' icon={faThumbsUp} className='text-xl'/>
+            <p className='inline'>{likes}</p>
+          </Link>
+          
+          }
           <Link onClick={handleCommentForm} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
             <FontAwesomeIcon id='comment-icon' icon={faComment} className='text-xl'/>
             <p className='inline'>{commentNo}</p>
@@ -77,7 +107,7 @@ function FeedsCont({img, post, username, descrip, like, comments}) {
           <form onSubmit={(e) => e.preventDefault()}>
             <p className='relative'>
               <label htmlFor="#" className='text-xl roboto text-[--accent1] font-bold'>Comment</label>
-              <input type="text" required className='w-full bg-[#ffffff2c] shadow-sm rounded-[2em] outline-none shadow-[--accent1] py-[.6em] p-[.5em]' />
+              <input onChange={(e) => setRemark(e.target.value)} type="text" required className='w-full bg-[#ffffff2c] shadow-sm rounded-[2em] outline-none shadow-[--accent1] py-[.6em] p-[.5em]' />
               <FontAwesomeIcon onClick={handleSubmit} icon={faPaperPlane} className='absolute bg-[--accent1] text-white p-[.5em] right-[.2em] top-[32px] flex items-center justify-center rounded-[50%] text-[1.1rem]'/>
             </p>
           </form>

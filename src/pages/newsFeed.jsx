@@ -21,6 +21,8 @@ function Feeds() {
   const [newPost, setNewPost] = useState("")
   const [write, setWrite] = useState(true)
 
+  
+
 //   fetch post
     const handleFetch = async () => {
     const response = Axios913.get("/api/user_posts").then(response => {
@@ -78,7 +80,9 @@ function Feeds() {
                         p: items.content,
                         userId : items.userId, 
                         likes : items.likes,
-                        comments : items.comments
+                        comments : items.comments, 
+                        postId : items.postId, 
+                        likeStatus : items.likeStatus[0]
                     }, 
                     ...t
                 ]))
@@ -91,57 +95,9 @@ function Feeds() {
     }, [])
 
     const [feeds, setFeeds] = useState([
-        // {
-        //     img: person1,
-        //     username: 'AsuraKing913',
-        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-        //     descrip: "GamerXpert"
-        // }, 
-        // {
-        //     img: person2,
-        //     username: 'Tywin Lannister',
-        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.12345", 
-        //     descrip: "Hand of the King"
-        // }, 
-        // {
-        //     img: person3,
-        //     username: 'Khal Drogo',
-        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-        //     descrip: "Cyber Security Expert"
-        // }, 
-        // {
-        //     img: person4,
-        //     username: 'Optimus Prime',
-        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-        //     descrip: "Full stack web developer"
-        // }, 
-        // {
-        //     img: person5,
-        //     username: 'Ghost Of Sparta',
-        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-        //     descrip: "Data Analyst"
-        // }, 
-        // {
-        //     img: person5,
-        //     username: 'Ghost Of Sparta',
-        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-        //     descrip: "Data Analyst"
-        // }, 
-        // {
-        //     img: person5,
-        //     username: 'Ghost Of Sparta',
-        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-        //     descrip: "Data Analyst"
-        // }, 
-        // {
-        //     img: person5,
-        //     username: 'Ghost123 Of Sparta',
-        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-        //     descrip: "Data Analyst"
-        // }
     ])
 
-    const listFeeds = feeds.map((items, i) => (<FeedsCont like={items.likes} comments={items.comments}  key={i} descrip={items.descrip} post={items.p} username={items.username} img={items.img}/>))
+    const listFeeds = feeds.map((items, i) => (<FeedsCont like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId} comments={items.comments}  key={i} descrip={items.descrip} post={items.p} username={items.username} img={items.img}/>))
 
   return (
     <>

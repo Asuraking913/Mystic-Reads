@@ -12,7 +12,7 @@ function Publish() {
 
   return (
     <>
-        <Nav log={log}/>
+        <Nav />
         <Display />
         <section className='min-h-screen sm:py-[--pdy] py-[.5em] px-[1em] sm:px-[--pdx] flex flex-col items-center'>
             <div className='w-full px-[.2em] flex flex-col gap-[1em]'>
