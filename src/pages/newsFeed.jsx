@@ -73,7 +73,7 @@ function Feeds() {
             console.log(data.data)
             
             data.data.feeds.map(items => {
-                setFeeds(t => ([
+                setFeeds([
                     {
                         img : `data:${items.img.mime};base64,${items.img.data}`, 
                         username: items.userName, 
@@ -84,7 +84,7 @@ function Feeds() {
                         postId : items.postId, 
                         likeStatus : items.likeStatus[0]
                     }
-                ]))
+                ])
             })
         })
     }
