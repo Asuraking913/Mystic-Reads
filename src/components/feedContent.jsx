@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Truncate from './truncate'
+import Truncate from '../utils/truncate'
 
 function FeedsCont({img, post, username, descrip}) {
 

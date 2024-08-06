@@ -15,7 +15,6 @@ import edit1 from "../assets/edit2.png"
 import Axios913 from '../utils/Axios913'
 import { userPicContext } from '../utils/fetchUserPic'
 import AuthContext from '../utils/fetchUserPic'
-import Axios from '../utils/Axios'
 
 function Profile() {
 
@@ -28,10 +27,10 @@ function Profile() {
       auth, setAuth,
       userId : id,
       userName : name,
-      location : loca,
-      birthday : birthday,
+      location : loca, setLocation : setLoca,
+      birthday : birthday, setBirthday,
       joined : joined,
-      bio : about,
+      bio : about, setBio : setAbout,
       gender : sex,
       email : userEmail,
     } = useContext(AuthContext)
@@ -149,14 +148,14 @@ function Profile() {
 
     const handleProfileDel = async () => {
 
-      const response = await Axios913.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
+      const response = await Axios913.post("/api/remove_image", {"photo" : 'profile'}).then().catch((err) => console.log(err))
 
       setProfile(user)
     }
 
     const handleCoverDel = async () => {
 
-      const response = await Axios913.post("/api/remove_image", {"photo" : 'cover'}).then(response => console.log(response.data))
+      const response = await Axios913.post("/api/remove_image", {"photo" : 'cover'}).then().catch((err) => console.log(err))
 
 
       setCover(null)
@@ -205,19 +204,22 @@ function Profile() {
         if (response.status = 201) {
         const items = ['userName', 'userEmail', 'member', 'userId', 'gender', 'bio', 'joined', 'birthday', 'location']
         items.forEach(item => localStorage.removeItem(item))
-        localStorage.setItem('userName', response.data['data']['userName'] )
-        localStorage.setItem('userEmail', response.data['data']['userEmail'], )
-        // localStorage.setItem( 'member', response.data['data']['joined'])
-        localStorage.setItem('userId', response.data['data']['userId'])
-        localStorage.setItem('gender', response.data['data']['gender'])
-        localStorage.setItem('bio', response.data['data']['bio'])
-        localStorage.setItem('joined', response.data['data']['joined'])
-        localStorage.setItem('birthday', response.data['data']['birthday'])
-        localStorage.setItem('location', response.data['data']['location'])
+        // localStorage.setItem('userName', response.data['data']['userName'] )
+        // localStorage.setItem('userEmail', response.data['data']['userEmail'], )
+        // // localStorage.setItem( 'member', response.data['data']['joined'])
+        // localStorage.setItem('userId', response.data['data']['userId'])
+        // localStorage.setItem('gender', response.data['data']['gender'])
+        // localStorage.setItem('bio', response.data['data']['bio'])
+        // localStorage.setItem('joined', response.data['data']['joined'])
+        // localStorage.setItem('birthday', response.data['data']['birthday'])
+        // localStorage.setItem('location', response.data['data']['location'])
         setLocation(localStorage.getItem('location'))
         setBio(localStorage.getItem('bio'))
         document.body.classList.remove('no-scroll')
         setEditProfile(!editProfile)
+        setLoca(response.data.data['location'])
+        setBirthday(response.data.data['birthday'])
+        setAbout(response.data.data['bio'])
         }
         })
       }
@@ -294,7 +296,6 @@ function Profile() {
 
       const response = await Axios913.post("/api/upload_picture", fileData).then(
         response => {
-        console.log('response', response)
 
             if (response.status === 401) {
               // setAuth(false)
