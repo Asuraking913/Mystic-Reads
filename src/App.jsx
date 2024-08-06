@@ -52,8 +52,7 @@ function App() {
       useEffect(() => {
         if(auth) {
         handleImages()
-      }
-        
+      } 
       }, [auth])
 
   return (

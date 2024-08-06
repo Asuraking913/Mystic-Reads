@@ -7,7 +7,6 @@ export default defineConfig({
   server: {
     proxy: {
     // "/api" : "http://127.0.0.1:5000"
-    // "/api" : "https://mystic-reads-api.vercel.app", 
     "/api" : {
       target : "https://mystic-reads-api.vercel.app", 
       changeOrigin : true, 
