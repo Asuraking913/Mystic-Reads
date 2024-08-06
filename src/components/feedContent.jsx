@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Truncate from '../utils/truncate'
 
-function FeedsCont({img, post, username, descrip}) {
+function FeedsCont({img, post, username, descrip, like, comments}) {
 
   const [postNav, setPostNav] = useState(false)
   const [form, setForm] = useState(false)
@@ -16,8 +16,8 @@ function FeedsCont({img, post, username, descrip}) {
     setPostNav(!postNav)
   }
 
-  const [likes, setLikes] = useState(0)
-  const [commentNo, setCommentNo] = useState(0)
+  const [likes, setLikes] = useState(like)
+  const [commentNo, setCommentNo] = useState(comments.length)
 
   const handleCommentForm = () => {
     setForm(!form)

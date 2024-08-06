@@ -64,58 +64,84 @@ function Feeds() {
     {newPost ? handleFetch() : ""}
     })
 
+        
+    const handleFeeds = async () => {
+        const response = await Axios913.get("/api/fetch_feeds").then(response => {
+            const data = response.data
+            console.log(data.data)
+            
+            data.data.feeds.map(items => {
+                setFeeds(t => ([
+                    {
+                        img : `data:${items.img.mime};base64,${items.img.data}`, 
+                        username: items.userName, 
+                        p: items.content,
+                        userId : items.userId, 
+                        likes : items.likes,
+                        comments : items.comments
+                    }, 
+                    ...t
+                ]))
+            })
+        })
+    }
+    
+    useEffect(() => {
+        handleFeeds()
+    }, [])
+
     const [feeds, setFeeds] = useState([
-        {
-            img: person1,
-            username: 'AsuraKing913',
-            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-            descrip: "GamerXpert"
-        }, 
-        {
-            img: person2,
-            username: 'Tywin Lannister',
-            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.12345", 
-            descrip: "Hand of the King"
-        }, 
-        {
-            img: person3,
-            username: 'Khal Drogo',
-            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-            descrip: "Cyber Security Expert"
-        }, 
-        {
-            img: person4,
-            username: 'Optimus Prime',
-            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-            descrip: "Full stack web developer"
-        }, 
-        {
-            img: person5,
-            username: 'Ghost Of Sparta',
-            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-            descrip: "Data Analyst"
-        }, 
-        {
-            img: person5,
-            username: 'Ghost Of Sparta',
-            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-            descrip: "Data Analyst"
-        }, 
-        {
-            img: person5,
-            username: 'Ghost Of Sparta',
-            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-            descrip: "Data Analyst"
-        }, 
-        {
-            img: person5,
-            username: 'Ghost123 Of Sparta',
-            p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
-            descrip: "Data Analyst"
-        }
+        // {
+        //     img: person1,
+        //     username: 'AsuraKing913',
+        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+        //     descrip: "GamerXpert"
+        // }, 
+        // {
+        //     img: person2,
+        //     username: 'Tywin Lannister',
+        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.12345", 
+        //     descrip: "Hand of the King"
+        // }, 
+        // {
+        //     img: person3,
+        //     username: 'Khal Drogo',
+        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+        //     descrip: "Cyber Security Expert"
+        // }, 
+        // {
+        //     img: person4,
+        //     username: 'Optimus Prime',
+        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+        //     descrip: "Full stack web developer"
+        // }, 
+        // {
+        //     img: person5,
+        //     username: 'Ghost Of Sparta',
+        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+        //     descrip: "Data Analyst"
+        // }, 
+        // {
+        //     img: person5,
+        //     username: 'Ghost Of Sparta',
+        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+        //     descrip: "Data Analyst"
+        // }, 
+        // {
+        //     img: person5,
+        //     username: 'Ghost Of Sparta',
+        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+        //     descrip: "Data Analyst"
+        // }, 
+        // {
+        //     img: person5,
+        //     username: 'Ghost123 Of Sparta',
+        //     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam cum, consequatur blanditiis voluptatum expedita ab commodi, rerum ad tempora, sint saepe neque. Reprehenderit magni iure exercitationem, aspernatur corrupti doloremque.", 
+        //     descrip: "Data Analyst"
+        // }
     ])
 
-    const listFeeds = feeds.map((items, i) => (<FeedsCont  key={i} descrip={items.descrip} post={items.p} username={items.username} img={items.img}/>))
+    const listFeeds = feeds.map((items, i) => (<FeedsCont like={items.likes} comments={items.comments}  key={i} descrip={items.descrip} post={items.p} username={items.username} img={items.img}/>))
 
   return (
     <>
