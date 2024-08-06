@@ -149,7 +149,7 @@ function Profile() {
 
     const handleProfileDel = async () => {
 
-      const response = await Axios.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
+      const response = await Axios913.post("/api/remove_image", {"photo" : 'profile'}).then(response => console.log(response.data))
 
       setProfile(user)
     }
@@ -200,7 +200,7 @@ function Profile() {
 
 
       try{
-        const response = await Axios.post(`/api/profiles_info`, data).then(response => {
+        const response = await Axios913.post(`/api/profiles_info`, data).then(response => {
                   
         if (response.status = 201) {
         const items = ['userName', 'userEmail', 'member', 'userId', 'gender', 'bio', 'joined', 'birthday', 'location']
