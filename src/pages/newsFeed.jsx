@@ -83,8 +83,7 @@ function Feeds() {
                         comments : items.comments, 
                         postId : items.postId, 
                         likeStatus : items.likeStatus[0]
-                    }, 
-                    ...t
+                    }
                 ]))
             })
         })
