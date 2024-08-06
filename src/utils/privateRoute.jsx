@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import AuthContext from './fetchUserPic'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBaseballBall, faBasketball } from '@fortawesome/free-solid-svg-icons'
+import { faGear } from '@fortawesome/free-solid-svg-icons'
 
 const PrivateRoutes = () => {
 
@@ -11,7 +11,7 @@ const PrivateRoutes = () => {
     if (!authContext & !loading) {
         return (
             <div className='h-screen flex items-center justify-center w-full'>
-                <FontAwesomeIcon className='text-[4rem] animate-spin text-[--accent1]' icon={faBaseballBall}/>
+                <FontAwesomeIcon className='text-[4rem] animate-spin text-[--accent1]' icon={faGear}/>
             </div>
         )
     }
