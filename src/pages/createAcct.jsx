@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import google from "../assets/google.svg"
 import svg from "../assets/svg2.svg"
-import axios from 'axios'
 import Axios913 from '../utils/Axios913'
 
 function Create() {

@@ -15,6 +15,7 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(false)
 
     const handleFetch = async () => {
+        if (!auth) {
 
         try {
         const response = await Axios913.get('/api/profiles_info')
@@ -48,6 +49,7 @@ const AuthProvider = ({children}) => {
                 setLoading(!loading)
             }
         }
+    }
     }
 
     useEffect(() => {  
