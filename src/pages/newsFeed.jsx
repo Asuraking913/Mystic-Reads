@@ -26,7 +26,7 @@ function Feeds() {
 //   fetch post
     const handleFetch = async () => {
     const response = Axios913.get("/api/user_posts").then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         const postDetails = response.data['data']['post']
         const userName = response.data['data']['userName']
         const userId = response.data['data']['userId']
@@ -92,6 +92,7 @@ function Feeds() {
     
     useEffect(() => {
         handleFeeds()
+        console.log('fetched')
     }, [])
 
     const [feeds, setFeeds] = useState([
