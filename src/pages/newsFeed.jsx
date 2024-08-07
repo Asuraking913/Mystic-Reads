@@ -85,6 +85,7 @@ function Feeds() {
                         likeStatus : items.likeStatus[0]
                     }), 
             )
+            console.log(newFeeds)
             setFeeds([...newFeeds])
         })
     }
@@ -95,7 +96,7 @@ function Feeds() {
     }, [])
 
 
-    const listFeeds = feeds.map((items, i) => (<FeedsCont like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId} comments={items.comments}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
+    const listFeeds = feeds.map((items, i) => (<FeedsCont like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
 
   return (
     <>

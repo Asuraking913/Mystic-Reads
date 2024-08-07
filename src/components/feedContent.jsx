@@ -9,13 +9,14 @@ import { useContext } from 'react'
 import AuthContext from '../utils/fetchUserPic'
 import user from "../assets/user.svg"
 
-function FeedsCont({post, username, descrip, like, comments, postId, userId, likeStatus}) {
+function FeedsCont({post, username, descrip, like, postId, userId, likeStatus}) {
 
   const [postNav, setPostNav] = useState(false)
   const [form, setForm] = useState(false)
   const [btn, setBtn] = useState(true)
   const [remark, setRemark] = useState("")
   const [likeStatus1, setLikeStatus] = useState(likeStatus)
+  const [likes, setLikes] = useState(like)
   const [img, setImg] = useState(user)
 
   const {
@@ -38,8 +39,6 @@ function FeedsCont({post, username, descrip, like, comments, postId, userId, lik
     setPostNav(!postNav)
   }
 
-  const [likes, setLikes] = useState(like)
-  const [commentNo, setCommentNo] = useState(comments.length)
 
   const handleCommentForm = () => {
     setForm(!form)
@@ -110,7 +109,7 @@ function FeedsCont({post, username, descrip, like, comments, postId, userId, lik
           }
           <Link onClick={handleCommentForm} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
             <FontAwesomeIcon id='comment-icon' icon={faComment} className='text-xl'/>
-            <p className='inline'>{commentNo}</p>
+            <p className='inline'>0</p>
           </Link>
         </div> : ""}
         {
