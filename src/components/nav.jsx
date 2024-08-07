@@ -80,7 +80,7 @@ function Nav() {
 
   return (
     <div className='text-[--accent] z-[100000000000] bg-[--accent1] fixed  sm:sticky top-0 font-bold  right-0 w-full px-[1em] sm:px-[--pdx] h-[60px] sm:mt] items-center flex justify-between'>
-        <a href="" className='text-2xl font-[audio]'>Mystic<span className='text-[--wh]'>Reads</span></a>
+        <a href="" className='text-2xl audio'>Mystic<span className='text-[--wh]'>Reads</span></a>
 
         <nav className='roboto sm:block hidden'>
 

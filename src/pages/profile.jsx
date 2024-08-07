@@ -94,27 +94,16 @@ function Profile() {
             const sect = document.getElementById('sect1')
             sect.classList.add('h-[120vh]')
           }
-          {postDetails ? postDetails.map(posts => 
-            setPostList(t => (
-              [
-                {
-                  postText : posts.content,
-                }, 
-                ...t
-              ]
-          ))
-          )
-              :
-              setPostList(t => (
-                [
-                  {
-                    postText : posts.content,
-                  }, 
-                  ...t
-                ]
-            ))
-
-        }
+          
+          const newFeeds = response.data.data.post.map((items, i) => 
+                    ({
+                        postText: items.content,
+                        userId : items.userId, 
+                        likes : items.likes,
+                        comments : items.comments, 
+                    }), 
+            )
+            setPostList([...newFeeds])
           
       }).catch((error) => {
           console.log(error)
@@ -202,17 +191,8 @@ function Profile() {
         const response = await Axios913.post(`/api/profiles_info`, data).then(response => {
                   
         if (response.status = 201) {
-        const items = ['userName', 'userEmail', 'member', 'userId', 'gender', 'bio', 'joined', 'birthday', 'location']
-        items.forEach(item => localStorage.removeItem(item))
-        // localStorage.setItem('userName', response.data['data']['userName'] )
-        // localStorage.setItem('userEmail', response.data['data']['userEmail'], )
-        // // localStorage.setItem( 'member', response.data['data']['joined'])
-        // localStorage.setItem('userId', response.data['data']['userId'])
-        // localStorage.setItem('gender', response.data['data']['gender'])
-        // localStorage.setItem('bio', response.data['data']['bio'])
-        // localStorage.setItem('joined', response.data['data']['joined'])
-        // localStorage.setItem('birthday', response.data['data']['birthday'])
-        // localStorage.setItem('location', response.data['data']['location'])
+        // const items = ['userName', 'userEmail', 'member', 'userId', 'gender', 'bio', 'joined', 'birthday', 'location']
+        // items.forEach(item => localStorage.removeItem(item))
         setLocation(localStorage.getItem('location'))
         setBio(localStorage.getItem('bio'))
         document.body.classList.remove('no-scroll')
@@ -334,36 +314,6 @@ function Profile() {
 
     // Postlist data
     const [postList, setPostList] = useState([
-        // { 
-        //   likes: 20, 
-        //   comments: 15,
-        //   active: "15mins ago", 
-        //   postText: "Just finished 'Doluo Dalu' and I'm completely hooked! The world-building is phenomenal, and Tang San's journey is so inspiring. Can't wait to see what happens next!",
-        // },
-        // { 
-        //   likes: 45, 
-        //   comments: 30,
-        //   active: "2 hours ago", 
-        //   postText: "I started reading 'Magic Chef of Ice and Fire' last night, and I'm already obsessed. The combination of cooking and magic is so unique and exciting. Nian Bing is such an intriguing character.",
-        // }, 
-        // { 
-        //   likes: 100, 
-        //   comments: 73,
-        //   active: "15 hours ago", 
-        //   postText: "Forcardos High School has such a relatable storyline! The characters feel so real, and the high school dynamics are spot-on. Can't wait to see how the friendships and rivalries develop.",
-        // }, 
-        // { 
-        //   likes: 100, 
-        //   comments: 73,
-        //   active: "15 hours ago", 
-        //   postText: "Magic Chef of Ice and Fire is a must-read for anyone who loves fantasy and culinary arts. The way Nian Bing combines magic with cooking is brilliant. I'm constantly amazed by his creativity",
-        // }, 
-        // { 
-        //   likes: 100, 
-        //   comments: 73,
-        //   active: "15 hours ago", 
-        //   postText: "Doluo Dalu is a masterpiece! The martial arts and spirit abilities are described so vividly. Each character's journey to become stronger is so motivating. Highly recommend!",
-        // }
     ])
 
     const post = postList.map((items, i) => (<Post key={i} comments={items.comments} likes={items.likes} profile={profile} post={items.postText} active={items.active} username={userName}/>))
