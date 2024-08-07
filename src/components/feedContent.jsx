@@ -9,7 +9,7 @@ import { useContext } from 'react'
 import AuthContext from '../utils/fetchUserPic'
 import user from "../assets/user.svg"
 
-function FeedsCont({post, username, descrip, like, postId, userId, likeStatus}) {
+function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, comments}) {
 
   const [postNav, setPostNav] = useState(false)
   const [form, setForm] = useState(false)
@@ -18,6 +18,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus}) 
   const [likeStatus1, setLikeStatus] = useState(likeStatus)
   const [likes, setLikes] = useState(like)
   const [img, setImg] = useState(user)
+  const [comment, setComment] = useState(comments)
 
   const {
     userName, 
@@ -45,15 +46,25 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus}) 
     setBtn(!btn)
   }
   
-  const handleComment = () => {
-    setCommentNo(t => (t += 1))
+  const handleComment = async () => {
+    const data = {
+      content : remark
+    }
+
+    const response = await Axios913.post(`api/${postId}/comment`, data).then(response => {
+      if (response.status == 201) {
+      setComment(t => (t += 1))
+
+      }
+    }).catch((err) => (console.log(err)))
+
   }
 
   const handleSubmit = async () => {
 
     setBtn(!btn)
     setForm(!form)
-    // handleComment()
+    handleComment()
   }
 
   const handleLike = async () => {
@@ -109,7 +120,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus}) 
           }
           <Link onClick={handleCommentForm} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
             <FontAwesomeIcon id='comment-icon' icon={faComment} className='text-xl'/>
-            <p className='inline'>0</p>
+            <p className='inline'>{comment.length}</p>
           </Link>
         </div> : ""}
         {

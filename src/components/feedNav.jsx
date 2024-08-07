@@ -66,15 +66,15 @@ function FeedNav() {
         <div className='h-full w-full sm:px-[8em] duration-[0.5s]'>
             <ul className='flex items-center  h-full w-full justify-between'>
                 <Link onClick={handleFeeds} className='sm:text-xl active:bg-[--accent] active:text-[--accent1] text-[1.1rem] relative sm:duration-[0.5s] sm:hover:text-[--accent1] sm:hover:bg-[--accent] py-1 px-[.5em] rounded-[5px] font-bold text-white roboto'>
-                <img src={feeds} className='sm:w-[50px] w-[40px] h-[40px] sm:h-[50px]' alt="" />
+                <img src={feeds} className='sm:w-[40px] w-[40px] h-[40px] sm:h-[40px]' alt="" />
                     <div className='bg-red-500 h-[15px] items-center flex justify-center w-[15px] text-[0.5em] rounded-[50%] text-white roboto absolute top-[10px] right-[4px]'>1</div>
                 </Link>
                 <Link onClick={handleSms} className='sm:text-xl active:bg-[--accent] active:text-[--accent1] text-[1.1rem] relative sm:duration-[0.5s] sm:hover:text-[--accent1] sm:hover:bg-[--accent] py-1 px-[.5em] rounded-[5px] font-bold text-white roboto'>
-                    <img src={sms} className='sm:w-[50px] w-[40px] h-[40px] sm:h-[50px]' alt="" />
+                    <img src={sms} className='sm:w-[40px] w-[40px] h-[40px] sm:h-[40px]' alt="" />
                     <div className='bg-red-500 h-[15px] items-center flex justify-center w-[15px] text-[0.5em] rounded-[50%] text-white roboto absolute top-[10px] right-[4px]'>1</div>
                 </Link>
                 <Link onClick={handleNotify} className='sm:text-xl active:bg-[--accent] active:text-[--accent1] text-[1.1rem] sm:duration-[0.5s] sm:hover:text-[--accent1] sm:hover:bg-[--accent] py-1 px-[.5em] relative rounded-[5px] font-bold text-white roboto'>
-                <img src={bell} className='sm:w-[50px] w-[40px] h-[40px] sm:h-[50px]' alt="" />
+                <img src={bell} className='sm:w-[40px] w-[40px] h-[40px] sm:h-[40px]' alt="" />
 
                     <div className='bg-red-500 h-[15px] items-center flex justify-center w-[15px] text-[0.5em] rounded-[50%] text-white roboto absolute top-[10px] right-[4px]'>2</div>
                 </Link>

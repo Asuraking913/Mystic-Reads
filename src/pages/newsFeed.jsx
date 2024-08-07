@@ -72,7 +72,7 @@ function Feeds() {
     const handleFeeds = async () => {
         const response = await Axios913.get("/api/fetch_feeds").then(response => {
             const data = response.data
-            console.log(data.data)
+            console.log(data)
             
             const newFeeds = response.data.data.feeds.map((items, i) => 
                     ({
@@ -85,18 +85,17 @@ function Feeds() {
                         likeStatus : items.likeStatus[0]
                     }), 
             )
-            console.log(newFeeds)
             setFeeds([...newFeeds])
+            // console.log(feeds[0].comments)
         })
     }
     
     useEffect(() => {
         handleFeeds()
-        console.log('fetched')
     }, [])
 
 
-    const listFeeds = feeds.map((items, i) => (<FeedsCont like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
+    const listFeeds = feeds.map((items, i) => (<FeedsCont comments={items.comments} like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
 
   return (
     <>
