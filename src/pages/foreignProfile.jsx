@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../components/nav'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import likes from "../assets/likes.svg"
 import posts from "../assets/post1.svg"
 import book from "../assets/book.svg"
@@ -16,6 +16,7 @@ import { useContext } from 'react'
 function ForeignView() {
 
   const navigate = useNavigate()
+  const location = useLocation()
 
   const {
     auth, setAuth,
@@ -29,33 +30,38 @@ function ForeignView() {
     email : userEmail,
   } = useContext(AuthContext)
 
-  // Fetch user details
   useEffect(() => {
-    const userId = id;
-    const response = Axios913.get(`/api/profiles_info/${userId}`).then(response => {
-      setBio(response.data['data']['bio'])
-      setLocation1(response.data['data']['location'])
-      setBirthday(response.data['data']['birthday'])
-      setGender(response.data['data']['gender'])
-      setUserName(response.data['data']["userName"])
-      setJoined(response.data['data']['member'])
-      setEmail(response.data['data']['userEmail'])
-    }).catch((error) => {
-      if (error.response.status === 401) {
-        setAuth(false)
-        navigate("/")
-      }
-      if (error.response.status === 500) {
-        setAuth(false)
-        navigate("/")
-      }
-    })
-   },  [])
+    let params = new URLSearchParams(location.search); 
+    for (const [key, value] of params.entries()) {
 
-  //  fetch images
-    const handleImages = async () => {
-      const userId = id
-      const response = await Axios913.get(`/api/fetch_picture`).then(response => {
+
+
+      const handledetails = async () => {
+
+    // Fetch user details
+      const profilesInfo = await Axios913.get(`/api/profiles_info/${key}`).then(response => {
+        setBio(response.data['data']['bio'])
+        setLocation1(response.data['data']['location'])
+        setBirthday(response.data['data']['birthday'])
+        setGender(response.data['data']['gender'])
+        setUserName(response.data['data']["userName"])
+        setJoined(response.data['data']['member'])
+        setEmail(response.data['data']['userEmail'])
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          setAuth(false)
+          navigate("/")
+        }
+        if (error.response.status === 500) {
+          setAuth(false)
+          navigate("/")
+        }
+      })
+
+      // Fetch user Images
+
+      const picture = await Axios913.get(`/api/fetch_picture/${key}`).then(response => {
+        // console.log(response.data )
         const {cover, profile} = response.data;
 
         if(response.status == 200 && cover) {
@@ -82,12 +88,44 @@ function ForeignView() {
           navigate("/")
         }
       })
+
+      // Post fetch
+
+      // fetch posts data
+        const posts = await Axios913.get(`/api/user_posts/${key}`).then(response => {
+          const postDetails = response.data.data.postList
+          const new_post = postDetails.map(items => ({
+                content : items.content, 
+                commentNo : items.postComments,
+                postId : items.postId,
+                likes : items.postLikes,
+                userName : response.data.data.userName,
+                userId : response.data.data.userId,
+              }))
+              
+          setPostList([...new_post])
+          
+      }).catch((error) => {
+          console.log(error)
+      })
+
+
     }
 
-useEffect(() => {
-  handleImages()
+    handledetails()
+
+  } 
+
+  }, [])
+
   
-}, [])
+
+  
+
+// useEffect(() => {
+//   handleImages()
+  
+// }, [userId])
 
 
 
@@ -105,41 +143,14 @@ useEffect(() => {
     const [bio, setBio] = useState("")
     const [joined, setJoined] = useState("")
 
-    // Postlist data
-    const postList = [
-      { 
-        likes: 20, 
-        comments: 15,
-        active: "15mins ago", 
-        postText: "Just finished 'Doluo Dalu' and I'm completely hooked! The world-building is phenomenal, and Tang San's journey is so inspiring. Can't wait to see what happens next!",
-      },
-      { 
-        likes: 45, 
-        comments: 30,
-        active: "2 hours ago", 
-        postText: "I started reading 'Magic Chef of Ice and Fire' last night, and I'm already obsessed. The combination of cooking and magic is so unique and exciting. Nian Bing is such an intriguing character.",
-      }, 
-      { 
-        likes: 100, 
-        comments: 73,
-        active: "15 hours ago", 
-        postText: "Forcardos High School has such a relatable storyline! The characters feel so real, and the high school dynamics are spot-on. Can't wait to see how the friendships and rivalries develop.",
-      }, 
-      { 
-        likes: 100, 
-        comments: 73,
-        active: "15 hours ago", 
-        postText: "Magic Chef of Ice and Fire is a must-read for anyone who loves fantasy and culinary arts. The way Nian Bing combines magic with cooking is brilliant. I'm constantly amazed by his creativity",
-      }, 
-      { 
-        likes: 100, 
-        comments: 73,
-        active: "15 hours ago", 
-        postText: "Doluo Dalu is a masterpiece! The martial arts and spirit abilities are described so vividly. Each character's journey to become stronger is so motivating. Highly recommend!",
-      }
-    ]
+    
 
-    const post = postList.map((items, i) => (<Post key={i} comments={items.comments} likes={items.likes} profile={image['profile_image']} post={items.postText} active={items.active} username={userName}/>))
+    // Postlist data
+    const [postList, setPostList] = useState([
+      
+    ])
+
+    const post = postList.map((items, i) => (<Post key={i} comments={items.commentNo} likes={items.likes} profile={image['profile_image']} post={items.content} active={true} username={items.userName}/>))
 
   return (
     <>
@@ -153,11 +164,11 @@ useEffect(() => {
                   <img src={image['profile_image']} className=' rounded-[50%] shadow-md shadow-[black] w-full h-full object-cover' alt="" />
                </div>
                <div className='text-center'>
-                 <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{name}</h2>
+                 <h2 className='sm:text-2xl font-bold roboto text-[--bg]'>{userName}</h2>
                  <p className='text-[0.9rem] text-[--bg] flex justify-center items-center gap-[.5em]'><span className='text-[--]'>Active:</span> {active ? <i className='w-[15px] border-[1.5px] border-white h-[15px] text2 rounded-[50%]'></i>: <i className='inline'>active 2hrs ago</i> }</p>
                </div>
                <div className='w-[90%] break-words px-[1.5em]'>
-                  <p className='line text-center font-sans italic sm:text-[0.9rem] text-white'>{(about == null) ? <i className='opacity-40'>none</i> : about }</p>
+                  <p className='line text-center font-sans italic sm:text-[0.9rem] text-white'>{(bio == null) ? <i className='opacity-40'>none</i> : bio }</p>
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
@@ -179,7 +190,7 @@ useEffect(() => {
                <div className='w-full flex flex-col gap-[.5em]'>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='text-xl mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>{(loca == null) ? <i className='opacity-40'>none</i> : loca }</span>
+                      <span className='text-[--bg] roboto'>{(location1 == null) ? <i className='opacity-40'>none</i> : location1 }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[1rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text-xl mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -187,19 +198,19 @@ useEffect(() => {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPeopleGroup} className='text-xl mr-[.1em] text-[--bg]'/>Joined:</span>
-                    <span className='text-[--bg] roboto'>Member Since {member}</span>
+                    <span className='text-[--bg] roboto'>Member Since {joined}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='text-xl mr-[.1em] text-[--bg]'/>Gender:</span>
-                    <span className='text-[--bg] roboto'>{sex}</span>
+                    <span className='text-[--bg] roboto'>{gender}</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='text-xl mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] roboto'>{(userEmail == null) ? <i className='opacity-40'>none</i> : userEmail }</span>
+                    <span className='text-[--bg] roboto'>{(email == null) ? <i className='opacity-40'>none</i> : email }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex items-center gap-[.1em] text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='text-xl mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{(birthday == null) ? <i className='opacity-40'>none</i> : birthday }</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{(birth == null) ? <i className='opacity-40'>none</i> : birth }</span>
                   </p>
                   
                </div>
@@ -216,7 +227,7 @@ useEffect(() => {
                  <p className='text-[0.9rem] text-[--bg]'><span className='text-[--]'>Active:</span> {active ? <FontAwesomeIcon icon={faCircle} className='text text-green-500 mt-[.5em] w-[15px] h-[15px]'/> : <i className='inline'>active 2hrs ago</i> }</p>
                </div>
                <div className='w-[85%] break-words px-[--pdx] '>
-                  <p className='line text-center font-sans italic text-[0.8rem] text-white'>{(bio == "null") ? <i className='opacity-40'>none</i> : bio }</p>
+                  <p className='line text-center font-sans italic text-[0.8rem] text-white'>{(bio == null) ? <i className='opacity-40'>none</i> : bio }</p>
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
@@ -238,7 +249,7 @@ useEffect(() => {
                <div className='w-full flex flex-col gap-[.5em]'>
                <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faLocationDot} className='mr-[.1em] text-[--bg]'/>Location:</span>
-                      <span className='text-[--bg] roboto'>{(loca == null) ? <i className='opacity-40'>none</i> : loca }</span>
+                      <span className='text-[--bg] roboto'>{(location1 == null) ? <i className='opacity-40'>none</i> : location1 }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faThumbsUp} className='text mr-[.1em] text-[--bg]'/>Likes:</span>
@@ -250,15 +261,15 @@ useEffect(() => {
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faPersonHalfDress} className='mr-[.1em] text-[--bg]'/>Gender</span>
-                    <span className='text-[--bg] roboto'>{(sex == "null") ? <i className='opacity-40'>none</i> : sex }</span>
+                    <span className='text-[--bg] roboto'>{(gender == null) ? <i className='opacity-40'>none</i> : gender }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faGift} className='mr-[.1em] text-[--bg]'/>Birthday:</span>
-                    <span className='text-[--bg] roboto'>{(birthday == "null") ? <i className='opacity-40'>none</i> : birthday }</span>
+                    <span className='text-[--bg] roboto'>{(birth == null) ? <i className='opacity-40'>none</i> : birth }</span>
                   </p>
                   <p className='flex justify-between items-center'>
                   <span className='flex gap-[.1em] items-center text-[.9rem] roboto text-[--bg] font-bold'><FontAwesomeIcon icon={faEnvelope} className='mr-[.1em] text-[--bg]'/>Email:</span>
-                    <span className='text-[--bg] text-[.9rem] roboto'>{(userEmail == "null") ? <i className='opacity-40'>none</i> : userEmail }</span>
+                    <span className='text-[--bg] text-[.9rem] roboto'>{(email == null) ? <i className='opacity-40'>none</i> : email }</span>
                   </p>
                </div>
       
@@ -283,7 +294,19 @@ useEffect(() => {
         </div>
           <div className=' w-[85%] sm:w-[60%] px-[.5em] py-[1em] hide-scrollbar h-[100%] overflow-scroll flex sm:flex-col gap-[1em]'>
             <div className='flex flex-col gap-[1em] relative'>
-              {post }
+              {
+                !postList[0] ?
+
+                <div className='h-[80vh] w-full flex items-center justify-center text-center'>
+                  <h2 className='sm:text-4xl text-3xl text-[--accent1] roboto font-bold'>User has not made any post</h2>
+                </div>
+
+                :
+
+
+              post
+              
+              }
             </div>
           </div>
           <FontAwesomeIcon icon={faDownLong} className='absolute top-[30%] text-[--accent1] h-[50px] right-[1.5em] animate-bounce sm:hidden'/>

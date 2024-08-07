@@ -2,7 +2,7 @@ import { faArrowsToDot, faComment, faPaperPlane, faThumbsUp, faTimes } from '@fo
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Truncate from '../utils/truncate'
 import Axios913 from '../utils/Axios913'
 import { useContext } from 'react'
@@ -19,6 +19,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
   const [likes, setLikes] = useState(like)
   const [img, setImg] = useState(user)
   const [comment, setComment] = useState(comments)
+  const navigate = useNavigate()
 
   const {
     userName, 
@@ -91,7 +92,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
   return (
     <div className='flex gap-[1em] shadow-sm shadow-[--accent1] w-full flex-col relative p-[1em] rounded-[10px]'>
         <div className='flex items-center w-[100%] justify-between'>
-            <Link>
+            <Link to={`/foreignView?${userId}`}>
               <img src={img} className='w-[60px] h-[60px] object-cover rounded-[50%] shadow-sm shadow-[--accent1]' alt="" />
             </Link>
             <div className='text-center'>

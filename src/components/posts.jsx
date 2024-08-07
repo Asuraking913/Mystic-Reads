@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Truncate from '../utils/truncate'
+import { useLocation } from 'react-router-dom'
 
 function Post({profile, username, active, post, comments, likes}) {
+
+  const location = useLocation()
+  // console.log(location.pathname)
+
   return (
     <div className='sm:w-[100%] relative sm:h-auto sm:rounded-[10px] rounded-[5px] flex items-center justify-center gap-[1em] shadow-md shadow-[--accent1] bg-[--accent1] p-[.5em] sm:p-[2em]'>
         <div className='sm:block hidden'><img src={profile} className='w-[150px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover h-[120px]' alt="" /></div>
@@ -24,9 +29,18 @@ function Post({profile, username, active, post, comments, likes}) {
           <Link className='text-[1rem] absolute hover:text-[--accent] right-[1em] bottom-[1em] text-[--bg] font-sans underline'>
             View Post
           </Link>
-          <Link className='text-[1rem] hover:text-[--accent] active:scale-[1] absolute right-[1em] hover:scale-125 duration-[0.5s] top-[1em] text-[--bg] font-sans underline'>
+          {
+            location.pathname === "/foreignView" ? 
+
+            ""
+
+            :
+
+            <Link className='text-[1rem] hover:text-[--accent] active:scale-[1] absolute right-[1em] hover:scale-125 duration-[0.5s] top-[1em] text-[--bg] font-sans underline'>
             <FontAwesomeIcon icon={faTrash}/>
           </Link>
+          
+          }
         </div>
     </div>
   )

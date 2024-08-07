@@ -3,29 +3,30 @@ import userDefault from "../assets/user.svg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faBell, faEllipsis, faHome, faSearch } from '@fortawesome/free-solid-svg-icons'
 import SendMessage from '../components/sendMessenger.jsx'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import InputMessage from '../components/inputWindow.jsx'
 import MainNotify from '../components/notifications.jsx'
 import menu from "../assets/menu.png"
 // import socket from '../utils/socket.jsx'
 
 function Messenger() {
-    
-
-    // useEffect(() => {
-    //     socket.connect()
-    //     socket.on('connect')
-    //     socket.on('response', (data)=> {
-    //         console.log(data)
-    //     })
-    // }, [])
-
-    
 
     const [currentUser, setCurrentUser] = useState('Asura')
     const [active, setActive] = useState('active 3 hrs ago')
     const [foreignImage, setForeignImage] = useState(false)
     const [search, setSearch] = useState('invalid')
+    
+    const location = useLocation()
+    // useEffect(() => {
+    //     console.log(location)
+    //     let params = new URLSearchParams(location.search); 
+    //     for (const [key, value] of params.entries()) {
+    //         console.log(key)
+    //       if(value) {
+    //         console.log(value)
+    //       }
+    //     }
+    //   }, [location])
 
   return (
     <>
