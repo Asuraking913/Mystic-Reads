@@ -66,16 +66,16 @@ function Feeds() {
     {newPost ? handleFetch() : ""}
     })
 
-        
+    const [feeds, setFeeds] = useState([
+    ])
+
     const handleFeeds = async () => {
         const response = await Axios913.get("/api/fetch_feeds").then(response => {
             const data = response.data
             console.log(data.data)
             
-            data.data.feeds.map(items => {
-                setFeeds([
-                    {
-                        img : `data:${items.img.mime};base64,${items.img.data}`, 
+            const newFeeds = response.data.data.feeds.map((items, i) => 
+                    ({
                         username: items.userName, 
                         p: items.content,
                         userId : items.userId, 
@@ -83,9 +83,9 @@ function Feeds() {
                         comments : items.comments, 
                         postId : items.postId, 
                         likeStatus : items.likeStatus[0]
-                    }
-                ])
-            })
+                    }), 
+            )
+            setFeeds([...newFeeds])
         })
     }
     
@@ -94,10 +94,8 @@ function Feeds() {
         console.log('fetched')
     }, [])
 
-    const [feeds, setFeeds] = useState([
-    ])
 
-    const listFeeds = feeds.map((items, i) => (<FeedsCont like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId} comments={items.comments}  key={i} descrip={items.descrip} post={items.p} username={items.username} img={items.img}/>))
+    const listFeeds = feeds.map((items, i) => (<FeedsCont like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId} comments={items.comments}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
 
   return (
     <>
@@ -119,8 +117,8 @@ function Feeds() {
             <div id='post' className='flex flex-col gap-[2em] w-[100%] relative h-[200vh] overflow-scroll hide-scrollbar sm:py-[.3em] px-[.5em]'>
                 <div id='newbox' className='absolute top-0'></div>
                     {listFeeds}
-                    {listFeeds}
-                    {listFeeds}
+                    {/* {listFeeds}
+                    {listFeeds} */}
             </div>
             <div id='box' className='w-[60%] h-[200vh] rounded-[1em] hidden sm:flex sm:justify-between notify '>
                 <Notify />

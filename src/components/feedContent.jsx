@@ -1,25 +1,37 @@
 import { faArrowsToDot, faComment, faPaperPlane, faThumbsUp, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Truncate from '../utils/truncate'
 import Axios913 from '../utils/Axios913'
 import { useContext } from 'react'
 import AuthContext from '../utils/fetchUserPic'
+import user from "../assets/user.svg"
 
-function FeedsCont({img, post, username, descrip, like, comments, postId, userId, likeStatus}) {
+function FeedsCont({post, username, descrip, like, comments, postId, userId, likeStatus}) {
 
   const [postNav, setPostNav] = useState(false)
   const [form, setForm] = useState(false)
   const [btn, setBtn] = useState(true)
   const [remark, setRemark] = useState("")
   const [likeStatus1, setLikeStatus] = useState(likeStatus)
+  const [img, setImg] = useState(user)
 
   const {
     userName, 
     userId : id
   } = useContext(AuthContext)
+
+  const handleImage = async () => {
+    const response = await Axios913.get(`/api/fetch_feeds/images/${userId}`).then(response => {
+      setImg(`data:${response.data.data.img.mime};base64,${response.data.data.img.data}`)
+    })
+  }
+
+  useEffect(() => {
+    handleImage()
+  }, [])
 
 
   const handlePostNav = () => {
