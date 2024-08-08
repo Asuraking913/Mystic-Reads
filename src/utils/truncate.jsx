@@ -8,12 +8,12 @@ const Truncate = ({text}) => {
 
     if (text.length > 300 & !full) {
       return (
-        <i>{text.substring(0, 250) + '...'} <button href="" onClick={() => setFull(true)} className='hover:text-[--accent1] text-[#593f3bbe] underline text-[0.9rem]'>Read more</button></i>
+        <i className="roboto text-[0.95rem]">{text.substring(0, 250) + '...'} <button href="" onClick={() => setFull(true)} className='hover:text-[--accent1] text-[#593f3bbe] underline text-[0.9rem]'>Read more</button></i>
       )
     }
 
     return (
-      <i>{text}</i>
+      <i className="roboto text-[0.95rem]">{text}</i>
     )
     
   }

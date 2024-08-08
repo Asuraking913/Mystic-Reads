@@ -53,12 +53,14 @@ function Login() {
         try {
             const response = await Axios913.post("/api/auth/login", data) 
             if (response.status === 200) {
+                console.log(response.data)
                 setAuth(true)
                 setBio(response.data['data']['bio'])
                 setBirthday(response.data['data']['birthday'])
                 setEmail(response.data['data']['userEmail'])
                 setGender(response.data['data']['gender'])
                 setUserId(response.data['data']['userId'])
+                setJoined(response.data['data']['joined'])
                 setLocation(response.data['data']['location'])
                 setUserName(response.data['data']['userName'])
                 navigate("/")

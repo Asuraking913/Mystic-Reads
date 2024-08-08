@@ -16,6 +16,7 @@ import user from "../src/assets/user.svg"
 import AuthContext from './utils/fetchUserPic'
 import { userPicContext } from './utils/fetchUserPic'
 import Axios913 from './utils/Axios913'
+import FullPost from './pages/fullPosts'
 
 function App() {
   
@@ -66,6 +67,7 @@ function App() {
               <Route path='/library' element={<Library />}/>
 
                 <Route element={<PrivateRoutes />}>
+                  <Route path='/viewPost' element={<FullPost  />}/>
                   <Route path='/profile' element={<Profile  />}/>
                   <Route path='/read' element={<ReadPage  />}/>
                   <Route path='/foreignView' element={<ForeignView  />}/>

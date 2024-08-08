@@ -1,13 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Truncate from '../utils/truncate'
 import { useLocation } from 'react-router-dom'
 
-function Post({profile, username, active, post, comments, likes}) {
+function Post({profile, username, active, post, comments, likes, postId}) {
 
   const location = useLocation()
+  const navigate = useNavigate()
   // console.log(location.pathname)
 
   return (
@@ -26,9 +27,12 @@ function Post({profile, username, active, post, comments, likes}) {
                 <span className='flex items-center text-[.9rem] justify-center roboto font-bold gap-[1em] text-[--bg] text'><FontAwesomeIcon icon={faComment} className='text-xl mr-[.1em] text-[--bg]'/>{comments}</span>
               </p>
           </div>
-          <Link className='text-[1rem] absolute hover:text-[--accent] right-[1em] bottom-[1em] text-[--bg] font-sans underline'>
+          <button onClick={() => {
+            navigate(`/viewPost?${postId}`)
+            // console.log('event')
+          }}  className='text-[1rem] absolute hover:text-[--accent] right-[1em] bottom-[1em] text-[--bg] font-sans underline'>
             View Post
-          </Link>
+          </button>
           {
             location.pathname === "/foreignView" ? 
 

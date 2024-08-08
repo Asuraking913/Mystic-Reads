@@ -101,6 +101,7 @@ function Profile() {
                         userId : items.userId, 
                         likes : items.likes,
                         comments : items.comments, 
+                        postId : items.postId
                     }), 
             )
             setPostList([...newFeeds])
@@ -316,7 +317,7 @@ function Profile() {
     const [postList, setPostList] = useState([
     ])
 
-    const post = postList.map((items, i) => (<Post key={i} comments={items.comments} likes={items.likes} profile={profile} post={items.postText} active={items.active} username={userName}/>))
+    const post = postList.map((items, i) => (<Post key={i} postId={items.postId} comments={items.comments} likes={items.likes} profile={profile} post={items.postText} active={items.active} username={userName}/>))
 
   return (
     <>
@@ -495,9 +496,9 @@ function Profile() {
         </div>
         <div className='sm:h-[80px] h-[60px] items-center justify-end px-[4em] flex sticky top-[3.5em] z-[10] bg-[--accent1]'>
           <ul className='flex sm:pr-[4em] items-center sm:justify-normal justify-between  sm:gap-[8em] sm:w-auto w-full'>
-              <Link className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Post</p></Link>
-              <Link   className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /><p className='text-[0.7rem] text-[--bg]'>Published</p></Link>
-              <Link className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /><p className='text-[0.7rem] text-[--bg]'>Likes</p></Link>
+              <Link className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={posts} title='Posts' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /><p className='text-[0.7rem] sm:text-[0.8rem] text-[--bg]'>Post</p></Link>
+              <Link   className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={book}  title='Puslished' className='sm:w-[40px] w-[30px] sm:h-[50px]'alt="" /><p className='text-[0.7rem] sm:text-[0.8rem] text-[--bg]'>Published</p></Link>
+              <Link className='flex flex-col items-center justify-center sm:py-0 active:scale-[0.95] hover:scale-110 rounded-[5px] duration-[0.1s] py-[.1em] sm:px-[.5em]'><img src={likes} title='Likes' className='sm:w-[40px] w-[30px] sm:h-[50px]' alt="" /><p className='text-[0.7rem] sm:text-[0.8rem] text-[--bg]'>Likes</p></Link>
               <Link onClick={() => {
                 setEditProfile(!editProfile);
                 document.body.classList.add('no-scroll')
