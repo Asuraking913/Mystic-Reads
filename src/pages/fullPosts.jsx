@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Nav from "../components/nav";
 import { useLocation, useNavigate } from "react-router-dom";
 import Foot from "../components/footer";
@@ -7,23 +7,37 @@ import user from "../assets/user.svg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown, faComment, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import AuthContext from "../utils/fetchUserPic";
+import Truncate from "../utils/truncate";
 
 const FullPost = () => {
+
+    const {userId} = useContext(AuthContext)
+
 
     const location = useLocation()
     const [postId, setPostId] = useState("")
     const [post, setPost] = useState({})
     const navigate = useNavigate()
     const [img, setImg] = useState(user)
-    const [userName, setUserName] = useState("AsuraKing913")
-    const [date, setDate] = useState("may 2000")
+    const [userName, setUserName] = useState("")
+    const [date, setDate] = useState()
     const [likes, setLikes] = useState(0)
     const [likeStatus, setLikeStatus] = useState(false)
-    const [comment, setComment] = useState(0)
-    const [content, setContent] = useState(<i>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore magnam voluptate nesciunt voluptatibus eligendi harum cumque asperiores, quasi numquam quia. Officia rem nemo dolore, esse obcaecati nobis quidem est voluptatem!</i>)
+    const [commentNo, setCommentNo] = useState(0)
+    const [comment, setComment] = useState([{}])
+    const [content, setContent] = useState()
     const [form, setForm] = useState(false)
     const [btn, setBtn] = useState(true)
     const [remark, setRemark] = useState("")
+
+    const handleImage = async (id) => {
+        const response = await Axios913.get(`/api/fetch_feeds/images/${id}`).then(response => {
+            if (response.data.data.img)
+          setImg(`data:${response.data.data.img.mime};base64,${response.data.data.img.data}`)
+          console.log(response.data)
+        })
+      }
 
     useEffect(() => {
         let params = new URLSearchParams(location.search)
@@ -33,13 +47,23 @@ const FullPost = () => {
         for (const [key, value] of params.entries()) {
             const handlePost = async () => {
                 const response = await Axios913.get(`/api/view_post/${key}`).then(
-                    response => console.log(response.data)
+                    response => {
+                        console.log(response.data)
+                        setCommentNo(response.data.commentNo)
+                        setLikeStatus(response.data.likeStatus[0])
+                        setContent(response.data.content)
+                        setLikes(response.data.likes)
+                        setDate(response.data.date)
+                        setUserName(response.data.userName)
+                        // setComment(response.data)
+                    }
 
             ).catch((err) => console.log(err))
             }
             setPostId(key)
 
             handlePost()
+            handleImage(userId)
             return
         }
     }
@@ -51,6 +75,7 @@ const FullPost = () => {
 
     const handleSubmit = async () => {
         handleComment()
+        setRemark("")
         console.log(form)
         setBtn(!btn)
         setForm(!form)
@@ -67,16 +92,10 @@ const FullPost = () => {
         const data = {
           content : remark
         }
-
-        console.log(remark)
-        return
-        if (remark === "") {
-            return
-        }
     
         const response = await Axios913.post(`api/${postId}/comment`, data).then(response => {
           if (response.status == 201) {
-          setComment(t => (t += 1))
+          setCommentNo(t => (t += 1))
     
           }
         }).catch((err) => (console.log(err)))
@@ -98,21 +117,25 @@ const FullPost = () => {
     return (
         <>
             <Nav />
-            <section className="min-h-[50vh] p-[0.5em]">
-                <div className="flex justify-center flex-col gap-[2em] bg-[#ffffff2c] shadow-sm shadow-[--accent1] min-h-[50vh] rounded-[1em] py-[1em]">
+            <section className=" p-[0.5em] mt-[4em] sm:mt-[.5em] sm:my-[.5em] mx-[1em] sm:mx-[--pdx] ">
+                <div className="flex h-auto  justify-start flex-col gap-[1em] bg-[#ffffff2c] shadow-sm shadow-[--accent1] rounded-[1em] py-[1em]">
                     <div className="flex items-center gap-[1em]">
-                    <div className='sm:block hidden pl-[--pdx]'><img src={user} className='w-[80px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover h-[80px]' alt="" /></div>
+                    <div className='pl-[1em]'><img src={img} className='sm:w-[60px] w-[50px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover sm:h-[60px] h-[50px]' alt="" /></div>
                         <div className="">
-                            <p className="text-2xl roboto font-bold text-[--accent1]">{userName}</p>
-                            <p className="font- text-[0.8rem]">{date}</p>
+                            <p className="sm:text-2xl text-xl roboto font-bold text-[--accent1]">{userName}</p>
+                            <p className="font- text-[0.7rem]">{date}</p>
                         </div>
                     </div>
-                    <div className="px-[--pdx]">
-                        <p className="line roboto text-[0.95rem] italic w-[80%]">
-                            {content}
+                    <div className="sm:px-[1em]">
+                        <p className="roboto text-[0.95rem] pl-[.5em] italic w-[90%] sm:w-[80%]">
+                            {
+                                !content ? ""
+                                :
+                                <Truncate text={content} maxLength={600} subLength={580}/>
+                            }
                         </p>
                     </div>
-                   <div className="text-xl flex justify-start px-[--pdx] gap-[2em]">
+                   <div className="text-[1rem] flex justify-start px-[1em] gap-[2em] mt-[17%] sm:mt-[10%] ">
                         {
                             !likeStatus ? 
                             <button onClick={handleLike}  className='flex p-[.5em] items-center gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
@@ -132,7 +155,7 @@ const FullPost = () => {
 
                         <button onClick={handleCommentForm}  className='flex items-center p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
                             <FontAwesomeIcon icon={faComment}/>
-                            <p className='inline'>{comment}</p>
+                            <p className='inline'>{commentNo}</p>
                         </button>
 
                                       
@@ -140,11 +163,11 @@ const FullPost = () => {
                    {
                         form ? 
 
-                            <form onSubmit={(e) => e.preventDefault()} className="px-[3.5rem]">
+                            <form onSubmit={(e) => e.preventDefault()} className=" px-[1em]">
                               <p className='relative'>
-                                <label htmlFor="#" className='text-xl roboto text-[--accent1] font-bold'>Comment</label>
-                                <input onChange={(e) => setRemark(e.target.value)} type="text" required className='w-[60%] block bg-[#ffffff2c] shadow-sm rounded-[2em] outline-none shadow-[--accent1] py-[.6em] p-[.5em]' />
-                                <FontAwesomeIcon onClick={handleSubmit} icon={faPaperPlane} className='absolute bg-[--accent1] text-white p-[.5em] right-[.2em] sm:right-[40.5%] top-[32px] flex items-center justify-center rounded-[50%] text-[1.1rem]'/>
+                                <label htmlFor="#" className='text-[1rem] roboto text-[--accent1] font-bold'>Comment</label>
+                                <input onChange={(e) => setRemark(e.target.value)} type="text" required className='sm:w-[60%] w-full block bg-[#ffffff2c] shadow-sm rounded-[2em] outline-none shadow-[--accent1] py-[.4em] p-[.5em]' />
+                                <FontAwesomeIcon onClick={handleSubmit} icon={faPaperPlane} className='absolute bg-[--accent1] text-white p-[.5em] right-[.2em] sm:right-[40.5%] top-[28px] flex items-center justify-center rounded-[50%] text-[0.95rem]'/>
                               </p>
                             </form>
 

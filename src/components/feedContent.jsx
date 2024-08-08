@@ -62,10 +62,10 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
   }
 
   const handleSubmit = async () => {
-
+    handleComment()
+    setRemark("")
     setBtn(!btn)
     setForm(!form)
-    handleComment()
   }
 
   const handleLike = async () => {
@@ -101,7 +101,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
             </div>
             <FontAwesomeIcon onClick={handlePostNav} className='text-xl cursor-pointer text-[--accent1] sm:hover:scale-125 active:duration-[0.1s] sm:active:scale-[1] sm:duration-[0.5s] duration-[0.1s]' icon={faArrowsToDot}/>
         </div>
-        <Truncate text={post}/>
+        <Truncate text={post} maxLength={350} subLength={290}/>
         { btn ? <div className='flex items-center justify-center gap-[2em] border-[--accent1]'>
           {
             likeStatus1 ? 

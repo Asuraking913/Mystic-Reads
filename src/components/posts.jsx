@@ -17,7 +17,7 @@ function Post({profile, username, active, post, comments, likes, postId}) {
         <div className='w-[100%] flex gap-[.2em] flex-col'>
           <h2 className='sm:text-2xl capitalize text-xl roboto font-bold text-[--accent]'>{username}</h2>
           <h4 className='text-[.9rem] text-[--bg]'>{active}</h4>
-          <p className='text-[--bg] w-[90%] py-[.5em] sm:text-[1rem] text-[0.9rem] line roboto'><Truncate text={post}/></p>
+          <p className='text-[--bg] w-[90%] py-[.5em] sm:text-[1rem] text-[0.9rem] line roboto'><Truncate text={post} maxLength={350} subLength={290}/></p>
           {/* <p className='text-[--bg] w-[90%] py-[.5em] sm:text-[1rem] text-[0.9rem] line roboto'>{post}</p> */}
           <div className='flex w-full gap-[2em] mt-[.2em]'>
               <p>
