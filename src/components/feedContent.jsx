@@ -46,6 +46,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
     setForm(!form)
     setBtn(!btn)
   }
+
   
   const handleComment = async () => {
     const data = {
@@ -121,7 +122,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
           }
           <Link onClick={handleCommentForm} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
             <FontAwesomeIcon id='comment-icon' icon={faComment} className='text-xl'/>
-            <p className='inline'>{comment.length}</p>
+            <p className='inline'>{comment}</p>
           </Link>
         </div> : ""}
         {

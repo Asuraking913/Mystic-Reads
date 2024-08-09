@@ -9,6 +9,7 @@ import { faThumbsUp, faThumbsDown, faComment, faPaperPlane } from "@fortawesome/
 import { Link } from "react-router-dom";
 import AuthContext from "../utils/fetchUserPic";
 import Truncate from "../utils/truncate";
+import SubComment from "../components/subComment";
 
 const FullPost = () => {
 
@@ -25,7 +26,7 @@ const FullPost = () => {
     const [likes, setLikes] = useState(0)
     const [likeStatus, setLikeStatus] = useState(false)
     const [commentNo, setCommentNo] = useState(0)
-    const [comment, setComment] = useState([{}])
+    const [comment, setComment] = useState([])
     const [content, setContent] = useState()
     const [form, setForm] = useState(false)
     const [btn, setBtn] = useState(true)
@@ -35,7 +36,6 @@ const FullPost = () => {
         const response = await Axios913.get(`/api/fetch_feeds/images/${id}`).then(response => {
             if (response.data.data.img)
           setImg(`data:${response.data.data.img.mime};base64,${response.data.data.img.data}`)
-          console.log(response.data)
         })
       }
 
@@ -55,7 +55,15 @@ const FullPost = () => {
                         setLikes(response.data.likes)
                         setDate(response.data.date)
                         setUserName(response.data.userName)
-                        // setComment(response.data)
+                        const postComments = response.data.comments.map(items => (
+                            {
+                              userName : items.userName, 
+                            userId : items.userId,
+                            content : items.comment
+                          }
+                        ))
+                        console.log(postComments)
+                        setComment([...postComments])
                     }
 
             ).catch((err) => console.log(err))
@@ -64,6 +72,7 @@ const FullPost = () => {
 
             handlePost()
             handleImage(userId)
+
             return
         }
     }
@@ -114,6 +123,10 @@ const FullPost = () => {
         // setLikes(t => (t +=1))
       }
 
+      // if (comment[0]) {
+        const commentList = comment.map((items, i) => <SubComment key={i} userName={items.userName} userId={items.userId} content={items.content}/>)
+      // }
+
     return (
         <>
             <Nav />
@@ -135,10 +148,15 @@ const FullPost = () => {
                             }
                         </p>
                     </div>
-                   <div className="text-[1rem] flex justify-start px-[1em] gap-[2em] mt-[17%] sm:mt-[10%] ">
+                    <div className="min-h-[10vh] sm:pl-[1em] mt-[1em] w-full flex flex-col gap-[.5em]">
+                          {
+                            commentList
+                          }
+                    </div>
+                   <div className="text-[1rem] flex justify-start px-[1em] gap-[2em]  ">
                         {
-                            !likeStatus ? 
-                            <button onClick={handleLike}  className='flex p-[.5em] items-center gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
+                            likeStatus ? 
+                            <button onClick={handleLike}  className='flex p-[.5em] items-center gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent] text-[--bg] shadow-sm shadow-[--accent1]'>
                             <FontAwesomeIcon icon={faThumbsUp}/>
                             <p className='inline'>{likes}</p>
                         </button>

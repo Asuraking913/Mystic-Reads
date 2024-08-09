@@ -2,11 +2,6 @@ import React, { useState } from 'react'
 import Nav from '../components/nav'
 import Display from '../components/display'
 import FeedsCont from '../components/feedContent'
-import person1 from "../assets/person1.jpeg"
-import person2 from "../assets/person2.jpeg"
-import person3 from "../assets/person3.jpeg"
-import person4 from "../assets/person4.jpeg"
-import person5 from "../assets/person5.jpeg"
 import FeedNav from '../components/feedNav'
 import Notify from '../components/notify'
 import SmsBox from '../components/messageBox'
@@ -95,7 +90,7 @@ function Feeds() {
     }, [])
 
 
-    const listFeeds = feeds.map((items, i) => (<FeedsCont comments={items.comments} like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
+    const listFeeds = feeds.map((items, i) => (<FeedsCont comments={items.comments.length} like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
 
   return (
     <>
