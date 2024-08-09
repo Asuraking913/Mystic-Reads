@@ -21,7 +21,7 @@ function Feeds() {
 //   fetch post
     const handleFetch = async () => {
     const response = Axios913.get("/api/user_posts").then(response => {
-        // console.log(response.data)
+        console.log(response.data)
         const postDetails = response.data['data']['post']
         const userName = response.data['data']['userName']
         const userId = response.data['data']['userId']
@@ -67,10 +67,10 @@ function Feeds() {
     const handleFeeds = async () => {
         const response = await Axios913.get("/api/fetch_feeds").then(response => {
             const data = response.data
-            console.log(data)
 
             
             const newFeeds = response.data.data.feeds.map((items, i) =>     
+
 
                     ({
                         username: items.userName, 
@@ -92,8 +92,8 @@ function Feeds() {
         handleFeeds()
     }, [])
 
+        const listFeeds = feeds.map((items, i) => (<FeedsCont comment_no={items.commentNo} comment={items.comment ? items.comment : [] } like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
 
-    const listFeeds = feeds.map((items, i) => (<FeedsCont comment_no={items.commentNo} comment={items.comment} like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
 
   return (
     <>

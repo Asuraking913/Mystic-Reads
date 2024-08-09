@@ -30,6 +30,10 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
   const handleImage = async () => {
     const response = await Axios913.get(`/api/fetch_feeds/images/${userId}`).then(response => {
       setImg(`data:${response.data.data.img.mime};base64,${response.data.data.img.data}`)
+    }).catch((err) => {
+      if (err.response.data == 400) {
+        return
+      }
     })
   }
 
@@ -88,7 +92,6 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
     preView.style.display = "none"
   }
 
-  const commentList = comment.map((items, i) => <SubComment key={i} userName={items.userName} userId={items.commentId} content={items.content}/>)
 
   
 
@@ -115,7 +118,8 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
             
             <div className='flex flex-col gap-[.5em]'>
             {
-              commentList
+                comment.map((items, i) => <SubComment key={i} userName={items.userName} userId={items.commentId} content={items.content}/>)
+
             }
           </div>
 

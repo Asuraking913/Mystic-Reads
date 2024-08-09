@@ -32,6 +32,8 @@ const FullPost = () => {
     const [btn, setBtn] = useState(true)
     const [remark, setRemark] = useState("")
     const [userId, setUserid] = useState(id)
+    const [viewComment, setViewComment] = useState(false)
+
 
     const handleImage = async (id) => {
         const response = await Axios913.get(`/api/fetch_feeds/images/${id}`).then(response => {
@@ -114,7 +116,6 @@ const FullPost = () => {
 
       const handleLike = async () => {
         const response = await Axios913.post(`/api/${postId}/likes`, {}).then(response => {
-          console.log(response.data)
           if (response.status == 201) {
             setLikes(t => (t +=1))
             setLikeStatus(!likeStatus)
@@ -153,7 +154,20 @@ const FullPost = () => {
                     </div>
                     <div className="min-h-[10vh] sm:pl-[1em] mt-[1em] w-full flex flex-col gap-[.5em]">
                           {
+
+                            viewComment
+                            
+                             ?
+
                             commentList
+
+                            :
+
+                            commentList [0] && <button onClick={() => {
+                              setViewComment(!viewComment)
+                            }} className='text-[--accent1] text-left font-bold opacity-70 pl-[.5em] roboto'>
+                              View Comments
+                            </button>
                           }
                     </div>
                    <div className="text-[1rem] flex justify-start px-[1em] gap-[2em]  ">

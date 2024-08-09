@@ -25,7 +25,7 @@ const SubComment = ({userName, userId, content}) => {
 
                     <button onClick={() => {
                         navigate(`/foreignView?${userId}`)
-                    }} className="cursor-pointer"><img src={user} className='sm:w-[40px] w-[40px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover sm:h-[40px] h-[40px]' alt="" /> </button>
+                    }} className="cursor-pointer"><img src={user} className='sm:w-[40px] w-[20px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover sm:h-[40px] h-[20px]' alt="" /> </button>
                     :
                     <button onClick={() => {
                         navigate(`/foreignView?${userId}`)

@@ -53,6 +53,7 @@ function Profile() {
     const [birth1, setBirthday1] = useState("")
     const [error1, setError1] = useState("")
     const [images, setImages] = useState({cover_image: "", profile_image : user})
+    const [deletePost, setDeletePost] = useState("")
 
     const handleImages = async () => {
         const userId = localStorage.getItem('userId')
@@ -317,7 +318,9 @@ function Profile() {
     const [postList, setPostList] = useState([
     ])
 
-    const post = postList.map((items, i) => (<Post key={i} postId={items.postId} comments={items.comments} likes={items.likes} profile={profile} post={items.postText} active={items.active} username={userName}/>))
+    
+
+    const post = postList.filter(items => items.postId !== deletePost).map((items, i) => (<Post deleted={deletePost} onDelete={setDeletePost} key={i} postId={items.postId} comments={items.comments} likes={items.likes} profile={profile} post={items.postText} active={items.active} username={userName}/>))
 
   return (
     <>
