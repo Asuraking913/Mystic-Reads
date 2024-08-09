@@ -13,7 +13,7 @@ import SubComment from "../components/subComment";
 
 const FullPost = () => {
 
-    const {userId} = useContext(AuthContext)
+    const {userId : id} = useContext(AuthContext)
 
 
     const location = useLocation()
@@ -31,6 +31,7 @@ const FullPost = () => {
     const [form, setForm] = useState(false)
     const [btn, setBtn] = useState(true)
     const [remark, setRemark] = useState("")
+    const [userId, setUserid] = useState(id)
 
     const handleImage = async (id) => {
         const response = await Axios913.get(`/api/fetch_feeds/images/${id}`).then(response => {
@@ -48,13 +49,14 @@ const FullPost = () => {
             const handlePost = async () => {
                 const response = await Axios913.get(`/api/view_post/${key}`).then(
                     response => {
-                        console.log(response.data)
                         setCommentNo(response.data.commentNo)
                         setLikeStatus(response.data.likeStatus[0])
                         setContent(response.data.content)
                         setLikes(response.data.likes)
                         setDate(response.data.date)
                         setUserName(response.data.userName)
+                        setUserid(response.data.userId)
+                        console.log(response.data)
                         const postComments = response.data.comments.map(items => (
                             {
                               userName : items.userName, 
@@ -62,7 +64,6 @@ const FullPost = () => {
                             content : items.comment
                           }
                         ))
-                        console.log(postComments)
                         setComment([...postComments])
                     }
 
@@ -71,8 +72,6 @@ const FullPost = () => {
             setPostId(key)
 
             handlePost()
-            handleImage(userId)
-
             return
         }
     }
@@ -82,16 +81,18 @@ const FullPost = () => {
         
     }, [])
 
+    useEffect(() => {
+      handleImage(userId)
+    }, [userId])
+
     const handleSubmit = async () => {
         handleComment()
         setRemark("")
-        console.log(form)
         setBtn(!btn)
         setForm(!form)
       }
 
       const handleCommentForm = () => {
-        console.log('sdf')
         setForm(!form)
         setBtn(!btn)
       }
@@ -133,7 +134,9 @@ const FullPost = () => {
             <section className=" p-[0.5em] mt-[4em] sm:mt-[.5em] sm:my-[.5em] mx-[1em] sm:mx-[--pdx] ">
                 <div className="flex h-auto  justify-start flex-col gap-[1em] bg-[#ffffff2c] shadow-sm shadow-[--accent1] rounded-[1em] py-[1em]">
                     <div className="flex items-center gap-[1em]">
-                    <div className='pl-[1em]'><img src={img} className='sm:w-[60px] w-[50px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover sm:h-[60px] h-[50px]' alt="" /></div>
+                    <div className='pl-[1em]'><button onClick={() => {
+                      navigate(`/foreignView?${userId}`)
+                    }}><img src={img} className='sm:w-[60px] w-[50px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover sm:h-[60px] h-[50px]' alt="" /></button></div>
                         <div className="">
                             <p className="sm:text-2xl text-xl roboto font-bold text-[--accent1]">{userName}</p>
                             <p className="font- text-[0.7rem]">{date}</p>

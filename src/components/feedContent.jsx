@@ -5,11 +5,11 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Truncate from '../utils/truncate'
 import Axios913 from '../utils/Axios913'
-import { useContext } from 'react'
-import AuthContext from '../utils/fetchUserPic'
+import SubComment from './subComment'
+
 import user from "../assets/user.svg"
 
-function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, comments}) {
+function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, comment_no, comment}) {
 
   const [postNav, setPostNav] = useState(false)
   const [form, setForm] = useState(false)
@@ -18,13 +18,14 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
   const [likeStatus1, setLikeStatus] = useState(likeStatus)
   const [likes, setLikes] = useState(like)
   const [img, setImg] = useState(user)
-  const [comment, setComment] = useState(comments)
+  const [commentNo, setCommentNo] = useState(comment_no)
   const navigate = useNavigate()
+  const [viewComment, setViewComment] = useState(false)
 
-  const {
-    userName, 
-    userId : id
-  } = useContext(AuthContext)
+  
+  // comments
+  // const [commentContent, setComment] = useState(comment)
+
 
   const handleImage = async () => {
     const response = await Axios913.get(`/api/fetch_feeds/images/${userId}`).then(response => {
@@ -34,7 +35,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
 
   useEffect(() => {
     handleImage()
-  }, [])
+  }, [userId])
 
 
   const handlePostNav = () => {
@@ -53,9 +54,9 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
       content : remark
     }
 
-    const response = await Axios913.post(`api/${postId}/comment`, data).then(response => {
+    const response = await Axios913.post(`api/${postId}/No`, data).then(response => {
       if (response.status == 201) {
-      setComment(t => (t += 1))
+      setCommentNo(t => (t += 1))
 
       }
     }).catch((err) => (console.log(err)))
@@ -78,8 +79,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
       }
       
     })
-    // setLikes(t => (t +=1))
-  }
+     }
 
   const handleView = () => {
     const fullView = document.getElementById('preview');
@@ -87,6 +87,8 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
     fullView.style.display = 'block'
     preView.style.display = "none"
   }
+
+  const commentList = comment.map((items, i) => <SubComment key={i} userName={items.userName} userId={items.commentId} content={items.content}/>)
 
   
 
@@ -103,6 +105,32 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
             <FontAwesomeIcon onClick={handlePostNav} className='text-xl cursor-pointer text-[--accent1] sm:hover:scale-125 active:duration-[0.1s] sm:active:scale-[1] sm:duration-[0.5s] duration-[0.1s]' icon={faArrowsToDot}/>
         </div>
         <Truncate text={post} maxLength={350} subLength={290}/>
+        {
+
+          comment[0] && 
+          
+          <div className='mt-[1em] text-[0.9rem]'>
+          {
+            viewComment ?
+            
+            <div className='flex flex-col gap-[.5em]'>
+            {
+              commentList
+            }
+          </div>
+
+          :
+
+          <button onClick={() => {
+            setViewComment(!viewComment)
+          }} className='text-[--accent1] font-bold opacity-70 pl-[.5em] roboto'>
+            View Comments
+          </button>
+
+          }
+        </div>
+        
+        }
         { btn ? <div className='flex items-center justify-center gap-[2em] border-[--accent1]'>
           {
             likeStatus1 ? 
@@ -121,8 +149,8 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
           
           }
           <Link onClick={handleCommentForm} className='flex p-[.5em] gap-[.5em] rounded-[5px] sm:hover:scale-110 active:scale-[0.9] sm:active:scale-[1] active:duration-[0.1s] duration-[0.5s] bg-[--accent1] text-[--bg] shadow-sm shadow-[--accent1]'>
-            <FontAwesomeIcon id='comment-icon' icon={faComment} className='text-xl'/>
-            <p className='inline'>{comment}</p>
+            <FontAwesomeIcon id='No-icon' icon={faComment} className='text-xl'/>
+            <p className='inline'>{commentNo}</p>
           </Link>
         </div> : ""}
         {
@@ -157,6 +185,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
               </ul>
           </div>
         }
+
         
     </div>
   )

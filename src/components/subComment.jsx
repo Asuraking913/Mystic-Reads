@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import user from "../assets/user.svg"
 import Axios913 from "../utils/Axios913";
+import { useNavigate } from "react-router-dom";
 
 const SubComment = ({userName, userId, content}) => {
     const [img, setImg] = useState(user)
+    const navigate = useNavigate()
 
         const handleImage = async () => {
             const response = await Axios913.get(`/api/fetch_feeds/images/${userId}`).then(response => {
@@ -21,9 +23,13 @@ const SubComment = ({userName, userId, content}) => {
                 {
                     img === user ?
 
-                    <img src={user} className='sm:w-[40px] w-[40px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover sm:h-[40px] h-[40px]' alt="" /> 
+                    <button onClick={() => {
+                        navigate(`/foreignView?${userId}`)
+                    }} className="cursor-pointer"><img src={user} className='sm:w-[40px] w-[40px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover sm:h-[40px] h-[40px]' alt="" /> </button>
                     :
-                    <img src={img} className='sm:w-[40px] w-[40px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover sm:h-[40px] h-[40px]' alt="" /> 
+                    <button onClick={() => {
+                        navigate(`/foreignView?${userId}`)
+                    }} className="cursor-pointer"><img src={img} className='sm:w-[40px] w-[40px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover sm:h-[40px] h-[40px]' alt="" /> </button>
                 }
             
             </div>

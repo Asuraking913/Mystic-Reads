@@ -68,19 +68,22 @@ function Feeds() {
         const response = await Axios913.get("/api/fetch_feeds").then(response => {
             const data = response.data
             console.log(data)
+
             
-            const newFeeds = response.data.data.feeds.map((items, i) => 
+            const newFeeds = response.data.data.feeds.map((items, i) =>     
+
                     ({
                         username: items.userName, 
                         p: items.content,
                         userId : items.userId, 
                         likes : items.likes,
-                        comments : items.comments, 
+                        commentNo : items.comments.length, 
+                        comment : items.comments,
                         postId : items.postId, 
                         likeStatus : items.likeStatus[0]
                     }), 
             )
-            setFeeds([...newFeeds])
+            setFeeds(t=> ([...newFeeds]))
             // console.log(feeds[0].comments)
         })
     }
@@ -90,7 +93,7 @@ function Feeds() {
     }, [])
 
 
-    const listFeeds = feeds.map((items, i) => (<FeedsCont comments={items.comments.length} like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
+    const listFeeds = feeds.map((items, i) => (<FeedsCont comment_no={items.commentNo} comment={items.comment} like={items.likes} likeStatus={items.likeStatus} postId={items.postId} userId={items.userId}  key={i} descrip={items.descrip} post={items.p} username={items.username}/>))
 
   return (
     <>

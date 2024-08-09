@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 
 function Foot() {
   return (
-    <section id='foot' className='min-h-[20vh] px-[1em] sm:px-[--pdx] flex flex-col items-center py-[2em] gap-[1em] bg-[--accent1]'>
+    <section id='foot' className='min-h-[20vh] px-[1em] sm:px-[--pdx] flex flex-col items-center  py-[2em] gap-[1em] bg-[--accent1]'>
             <div className='flex sm:flex-row flex-col justify-center items-center w-[100%]'>
                 <ul className='flex flex-col gap-[.5em] sm:gap-[1em] py-[0.5em]'>
                     <h2 className='sm:text-3xl text-2xl audio text-[--bg]'>MysticReads</h2>
-                    <p className='sm:w-[80%] w-[100%] text-[1.1rem] text-[--bg] italic'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio repellendus facere vel inventore voluptatum officia ex unde odio iusto quia, dolores harum maiores voluptatibus possimus ratione, sapiente temporibus qui vero.</p>
+                    <p className='sm:w-[80%] w-[100%] text-[1rem] roboto text-[--bg] italic'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio repellendus facere vel inventore voluptatum officia ex unde odio iusto quia, dolores harum maiores voluptatibus possimus ratione, sapiente temporibus qui vero.</p>
                 </ul>
                 <ul className='flex flex-col items-center justify-center w-[100%]'>
                     <form action="" className='flex flex-col w-[100%] gap-[1em]'>
@@ -22,7 +22,7 @@ function Foot() {
                     </form>
                 </ul>
             </div>
-            <ul className='w-[100%] flex flex-col gap-[1em]'>
+            <ul className='w-[100%] flex justify-center flex-col gap-[1em]'>
                 <p className='sm:text-xl roboto font-bold text-[--bg]'>Contact: israelshedrack913@gmail.com</p>
                 <div className='flex gap-[2em] sm:justify-start justify-center text-2xl w-[100%]'>
                     <FontAwesomeIcon className='hover:scale-125 duration-[0.5s] text-blue-500' icon={faFacebook}/>

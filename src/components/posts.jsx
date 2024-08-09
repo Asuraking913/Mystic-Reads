@@ -10,7 +10,6 @@ function Post({profile, username, active, post, comments, likes, postId}) {
   const location = useLocation()
   const navigate = useNavigate()
   // console.log(location.pathname)
-
   return (
     <div className='sm:w-[100%] relative sm:h-auto sm:rounded-[10px] rounded-[5px] flex items-center justify-center gap-[1em] shadow-md shadow-[--accent1] bg-[--accent1] p-[.5em] sm:p-[2em]'>
         <div className='sm:block hidden'><img src={profile} className='w-[150px] bg-[--accent] shadow-md shadow-black rounded-[50%] object-cover h-[120px]' alt="" /></div>

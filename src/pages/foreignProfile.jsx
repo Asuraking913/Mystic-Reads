@@ -150,7 +150,7 @@ function ForeignView() {
       
     ])
 
-    const post = postList.map((items, i) => (<Post key={i} comments={items.commentNo} likes={items.likes} profile={image['profile_image']} post={items.content} active={true} username={items.userName}/>))
+    const post = postList.map((items, i) => (<Post key={i} comments={items.commentNo} likes={items.likes} profile={image['profile_image']} post={items.content} postId={items.postId} active={true} username={items.userName}/>))
 
   return (
     <>
