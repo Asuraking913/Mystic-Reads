@@ -58,7 +58,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
       content : remark
     }
 
-    const response = await Axios913.post(`api/${postId}/No`, data).then(response => {
+    const response = await Axios913.post(`api/${postId}/comment`, data).then(response => {
       if (response.status == 201) {
       setCommentNo(t => (t += 1))
 
