@@ -21,6 +21,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
   const [commentNo, setCommentNo] = useState(comment_no)
   const navigate = useNavigate()
   const [viewComment, setViewComment] = useState(false)
+  const [commentList, setCommentList] = useState(comment)
 
   
   // comments
@@ -61,17 +62,25 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
     const response = await Axios913.post(`api/${postId}/comment`, data).then(response => {
       if (response.status == 201) {
       setCommentNo(t => (t += 1))
+      setCommentList([...comment, {
+          commentId : userId, 
+          content : remark,
+          userName : username
+      }])
 
       }
+
     }).catch((err) => (console.log(err)))
 
   }
 
   const handleSubmit = async () => {
     handleComment()
+    // setViewComment(true)
     setRemark("")
     setBtn(!btn)
     setForm(!form)
+
   }
 
   const handleLike = async () => {
@@ -118,7 +127,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
             
             <div className='flex flex-col gap-[.5em]'>
             {
-                comment.map((items, i) => <SubComment key={i} userName={items.userName} userId={items.commentId} content={items.content}/>)
+                commentList.map((items, i) => <SubComment key={i} onChange={viewComment} userName={items.userName} userId={items.commentId} content={items.content}/>)
 
             }
           </div>
@@ -163,8 +172,8 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
           <form onSubmit={(e) => e.preventDefault()}>
             <p className='relative'>
               <label htmlFor="#" className='text-xl roboto text-[--accent1] font-bold'>Comment</label>
-              <input onChange={(e) => setRemark(e.target.value)} type="text" required className='w-full bg-[#ffffff2c] shadow-sm rounded-[2em] outline-none shadow-[--accent1] py-[.6em] p-[.5em]' />
-              <FontAwesomeIcon onClick={handleSubmit} icon={faPaperPlane} className='absolute bg-[--accent1] text-white p-[.5em] right-[.2em] top-[32px] flex items-center justify-center rounded-[50%] text-[1.1rem]'/>
+              <textarea  onChange={(e) => setRemark(e.target.value)} type="text" required className='w-full  px-[.5em]  resize-none bg-[#ffffff2c] h-[40px] text-[1rem] no-scrollbar hide-scrollbar shadow-sm rounded-[.5em] pt-[1em] line pr-[2.5em] sm:pr-[2.2em] outline-none shadow-[--accent1]' />
+              <FontAwesomeIcon onClick={handleSubmit} icon={faPaperPlane} className='absolute bg-[--accent1]  text-white p-[.5em] right-[.2em] top-[30px] flex items-center justify-center rounded-[5px] text-[1.1rem]'/>
             </p>
           </form>
 

@@ -98,10 +98,10 @@ function Feeds() {
   return (
     <>
         <Nav />
-        <Display />
+        {/* <Display /> */}
         <FeedNav />
         {
-        write ? <div className='flex justify-between px-[1em] sm:px-[--pdx] py-[1em]'>
+        write ? <div className='flex mt-[2em] justify-between px-[1em] sm:px-[--pdx] py-[1em]'>
                     <Link onClick={() => {
                         setWrite(!write)
                     }} className='sm:p-[.5em] p-[.3em] sm:text-[1rem] text-[0.9rem] px-[.4em] flex items-center sm:px-[1em] bg-[--accent1] sm:hover:bg-[#ffffff2c] text-white roboto rounded-[5px] hover:duration-[0.5s] hover:scale-105 hover:shadow-md hover:shadow-[--accent1] hover:text-[--accent1] cursor-pointer active:bg-[#ffffff2c] active:scale-100 active:duration-[0.1s]'>Create Post</Link>

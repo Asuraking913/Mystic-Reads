@@ -3,7 +3,7 @@ import user from "../assets/user.svg"
 import Axios913 from "../utils/Axios913";
 import { useNavigate } from "react-router-dom";
 
-const SubComment = ({userName, userId, content}) => {
+const SubComment = ({userName, userId, content, onChange}) => {
     const [img, setImg] = useState(user)
     const navigate = useNavigate()
 
@@ -15,7 +15,7 @@ const SubComment = ({userName, userId, content}) => {
 
           useEffect(() => {
             handleImage()
-          }, [])
+          }, [onChange])
 
     return (
         <div className="flex gap-[.4em] sm:gap-0 px-[.5em]">
