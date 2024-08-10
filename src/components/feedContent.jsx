@@ -97,6 +97,10 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
         setLikes(t => (t +=1))
         setLikeStatus(!likeStatus)
       }
+
+      if(response.status != 201) {
+        setLikeStatus(!likeStatus)
+      }
       
     })
      }
