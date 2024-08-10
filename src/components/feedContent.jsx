@@ -9,7 +9,7 @@ import SubComment from './subComment'
 
 import user from "../assets/user.svg"
 
-function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, comment_no, comment}) {
+function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, comment_no}) {
 
   const [postNav, setPostNav] = useState(false)
   const [form, setForm] = useState(false)
@@ -21,7 +21,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
   const [commentNo, setCommentNo] = useState(comment_no)
   const navigate = useNavigate()
   const [viewComment, setViewComment] = useState(false)
-  const [commentList, setCommentList] = useState(comment)
+  const [commentList, setCommentList] = useState([])
 
   
   // comments
@@ -38,9 +38,16 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
     })
   }
 
+  const handleCommentList = async () => {
+    const response = await Axios913.get(`/api/fetch_comments/${postId}`).then(response => {
+      setCommentList([...response.data.data.comments])
+    })
+  }
+
   useEffect(() => {
     handleImage()
-  }, [userId])
+    handleCommentList()
+  }, [userId, viewComment])
 
 
   const handlePostNav = () => {
@@ -62,11 +69,11 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
     const response = await Axios913.post(`api/${postId}/comment`, data).then(response => {
       if (response.status == 201) {
       setCommentNo(t => (t += 1))
-      setCommentList([...comment, {
+      setCommentList(t => ([...t, {
           commentId : userId, 
           content : remark,
           userName : username
-      }])
+      }]))
 
       }
 
@@ -100,8 +107,6 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
     fullView.style.display = 'block'
     preView.style.display = "none"
   }
-
-
   
 
   return (
@@ -119,7 +124,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
         <Truncate text={post} maxLength={350} subLength={290}/>
         {
 
-          comment[0] && 
+          commentList[0] &&
           
           <div className='mt-[1em] text-[0.9rem]'>
           {

@@ -12,7 +12,6 @@ const SubComment = ({userName, userId, content, onChange}) => {
               setImg(`data:${response.data.data.img.mime};base64,${response.data.data.img.data}`)
             })
           }
-
           useEffect(() => {
             handleImage()
           }, [onChange])
