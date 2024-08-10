@@ -7,7 +7,7 @@ import { Link, useLocation } from 'react-router-dom'
 import InputMessage from '../components/inputWindow.jsx'
 import MainNotify from '../components/notifications.jsx'
 import menu from "../assets/menu.png"
-// import socket from '../utils/socket.jsx'
+import socket from '../utils/socket.jsx'
 
 function Messenger() {
 
@@ -27,6 +27,12 @@ function Messenger() {
     //       }
     //     }
     //   }, [location])
+
+    // useEffect(() => {
+    //     socket.on('connect', (data) => {
+    //         console.log(data, 'sdf')
+    //     })
+    // })
 
   return (
     <>
