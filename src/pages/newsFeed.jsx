@@ -70,7 +70,6 @@ function Feeds() {
 
             
             const newFeeds = response.data.data.feeds.map((items, i) =>  
-            console.log(response.data)   
 
 
                     ({
