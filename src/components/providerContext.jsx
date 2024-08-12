@@ -1,6 +1,7 @@
 import AuthContext from "../utils/fetchUserPic";
 import { useState, useEffect } from "react";
 import Axios913 from "../utils/Axios913";
+import { io } from "socket.io-client";
 
 const AuthProvider = ({children}) => {
     const [auth, setAuth] = useState(null); 
@@ -13,6 +14,14 @@ const AuthProvider = ({children}) => {
     const [gender, setGender] = useState(null)
     const [email, setEmail] = useState(null)
     const [loading, setLoading] = useState(false)
+    const socket = io("localhost:5001", {
+        autoConnect : false,
+        transports : ['websocket'], 
+        cors : {
+            origin : 'localhost:5001'
+        }
+    })
+
 
     const handleFetch = async () => {
         if (!auth) {
@@ -37,15 +46,16 @@ const AuthProvider = ({children}) => {
         catch (err) {
 
             if (err.response.status === 401) {
-                console.log('Error Occured here')
+                
                 setLoading(false)
-                setAuth(true)
+                setAuth(false)
+
                 return
             } 
 
             if (err.response.status === 500) {
-                setAuth(!auth)
-                setLoading(!loading)
+                setAuth(false)
+                setLoading(false)
             }
         }
     }
@@ -67,7 +77,8 @@ const AuthProvider = ({children}) => {
             joined, setJoined,
             bio, setBio,
             gender, setGender,
-            email, setEmail
+            email, setEmail, 
+            socket
         }}>
             {children}
         </AuthContext.Provider>

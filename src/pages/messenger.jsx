@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import userDefault from "../assets/user.svg"
+import React, { useContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faBell, faEllipsis, faHome, faSearch } from '@fortawesome/free-solid-svg-icons'
 import SendMessage from '../components/sendMessenger.jsx'
@@ -7,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom'
 import InputMessage from '../components/inputWindow.jsx'
 import MainNotify from '../components/notifications.jsx'
 import menu from "../assets/menu.png"
-import socket from '../utils/socket.jsx'
+import AuthContext from '../utils/fetchUserPic.jsx'
 
 function Messenger() {
 
@@ -15,24 +14,14 @@ function Messenger() {
     const [active, setActive] = useState('active 3 hrs ago')
     const [foreignImage, setForeignImage] = useState(false)
     const [search, setSearch] = useState('invalid')
+    const {socket} = useContext(AuthContext)
     
     const location = useLocation()
-    // useEffect(() => {
-    //     console.log(location)
-    //     let params = new URLSearchParams(location.search); 
-    //     for (const [key, value] of params.entries()) {
-    //         console.log(key)
-    //       if(value) {
-    //         console.log(value)
-    //       }
-    //     }
-    //   }, [location])
-
-    // useEffect(() => {
-    //     socket.on('connect', (data) => {
-    //         console.log(data, 'sdf')
-    //     })
-    // })
+    
+    
+    useEffect(() => {
+        socket.connect()
+    }, [])
 
   return (
     <>
@@ -105,8 +94,7 @@ function Messenger() {
             <section id='sect-box' className='sm:w-[40%] block sm:block w-full overflow-scroll hide-scrollbar px-[1em]'>
                 <div className='pt-[6.5em]'>
                     <SendMessage onImage={setForeignImage} bool={foreignImage} onUsername={setCurrentUser} onSearch={search}/>
-                    <SendMessage onImage={setForeignImage} bool={foreignImage} onUsername={setCurrentUser} onSearch={search}/>
-                    <SendMessage onImage={setForeignImage} bool={foreignImage} onUsername={setCurrentUser} onSearch={search}/>
+                    
                 </div>
             </section>
             <section id='small-sms' className='sm:w-[60%] w-full h-full sm:block hidden relative shadow-sm shadow-[--accent1] ' >

@@ -54,8 +54,7 @@ function App() {
         if(auth) {
         handleImages()
       } 
-      }, [auth])
-
+      }, [auth])  
       
   return (
     <userPicContext.Provider value={images['profile_image']}>

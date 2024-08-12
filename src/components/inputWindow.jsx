@@ -1,15 +1,36 @@
-import { faArrowLeft, faEllipsis, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import user1 from "../assets/user.svg"
+import React, { useContext, useEffect, useState } from 'react'
+import AuthContext from '../utils/fetchUserPic'
 
 function InputMessage() {
 
   const [newSms, setNewSms] = useState("")
   const [receive, setReceive] = useState('')
+  const {socket} = useContext(AuthContext)
+
+  socket.on('new_message', (data) => {
+    console.log(data)
+    setReceive(data.message)
+  })
+
 
   const sendMessage = (event) => {
+
+    console.log('event')
+
+
+    console.log(socket.connected)
+
+      if (newSms) {
+      socket.emit("message", newSms)
+
+      socket.off('message')
+    }
+
+    
+
+
     if (newSms === "") {
       return
     }
@@ -30,8 +51,7 @@ function InputMessage() {
   }
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const handleSubmit = () => {
     const newUserSms = receive.trim();
     if (newUserSms) {
     const chatField = document.getElementById('smsBox');
@@ -44,6 +64,10 @@ function InputMessage() {
     // console.log(newElement)
   }
   }
+
+  useEffect(() => {
+    handleSubmit()
+  }, [receive])
 
   return (
     <div id='smscont' className='flex flex-col z-[300] justify-center px-[1.5em] absolute bottom-[4em] w-full'>

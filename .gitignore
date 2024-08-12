@@ -23,6 +23,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-*vite.config.js
-Axios913.jsx
+# vite.config.js
+# utils/Axios913.jsx
 

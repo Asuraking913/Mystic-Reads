@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import fantasy from "../assets/story4.jpeg"
 import action from "../assets/action.jpeg"
 import romance from "../assets/romance.jpeg"
@@ -14,7 +14,7 @@ import {Navigation, Pagination, Autoplay} from "swiper/modules"
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
-import { Link} from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 
 // People Image
 import person1 from "../assets/person1.jpeg"
@@ -31,6 +31,7 @@ import phone from '../assets/phone.png'
 import "@fontsource/audiowide"
 import "@fontsource/poppins"
 import "@fontsource/orbitron"
+import AuthContext from '../utils/fetchUserPic'
 
 
 function Body() {
@@ -45,6 +46,9 @@ function Body() {
       }
     }
   }, [location])
+
+  const navigate = useNavigate()
+  const {auth} = useContext(AuthContext)
 
   const genreImage = [
     {
@@ -248,9 +252,15 @@ function Body() {
         <div className='bg-[--accent] overflow-hidden sm:text-left text-center w-full sm:p-[1em] sm:py-[1em] py-[1.5em] p-[1em] sm:h-[300px] rounded-[1em] flex gap-[1em] items-center'>
           <div className='sm:w-[80%] w-full flex flex-col gap-[1em] items-center sm:items-start'>
             <h2 className='text-2xl text-white roboto font-semibold'>Join us and publish your own stories to expand the paths to wondrous fantasies</h2>
-            <Link to={"/publish"} className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
+            <button onClick={() => {
+              if (auth) {
+                navigate("/publish")
+                return 
+              } 
+              navigate("/login")
+            }}  className='px-[1em] hover:bg-white hover:border-[--accent] border-2 border-transparent duration-[0.5s] w-[50%] text-center text-xl text-[--accent] text orb py-[0.5em] bg-[--bg] rounded-[2em]'>
               Publish
-            </Link>
+            </button>
           </div>
           <div className='h-[200px] sm:block hidden w-[300px]'>
             <img src={phone} alt="" />

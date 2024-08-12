@@ -1,5 +1,6 @@
 import React from "react"
 import { createContext} from "react"
+import { io } from "socket.io-client"
 
 
 export const userPicContext = createContext()
@@ -25,6 +26,7 @@ const AuthContext = createContext({
     setBio: () =>{},
     setGender: () =>{},
     setLoading: () =>{},
+    socket : null
 
 })
 
