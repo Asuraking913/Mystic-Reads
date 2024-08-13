@@ -1,13 +1,13 @@
 import { faArrowsToDot, faComment, faPaperPlane, faThumbsUp, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Truncate from '../utils/truncate'
 import Axios913 from '../utils/Axios913'
 import SubComment from './subComment'
-
 import user from "../assets/user.svg"
+import AuthContext from '../utils/fetchUserPic'
 
 function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, comment_no}) {
 
@@ -22,6 +22,8 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
   const navigate = useNavigate()
   const [viewComment, setViewComment] = useState(false)
   const [commentList, setCommentList] = useState([])
+  const {userId : authId} = useContext(AuthContext)
+  const [viewLink, setVewLink] = useState(userId === authId ? 'profile' : "foreignView")
 
   
   // comments
@@ -29,20 +31,29 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
 
 
   const handleImage = async () => {
-    const response = await Axios913.get(`/api/fetch_feeds/images/${userId}`).then(response => {
-      setImg(`data:${response.data.data.img.mime};base64,${response.data.data.img.data}`)
-    }).catch((err) => {
-      if (err.response.data == 400) {
-        return
+    if (userId) {
+      const response = await Axios913.get(`/api/fetch_feeds/images/${userId}`).then(response => {
+        if (response.status === 200) {
+        setImg(`data:${response.data.data.img.mime};base64,${response.data.data.img.data}`)
       }
-    })
+      }).catch((err) => {
+        setImg(user)
+        return
+      })
+    }
+    
   }
 
   const handleCommentList = async () => {
+    if (postId) {
     const response = await Axios913.get(`/api/fetch_comments/${postId}`).then(response => {
       setCommentList([...response.data.data.comments])
+    }).catch((err) => {
+      console.log(err, 'sdfsdf')
+      setCommentList([])
     })
   }
+}
 
   useEffect(() => {
     handleImage()
@@ -116,7 +127,7 @@ function FeedsCont({post, username, descrip, like, postId, userId, likeStatus, c
   return (
     <div className='flex gap-[1em] shadow-sm shadow-[--accent1] w-full flex-col relative p-[1em] rounded-[10px]'>
         <div className='flex items-center w-[100%] justify-between'>
-            <Link to={`/foreignView?${userId}`}>
+            <Link to={`/${viewLink}?${userId}`}>
               <img src={img} className='w-[60px] h-[60px] object-cover rounded-[50%] shadow-sm shadow-[--accent1]' alt="" />
             </Link>
             <div className='text-center'>

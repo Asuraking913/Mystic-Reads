@@ -7,7 +7,7 @@ import person2 from "../assets/person2.jpeg"
 import person3 from "../assets/person3.jpeg"
 import person4 from "../assets/person4.jpeg"
 
-function SendMessage({onUsername, onImage, onSearch, bool}) {
+function SendMessage({onUsername, onImage, onSearch, bool, friendList}) {
 
     // const handleFriends = () => {
         

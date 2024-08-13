@@ -37,7 +37,11 @@ const FullPost = () => {
 
     const handleImage = async (id) => {
         const response = await Axios913.get(`/api/fetch_feeds/images/${id}`).then(response => {
-            if (response.data.data.img)
+          if(response.data.status === 'unsucessfull') {
+            setImg(user)
+            return
+          } 
+            if (response.data.data.img && response.status == 200)
           setImg(`data:${response.data.data.img.mime};base64,${response.data.data.img.data}`)
         })
       }
@@ -58,7 +62,6 @@ const FullPost = () => {
                         setDate(response.data.date)
                         setUserName(response.data.userName)
                         setUserid(response.data.userId)
-                        console.log(response.data)
                         const postComments = response.data.comments.map(items => (
                             {
                               userName : items.userName, 

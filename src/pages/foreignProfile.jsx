@@ -17,6 +17,8 @@ function ForeignView() {
 
   const navigate = useNavigate()
   const location = useLocation()
+  const [foreignId, setForeignId] = useState("")
+  const [friendStatus, setFriendStatus] = useState(false)
 
   const {
     auth, setAuth,
@@ -34,9 +36,13 @@ function ForeignView() {
     let params = new URLSearchParams(location.search); 
     for (const [key, value] of params.entries()) {
 
-
+      setForeignId(key)
 
       const handledetails = async () => {
+
+        const friendStatus = await Axios913.get(`/api/verify_friend/${key}`).then(response => {
+          setFriendStatus(response.data.data.status)
+        })
 
     // Fetch user details
       const profilesInfo = await Axios913.get(`/api/profiles_info/${key}`).then(response => {
@@ -118,16 +124,6 @@ function ForeignView() {
 
   }, [])
 
-  
-
-  
-
-// useEffect(() => {
-//   handleImages()
-  
-// }, [userId])
-
-
 
     // State vars
     const [image, setImages] = useState({profile_image : '', cover_image : ""})
@@ -172,11 +168,41 @@ function ForeignView() {
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
-                    <button className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <button onClick={async () => {
+                      const data = {
+                        targetId : foreignId
+                      }
+                      if (!friendStatus) {
+                        const response = await Axios913.post(`/api/add_friend`, data).then(response => {
+
+                          if (response.status == 201) {
+                            setFriendStatus(true)
+                          }
+                        }
+                      )
+                      }
+
+                      if (friendStatus) {
+                        const response = await Axios913.get(`/api/unfollow_friend/${foreignId}`).then(response => {
+                          setFriendStatus(response.data.data.status)
+                        })
+                      }
+                      
+                    }} className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faUserPlus}/>
+                     {
+                      friendStatus ?
+
+                      <p>Unfollow</p>
+                      :
+
                       <p>Follow</p>
+                    
+                    }
                     </button>
-                    <button className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <button onClick={() => {
+                      navigate(`/sendSms?${foreignId}`)
+                    }} className='px-[1em] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justifsm:y-center hover:scale-105 duration-[0.5s] hover:bg-[--bg] hover:text-[--accent] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faMessage}/>
                       <p>Message</p>
                     </button>
@@ -231,11 +257,44 @@ function ForeignView() {
                </div>
                <div>
                  <div className='flex justify-between gap-[2em]'>
-                    <button className='px-[1em] text-[.9rem] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center duration-[0.5s] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <button onClick={async () => {
+                      const data = {
+                        targetId : foreignId
+                      }
+                    
+                      if (!friendStatus) {
+                        const response = await Axios913.post(`/api/add_friend`, data).then(response => {
+                          console.log(response.data)
+                          if (response.status == 201) {
+                            setFriendStatus(true)
+                          }
+                        }
+                      )
+                      }
+
+                      if (friendStatus) {
+                        
+                        const response = await Axios913.get(`/api/unfollow_friend/${foreignId}`).then(response => {
+
+                          setFriendStatus(response.data.data.status)
+                        })
+                      }
+                      
+                    }}  className='px-[1em] text-[.9rem] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center duration-[0.5s] py-[.5em] font-semibold bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faUserPlus}/>
-                      <p className='text-[.9rem]'>Follow</p>
+                      {
+                      friendStatus ?
+
+                      <p>Unfollow</p>
+                      :
+
+                      <p>Follow</p>
+                    
+                    }
                     </button>
-                    <button className='px-[1em] text-[.9rem] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center duration-[0.5s] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
+                    <button onClick={() => {
+                      navigate(`/sendSms?${foreignId}`)
+                    }} className='px-[1em] text-[.9rem] active:scale-[0.95] shadow-md shadow-[black] gap-[.5em] items-center justify-center duration-[0.5s] font-semibold py-[.5em] bg-[--accent] roboto rounded-[5px] text-[--bg] flex'>
                       <FontAwesomeIcon icon={faMessage}/>
                       <p className='text-[.9rem]'>Message</p>
                     </button>

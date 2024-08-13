@@ -9,6 +9,7 @@ import PostForm from '../components/postForm'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import Axios913 from '../utils/Axios913'
+import user from "../assets/user.svg"
 
 function Feeds() {
 
@@ -44,6 +45,7 @@ function Feeds() {
         setFeeds(t => (
             [
                 {
+                    img : user,
                     username : userName, 
                     p : content, 
                 }, 

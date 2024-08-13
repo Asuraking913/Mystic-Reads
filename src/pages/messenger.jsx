@@ -7,6 +7,7 @@ import InputMessage from '../components/inputWindow.jsx'
 import MainNotify from '../components/notifications.jsx'
 import menu from "../assets/menu.png"
 import AuthContext from '../utils/fetchUserPic.jsx'
+import Axios913 from '../utils/Axios913.jsx'
 
 function Messenger() {
 
@@ -17,10 +18,24 @@ function Messenger() {
     const {socket} = useContext(AuthContext)
     
     const location = useLocation()
+
+    const fetchFriends = async () => {
+        const response = Axios913.get(`/api/friends_list`).then(response => {
+            console.log(response.data)
+        })
+    }
     
     
     useEffect(() => {
+        fetchFriends()
         socket.connect()
+        // let params = new URLSearchParams(location.search)
+
+        // for (const [key, value] of params.entries()) {
+        //     if (key) {
+
+        //     }
+        // }
     }, [])
 
   return (

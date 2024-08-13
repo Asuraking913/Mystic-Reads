@@ -11,13 +11,15 @@ const PrivateRoutes = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
-    if (!authContext & !loading) {
-        useEffect(() => {
-            if(!authContext) {
-                navigate("/")
+    useEffect(() => {
+        if(!authContext) {
+            navigate("/")
 
-            }
-            }, [])
+        }
+        }, [authContext, loading ])
+
+    if (!authContext & !loading) {
+        
 
         return (
             <div className='h-screen flex items-center justify-center w-full'>
