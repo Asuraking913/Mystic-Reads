@@ -20,7 +20,7 @@ import FullPost from './pages/fullPosts'
 
 function App() {
   
-  const {auth, setAuth} = useContext(AuthContext)
+  const {auth, setAuth, userId} = useContext(AuthContext)
 
   useEffect(() => {
     document.title = "Mystic Reads"
@@ -54,7 +54,7 @@ function App() {
         if(auth) {
         handleImages()
       } 
-      }, [auth])  
+      }, [auth, userId])  
       
   return (
     <userPicContext.Provider value={images['profile_image']}>

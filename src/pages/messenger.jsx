@@ -7,7 +7,6 @@ import InputMessage from '../components/inputWindow.jsx'
 import MainNotify from '../components/notifications.jsx'
 import menu from "../assets/menu.png"
 import AuthContext from '../utils/fetchUserPic.jsx'
-import Axios913 from '../utils/Axios913.jsx'
 
 function Messenger() {
 
@@ -16,18 +15,14 @@ function Messenger() {
     const [foreignImage, setForeignImage] = useState(false)
     const [search, setSearch] = useState('invalid')
     const {socket} = useContext(AuthContext)
+    const [friends, setFriends] = useState([])
     
     const location = useLocation()
 
-    const fetchFriends = async () => {
-        const response = Axios913.get(`/api/friends_list`).then(response => {
-            console.log(response.data)
-        })
-    }
+    
     
     
     useEffect(() => {
-        fetchFriends()
         socket.connect()
         // let params = new URLSearchParams(location.search)
 

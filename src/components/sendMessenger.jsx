@@ -1,82 +1,76 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMessage, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
-import person1 from "../assets/person1.jpeg"
-import person2 from "../assets/person2.jpeg"
-import person3 from "../assets/person3.jpeg"
-import person4 from "../assets/person4.jpeg"
+import React, { useContext, useEffect, useState } from 'react'
+import user from "../assets/user.svg"
+import AuthContext from '../utils/fetchUserPic'
+import Axios913 from '../utils/Axios913'
 
 function SendMessage({onUsername, onImage, onSearch, bool, friendList}) {
 
-    // const handleFriends = () => {
-        
-    // }
+    const {userId : id} = useContext(AuthContext)
+    const [status, setStatus] = useState(false)
+
+    const [msgList, setMsgList] = useState([
+    ])
+
+    const setImages = async () => {
+        try {
+          const newList = await Promise.all(msgList.map(async (items) => {
+            try {
+              const response = await Axios913.get(`/api/fetch_feeds/images/${items.userId}`);
+              return {
+                userId: items.userId,
+                relation_id: items.relation_id,
+                username: items.username,
+                msg: '',
+                time: '000',
+                img: `data:${response.data.data.img.mime};base64,${response.data.data.img.data}`
+              };
+            } catch (err) {
+              console.error(`Error fetching image for userId ${items.userId}:`, err);
+              return {
+                userId: items.userId,
+                relation_id: items.relation_id,
+                username: items.username,
+                msg: '',
+                time: '000',
+                img: user
+              };
+            }
+          }));
+          setMsgList(newList);
+          return newList;
+        } catch (err) {
+          console.error('Error in setImages:', err);
+        }
+      };
+      
+
+    const fetchFriends = async () => {
+        const response = Axios913.get(`/api/friends_list`).then(response => {
+            const new_friends = response.data.data.friendList.map(items => (
+                {
+                    userId : items.id,
+                    relation_id : items.relation_id,
+                    username : items.userName, 
+                    msg : '',
+                    time : '000',
+                    // img : items.img
+                }
+            ))
+
+            setMsgList([...new_friends])
+            setStatus(!status)
+        })
+    }
 
 
-    const msgList = [
-        {
-            img: person3, 
-            username: 'Dai Tan', 
-            msg: "Hey there, How's the day going", 
-            time: "2:14pm"
-        }, 
-        {
-            img: person2, 
-            username: 'Tang WuTong', 
-            msg: "I do too", 
-            time: "2:14pm"
-        }, 
-        {
-            img: person4, 
-            username: 'Miles Morales', 
-            msg: "There's actually a reason for that", 
-            time: "2:14pm"
-        }, 
-        {
-            img: person1, 
-            username: 'Frodo Baggins', 
-            msg: "Love sucks for some people", 
-            time: "2:14pm"
-        }, 
-        {
-            img: person2, 
-            username: "Thor Odinson",
-            msg: "Am leveling up my game", 
-            time: "2:14pm"
-        }, 
-        {
-            img: person4, 
-            username: 'Thousand Hands Doluo', 
-            msg: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste aliquam dolores voluptates qui enim?", 
-            time: "2:14pm"
-        }, 
-        {
-            img: person2, 
-            username: "Hiroshi Kantana",
-            msg: "Hey there, How's the day going", 
-            time: "2:14pm"
-        }, 
-        {
-            img: person4, 
-            username: 'Charlie Wade',
-            msg: "Hey there, How's the day going", 
-            time: "2:14pm"
-        }, 
-        {
-            img: person2, 
-            username: "Hiroshi Kantana",
-            msg: "Hey there, How's the day going", 
-            time: "2:14pm"
-        }, 
-        {
-            img: person4, 
-            username: 'Charlie 123Wade',
-            msg: "Hey there, How's the day going", 
-            time: "2:14pm"
-        }, 
-        
-    ]
+
+    useEffect(() => {
+        fetchFriends()
+    },[])
+
+    useEffect(() => {
+        setImages()
+    }, [status])
 
 
   return (
