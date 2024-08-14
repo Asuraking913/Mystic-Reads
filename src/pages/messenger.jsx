@@ -10,27 +10,19 @@ import AuthContext from '../utils/fetchUserPic.jsx'
 
 function Messenger() {
 
-    const [currentUser, setCurrentUser] = useState('Asura')
+    const [currentUser, setCurrentUser] = useState('')
+    const [foreignUserId, setForeignUserId] = useState("")
     const [active, setActive] = useState('active 3 hrs ago')
-    const [foreignImage, setForeignImage] = useState(false)
+    const [foreignImage, setForeignImage] = useState("")
     const [search, setSearch] = useState('invalid')
     const {socket} = useContext(AuthContext)
-    const [friends, setFriends] = useState([])
+    const [relationId, setRelationId] = useState("")
     
     const location = useLocation()
-
-    
-    
     
     useEffect(() => {
         socket.connect()
-        // let params = new URLSearchParams(location.search)
-
-        // for (const [key, value] of params.entries()) {
-        //     if (key) {
-
-        //     }
-        // }
+        
     }, [])
 
   return (
@@ -103,7 +95,7 @@ function Messenger() {
         <div className='flex sm:flex-row flex-col h-full '>
             <section id='sect-box' className='sm:w-[40%] block sm:block w-full overflow-scroll hide-scrollbar px-[1em]'>
                 <div className='pt-[6.5em]'>
-                    <SendMessage onImage={setForeignImage} bool={foreignImage} onUsername={setCurrentUser} onSearch={search}/>
+                    <SendMessage onImage={setForeignImage} onRelation={setRelationId} foreignUserId={foreignUserId} onForeignUserId={setForeignUserId} onUsername={setCurrentUser} onSearch={search}/>
                     
                 </div>
             </section>
@@ -111,7 +103,7 @@ function Messenger() {
                 <div className='h-[15vh] '>
 
                 </div>
-                {foreignImage ? <InputMessage /> : <div className='flex flex-col gap-[8em]'>
+                {foreignImage ? <InputMessage relation_id={relationId} foreignUserId={foreignUserId}  /> : <div className='flex flex-col gap-[8em]'>
                     <p className='text-center roboto text-2xl px-[4em] text-[--accent1] font-bold opacity-[0.8]'>Your chat history will be stored in our database</p>
                     <p className='text-center roboto text-2xl px-[4em] text-[--accent1] font-bold opacity-[0.8]'>
                         Your Privacy Matters

@@ -3,16 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../utils/fetchUserPic'
 
-function InputMessage() {
+function InputMessage({foreignUserId, relation_id}) {
 
   const [newSms, setNewSms] = useState("")
   const [receive, setReceive] = useState('')
   const {socket} = useContext(AuthContext)
+  const {userId} = useContext(AuthContext)
 
-  socket.on('new_message', (data) => {
-    console.log(data)
-    setReceive(data.message)
-  })
+  // socket.on('new_message', (data) => {
+  //   console.log(data)
+  //   setReceive(data.message)
+  // })
+
+  console.log(userId)
+  console.log(foreignUserId)
+  console.log(relation_id)
 
 
   const sendMessage = (event) => {
@@ -22,11 +27,11 @@ function InputMessage() {
 
     console.log(socket.connected)
 
-      if (newSms) {
-      socket.emit("message", newSms)
+    //   if (newSms) {
+    //   socket.emit("message", newSms)
 
-      socket.off('message')
-    }
+    //   socket.off('message')
+    // }
 
     
 

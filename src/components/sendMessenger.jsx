@@ -3,10 +3,11 @@ import user from "../assets/user.svg"
 import AuthContext from '../utils/fetchUserPic'
 import Axios913 from '../utils/Axios913'
 
-function SendMessage({onUsername, onImage, onSearch, bool, friendList}) {
+function SendMessage({onUsername, onImage, onSearch, onForeignUserId, onRelation}) {
 
     const {userId : id} = useContext(AuthContext)
     const [status, setStatus] = useState(false)
+    const [select ,setSelect] = useState(0)
 
     const [msgList, setMsgList] = useState([
     ])
@@ -20,7 +21,7 @@ function SendMessage({onUsername, onImage, onSearch, bool, friendList}) {
                 userId: items.userId,
                 relation_id: items.relation_id,
                 username: items.username,
-                msg: '',
+                msg: 'You are now connected',
                 time: '000',
                 img: `data:${response.data.data.img.mime};base64,${response.data.data.img.data}`
               };
@@ -30,7 +31,7 @@ function SendMessage({onUsername, onImage, onSearch, bool, friendList}) {
                 userId: items.userId,
                 relation_id: items.relation_id,
                 username: items.username,
-                msg: '',
+                msg: 'You are now connected',
                 time: '000',
                 img: user
               };
@@ -53,7 +54,6 @@ function SendMessage({onUsername, onImage, onSearch, bool, friendList}) {
                     username : items.userName, 
                     msg : '',
                     time : '000',
-                    // img : items.img
                 }
             ))
 
@@ -72,6 +72,30 @@ function SendMessage({onUsername, onImage, onSearch, bool, friendList}) {
         setImages()
     }, [status])
 
+    useEffect(() => {
+        if (select < 50) {
+            setSelect(select + 1)
+        }
+
+        let params = new URLSearchParams(location.search)
+
+        for (const [key, value] of params.entries()) {
+            if (key) {
+                onForeignUserId(key)
+                for (let i = 0; i < msgList.length; i++) {
+                    if (msgList[i].userId == key) {
+                        onUsername(msgList[i].username)
+                        onImage(msgList[i].img)
+                        onForeignUserId(msgList[i].userId)
+                        onRelation(msgList[i].relation_id)
+                        
+                    }
+                }
+            }
+        }
+
+    }, [select])
+
 
   return (
     <div className='flex flex-col px-[.1em] gap-[.5em]'>
@@ -79,6 +103,8 @@ function SendMessage({onUsername, onImage, onSearch, bool, friendList}) {
         <div key={i} onClick={(e) => {
             onImage(items.img)
             onUsername(items.username)
+            onForeignUserId(items.userId)
+            onRelation(items.relation_id)
             const back = document.getElementById('back')
             back.classList.remove('hidden')
             back.classList.add('block')
@@ -126,7 +152,9 @@ function SendMessage({onUsername, onImage, onSearch, bool, friendList}) {
         msgList.filter(items => (items.username.toLowerCase().includes(onSearch.toLowerCase()))).map((items, i) => (
             <div key={i} onClick={(e) => {
                 onImage(items.img)
+                onForeignUserId(items.userId)
                 onUsername(items.username)
+                onRelation(items.relation_id)
                 const back = document.getElementById('back')
                 back.classList.remove('hidden')
                 back.classList.add('block')
