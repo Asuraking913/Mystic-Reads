@@ -10,14 +10,9 @@ function InputMessage({foreignUserId, relation_id}) {
   const {socket} = useContext(AuthContext)
   const {userId} = useContext(AuthContext)
 
-  // socket.on('new_message', (data) => {
-  //   console.log(data)
-  //   setReceive(data.message)
-  // })
-
-  console.log(userId)
-  console.log(foreignUserId)
-  console.log(relation_id)
+  // console.log(userId)
+  // console.log(foreignUserId)
+  // console.log(relation_id)
 
 
   const sendMessage = (event) => {
@@ -25,20 +20,15 @@ function InputMessage({foreignUserId, relation_id}) {
     console.log('event')
 
 
-    console.log(socket.connected)
-
-    //   if (newSms) {
-    //   socket.emit("message", newSms)
-
-    //   socket.off('message')
-    // }
-
-    
-
+    console.log(socket.connected)    
 
     if (newSms === "") {
       return
     }
+
+    socket.emit("send_message", {'userId' : userId, targetId : foreignUserId, relationId : relation_id, "sms" : newSms })
+
+
     event.preventDefault()
     const newUserSms = newSms.trim();
     if (newUserSms) {

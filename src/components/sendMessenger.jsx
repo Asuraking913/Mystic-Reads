@@ -5,7 +5,7 @@ import Axios913 from '../utils/Axios913'
 
 function SendMessage({onUsername, onImage, onSearch, onForeignUserId, onRelation}) {
 
-    const {userId : id} = useContext(AuthContext)
+    const {userId : id, socket} = useContext(AuthContext)
     const [status, setStatus] = useState(false)
     const [select ,setSelect] = useState(0)
 
@@ -101,6 +101,14 @@ function SendMessage({onUsername, onImage, onSearch, onForeignUserId, onRelation
     <div className='flex flex-col px-[.1em] gap-[.5em]'>
         {(onSearch === 'invalid') ? msgList.map((items, i) => (
         <div key={i} onClick={(e) => {
+
+            //sockets 
+
+            
+            socket.emit('init_room', {'userId' : id, targetId : items.userId, relationId : items.relation_id})
+
+            //
+
             onImage(items.img)
             onUsername(items.username)
             onForeignUserId(items.userId)

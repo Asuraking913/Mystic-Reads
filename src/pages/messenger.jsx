@@ -15,15 +15,26 @@ function Messenger() {
     const [active, setActive] = useState('active 3 hrs ago')
     const [foreignImage, setForeignImage] = useState("")
     const [search, setSearch] = useState('invalid')
-    const {socket} = useContext(AuthContext)
+    const {socket, userId} = useContext(AuthContext)
     const [relationId, setRelationId] = useState("")
     
     const location = useLocation()
+    const data = {
+        user_id : userId
+    }
     
-    useEffect(() => {
-        socket.connect()
+    // useEffect(() => {
+    //     socket.connect()
         
-    }, [])
+    //     socket.emit('join_rooms', data)
+        
+    // }, [])
+
+    // useEffect(() => {
+    //     socket.on('receive_message', (data) => {
+    //         console.log(data)
+    //     })
+    // }, [])
 
   return (
     <>
