@@ -102,11 +102,9 @@ function SendMessage({onUsername, onImage, onSearch, onForeignUserId, onRelation
         {(onSearch === 'invalid') ? msgList.map((items, i) => (
         <div key={i} onClick={(e) => {
 
-            //sockets 
 
-            
+            //sockets             
             socket.emit('init_room', {'userId' : id, targetId : items.userId, relationId : items.relation_id})
-
             //
 
             onImage(items.img)

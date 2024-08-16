@@ -7,6 +7,7 @@ import InputMessage from '../components/inputWindow.jsx'
 import MainNotify from '../components/notifications.jsx'
 import menu from "../assets/menu.png"
 import AuthContext from '../utils/fetchUserPic.jsx'
+import Axios913 from '../utils/Axios913.jsx'
 
 function Messenger() {
 
@@ -17,29 +18,46 @@ function Messenger() {
     const [search, setSearch] = useState('invalid')
     const {socket, userId} = useContext(AuthContext)
     const [relationId, setRelationId] = useState("")
+    const [smsHistoryList, setSmsHistoryList] = useState([])
     
     const location = useLocation()
     const data = {
-        user_id : userId
+        userId : userId
     }
     
-    // useEffect(() => {
-    //     socket.connect()
+    useEffect(() => {
+        socket.connect()
         
-    //     socket.emit('join_rooms', data)
+        socket.emit('join_rooms', data)
         
-    // }, [])
+    }, [])
+    // console.log(foreignUserId)
 
-    // useEffect(() => {
-    //     socket.on('receive_message', (data) => {
-    //         console.log(data)
-    //     })
-    // }, [])
+    const handlePastSms = (id) => {
+        if (id) {
+        const response = Axios913.get(`/api/fetch_messages/${id}`).then(response => {
+        const newList = response.data.data.messageList.map(items => (
+            {
+                content : items.content,
+                day : items.day, 
+                time : items.time, 
+                userId : items.userId,
+                userName : items.userName
+            }
+        ))
+        setSmsHistoryList([...newList])
+        })
+    }
+      }
+
+      useEffect(() => {
+        handlePastSms(relationId)
+      }, [relationId])
 
   return (
     <>
             <div className='fixed bg-[#DDBDB2] z-[1000] top-0 p-[1em] w-full flex justify-between items-center  sm:px-[4em] text-[--accent1]'>
-                <Link id='back' onClick={() => {
+                <button id='back' onClick={() => {
                     const back = document.getElementById('back')
                     back.classList.add('hidden')
                     back.classList.remove('block')
@@ -58,7 +76,7 @@ function Messenger() {
                     message.classList.add('hidden')
                 }}  className='sm:hidden hidden'>
                     <FontAwesomeIcon className='sm:text-4xl text-3xl hover:scale-110 active:scale-[1] active:duration-[0.1s] duration-[0.5s] text-[--accent1]' icon={faArrowLeft} title='Home page '/>
-                </Link>
+                </button>
                 <Link to={"/"} className=''>
                     <FontAwesomeIcon className='sm:text-4xl text-2xl hover:scale-110 active:scale-[1] active:duration-[0.1s] duration-[0.5s] text-[--accent1]' icon={faHome} title='Home page '/>
                 </Link>
@@ -114,7 +132,7 @@ function Messenger() {
                 <div className='h-[15vh] '>
 
                 </div>
-                {foreignImage ? <InputMessage relation_id={relationId} foreignUserId={foreignUserId}  /> : <div className='flex flex-col gap-[8em]'>
+                {foreignImage ? <InputMessage smsHistory={smsHistoryList} relation_id={relationId} foreignUserId={foreignUserId}  /> : <div className='flex flex-col gap-[8em]'>
                     <p className='text-center roboto text-2xl px-[4em] text-[--accent1] font-bold opacity-[0.8]'>Your chat history will be stored in our database</p>
                     <p className='text-center roboto text-2xl px-[4em] text-[--accent1] font-bold opacity-[0.8]'>
                         Your Privacy Matters

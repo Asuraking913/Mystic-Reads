@@ -2,20 +2,90 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../utils/fetchUserPic'
+import Axios913 from '../utils/Axios913'
 
-function InputMessage({foreignUserId, relation_id}) {
+function InputMessage({foreignUserId, relation_id, smsHistory}) {
 
   const [newSms, setNewSms] = useState("")
   const [receive, setReceive] = useState('')
   const {socket} = useContext(AuthContext)
   const {userId} = useContext(AuthContext)
+  const [currentDate, setCurrentDate] = useState("") 
+
 
   // console.log(userId)
   // console.log(foreignUserId)
   // console.log(relation_id)
 
+//   useEffect(() => {
+//     socket.on('receive_message', (data) => {
+//         if (userId in data ) {
+//           if ("sms" in data[`${userId}`]) {
+//           setReceive(data[`${userId}`].sms)
+
+//           }
+//       }
+//     })
+// })
+
+const handleDate = (value) => {
+  const chatField = document.getElementById('smsBox');
+      let day = value
+      const newDiv = document.createElement('div')
+      newDiv.classList.add('w-full', 'text-center',  'text-[1em]', 'p-4')
+      const newBtn = document.createElement('button')
+      newBtn.classList.add('outline-none', 'text-[white]', 'px-[1em]', 'py-[.3em]', 'roboto', 'opacity-90', 'rounded-[1.3em]', 'bg-[--accent1]', 'shadow-sm', 'shadow-[--accent1]')
+      newBtn.innerHTML = day
+      newDiv.appendChild(newBtn)
+      chatField.appendChild(newDiv)
+}
+
+const handleDate1 = (value) => {
+  handleDate(value) 
+  setCurrentDate(value)
+}
+
+  useEffect(() => {
+    if (smsHistory.length > 0) {
+      console.log(smsHistory)
+      setCurrentDate(smsHistory[0].day)
+
+      handleDate(smsHistory[0].day)
+      for (let  i = 0; i < smsHistory.length; i++) {
+        if (userId == smsHistory[i].userId) {
+
+          currentDate === smsHistory[i].day ? console.log(smsHistory[i].day) : handleDate(smsHistory[i].day)
+
+        let newUserSms = smsHistory[i].content
+        const chatField = document.getElementById('smsBox');
+        const newElement =document.createElement('p')
+        newElement.style.backgroundColor = ''
+        newElement.classList.add('text-[1rem]', 'line',  'bg-[--accent1]', "mt-[.1em]", 'px-[.8em]',  'p-[.2em]', 'text-white', 'rounded-l-[1em]', 'rounded-tr-[.5em]', 'max-w-[90%]', 'sm:max-w-[400px]')
+        newElement.innerHTML = newUserSms
+        chatField.appendChild(newElement)
+        chatField.scrollTo({top : chatField.scrollHeight, behavior : 'smooth'})
+        const inbox = document.getElementById('sms')
+        inbox.value = ""
+        setNewSms(inbox.value)
+
+      }
+
+      if (foreignUserId === smsHistory[i].userId) {
+        let newUserSms = smsHistory[i].content
+        const chatField = document.getElementById('smsBox');
+        const newElement =document.createElement('p')
+        newElement.style.backgroundColor = ''
+        newElement.classList.add('text-[1rem]',  'bg-[--accent]', "mt-[.1em]", 'self-start', 'px-[.8em]',  'p-[.2em]', 'text-white', 'rounded-r-[1em]', 'rounded-l-[1em]','sm:max-w-[400px]')
+        newElement.innerHTML = newUserSms
+        chatField.appendChild(newElement)
+        chatField.scrollTo({top : chatField.scrollHeight, behavior : 'smooth'})
+      }
+    }
+  }
+}, [smsHistory])
 
   const sendMessage = (event) => {
+    
 
     console.log('event')
 
@@ -67,8 +137,6 @@ function InputMessage({foreignUserId, relation_id}) {
   return (
     <div id='smscont' className='flex flex-col z-[300] justify-center px-[1.5em] absolute bottom-[4em] w-full'>
       <div className='sm:h-[65vh] height h-[66vh] break-words flex flex-col gap-[.3em] items-end overflow-scroll hide-scrollbar p-[.3em]' id='smsBox'>
-
-      {/* <p className='justify-self-start '>sdfsdfsfd</p> */}
       </div>
           <div className='relative mt-[.5em]'>
             <form action="" className='absolute w-full' >
