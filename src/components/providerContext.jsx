@@ -14,11 +14,11 @@ const AuthProvider = ({children}) => {
     const [gender, setGender] = useState(null)
     const [email, setEmail] = useState(null)
     const [loading, setLoading] = useState(false)
-    const socket = io("https://mystic-reads.vercel.app", {
+    const socket = io("https://mystic-reads-api.vercel.app", {
         autoConnect : false,
         transports : ['websocket'], 
         cors : {
-            origin : 'https://mystic-reads.vercel.app', 
+            origin : 'https://mystic-reads-api.vercel.app', 
             
         },
         withCredentials : true
