@@ -18,8 +18,10 @@ const AuthProvider = ({children}) => {
         autoConnect : false,
         transports : ['websocket'], 
         cors : {
-            origin : 'https://mystic-reads.vercel.app/login'
-        }
+            origin : 'https://mystic-reads.vercel.app/login', 
+            
+        },
+        withCredentials : true
     })
 
 
