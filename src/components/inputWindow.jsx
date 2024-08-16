@@ -18,16 +18,16 @@ function InputMessage({foreignUserId, relation_id, smsHistory}) {
   // console.log(foreignUserId)
   // console.log(relation_id)
 
-//   useEffect(() => {
-//     socket.on('receive_message', (data) => {
-//         if (userId in data ) {
-//           if ("sms" in data[`${userId}`]) {
-//           setReceive(data[`${userId}`].sms)
+  useEffect(() => {
+    socket.on('receive_message', (data) => {
+        if (userId in data ) {
+          if ("sms" in data[`${userId}`]) {
+          setReceive(data[`${userId}`].sms)
 
-//           }
-//       }
-//     })
-// })
+          }
+      }
+    })
+})
 
 const handleDays = (list) => {
   if(list.length > 0) {
@@ -40,7 +40,7 @@ const handleDays = (list) => {
 }
 
 const handleDate = (smsList, targetDay) => {
-  targetDay && targetDay.reverse().forEach(items => {
+  targetDay && targetDay.forEach(items => {
     // headers
        const chatField = document.getElementById('smsBox');
        const newBtn = document.createElement('button')
