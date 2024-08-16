@@ -1,6 +1,6 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { createElement, useContext, useEffect, useState } from 'react'
 import AuthContext from '../utils/fetchUserPic'
 import Axios913 from '../utils/Axios913'
 
@@ -10,7 +10,8 @@ function InputMessage({foreignUserId, relation_id, smsHistory}) {
   const [receive, setReceive] = useState('')
   const {socket} = useContext(AuthContext)
   const {userId} = useContext(AuthContext)
-  const [currentDate, setCurrentDate] = useState("") 
+  const [currentDate, setCurrentDate] = useState() 
+  const listDays = []
 
 
   // console.log(userId)
@@ -28,35 +29,35 @@ function InputMessage({foreignUserId, relation_id, smsHistory}) {
 //     })
 // })
 
-const handleDate = (value) => {
-  const chatField = document.getElementById('smsBox');
-      let day = value
-      const newDiv = document.createElement('div')
-      newDiv.classList.add('w-full', 'text-center',  'text-[1em]', 'p-4')
-      const newBtn = document.createElement('button')
-      newBtn.classList.add('outline-none', 'text-[white]', 'px-[1em]', 'py-[.3em]', 'roboto', 'opacity-90', 'rounded-[1.3em]', 'bg-[--accent1]', 'shadow-sm', 'shadow-[--accent1]')
-      newBtn.innerHTML = day
-      newDiv.appendChild(newBtn)
-      chatField.appendChild(newDiv)
+const handleDays = (list) => {
+  if(list.length > 0) {
+    list.forEach(items => {
+      if (!listDays.includes(items.day)) {
+      listDays.push(items.day)
+    }
+    })
+  }
 }
 
-const handleDate1 = (value) => {
-  handleDate(value) 
-  setCurrentDate(value)
-}
+const handleDate = (smsList, targetDay) => {
+  targetDay && targetDay.reverse().forEach(items => {
+    // headers
+       const chatField = document.getElementById('smsBox');
+       const newBtn = document.createElement('button')
+       let day = items
+       const newDiv = document.createElement('div')
+       newDiv.classList.add('w-full', 'text-center', 'text-[1em]', 'p-4')
+       newBtn.classList.add('outline-none', 'text-[white]', 'px-[1em]', 'py-[.3em]', 'roboto', 'opacity-90', 'rounded-[1.3em]', 'bg-[--accent1]', 'shadow-sm', 'shadow-[--accent1]')
+       newBtn.innerHTML = day
+       newDiv.append(newBtn)
+       chatField.appendChild(newDiv)
+       chatField.scrollTo({top : chatField.scrollHeight, behavior : 'smooth'})
+       const inbox = document.getElementById('sms')
+       inbox.value = ""
 
-  useEffect(() => {
-    if (smsHistory.length > 0) {
-      console.log(smsHistory)
-      setCurrentDate(smsHistory[0].day)
-
-      handleDate(smsHistory[0].day)
-      for (let  i = 0; i < smsHistory.length; i++) {
-        if (userId == smsHistory[i].userId) {
-
-          currentDate === smsHistory[i].day ? console.log(smsHistory[i].day) : handleDate(smsHistory[i].day)
-
-        let newUserSms = smsHistory[i].content
+    smsList && smsList.forEach(item => {
+        if (item.day == items & item.userId == userId) {
+        let newUserSms = item.content
         const chatField = document.getElementById('smsBox');
         const newElement =document.createElement('p')
         newElement.style.backgroundColor = ''
@@ -67,11 +68,10 @@ const handleDate1 = (value) => {
         const inbox = document.getElementById('sms')
         inbox.value = ""
         setNewSms(inbox.value)
-
       }
 
-      if (foreignUserId === smsHistory[i].userId) {
-        let newUserSms = smsHistory[i].content
+      if (item.day == items & item.userId == foreignUserId) {
+        let newUserSms = item.content
         const chatField = document.getElementById('smsBox');
         const newElement =document.createElement('p')
         newElement.style.backgroundColor = ''
@@ -80,14 +80,24 @@ const handleDate1 = (value) => {
         chatField.appendChild(newElement)
         chatField.scrollTo({top : chatField.scrollHeight, behavior : 'smooth'})
       }
-    }
-  }
+
+    })
+
+  })
+}
+
+useEffect(() => {
+  handleDays(smsHistory)
+  handleDate(smsHistory, listDays)
+
 }, [smsHistory])
+
 
   const sendMessage = (event) => {
     
 
     console.log('event')
+
 
 
     console.log(socket.connected)    
