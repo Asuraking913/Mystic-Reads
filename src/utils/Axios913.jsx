@@ -5,7 +5,7 @@ import AuthContext from "./fetchUserPic";
 const Axios913 = axios.create({
     withCredentials : true,
     // baseURL : "https://mystic-reads-api.vercel.app"
-    baseURL : "https://israel913.pythonanywhere.com"
+    baseURL : "https://mystic-reads-api.onrender.com/"
 })
 
 
