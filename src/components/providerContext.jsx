@@ -14,7 +14,7 @@ const AuthProvider = ({children}) => {
     const [gender, setGender] = useState(null)
     const [email, setEmail] = useState(null)
     const [loading, setLoading] = useState(false)
-    const socket = io("https://israel913.pythonanywhere.com", {
+    const socket = io("https://mystic-reads-api.onrender.com", {
         autoConnect : false,
         transports : ['websocket'], 
         withCredentials : true
