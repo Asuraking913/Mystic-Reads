@@ -14,15 +14,18 @@ const AuthProvider = ({children}) => {
     const [gender, setGender] = useState(null)
     const [email, setEmail] = useState(null)
     const [loading, setLoading] = useState(false)
-    const socket = io("https://mystic-reads-api.vercel.app", {
+    const socket = io("https://israel913.pythonanywhere.com", {
         autoConnect : false,
         transports : ['websocket'], 
-        cors : {
-            origin : 'https://mystic-reads-api.vercel.app', 
-            
-        },
         withCredentials : true
     })
+    // const socket = io("localhost:5000", {
+    //     autoConnect : false,
+    //     transports : ['websocket'], 
+    //     cors : {
+    //         origin : 'localhost:5000'
+    //     }
+    // })
 
 
     const handleFetch = async () => {
